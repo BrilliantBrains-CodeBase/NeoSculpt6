@@ -1,0 +1,23 @@
+{
+  "_client-BeSfUVn4.js": {
+    "file": "assets/client-BeSfUVn4.js",
+    "name": "client",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  },
+  "index.html": {
+    "file": "assets/app-CCA9QjYm.js",
+    "name": "app",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "_client-BeSfUVn4.js",
+      "_client-BeSfUVn4.js"
+    ],
+    "css": [
+      "assets/app-BLiaNweQ.css"
+    ]
+  }
+}

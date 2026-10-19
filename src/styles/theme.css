@@ -1,0 +1,100 @@
+/* Tailwind v4 theme generated from the Rejuvita Elementor kit (design/tokens.json). */
+/* Font sizes step down at the theme's breakpoints (<=1180px tablet, <=767px mobile). */
+@theme {
+  --color-primary: var(--e-global-color-primary, #d98391);
+  --color-secondary: var(--e-global-color-secondary, #faf3ec);
+  --color-text: var(--e-global-color-text, #d9c5be);
+  --color-accent: var(--e-global-color-accent, #c92a45);
+  --color-tertiary: var(--e-global-color-tertiary, #e4c98a);
+  --color-background: var(--e-global-color-background, #221a19);
+  --color-alternate: var(--e-global-color-alternate, #0b0b0d);
+  --color-border: var(--e-global-color-border, #38292e);
+  --font-heading: "Aboreto", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-accent-serif: "Arapey", serif;
+  --breakpoint-md: 768px;
+  --breakpoint-xl: 1181px;
+  --container-site: 1280px;
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: 1.10em;
+  --text-h1--letter-spacing: -1px;
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: 1.15em;
+  --text-h2--letter-spacing: -1px;
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: 1.20em;
+  --text-h3--letter-spacing: 0px;
+  --text-h4: var(--fs-h4);
+  --text-h4--line-height: 1.30em;
+  --text-h4--letter-spacing: 0px;
+  --text-h5: var(--fs-h5);
+  --text-h5--line-height: 1.35em;
+  --text-h5--letter-spacing: 0px;
+  --text-h6: var(--fs-h6);
+  --text-h6--line-height: 1.55em;
+  --text-h6--letter-spacing: 2px;
+  --text-text: var(--fs-text);
+  --text-text--line-height: 1.65em;
+  --text-text--letter-spacing: 0px;
+  --text-small: var(--fs-small);
+  --text-small--line-height: 1.65em;
+  --text-small--letter-spacing: 0px;
+  --text-meta: var(--fs-meta);
+  --text-meta--line-height: 1.45em;
+  --text-meta--letter-spacing: 0px;
+  --text-accent: var(--fs-accent);
+  --text-accent--line-height: 1.70em;
+  --text-accent--letter-spacing: 2px;
+  --text-button: var(--fs-button);
+  --text-button--line-height: 1.55em;
+  --text-button--letter-spacing: 2px;
+  --text-blockquote: var(--fs-blockquote);
+  --text-blockquote--line-height: 1.60em;
+  --text-blockquote--letter-spacing: 0px;
+}
+:root {
+  --fs-h1: 66px;
+  --fs-h2: 54px;
+  --fs-h3: 42px;
+  --fs-h4: 28px;
+  --fs-h5: 21px;
+  --fs-h6: 14px;
+  --fs-text: 17px;
+  --fs-small: 16px;
+  --fs-meta: 15px;
+  --fs-accent: 13px;
+  --fs-button: 13px;
+  --fs-blockquote: 24px;
+}
+@media (max-width: 1180px) {
+  :root {
+    --fs-h1: 56px;
+    --fs-h2: 48px;
+    --fs-h3: 36px;
+    --fs-h4: 26px;
+    --fs-h5: 19px;
+    --fs-h6: 13px;
+    --fs-text: 16px;
+    --fs-small: 15px;
+    --fs-meta: 14px;
+    --fs-accent: 12px;
+    --fs-button: 12px;
+    --fs-blockquote: 22px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --fs-h1: 40px;
+    --fs-h2: 32px;
+    --fs-h3: 26px;
+    --fs-h4: 22px;
+    --fs-h5: 18px;
+    --fs-h6: 12px;
+    --fs-text: 15px;
+    --fs-small: 14px;
+    --fs-meta: 13px;
+    --fs-accent: 12px;
+    --fs-button: 11px;
+    --fs-blockquote: 20px;
+  }
+}

@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+/* Rejuvita design tokens (copied from rejuvita-scrape/design/theme.css). */
+@import './theme.css';
+
+@layer base {
+  html {
+    background-color: var(--color-background);
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: var(--text-text);
+    line-height: var(--text-text--line-height);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+  }
+}
