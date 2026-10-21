@@ -44,7 +44,7 @@ export const sameAs: string[] = [...Object.values(clinic.social), ...clinic.othe
 export const footerNav = [
   { label: 'About', href: '/about-dr-sandeep-mahapatra/' },
   { label: 'Specialities', href: '/#specialities' },
-  { label: 'Our Doctors', href: '/#doctors' },
+  { label: 'Our Doctors', href: '/#our-doctors' },
   { label: 'Results', href: '/#results' },
   { label: 'Journal', href: '/#journal' },
   { label: 'Contact', href: '/contact-us/' },

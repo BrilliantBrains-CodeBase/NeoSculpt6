@@ -99,6 +99,14 @@ export function YoutubeIcon({ className = 'size-4' }: IconProps) {
   )
 }
 
+export function LinkedInIcon({ className = 'size-4' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M6.9 21H2.6V8.9h4.3V21zM4.7 7.2a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zM21.4 21h-4.3v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1v6H8.6V8.9h4.1v1.7h.1c.6-1.1 2-2.2 4-2.2 4.3 0 5.1 2.8 5.1 6.5V21z" />
+    </svg>
+  )
+}
+
 // Theme glyphs from the captured Local-Icons font (rejuvita-scrape/assets/…/cmsmasters-local-icons/Local-Icons/fonts/
 // Local-Icons.svg). Font glyphs are y-up on a 1024 em with a 960 ascent, so the group flips them into the viewBox.
 const glyph = (d: string, className: string) => (
@@ -130,6 +138,32 @@ export function CompareArrowsIcon({ className = 'size-[25px] shrink-0' }: IconPr
     <svg {...iconProps} viewBox="0 0 20 12" className={className} fill="currentColor">
       <path fillRule="evenodd" clipRule="evenodd" d="M14.766 0.222482L19.5895 5.04594C19.8855 5.34193 19.8855 5.82183 19.5895 6.11782L14.766 10.9413C14.4701 11.2373 13.9902 11.2373 13.6942 10.9413C13.3982 10.6453 13.3982 10.1654 13.6942 9.8694L17.9817 5.58188L13.6942 1.29436C13.3982 0.998371 13.3982 0.518474 13.6942 0.222482C13.9902 -0.0735096 14.4701 -0.0735096 14.766 0.222482Z" />
       <path fillRule="evenodd" clipRule="evenodd" d="M5.04548 0.221994L0.222019 5.04545C-0.0739727 5.34145 -0.0739727 5.82134 0.222019 6.11733L5.04548 10.9408C5.34147 11.2368 5.82137 11.2368 6.11736 10.9408C6.41335 10.6448 6.41335 10.1649 6.11736 9.86892L1.82984 5.58139L6.11736 1.29387C6.41335 0.997882 6.41335 0.517985 6.11736 0.221994C5.82137 -0.0739979 5.34147 -0.0739979 5.04548 0.221994Z" />
+    </svg>
+  )
+}
+
+// Rating star (the theme's demo star font isn't in the capture; a plain five-point star at the same size).
+export function StarIcon({ className = 'size-[22px] shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M12 1.6l3.1 6.6 7.2.9-5.3 5 1.4 7.1L12 17.7l-6.4 3.5 1.4-7.1-5.3-5 7.2-.9z" />
+    </svg>
+  )
+}
+
+export function PauseIcon({ className = 'size-3 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 12 12" className={className} fill="currentColor">
+      <rect x="2" y="1" width="3" height="10" rx="0.5" />
+      <rect x="7" y="1" width="3" height="10" rx="0.5" />
+    </svg>
+  )
+}
+
+export function PlayIcon({ className = 'size-3 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 12 12" className={className} fill="currentColor">
+      <path d="M2.5 1.2v9.6a.5.5 0 0 0 .76.43l7.6-4.8a.5.5 0 0 0 0-.86l-7.6-4.8a.5.5 0 0 0-.76.43z" />
     </svg>
   )
 }

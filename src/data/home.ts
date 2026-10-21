@@ -296,3 +296,351 @@ export const results = {
     caption: null as string | null,
   },
 }
+
+// 8. Signature hair expertise + technology ticker (the theme's hotspot section). The H2 is three lines, as the doc
+// sets them. Hotspot `x`/`y` are % from the image's left/top edge; `side` puts the tooltip above or below the dot.
+// The dots sit off faces and off the implanter tip.
+// TODO: placeholder image, cropped from the old site's direct hair transplant photo (patient's face cropped out).
+// Replace it with a consented photograph of Dr Sandeep marking a patient's hairline before launch, then move the
+// hotspots to suit the new photo. The alt text already describes that photo.
+// Needs sign-off before launch (marked † in the doc): 10,000+ procedures in the NFT tooltip. The † is not shown.
+export const signature = {
+  eyebrow: 'Signature Expertise',
+  h2: [[{ text: 'Hair Restoration,' }], [{ text: 'Planned for the', gold: true }], [{ text: 'Next Ten Years' }]] as {
+    text: string
+    gold?: boolean
+  }[][],
+  text: 'A hairline should still look natural when you are older. Dr Sandeep plans every transplant around your donor reserve and future hair loss not graft numbers.',
+  cta: { label: 'Get Your Hair Assessment', href: '/hair-transplant-restoration/' },
+  image: {
+    src: '/images/home/signature-hairline.webp',
+    width: 644,
+    height: 732,
+    alt: 'Dr Sandeep Mahapatra marking a patient’s hairline before a hair transplant in Whitefield, Bangalore',
+  },
+  hotspots: [
+    {
+      title: 'Diagnosis before surgery',
+      text: 'Early thinning often responds to PRP, GFC, exosomes or medication and you’ll be told so.',
+      x: 24,
+      y: 13,
+      side: 'bottom',
+    },
+    {
+      title: 'Neo Follicle Transplant (NFT)',
+      text: 'Dr Sandeep’s own approach to graft handling and implantation, refined over 10,000+ procedures.',
+      x: 30,
+      y: 76,
+      side: 'top',
+    },
+    {
+      title: 'DHI and FUE, chosen per case',
+      text: 'Methods matched to your hair, scalp and goal, not to a brand name.',
+      x: 40,
+      y: 38,
+      side: 'bottom',
+    },
+    {
+      title: 'ARTAS robotic assistance',
+      text: 'Image-guided robotic harvesting where your donor area suits it.',
+      x: 56,
+      y: 89,
+      side: 'top',
+    },
+    {
+      title: 'Repair and complex cases',
+      text: 'Unnatural hairlines, poor density and previous transplants elsewhere, assessed for correction.',
+      x: 79,
+      y: 68,
+      side: 'top',
+    },
+  ] as { title: string; text: string; x: number; y: number; side: 'top' | 'bottom' }[],
+  ticker: [
+    'AI Hair Analysis',
+    'AI Donor Assessment',
+    'ARTAS Robotic',
+    'Vaser Liposuction',
+    'CO2 Fractional Laser',
+    'Viora Reaction RF',
+    'Q-Switch Laser',
+    'Cryolipolysis',
+  ],
+}
+
+// 9. Meet your doctors. The theme has 3 cards; ours centres the 2 doctor cards (homepage.md §9). `specialty` is the
+// pink line, copied from the doc as written. The H2 is two lines, as the doc sets them.
+// Needs sign-off before launch (marked † in the doc): the sub-line's claim. The † is not shown.
+// TODO: portraits. Each card shows an initials circle while `portrait` is null. Add real, consented clinic portraits
+// of both doctors with the same background, lighting and crop (square, ~880×880 webp in /images/home/doctors/), e.g.
+// { src: '/images/home/doctors/dr-sandeep-mahapatra.webp', width: 880, height: 880, alt: 'Dr Sandeep Mahapatra,
+// dermatologist and hair transplant surgeon, in the NeoSculpt6 clinic, Whitefield, Bangalore' }.
+// TODO: add each doctor's real profile URLs. An icon shows only once its href is filled in (as in the footer).
+export type DoctorSocial = { network: 'instagram' | 'youtube' | 'linkedin'; href: string }
+export type DoctorPortrait = { src: string; width: number; height: number; alt: string }
+
+export const doctors = {
+  eyebrow: 'Your Doctors',
+  h2: [[{ text: 'The Doctors' }], [{ text: 'Behind Every Plan', gold: true }]] as { text: string; gold?: boolean }[][],
+  subline: 'The specialist who plans your treatment leads it and reviews your recovery.',
+  profileLabel: 'Open Profile',
+  cta: 'Book a Consultation', // opens the booking popup
+  cards: [
+    {
+      name: 'Dr Sandeep Mahapatra',
+      specialty: 'Dermatologist · Hair Transplant Surgeon',
+      href: '/about-dr-sandeep-mahapatra/',
+      initials: 'SM',
+      portrait: null as DoctorPortrait | null,
+      social: [
+        { network: 'instagram', href: '' },
+        { network: 'youtube', href: '' },
+      ] as DoctorSocial[],
+    },
+    {
+      name: 'Dr Saranya T',
+      specialty: 'M.Ch Plastic & Reconstructive Surgeon',
+      href: '/dr-saranya-t/',
+      initials: 'ST',
+      portrait: null as DoctorPortrait | null,
+      social: [
+        { network: 'instagram', href: '' },
+        { network: 'linkedin', href: '' },
+      ] as DoctorSocial[],
+    },
+  ],
+}
+
+// Section 12: booking form (homepage.md §12). Shared by the home section (HomeBooking) and the popup (BookingDialog).
+// The form's fields and microcopy live in components/booking/BookingForm.tsx.
+export const booking = {
+  h2: [[{ text: 'Start With a Conversation,' }], [{ text: 'Not a Commitment', gold: true }]] as { text: string; gold?: boolean }[][],
+  subline:
+    "Tell us what you'd like to change. You'll meet the right specialist, understand every option and receive a clear written plan, then decide in your own time.",
+  // TODO: replace with a NeoSculpt6 clinic photo shot for this slot (same placeholder as the popup).
+  image: {
+    src: '/og/about-dr-sandeep-mahapatra.jpeg',
+    alt: 'Dr Sandeep Mahapatra in the NeoSculpt6 clinic, Whitefield',
+    width: 1122,
+    height: 1402,
+  },
+}
+
+// 10. Testimonials / Patient Stories. Copy real Google reviews word for word, with the patient's written permission;
+// never write, edit, shorten or combine them, and never add an age. A card shows its quote only when `quote`,
+// `author` and `consent` are all set; until then it shows as pending. `author` is first name + initial ("Priya S.");
+// `source` is the review's Google link, kept for the record (not shown). `lookFor` is the doc's brief for each card.
+// Needs sign-off before launch: the Google rating and review count (null = pending, shown as [x.x] / [nn]) and
+// 2,054 Practo recommendations (marked † in the doc; the † is not shown). No AggregateRating schema until the rating
+// is shown on the page and verified. `npm run verify` lists whatever is still pending.
+export type Testimonial = {
+  treatment: string
+  lookFor: string
+  quote: string | null
+  author: string | null
+  consent: boolean
+  source: string | null
+}
+
+export const testimonials = {
+  eyebrow: 'Patient Stories',
+  h2: [{ text: 'Trusted by ' }, { text: 'Thousands', gold: true }, { text: ' of Patients' }] as {
+    text: string
+    gold?: boolean
+  }[],
+  rating: { value: null as string | null, count: null as number | null },
+  practo: '2,054 Practo recommendations for Dr Sandeep',
+  reviews: [
+    {
+      treatment: 'Hair Transplant',
+      lookFor: 'Dr Sandeep and a natural hairline',
+      quote: null,
+      author: null,
+      consent: false,
+      source: null,
+    },
+    {
+      treatment: 'Body Contouring',
+      lookFor: 'the plan or the recovery',
+      quote: null,
+      author: null,
+      consent: false,
+      source: null,
+    },
+    {
+      treatment: 'Acne Scar Laser',
+      lookFor: 'honest advice on the number of sessions',
+      quote: null,
+      author: null,
+      consent: false,
+      source: null,
+    },
+    {
+      treatment: 'Botox & Fillers',
+      lookFor: 'still looking like themselves',
+      quote: null,
+      author: null,
+      consent: false,
+      source: null,
+    },
+    {
+      treatment: 'Cosmetic Surgery',
+      lookFor: 'Dr Saranya, safety or recovery',
+      quote: null,
+      author: null,
+      consent: false,
+      source: null,
+    },
+  ] as Testimonial[],
+}
+
+// 11. Price guide. homepage.md lists the section but gives no copy, and its sign-off list still has "Starting prices
+// and EMI" open, so the section is consultation-first: every treatment row shows `pendingLabel` until its price is
+// set in `prices`. Rules until prices are signed off:
+// - Show only approved, current prices. Never a placeholder or an old figure (the old hair pages' "Rs.60 to Rs.100
+//   per graft" is not approved for this page).
+// - No "from" prices until "from" pricing is confirmed. No EMI or finance wording.
+// - No priceRange or Offer schema (src/components/Seo.tsx) until prices are approved and shown here.
+// Needs sign-off before launch: `eyebrow`, `h2`, `subline` and `disclaimer` are drafts. The H2 joins two phrases the
+// doc already approves (Promise "One clear price"; Step 04 "the full cost, before you commit"). The subline is the
+// Promise line word for word. The disclaimer follows the FAQ's cost answer.
+// Cards are the six specialities from `pillars` (same treatments, links, images and hub buttons), so nothing is
+// copied here; `npm run verify` already checks those links and images.
+export const priceGuide = {
+  eyebrow: 'Price Guide',
+  h2: [{ text: 'One Clear Price, ' }, { text: 'Before You Commit', gold: true }] as { text: string; gold?: boolean }[],
+  subline: 'You receive the full cost in your written plan before treatment. No surprises.',
+  pendingLabel: 'Quoted after assessment',
+  disclaimer:
+    'Your exact cost depends on your assessment, treatment plan, technique and number of sessions, and is confirmed in writing before you begin.',
+  cta: 'Book a Consultation',
+  cards: pillars.tabs.map(({ title, items, cta, image, imageAlt }) => ({ title, items, cta, image, imageAlt })),
+  // Approved price per treatment, keyed by the treatment's page URL (as in `pillars`), in ₹ exactly as signed off,
+  // e.g. '₹45,000' or '₹40,000–60,000'. null = not approved yet (the row shows `pendingLabel`).
+  prices: {} as Record<string, string | null>,
+}
+
+// 13. Our Technology (replaces the theme's Shop row). Each card: platform name, the doc's one line (in the theme's
+// price slot) and a "Learn More" link to its technology page; `npm run verify` checks every link and image.
+// `position` is the image's object-position, to keep the subject in the tall card crop.
+// TODO: only AI Hair Analysis, CO2 and Q-Switch have a photo of their own (the ARTAS page's photo is the same file as
+// AI Hair Analysis). The other six are the closest old-site clinic photos: Donor Assessment (DHI consult), ARTAS (FUE
+// harvest, also used in section 5), Vaser (liposuction page), Viora RF (HIFU page), Excimer (vitiligo exam) and
+// Cryolipolysis (its treatment page). Replace them with photos of each NeoSculpt6 platform before launch, and update
+// the alt text to match.
+export const technology = {
+  eyebrow: 'Our Technology',
+  h2: [[{ text: 'Advanced Platforms.' }], [{ text: 'Clinical Judgement First.', gold: true }]] as {
+    text: string
+    gold?: boolean
+  }[][],
+  subline: "Technology supports diagnosis and precision; it never replaces the doctor's decision.",
+  cta: { label: 'Explore Our Technology', href: '/technology/' },
+  cards: [
+    {
+      title: 'AI-Integrated Hair Analysis',
+      text: 'Maps density and thinning to plan treatment precisely.',
+      href: '/technology/ai-integrated-hair-analysis/',
+      image: '/og/technology__ai-integrated-hair-analysis.webp',
+      width: 1513,
+      height: 1039,
+      position: '62% center',
+      alt: 'Doctor reviewing a magnified scalp scan on a screen while examining a patient’s hair',
+    },
+    {
+      title: 'AI-Integrated Donor Assessment',
+      text: 'Measures your donor reserve before any graft number is quoted.',
+      href: '/technology/ai-integrated-donor-assessment/',
+      image: '/og/hair-transplant-restoration__dhi-hair-transplant-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Doctor showing a patient scans of his scalp on a monitor during a hair consultation',
+    },
+    {
+      title: 'ARTAS Robotic Hair Transplant',
+      text: 'Image-guided robotic harvesting for suitable candidates.',
+      href: '/technology/artas-robotic-hair-transplant/',
+      image: '/og/hair-transplant-restoration__fue-hair-transplant-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Surgeon wearing loupes harvesting grafts from the donor area at the back of a patient’s scalp',
+    },
+    {
+      title: 'Vaser Liposuction',
+      text: 'Ultrasound-assisted fat removal for refined body contouring.',
+      href: '/technology/vaser-liposuction-technology/',
+      image: '/og/cosmetic-surgery__liposuction-surgery-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Clinician treating a reclining patient’s abdomen with a body contouring handpiece',
+    },
+    {
+      title: 'Viora Reaction RF',
+      text: 'Radiofrequency skin tightening for face and body.',
+      href: '/technology/reaction-viora-rf-tightening/',
+      image: '/og/anti-aging-injectables__hifu-treatment-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Clinician treating a patient’s jawline with a skin tightening handpiece',
+    },
+    {
+      title: 'CO2 Fractional Laser',
+      text: 'Resurfacing for acne scars, texture and fine lines.',
+      href: '/technology/co2-fractional-laser/',
+      image: '/og/technology__co2-fractional-laser.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Doctor treating a patient’s face with a fractional laser handpiece, both wearing eye protection',
+    },
+    {
+      title: 'Q-Switch Laser',
+      text: 'Targeted treatment for pigmentation and tattoos.',
+      href: '/technology/q-switch-laser/',
+      image: '/og/technology__q-switch-laser.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Doctor treating the side of a patient’s face with a laser handpiece, both wearing eye protection',
+    },
+    {
+      title: 'Excimer Laser & Phototherapy',
+      text: 'Focused light therapy for vitiligo and selected skin conditions.',
+      href: '/technology/excimer-laser-targeted-phototherapy/',
+      image: '/og/cosmetic-surgery__phototherapy-for-vitiligo-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Dermatologist examining a vitiligo patch on a patient’s hand with a dermatoscope',
+    },
+    {
+      title: 'Cryolipolysis Platforms',
+      text: 'Non-surgical fat reduction for localised areas.',
+      href: '/technology/body-contouring-cryolipolysis-platforms/',
+      image: '/og/slimming-body-contouring__cryolipolysis-treatment-in-bangalore.jpg',
+      width: 1024,
+      height: 1024,
+      alt: 'Doctor fitting non-surgical fat reduction applicators to a patient’s abdomen',
+    },
+  ] as { title: string; text: string; href: string; image: string; width: number; height: number; position?: string; alt: string }[],
+}
+
+// 14. Journal. The cards come from src/data/posts.ts (latest 3 published posts, topped up with "Coming soon"
+// topics); this block is only the section copy. `h2` is two lines, as the doc sets them.
+// TODO: the theme's "Read More Articles" button links to the blog index. Set `cta` to
+// { label: 'Read More Articles', href: '/journal/' } once that page exists; the button is hidden while it is null.
+export const journal = {
+  eyebrow: 'Our Journal',
+  h2: [[{ text: 'Insights', gold: true }], [{ text: 'From Our Doctors' }]] as { text: string; gold?: boolean }[][],
+  cta: null as { label: string; href: string } | null,
+}
+
+// 15. Find My Treatment section (replaces the theme's newsletter band). Holds the full appointment form; submitting
+// opens a WhatsApp chat with the clinic (no form backend). `id="find-my-treatment"` is the target of the hero's secondary CTA and the
+// menus' "Find My Treatment" links. No offer or discount: the theme's 10% newsletter line is not used.
+// TODO: theme stock image (the newsletter band's 84-home-1-11.webp). Replace with NeoSculpt6 photography before launch.
+export const findTreatment = {
+  h2: [[{ text: 'Not Sure What You Need?' }], [{ text: 'Start With What You’d Like to Change.', gold: true }]] as {
+    text: string
+    gold?: boolean
+  }[][],
+  subline: 'Tell us your concern and we’ll book you with the right doctor.',
+  image: '/images/home/find-treatment-bg.webp',
+  // The form is the shared BookingForm; its fields and microcopy live in components/booking/BookingForm.tsx.
+}

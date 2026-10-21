@@ -5,7 +5,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { primaryNav, findMyTreatment } from '../src/data/nav.ts'
 import { footerNav, legalNav } from '../src/data/site.ts'
-import { pillars, results } from '../src/data/home.ts'
+import { pillars, results, signature, doctors, testimonials, technology, journal } from '../src/data/home.ts'
+import { posts, postHref, specialities } from '../src/data/posts.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DIST = path.join(ROOT, 'dist')
@@ -134,6 +135,75 @@ if (!fs.existsSync(fileFor(results.cta.href))) fail('home results', `no page for
 for (const { src } of [results.slider.before, results.slider.after]) {
   if (!fs.existsSync(path.join(DIST, src))) fail('home results', `image missing: ${src}`)
 }
+// Home section 8 (Signature hair expertise): the assessment button is a built page, and the hotspot image exists.
+if (!fs.existsSync(fileFor(signature.cta.href))) fail('home signature', `no page for ${signature.cta.href}`)
+if (!fs.existsSync(path.join(DIST, signature.image.src))) fail('home signature', `image missing: ${signature.image.src}`)
+// Home section 9 (Meet your doctors): every profile link is a built page, every portrait that is set exists, and
+// every social link that is set is an https URL.
+for (const card of doctors.cards) {
+  if (!fs.existsSync(fileFor(card.href))) fail('home doctors', `no page for ${card.href}`)
+  if (card.portrait && !fs.existsSync(path.join(DIST, card.portrait.src))) fail('home doctors', `portrait missing: ${card.portrait.src}`)
+  for (const s of card.social) {
+    if (s.href && !s.href.startsWith('https://')) fail('home doctors', `${card.name} ${s.network} link is not https: ${s.href}`)
+  }
+}
+// Home section 10 (Testimonials): the five treatment labels from homepage.md, a quote only with consent, no ages,
+// no AggregateRating until the rating is signed off. Anything still pending is listed as a warning, not a failure.
+const testimonialLabels = ['Hair Transplant', 'Body Contouring', 'Acne Scar Laser', 'Botox & Fillers', 'Cosmetic Surgery']
+const testimonialsPending = []
+const homeHtml = fs.existsSync(fileFor('/')) ? decode(fs.readFileSync(fileFor('/'), 'utf8')) : ''
+if (!homeHtml.includes('id="testimonials"')) fail('home testimonials', 'section not on the built home page')
+for (const label of testimonialLabels) {
+  if (!testimonials.reviews.some((r) => r.treatment === label)) fail('home testimonials', `no card for ${label}`)
+  if (!homeHtml.includes(label)) fail('home testimonials', `${label} missing from the built home page`)
+}
+for (const r of testimonials.reviews) {
+  if ((r.quote || r.author) && !r.consent) fail('home testimonials', `${r.treatment}: review text set without consent`)
+  if (r.author && /\d/.test(r.author)) fail('home testimonials', `${r.treatment}: author "${r.author}" looks like it has an age`)
+  if (!(r.quote && r.author && r.consent)) testimonialsPending.push(`${r.treatment} review (quote, name, consent)`)
+  else if (!r.source) testimonialsPending.push(`${r.treatment} review: Google link for the record`)
+}
+if (!testimonials.rating.value) testimonialsPending.push('Google rating [x.x]')
+if (!testimonials.rating.count) testimonialsPending.push('Google review count [nn]')
+testimonialsPending.push('Practo: 2,054 recommendations for Dr Sandeep (†)')
+if (/AggregateRating/.test(homeHtml) && !testimonials.rating.value) {
+  fail('home testimonials', 'AggregateRating schema on the home page before the rating is signed off')
+}
+// Home section 13 (Our Technology): every card link and the button are built pages, and every card image exists.
+const technologyLinks = [...technology.cards, technology.cta]
+for (const { href } of technologyLinks) {
+  if (!fs.existsSync(fileFor(href))) fail('home technology', `no page for ${href}`)
+}
+for (const { image } of technology.cards) {
+  if (!fs.existsSync(path.join(DIST, image))) fail('home technology', `image missing: ${image}`)
+}
+// Home section 14 (Journal): every published post has a built page, a review record and an image with real alt
+// text; the home page shows at most 3 cards; planned topics are reported as editorial dependencies.
+const publishedPosts = posts.filter((p) => p.status === 'published')
+for (const post of publishedPosts) {
+  const href = postHref(post.slug)
+  if (!fs.existsSync(fileFor(href))) fail('home journal', `published post has no page: ${href}`)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) fail('home journal', `${href}: date must be YYYY-MM-DD`)
+  if (!post.medicalReview?.by || !post.medicalReview?.date) fail('home journal', `${href}: no medical review record`)
+  if (!fs.existsSync(path.join(DIST, post.image.src))) fail('home journal', `${href}: image missing: ${post.image.src}`)
+  const alt = post.image.alt.trim()
+  if (!alt || alt.toLowerCase() === post.title.trim().toLowerCase()) fail('home journal', `${href}: alt text must describe the image`)
+}
+for (const post of posts) {
+  if (!specialities[post.speciality]) fail('home journal', `unknown speciality "${post.speciality}" on "${post.title}"`)
+  if (post.status !== 'published' && post.image && !fs.existsSync(path.join(DIST, post.image.src))) {
+    fail('home journal', `image missing: ${post.image.src}`)
+  }
+}
+for (const { href } of Object.values(specialities)) {
+  if (!fs.existsSync(fileFor(href))) fail('home journal', `no page for speciality ${href}`)
+}
+if (journal.cta && !fs.existsSync(fileFor(journal.cta.href))) fail('home journal', `no page for ${journal.cta.href}`)
+const journalHtml = homeHtml.match(/<section[^>]*id="journal"[\s\S]*?<\/section>/)?.[0] ?? ''
+if (!journalHtml) fail('home journal', 'section id="journal" missing from the home page')
+const journalCardCount = (journalHtml.match(/<article\b/g) ?? []).length
+if (journalCardCount > 3) fail('home journal', `${journalCardCount} cards, expected at most 3`)
+const plannedTopics = posts.filter((p) => p.status === 'planned').map((p) => `${specialities[p.speciality]?.label}: ${p.title}`)
 const pendingLegal =legalNav.filter(({ href }) => !fs.existsSync(fileFor(href))).map(({ href }) => href)
 
 if (!fs.existsSync(path.join(DIST, 'robots.txt'))) fail('robots.txt', 'missing')
@@ -150,6 +220,12 @@ console.log(`checked ${pages.length} routes`, byType)
 console.log(`old URLs: ${manifest.length}, all routed: ${!failures.some((f) => f.endsWith('old URL has no route'))}`)
 console.log(`sitemap: ${locs.length} URLs`)
 console.log(`home pillar links: ${pillarLinks.length} checked`)
+console.log(`home doctor profiles: ${doctors.cards.length} checked`)
+console.log(`home technology links: ${technologyLinks.length} checked`)
+console.log(`home testimonials: ${testimonials.reviews.length} cards checked; pending sign-off:`)
+for (const item of testimonialsPending) console.log(`  - ${item}`)
+console.log(`home journal: ${journalCardCount} cards (${publishedPosts.length} published); not yet written or medically reviewed:`)
+for (const item of plannedTopics) console.log(`  - ${item}`)
 console.log(`menu links: ${navLinks.length} checked${pendingLegal.length ? `; legal pages not built yet: ${pendingLegal.join(', ')}` : ''}`)
 console.log(`duplicate titles: ${dups('title').length}, duplicate descriptions: ${dups('description').length}`)
 console.log(`pages with todo items: ${pages.filter((p) => p.todo?.length).length} (see src/data/seo-report.csv)`)

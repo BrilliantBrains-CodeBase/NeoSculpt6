@@ -112,6 +112,20 @@
   will-change: transform;
   animation: marquee-scroll var(--marquee-duration) linear infinite;
 }
+/* <Marquee pausable>: stops while hovered or focused. */
+.marquee-pausable:hover .marquee-track,
+.marquee-pausable:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Hotspot dot pulse (Rejuvita `cmsmasters-soft-beat`: 0.7s, alternate, ease). src/components/home/HomeSignature.tsx */
+@keyframes cmsmasters-soft-beat {
+  0% { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+.hotspot-beat {
+  animation: cmsmasters-soft-beat 0.7s ease infinite alternate;
+}
 
 /* Before/after handle nudge (the addon's imitationHandle(): every 6s, translateX 10px, -10px, 0 in 250ms linear
    steps). The cycle ends with the nudge, so the first one comes 6s in, as with the theme's setInterval. Stops while
@@ -131,7 +145,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .before-after-handle {
+  .before-after-handle,
+  .hotspot-beat {
     animation: none;
   }
   .js [data-reveal]:not(.is-revealed),

@@ -1,143 +1,28 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type FocusEvent,
-  type PointerEvent,
-  type TransitionEvent,
-} from 'react'
+import type { CSSProperties } from 'react'
 import { popular } from '../../data/home'
 import { useReveal } from '../useReveal'
+import { useLoopCarousel } from '../useLoopCarousel'
 import { SmartLink } from '../SmartLink'
 
 // Home section 5: Rejuvita "Our popular treatments" (rejuvita-scrape/pages/home, container f873acc: highlight title
 // 89c1bf4, blog slider aed8552, button 8d459a8; styles from elementor/css/post-39758.css). Each card is the theme's
 // entry template 107 (container 155d2fa7; elementor/css/post-107.css).
 // The theme's Swiper settings: carousel, centred slides, infinite loop, 4 / 2 / 1 per view, 40px gap (30px tablet and
-// mobile, 80px from 1601px), autoplay 5000ms, speed 500ms, pause on hover; no arrows, dots or scrollbar. Rebuilt here
-// without Swiper: the track holds three copies of the cards (the middle one is real; the clones are aria-hidden and
-// inert) and jumps back a copy, unanimated, when a move ends outside the middle. Slide width and the centring offset
-// are CSS, so the prerendered HTML already shows the first card centred with its neighbours peeking.
+// mobile, 80px from 1601px), autoplay 5000ms, speed 500ms, pause on hover; no arrows, dots or scrollbar. Rebuilt
+// without Swiper by useLoopCarousel (clones, loop jump, drag, autoplay).
 // As in the theme, the section has no top padding: the space above the title is the bottom padding of section 4
 // (HomePillars).
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 const COUNT = popular.cards.length
-const AUTOPLAY = 5000 // ms, the theme's slider_autoplay_speed
-const SPEED = 500 // ms, the theme's slider_speed
-const SHORT_SWIPE = 300 // ms; a flick shorter than this moves one card whatever its distance (Swiper's short swipe)
 
 const delay = (ms: number) => ({ '--reveal-delay': `${ms}ms` }) as CSSProperties
-// Keeps an index inside the middle copy.
-const wrap = (i: number) => COUNT + ((((i - COUNT) % COUNT) + COUNT) % COUNT)
 
 export function HomePopular() {
   const titleRef = useReveal<HTMLHeadingElement>()
   const sliderRef = useReveal<HTMLDivElement>()
   const buttonRef = useReveal<HTMLDivElement>()
-  const trackRef = useRef<HTMLUListElement>(null)
-
-  const [index, setIndex] = useState(COUNT)
-  const [animate, setAnimate] = useState(true)
-  const [dragX, setDragX] = useState(0)
-  const [dragging, setDragging] = useState(false)
-  const [hovered, setHovered] = useState(false)
-  const [focused, setFocused] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const [reducedMotion, setReducedMotion] = useState(false)
-  const drag = useRef<{ id: number; x: number; t: number; dx: number; active: boolean } | null>(null)
-  const dragged = useRef(false)
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => setReducedMotion(media.matches)
-    const visibility = () => setHidden(document.hidden)
-    update()
-    media.addEventListener('change', update)
-    document.addEventListener('visibilitychange', visibility)
-    return () => {
-      media.removeEventListener('change', update)
-      document.removeEventListener('visibilitychange', visibility)
-    }
-  }, [])
-
-  // Autoplay: one card every 5s, held while the carousel is hovered, focused, dragged or the tab is hidden.
-  const paused = hovered || focused || dragging || hidden || reducedMotion
-  useEffect(() => {
-    if (paused) return
-    const timer = setTimeout(() => setIndex((i) => i + 1), AUTOPLAY)
-    return () => clearTimeout(timer)
-  }, [index, paused])
-
-  // After an unanimated jump, turn the transition back on once the new position has been painted.
-  useEffect(() => {
-    if (animate) return
-    let frame = requestAnimationFrame(() => {
-      frame = requestAnimationFrame(() => setAnimate(true))
-    })
-    return () => cancelAnimationFrame(frame)
-  }, [animate])
-
-  const onTransitionEnd = (e: TransitionEvent<HTMLUListElement>) => {
-    if (e.target !== e.currentTarget || e.propertyName !== 'transform') return
-    if (index === wrap(index)) return
-    setAnimate(false)
-    setIndex(wrap(index))
-  }
-
-  // Mouse drag and touch swipe. The pointer is captured only once it has moved, so a tap still follows the link.
-  const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return
-    dragged.current = false
-    drag.current = { id: e.pointerId, x: e.clientX, t: performance.now(), dx: 0, active: false }
-  }
-  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
-    const d = drag.current
-    if (!d || d.id !== e.pointerId) return
-    d.dx = e.clientX - d.x
-    if (!d.active && Math.abs(d.dx) > 5) {
-      d.active = true
-      e.currentTarget.setPointerCapture(e.pointerId)
-      setDragging(true)
-    }
-    if (d.active) setDragX(d.dx)
-  }
-  const onPointerEnd = (e: PointerEvent<HTMLDivElement>) => {
-    const d = drag.current
-    if (!d || d.id !== e.pointerId) return
-    drag.current = null
-    if (!d.active) return
-    dragged.current = true
-    setDragging(false)
-    setDragX(0)
-    const first = trackRef.current?.firstElementChild as HTMLElement | null
-    const gap = trackRef.current ? parseFloat(getComputedStyle(trackRef.current).columnGap) || 0 : 0
-    const step = (first?.offsetWidth ?? 1) + gap
-    let moves = Math.round(-d.dx / step)
-    if (moves === 0 && performance.now() - d.t < SHORT_SWIPE && Math.abs(d.dx) > 10) moves = d.dx < 0 ? 1 : -1
-    moves = Math.max(-(COUNT - 1), Math.min(COUNT - 1, moves))
-    if (moves) setIndex((i) => i + moves)
-  }
-
-  // Keyboard: a focused card slides to the centre, so focus never sits on a card that is off screen. Mouse focus
-  // (pressing a link, maybe to drag) is ignored.
-  const onFocus = (e: FocusEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement
-    if (!target.matches(':focus-visible')) return
-    setFocused(true)
-    const slide = target.closest<HTMLElement>('[data-slide]')
-    if (slide) setIndex(Number(slide.dataset.slide))
-  }
-  const onBlur = (e: FocusEvent<HTMLDivElement>) => {
-    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false)
-  }
-
-  const trackStyle = {
-    transform: `translateX(calc(50% - var(--slide) / 2 - ${index} * (var(--slide) + var(--gap)) + ${dragX}px))`,
-    // Swiper's wrapper transition (timing function `initial` = ease). Off while dragging and for the loop jump.
-    transition: animate && !dragging ? `transform ${SPEED}ms ease` : 'none',
-  } as CSSProperties
+  const carousel = useLoopCarousel({ count: COUNT })
 
   return (
     <section
@@ -162,29 +47,13 @@ export function HomePopular() {
         ref={sliderRef}
         data-reveal="up"
         style={delay(150)}
-        // Mouse only: a tap on a touch screen fires mouseenter with no mouseleave, which would pause autoplay for good.
-        onPointerEnter={(e) => e.pointerType === 'mouse' && setHovered(true)}
-        onPointerLeave={(e) => e.pointerType === 'mouse' && setHovered(false)}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerEnd}
-        onPointerCancel={onPointerEnd}
-        onClickCapture={(e) => {
-          if (!dragged.current) return
-          dragged.current = false
-          e.preventDefault()
-          e.stopPropagation()
-        }}
-        onDragStart={(e) => e.preventDefault()}
+        {...carousel.viewportProps}
+        {...carousel.focusProps}
         // overflow-x: clip (not hidden) so the browser cannot scroll the row when a card link takes focus.
-        className={`w-full touch-pan-y overflow-x-clip select-none ${dragging ? 'cursor-grabbing' : ''}`}
+        className={`w-full touch-pan-y overflow-x-clip select-none ${carousel.dragging ? 'cursor-grabbing' : ''}`}
       >
         <ul
-          ref={trackRef}
-          style={trackStyle}
-          onTransitionEnd={onTransitionEnd}
+          {...carousel.trackProps}
           className="flex gap-(--gap) [--cols:1] [--gap:30px] [--slide:calc((100%_-_(var(--cols)_-_1)_*_var(--gap))_/_var(--cols))] md:[--cols:2] xl:[--cols:4] xl:[--gap:40px] min-[1601px]:[--gap:80px]"
         >
           {[0, 1, 2].flatMap((copy) =>

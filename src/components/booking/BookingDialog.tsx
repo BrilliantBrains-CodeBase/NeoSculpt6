@@ -4,6 +4,7 @@ import { BookingForm } from './BookingForm'
 import { useModal } from '../useModal'
 import { usePresence } from '../usePresence'
 import { CloseIcon } from '../icons'
+import { booking } from '../../data/home'
 
 // Rejuvita "Book a Consultation" popup (cmsmasters popup 135, elementor/css/post-135.css): a 1200px card with
 // radius 20, photo on the left 40% (hidden <=1180px) and the form on `alternate` with 80px padding.
@@ -40,9 +41,18 @@ export function BookingDialog() {
         </div>
         <div className="flex flex-1 flex-col gap-[30px] px-5 py-[60px] md:p-[50px] md:gap-[50px] xl:p-20">
           <h2 id={titleId} className="text-center font-heading text-h3 text-secondary uppercase text-balance">
-            Start With a Conversation, <span className="text-tertiary">Not a Commitment</span>
+            {booking.h2.map((line, i) => (
+              <span key={i}>
+                {i > 0 && ' '}
+                {line.map((part) => (
+                  <span key={part.text} className={part.gold ? 'text-tertiary' : undefined}>
+                    {part.text}
+                  </span>
+                ))}
+              </span>
+            ))}
           </h2>
-          <BookingForm />
+          <BookingForm autoFocus />
         </div>
         <button
           type="button"
