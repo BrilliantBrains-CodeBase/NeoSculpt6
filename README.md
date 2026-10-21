@@ -46,4 +46,4 @@ src/layouts/SiteLayout    header / footer slots
 src/styles/theme.css      Rejuvita tokens (from ../rejuvita-scrape/design/theme.css)
 ```
 
-Each record in `pages.json` has `oldSite.dataJson` and `oldSite.contentMd`, pointing at the old page's captured copy, for when templates get real content. v2
+Each record in `pages.json` has `oldSite.dataJson` and `oldSite.contentMd`, pointing at the old page's captured copy, for when templates get real content. v3
