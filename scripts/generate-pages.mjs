@@ -152,6 +152,13 @@ function record({ p, type, title, description, h1, robots = 'index, follow', ogI
 }
 
 async function main() {
+  // The scrape lives outside this repo (769 MB), so CI builds (Vercel) don't have it.
+  // There, use the committed src/data/*.json and public/ files instead of regenerating.
+  if (!fs.existsSync(path.join(SCRAPED, 'manifest.json'))) {
+    console.log(`gen: ${SCRAPED} not found, using committed src/data/pages.json and routes.json`)
+    return
+  }
+
   fs.mkdirSync(OG_DIR, { recursive: true })
   if (DOWNLOAD) {
     for (const [url, dest] of [[LOGO_URL, path.join(PUBLIC, DEFAULT_OG_IMAGE)], [FAVICON_URL, path.join(PUBLIC, 'favicon.png')]]) {
