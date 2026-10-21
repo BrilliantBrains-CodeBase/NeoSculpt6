@@ -2,6 +2,41 @@
 /* Rejuvita design tokens (copied from rejuvita-scrape/design/theme.css). */
 @import './theme.css';
 
+/* Header: the theme layout (menu left, logo centred) only fits our menu from 1536px (measured: the five items
+   need ~560px); 1181-1535 uses a compact row. */
+@theme {
+  --breakpoint-wide: 1536px;
+}
+
+/* The header is absolute over the first section (Rejuvita `cmsmasters-header-position-absolute`), so the first
+   section of a page pads its top by this much (theme: --cmsmasters-section-for-header-pdd). */
+:root {
+  --header-offset: 155px;
+}
+@media (max-width: 1180px) {
+  :root {
+    --header-offset: 160px;
+  }
+}
+/* Our top bar wraps to three lines on phones. */
+@media (max-width: 767px) {
+  :root {
+    --header-offset: 175px;
+  }
+}
+
+/* Type styles whose names clash with colours: `text-accent` / `text-text` compile to colours. */
+@utility type-accent {
+  font-size: var(--text-accent);
+  line-height: var(--text-accent--line-height);
+  letter-spacing: var(--text-accent--letter-spacing);
+}
+@utility type-text {
+  font-size: var(--text-text);
+  line-height: var(--text-text--line-height);
+  letter-spacing: var(--text-text--letter-spacing);
+}
+
 @layer base {
   html {
     background-color: var(--color-background);
@@ -12,6 +47,99 @@
     line-height: var(--text-text--line-height);
     color: var(--color-text);
     background-color: var(--color-background);
-    -webkit-font-smoothing: antialiased;
+    /* No -webkit-font-smoothing: antialiased. The theme keeps the browser default, which on macOS draws
+       Aboreto, Manrope and Arapey at their intended stroke weight; antialiased makes them visibly thinner. */
+  }
+}
+
+/* Scroll-entrance animations (Rejuvita `cmsmasters-fade-in`, Elementor's 1.25s "normal" duration).
+   [data-reveal] fades itself in; [data-reveal-stagger] fades its children in one by one (--i = index).
+   Toggled by useReveal() in src/components/useReveal.ts. */
+@keyframes cmsmasters-fade-in {
+  0% { opacity: 0; }
+  to { opacity: 1; }
+}
+.js [data-reveal]:not(.is-revealed),
+.js [data-reveal-stagger]:not(.is-revealed) > * {
+  opacity: 0;
+}
+[data-reveal].is-revealed {
+  animation: cmsmasters-fade-in 1.25s both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal-stagger].is-revealed > * {
+  animation: cmsmasters-fade-in 1.25s both;
+  animation-delay: calc(var(--i, 0) * var(--reveal-stagger, 200ms));
+}
+/* Directional variants: data-reveal="right" slides in from the right, "left" from the left (Rejuvita
+   `cmsmasters-fade-in-right` / `-left`). */
+@keyframes cmsmasters-fade-in-right {
+  0% { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes cmsmasters-fade-in-left {
+  0% { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+[data-reveal='right'].is-revealed {
+  animation-name: cmsmasters-fade-in-right;
+}
+[data-reveal='left'].is-revealed {
+  animation-name: cmsmasters-fade-in-left;
+}
+/* data-reveal="up" rises as it fades in (Rejuvita `cmsmasters-fade-in-up`, the theme's most used entrance). */
+@keyframes cmsmasters-fade-in-up {
+  0% { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+[data-reveal='up'].is-revealed {
+  animation-name: cmsmasters-fade-in-up;
+}
+/* data-reveal="pop" scales up as it fades in (Rejuvita `cmsmasters-pop-in`, used on images and counters). */
+@keyframes cmsmasters-pop-in {
+  0% { opacity: 0; transform: scale(0.75); }
+  to { opacity: 1; transform: scale(1); }
+}
+[data-reveal='pop'].is-revealed {
+  animation-name: cmsmasters-pop-in;
+}
+
+/* Marquee loop (src/components/Marquee.tsx sets the distance and duration once it has measured the row). */
+@keyframes marquee-scroll {
+  to { transform: translate3d(calc(-1 * var(--marquee-distance)), 0, 0); }
+}
+.marquee-track {
+  will-change: transform;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+/* Before/after handle nudge (the addon's imitationHandle(): every 6s, translateX 10px, -10px, 0 in 250ms linear
+   steps). The cycle ends with the nudge, so the first one comes 6s in, as with the theme's setInterval. Stops while
+   the slider is dragged. src/components/BeforeAfter.tsx */
+@keyframes before-after-nudge {
+  0%, 87.5% { transform: translateX(0); }
+  91.67% { transform: translateX(10px); }
+  95.83% { transform: translateX(-10px); }
+  to { transform: translateX(0); }
+}
+.before-after-handle {
+  animation: before-after-nudge 6s linear infinite;
+}
+[data-active] > .before-after-handle {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .before-after-handle {
+    animation: none;
+  }
+  .js [data-reveal]:not(.is-revealed),
+  .js [data-reveal-stagger]:not(.is-revealed) > * {
+    opacity: 1;
+  }
+  [data-reveal].is-revealed,
+  [data-reveal-stagger].is-revealed > * {
+    animation: none;
   }
 }

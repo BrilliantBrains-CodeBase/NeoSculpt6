@@ -1,7 +1,7 @@
 import { Head } from 'vite-react-ssg'
 import type { RoutePage } from '../data/types'
 import { pageByPath } from '../data/entries'
-import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic } from '../data/site'
+import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from '../data/site'
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
 const crumbName = (p: string) => (p === '/' ? 'Home' : (pageByPath.get(p)?.name ?? p))
@@ -13,7 +13,7 @@ function jsonLd(page: RoutePage, canonical: string) {
     name: SITE_NAME,
     url: `${SITE_URL}/`,
     logo: abs(DEFAULT_OG_IMAGE),
-    ...(clinic.sameAs.length ? { sameAs: clinic.sameAs } : {}),
+    ...(sameAs.length ? { sameAs } : {}),
   }
   const website = {
     '@type': 'WebSite',
@@ -67,7 +67,7 @@ function jsonLd(page: RoutePage, canonical: string) {
         closes: clinic.hours.closes,
       },
       // TODO: geo coordinates, Physician × 2 and FAQPage once the home content is built (homepage.md → Schema).
-      ...(clinic.sameAs.length ? { sameAs: clinic.sameAs } : {}),
+      ...(sameAs.length ? { sameAs } : {}),
     })
   }
   // Escape "<" so the JSON can never close the <script> tag early.

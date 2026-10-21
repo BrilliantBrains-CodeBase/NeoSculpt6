@@ -93,4 +93,13 @@ export const hubs: HubDraft[] = [
     description:
       'Plan your treatment in Bangalore before you fly: video consultation, written plan and cost, travel support and follow-up from home with NeoSculpt6.',
   },
+  {
+    path: '/results/',
+    type: 'hub',
+    name: 'Results',
+    h1: 'Before & After Results',
+    title: 'Before & After Results | NeoSculpt6',
+    description:
+      'Consented before-and-after cases from NeoSculpt6, Whitefield, Bangalore: hair restoration, body contouring, skin, anti-ageing and cosmetic surgery.',
+  },
 ]

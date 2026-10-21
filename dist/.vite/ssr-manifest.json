@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-BeSfUVn4.js"
+    "/assets/client-cQ8jjxDG.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-BeSfUVn4.js"
+    "/assets/client-cQ8jjxDG.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-BeSfUVn4.js"
+    "/assets/client-cQ8jjxDG.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -50,11 +50,37 @@
   "node_modules/vite-react-ssg/dist/shared/vite-react-ssg.BhGKpaqQ.mjs": [],
   "node_modules/vite-react-ssg/dist/shared/vite-react-ssg.C1RTs5UA.mjs": [],
   "node_modules/vite-react-ssg/dist/shared/vite-react-ssg.CoMLbIiW.mjs": [],
+  "src/components/BackToTop.tsx": [],
+  "src/components/BeforeAfter.tsx": [],
+  "src/components/Logo.tsx": [],
+  "src/components/Marquee.tsx": [],
   "src/components/NotFound.tsx": [],
   "src/components/PageShell.tsx": [],
   "src/components/RedirectPage.tsx": [],
   "src/components/Seo.tsx": [],
+  "src/components/SiteFooter.tsx": [],
+  "src/components/SmartLink.tsx": [],
+  "src/components/booking/BookingContext.tsx": [],
+  "src/components/booking/BookingDialog.tsx": [],
+  "src/components/booking/BookingForm.tsx": [],
+  "src/components/header/DesktopNav.tsx": [],
+  "src/components/header/MobileMenu.tsx": [],
+  "src/components/header/SiteHeader.tsx": [],
+  "src/components/home/HomeAbout.tsx": [],
+  "src/components/home/HomeCredentials.tsx": [],
+  "src/components/home/HomeHero.tsx": [],
+  "src/components/home/HomePillars.tsx": [],
+  "src/components/home/HomePopular.tsx": [],
+  "src/components/home/HomeResults.tsx": [],
+  "src/components/home/HomeStats.tsx": [],
+  "src/components/icons.tsx": [],
+  "src/components/useModal.ts": [],
+  "src/components/useParallax.ts": [],
+  "src/components/usePresence.ts": [],
+  "src/components/useReveal.ts": [],
   "src/data/entries.ts": [],
+  "src/data/home.ts": [],
+  "src/data/nav.ts": [],
   "src/data/routes.json": [],
   "src/data/site.ts": [],
   "src/layouts/SiteLayout.tsx": [],
