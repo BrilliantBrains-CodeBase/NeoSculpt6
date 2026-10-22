@@ -7,7 +7,6 @@ import { HomeResults } from '../components/home/HomeResults'
 import { HomeSignature } from '../components/home/HomeSignature'
 import { HomeDoctors } from '../components/home/HomeDoctors'
 import { HomeTestimonials } from '../components/home/HomeTestimonials'
-import { HomePriceGuide } from '../components/home/HomePriceGuide'
 import { HomeTechnology } from '../components/home/HomeTechnology'
 import { HomeJournal } from '../components/home/HomeJournal'
 import { HomeFindTreatment } from '../components/home/HomeFindTreatment'
@@ -31,7 +30,8 @@ export function HomeTemplate() {
       <HomeDoctors />
       {/* Section C (journey + promise) goes here. */}
       <HomeTestimonials />
-      <HomePriceGuide />
+      {/* Section 11 (HomePriceGuide) is hidden for now: no prices are approved yet. To show it again, import it
+          from ../components/home/HomePriceGuide and render it here. */}
       {/* Then D (international) and E (FAQs). */}
       {/* Section 12 (HomeBooking, the full appointment form) is left out: the phone-only Find My Treatment strip
           below is the page's one lead form. The full form stays in the "Book a Consultation" popup. */}

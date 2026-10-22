@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-BL2LYrhQ.js"
+    "/assets/client-CMULHaRX.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-BL2LYrhQ.js"
+    "/assets/client-CMULHaRX.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-BL2LYrhQ.js"
+    "/assets/client-CMULHaRX.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -63,12 +63,10 @@
   "src/components/booking/BookingContext.tsx": [],
   "src/components/booking/BookingDialog.tsx": [],
   "src/components/booking/BookingForm.tsx": [],
-  "src/components/booking/whatsapp.ts": [],
   "src/components/header/DesktopNav.tsx": [],
   "src/components/header/MobileMenu.tsx": [],
   "src/components/header/SiteHeader.tsx": [],
   "src/components/home/HomeAbout.tsx": [],
-  "src/components/home/HomeBooking.tsx": [],
   "src/components/home/HomeCredentials.tsx": [],
   "src/components/home/HomeDoctors.tsx": [],
   "src/components/home/HomeFindTreatment.tsx": [],
@@ -76,7 +74,6 @@
   "src/components/home/HomeJournal.tsx": [],
   "src/components/home/HomePillars.tsx": [],
   "src/components/home/HomePopular.tsx": [],
-  "src/components/home/HomePriceGuide.tsx": [],
   "src/components/home/HomeResults.tsx": [],
   "src/components/home/HomeSignature.tsx": [],
   "src/components/home/HomeStats.tsx": [],

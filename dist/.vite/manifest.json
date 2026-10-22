@@ -1,6 +1,6 @@
 {
-  "_client-BL2LYrhQ.js": {
-    "file": "assets/client-BL2LYrhQ.js",
+  "_client-CMULHaRX.js": {
+    "file": "assets/client-CMULHaRX.js",
     "name": "client",
     "isDynamicEntry": true,
     "imports": [
@@ -8,16 +8,16 @@
     ]
   },
   "index.html": {
-    "file": "assets/app-DPrjoay-.js",
+    "file": "assets/app-BZtSS1fT.js",
     "name": "app",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
-      "_client-BL2LYrhQ.js",
-      "_client-BL2LYrhQ.js"
+      "_client-CMULHaRX.js",
+      "_client-CMULHaRX.js"
     ],
     "css": [
-      "assets/app-BgO8ZNPn.css"
+      "assets/app-D_FiM29H.css"
     ]
   }
 }
