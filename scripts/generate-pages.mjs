@@ -34,6 +34,18 @@ const HOME = {
   todo: ['description: "Gold Medalist" claim needs sign-off (homepage.md †)'],
 }
 
+// About page SEO is fixed by content/about-us/about-us.md ("Page SEO"). The live page's description is theme-demo
+// copy, so the doc's replacement is used. The live page was noindex; the new one is index, follow.
+const ABOUT = {
+  name: 'About Us',
+  title: 'About NeoSculpt6 | Specialist-Led Care in Bangalore',
+  description:
+    'Hair restoration, skin and laser, anti-ageing, cosmetic surgery, body contouring and intimate care under one doctor-led clinic in Whitefield, Bangalore.',
+  h1: 'Care Planned Around You',
+  ogImage: '/og/about-dr-sandeep-mahapatra.jpeg',
+  ogImageAlt: 'Dr Sandeep Mahapatra, founder of NeoSculpt6, in a clinic consultation room',
+}
+
 const CONTACT_DESCRIPTION =
   'Visit NeoSculpt6 on Whitefield Main Road, Bangalore 560066, beside BMW Deutsche Motoren. Open Mon–Sat, 7am–7pm. Call +91 99640 60483 to book.'
 
@@ -80,6 +92,8 @@ const technologyDescription = (name) =>
   `${name} at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.`
 
 function pageType(row, p) {
+  // The old /about-us/ was a theme-demo page; it is rebuilt from about-us.md.
+  if (p === '/about-us/') return 'about'
   if (row.likely_theme_demo) return 'legacy-demo'
   if (p === '/') return 'home'
   if (p === '/contact-us/') return 'contact'
@@ -199,6 +213,7 @@ async function main() {
     // title
     let title
     if (type === 'home') [title, sources.title] = [HOME.title, 'homepage.md']
+    else if (type === 'about') [title, sources.title] = [ABOUT.title, 'about-us.md']
     else if (row.planned_meta_title) [title, sources.title] = [decode(row.planned_meta_title), 'seo-csv']
     else if (live404) [title, sources.title] = [`${row.service} in Bangalore | NeoSculpt6`, 'draft']
     else [title, sources.title] = [decode(meta.title), 'live']
@@ -208,6 +223,7 @@ async function main() {
     const liveDesc = decode(meta.description)
     let description
     if (type === 'home') [description, sources.description] = [HOME.description, 'homepage.md']
+    else if (type === 'about') [description, sources.description] = [ABOUT.description, 'about-us.md']
     else if (row.planned_meta_description) [description, sources.description] = [decode(row.planned_meta_description), 'seo-csv']
     else if (type === 'legacy-demo') [description, sources.description] = [liveDesc, 'live']
     else if (isRealDescription(liveDesc)) [description, sources.description] = [liveDesc, 'live']
@@ -217,7 +233,7 @@ async function main() {
     if (sources.description === 'generated') todo.push('description: generated draft')
 
     // h1 (rendered now; real content comes later)
-    let h1 = type === 'home' ? HOME.h1 : decode(data.h1 || row.h1)
+    let h1 = type === 'home' ? HOME.h1 : type === 'about' ? ABOUT.h1 : decode(data.h1 || row.h1)
     if (!h1) {
       h1 = type === 'contact' ? 'Contact Us' : live404 ? row.service : shortName(title)
       todo.push('h1: missing on old page, derived')
@@ -226,7 +242,7 @@ async function main() {
 
     const og = meta.og ?? {}
     const ogImage =
-      type === 'legacy-demo' ? DEFAULT_OG_IMAGE : await localOgImage(p, og['og:image'], todo)
+      type === 'legacy-demo' ? DEFAULT_OG_IMAGE : type === 'about' ? ABOUT.ogImage : await localOgImage(p, og['og:image'], todo)
 
     pages.push(
       record({
@@ -237,12 +253,13 @@ async function main() {
         h1,
         robots: type === 'legacy-demo' ? 'noindex, follow' : 'index, follow',
         ogImage,
-        ogImageAlt: decode(og['og:image:alt']),
+        ogImageAlt: type === 'about' ? ABOUT.ogImageAlt : decode(og['og:image:alt']),
         sources,
         todo,
         extra: {
           category: row.category,
           ...(type === 'technology' || type === 'service' ? { name: live404 ? row.service : shortName(title) } : {}),
+          ...(type === 'about' ? { name: ABOUT.name } : {}),
           video: row.video_planned || null,
           lastmod: og['og:updated_time'] || sitemapLastmod[p] || null,
           oldSite: {

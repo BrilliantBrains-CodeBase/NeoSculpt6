@@ -2,9 +2,73 @@ import { Head } from 'vite-react-ssg'
 import type { RoutePage } from '../data/types'
 import { pageByPath } from '../data/entries'
 import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from '../data/site'
+import { faqs, physicians } from '../data/about'
+import { servicesByPath } from '../data/services'
+import type { Faq } from '../data/services/types'
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
 const crumbName = (p: string) => (p === '/' ? 'Home' : (pageByPath.get(p)?.name ?? p))
+
+// The clinic, shared by the home and about pages.
+function medicalClinic() {
+  return {
+    '@type': 'MedicalClinic',
+    '@id': `${SITE_URL}/#clinic`,
+    name: clinic.name,
+    url: `${SITE_URL}/`,
+    image: abs(DEFAULT_OG_IMAGE),
+    telephone: clinic.phone,
+    email: clinic.email,
+    parentOrganization: { '@id': `${SITE_URL}/#organization` },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: clinic.address.streetAddress,
+      addressLocality: clinic.address.addressLocality,
+      addressRegion: clinic.address.addressRegion,
+      postalCode: clinic.address.postalCode,
+      addressCountry: clinic.address.addressCountry,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: clinic.hours.days,
+      opens: clinic.hours.opens,
+      closes: clinic.hours.closes,
+    },
+    // TODO: geo coordinates, Physician × 2 and FAQPage on the home page once the home content is built (homepage.md → Schema).
+    ...(sameAs.length ? { sameAs } : {}),
+  }
+}
+
+// A doctor named on the page. Only signed-off credentials and memberships are listed (see `physicians` in
+// src/data/about.ts), and only on pages that show them (`credentials: false` leaves both out).
+function physicianNode(doc: (typeof physicians)[number], { credentials = true } = {}) {
+  return {
+    '@type': 'Physician',
+    '@id': `${abs(doc.href)}#physician`,
+    name: doc.name,
+    url: abs(doc.href),
+    jobTitle: doc.jobTitle,
+    medicalSpecialty: `https://schema.org/${doc.specialty}`,
+    worksFor: { '@id': `${SITE_URL}/#clinic` },
+    ...(credentials && doc.credentials.length
+      ? { hasCredential: doc.credentials.map((name) => ({ '@type': 'EducationalOccupationalCredential', name })) }
+      : {}),
+    ...(credentials && doc.memberOf.length ? { memberOf: doc.memberOf.map((name) => ({ '@type': 'Organization', name })) } : {}),
+  }
+}
+
+// FAQPage from the same strings the page shows.
+function faqPage(canonical: string, items: Faq[]) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+}
 
 function jsonLd(page: RoutePage, canonical: string) {
   const org = {
@@ -28,7 +92,7 @@ function jsonLd(page: RoutePage, canonical: string) {
     '@id': `${canonical}#breadcrumb`,
     itemListElement: page.crumbs.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: crumbName(p), item: abs(p) })),
   }
-  const webpage = {
+  const webpage: Record<string, unknown> = {
     '@type': 'WebPage',
     '@id': `${canonical}#webpage`,
     url: canonical,
@@ -42,33 +106,24 @@ function jsonLd(page: RoutePage, canonical: string) {
     ...(page.lastmod ? { dateModified: page.lastmod } : {}),
   }
   const graph: object[] = [org, website, webpage, breadcrumb]
-  if (page.type === 'home') {
-    graph.push({
-      '@type': 'MedicalClinic',
-      '@id': `${SITE_URL}/#clinic`,
-      name: clinic.name,
-      url: `${SITE_URL}/`,
-      image: abs(DEFAULT_OG_IMAGE),
-      telephone: clinic.phone,
-      email: clinic.email,
-      parentOrganization: { '@id': `${SITE_URL}/#organization` },
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: clinic.address.streetAddress,
-        addressLocality: clinic.address.addressLocality,
-        addressRegion: clinic.address.addressRegion,
-        postalCode: clinic.address.postalCode,
-        addressCountry: clinic.address.addressCountry,
-      },
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: clinic.hours.days,
-        opens: clinic.hours.opens,
-        closes: clinic.hours.closes,
-      },
-      // TODO: geo coordinates, Physician × 2 and FAQPage once the home content is built (homepage.md → Schema).
-      ...(sameAs.length ? { sameAs } : {}),
-    })
+  if (page.type === 'home') graph.push(medicalClinic())
+  if (page.type === 'about') {
+    // about-us.md "Page SEO": AboutPage · MedicalClinic · Physician × 2 · FAQPage. The FAQ text is the same strings the
+    // page shows (src/data/about.ts). No rating markup until the Google rating is verified.
+    webpage['@type'] = ['WebPage', 'AboutPage']
+    graph.push(medicalClinic(), ...physicians.map((doc) => physicianNode(doc)), faqPage(canonical, faqs.items))
+  }
+  const service = page.type === 'service' ? servicesByPath.get(page.path) : undefined
+  if (service) {
+    // service-page.md: FAQPage for the visible FAQs; Physician only for the doctor the page shows, without credentials
+    // or memberships (the page's chips are pending sign-off and it shows no memberships). MedicalWebPage is a WebPage subtype. No rating or review markup until the reviews are verified.
+    webpage['@type'] = 'MedicalWebPage'
+    const doctor = physicians.find((d) => d.name === service.doctor.doctor)
+    graph.push(
+      medicalClinic(),
+      ...(doctor ? [physicianNode(doctor, { credentials: false })] : []),
+      faqPage(canonical, service.faqs.items),
+    )
   }
   // Escape "<" so the JSON can never close the <script> tag early.
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')

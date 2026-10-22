@@ -30,9 +30,12 @@ type Options = {
   autoplay?: number // ms between moves, the theme's slider_autoplay_speed
   speed?: number // ms per move, the theme's slider_speed
   userPaused?: boolean
+  // 'center' (the theme's centredSlides) puts the current slide in the middle; 'start' puts it at the left edge, so a
+  // row of whole cards opens on the first one (the service technology cards).
+  align?: 'center' | 'start'
 }
 
-export function useLoopCarousel({ count, autoplay = 5000, speed = 500, userPaused = false }: Options) {
+export function useLoopCarousel({ count, autoplay = 5000, speed = 500, userPaused = false, align = 'center' }: Options) {
   // Keeps an index inside the middle copy.
   const wrap = useCallback((i: number) => count + ((((i - count) % count) + count) % count), [count])
   // Moves never leave the clones, even when buttons are pressed faster than a move takes.
@@ -142,7 +145,7 @@ export function useLoopCarousel({ count, autoplay = 5000, speed = 500, userPause
   }
 
   // Keyboard focus (not mouse focus, which may be the start of a drag) holds autoplay, and a focused slide slides to
-  // the centre so focus never sits off screen. Put these on the element that wraps the slider and its controls.
+  // the centre (or the left edge) so focus never sits off screen. Put these on the element that wraps the slider and its controls.
   const onFocus = (e: FocusEvent<HTMLElement>) => {
     const target = e.target as HTMLElement
     if (!target.matches(':focus-visible')) return
@@ -162,7 +165,7 @@ export function useLoopCarousel({ count, autoplay = 5000, speed = 500, userPause
   }
 
   const trackStyle = {
-    transform: `translateX(calc(50% - var(--slide) / 2 - ${index} * (var(--slide) + var(--gap)) + ${dragX}px))`,
+    transform: `translateX(calc(${align === 'center' ? '50% - var(--slide) / 2 - ' : '-1 * '}${index} * (var(--slide) + var(--gap)) + ${dragX}px))`,
     // Swiper's wrapper transition (timing function `initial` = ease). Off while dragging, for the loop jump and for
     // reduced motion.
     transition: animate && !dragging && !reducedMotion ? `transform ${speed}ms ease` : 'none',

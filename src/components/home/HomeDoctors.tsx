@@ -91,7 +91,8 @@ export function HomeDoctors() {
   )
 }
 
-function DoctorCard({ card, index }: { card: (typeof doctors.cards)[number]; index: number }) {
+// Also used by the About page's team section (AboutTeam).
+export function DoctorCard({ card, index }: { card: (typeof doctors.cards)[number]; index: number }) {
   const ref = useReveal<HTMLLIElement>()
   const social = card.social.filter((s) => s.href)
 

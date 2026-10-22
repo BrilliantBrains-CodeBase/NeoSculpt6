@@ -2,7 +2,8 @@ import { useState, type CSSProperties, type KeyboardEvent } from 'react'
 import { testimonials, type Testimonial } from '../../data/home'
 import { useReveal } from '../useReveal'
 import { useLoopCarousel } from '../useLoopCarousel'
-import { ArrowLeftIcon, ArrowRightIcon, PauseIcon, PlayIcon, StarIcon } from '../icons'
+import { CarouselControls, carouselControl } from '../CarouselControls'
+import { StarIcon } from '../icons'
 
 // Home section 10: Rejuvita "The Rejuvita Experience" testimonials (rejuvita-scrape/pages/home, container 8273e3d:
 // eyebrow e39ad11, advanced title fbb50dc, sub-line 97346a6, testimonials slider b1ffd89; styles from
@@ -11,19 +12,45 @@ import { ArrowLeftIcon, ArrowRightIcon, PauseIcon, PlayIcon, StarIcon } from '..
 // 100px from 1601px), autoplay 5000ms, speed 500ms, pause on hover, bullets 95px (60px tablet/mobile) under the
 // slides. Each slide is plain centred text (no card box): stars, quote, author name, treatment.
 // Not in the theme, added for accessibility: previous/next buttons, a pause button (autoplay moves text), arrow-key
-// support, and a polite announcement after a move the visitor made. The dots keep the theme's look on a 24px pitch
-// so each one is a full-size target.
+// support, and a polite announcement after a move the visitor made (CarouselControls).
 // The theme's author line shows an age; ours never does. No Review/AggregateRating markup (homepage.md: only once a
 // verified rating shows on the page).
+// TestimonialsSection is the section itself; the About page uses it too ("What Our Patients Say", about-us.md §5),
+// with its own heading and reviews, no eyebrow, and the same rating line; so do the service pages ("Success Stories",
+// service-page.md §11), without the Practo line.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
-
-const { reviews } = testimonials
-const COUNT = reviews.length
 
 const delay = (ms: number) => ({ '--reveal-delay': `${ms}ms` }) as CSSProperties
 const isApproved = (r: Testimonial) => Boolean(r.quote && r.author && r.consent)
 
 export function HomeTestimonials() {
+  return (
+    <TestimonialsSection
+      id="testimonials"
+      eyebrow={testimonials.eyebrow}
+      h2={testimonials.h2}
+      reviews={testimonials.reviews}
+      rating={testimonials.rating}
+      practo={testimonials.practo}
+    />
+  )
+}
+
+interface SectionProps {
+  /** Section id; the heading and track ids are derived from it. */
+  id: string
+  eyebrow?: string
+  h2: { text: string; gold?: boolean }[]
+  reviews: Testimonial[]
+  rating: { value: string | null; count: number | null }
+  /** Added after the Google line; service pages leave it out (their doc's sub-line is the Google line only). */
+  practo?: string
+}
+
+export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }: SectionProps) {
+  const count = reviews.length
+  const headingId = `${id}-heading`
+  const trackId = `${id}-track`
   const eyebrowRef = useReveal<HTMLParagraphElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
   const sublineRef = useReveal<HTMLParagraphElement>()
@@ -31,14 +58,14 @@ export function HomeTestimonials() {
 
   const [userPaused, setUserPaused] = useState(false)
   const [announcement, setAnnouncement] = useState('')
-  const carousel = useLoopCarousel({ count: COUNT, userPaused })
+  const carousel = useLoopCarousel({ count, userPaused })
   const { activeIndex } = carousel
 
   // Moves the visitor asked for are announced; autoplay moves are not.
   const show = (target: number) => {
-    const i = ((target % COUNT) + COUNT) % COUNT
+    const i = ((target % count) + count) % count
     carousel.goTo(i)
-    setAnnouncement(`Review ${i + 1} of ${COUNT}: ${reviews[i].treatment}`)
+    setAnnouncement(`Review ${i + 1} of ${count}${reviews[i].treatment ? `: ${reviews[i].treatment}` : ''}`)
   }
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
@@ -46,13 +73,10 @@ export function HomeTestimonials() {
     show(activeIndex + (e.key === 'ArrowLeft' ? -1 : 1))
   }
 
-  const control =
-    'outline-offset-4 outline-tertiary transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-solid'
-
   return (
     <section
-      id="testimonials"
-      aria-labelledby="testimonials-heading"
+      id={id}
+      aria-labelledby={headingId}
       // Same file as the theme's 84-background-1-2.webp.
       style={{ backgroundImage: 'url(/images/home/stats-bg.webp)' }}
       className="relative isolate mb-20 flex flex-col items-center gap-[30px] bg-cover bg-center bg-no-repeat px-5 pt-20 pb-[65px] md:mb-[100px] md:px-0 md:pt-[100px] md:pb-[90px] xl:mb-[150px] xl:pt-[150px] xl:pb-[140px]"
@@ -61,19 +85,21 @@ export function HomeTestimonials() {
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0b0b0d00_0%,#0b0b0d_40%)] opacity-80" />
 
       {/* Eyebrow (e39ad11) */}
-      <p ref={eyebrowRef} data-reveal="up" style={delay(150)} className="text-center text-h6 font-medium text-text uppercase">
-        {testimonials.eyebrow}
-      </p>
+      {eyebrow && (
+        <p ref={eyebrowRef} data-reveal="up" style={delay(150)} className="text-center text-h6 font-medium text-text uppercase">
+          {eyebrow}
+        </p>
+      )}
 
       {/* Title (fbb50dc) */}
       <h2
-        id="testimonials-heading"
+        id={headingId}
         ref={titleRef}
         data-reveal="up"
         style={delay(300)}
         className="text-center font-heading text-h2 text-secondary uppercase md:px-[30px] xl:px-10"
       >
-        {testimonials.h2.map((part) => (
+        {h2.map((part) => (
           <span key={part.text} className={part.gold ? 'text-tertiary' : undefined}>
             {part.text}
           </span>
@@ -87,9 +113,9 @@ export function HomeTestimonials() {
         style={delay(450)}
         className="mb-5 text-center font-accent-serif text-[18px] leading-[1.35] text-text italic md:mb-10 md:px-[30px] md:text-[20px] xl:mb-[50px] xl:px-10 xl:text-[22px]"
       >
-        Rated <Pending value={testimonials.rating.value} placeholder="x.x" /> on Google from{' '}
-        <Pending value={testimonials.rating.count?.toLocaleString('en-IN') ?? null} placeholder="nn" /> reviews ·{' '}
-        {testimonials.practo}
+        Rated <Pending value={rating.value} placeholder="x.x" /> on Google from{' '}
+        <Pending value={rating.count?.toLocaleString('en-IN') ?? null} placeholder="nn" /> reviews
+        {practo && <> · {practo}</>}
       </p>
 
       {/* Slider (b1ffd89) and its controls */}
@@ -103,7 +129,7 @@ export function HomeTestimonials() {
         tabIndex={0}
         onKeyDown={onKeyDown}
         {...carousel.focusProps}
-        className={`w-full ${control}`}
+        className={`w-full ${carouselControl}`}
       >
         <div
           {...carousel.viewportProps}
@@ -111,7 +137,7 @@ export function HomeTestimonials() {
           className={`w-full touch-pan-y overflow-x-clip select-none ${carousel.dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         >
           <ul
-            id="testimonials-track"
+            id={trackId}
             {...carousel.trackProps}
             className="flex gap-(--gap) [--cols:1] [--gap:20px] [--slide:calc((100%_-_(var(--cols)_-_1)_*_var(--gap))_/_var(--cols))] md:[--cols:2] md:[--gap:60px] xl:[--cols:4] min-[1601px]:[--gap:100px]"
           >
@@ -120,11 +146,11 @@ export function HomeTestimonials() {
                 const clone = copy !== 1
                 return (
                   <li
-                    key={`${copy}-${review.treatment}`}
-                    data-slide={COUNT * copy + i}
+                    key={`${copy}-${i}`}
+                    data-slide={count * copy + i}
                     aria-hidden={clone || undefined}
                     // React 18 has no `inert` prop; the empty string sets the attribute.
-                    {...(clone ? { inert: '' } : { role: 'group', 'aria-roledescription': 'slide', 'aria-label': `${i + 1} of ${COUNT}` })}
+                    {...(clone ? { inert: '' } : { role: 'group', 'aria-roledescription': 'slide', 'aria-label': `${i + 1} of ${count}` })}
                     className="shrink-0 basis-(--slide)"
                   >
                     <TestimonialCard review={review} />
@@ -135,66 +161,18 @@ export function HomeTestimonials() {
           </ul>
         </div>
 
-        {/* Controls. The dots sit where the theme's do: 95px (60px tablet/mobile) under the slides. */}
-        <div className="mt-[35px] flex items-center justify-center gap-5 xl:mt-[70px]">
-          <button
-            type="button"
-            aria-label="Previous review"
-            aria-controls="testimonials-track"
-            onClick={() => show(activeIndex - 1)}
-            className={`flex size-10 items-center justify-center rounded-full border border-tertiary/40 text-secondary hover:border-tertiary hover:text-tertiary ${control}`}
-          >
-            <ArrowLeftIcon className="size-3.5 shrink-0" />
-          </button>
-
-          <div className="flex items-center">
-            {reviews.map((review, i) => (
-              <button
-                key={review.treatment}
-                type="button"
-                aria-label={`Show review ${i + 1} of ${COUNT}: ${review.treatment}`}
-                aria-current={i === activeIndex ? 'true' : undefined}
-                aria-controls="testimonials-track"
-                onClick={() => show(i)}
-                className={`group flex size-6 items-center justify-center rounded-full ${control}`}
-              >
-                <span
-                  className={`size-[9px] rounded-full border transition-colors duration-250 ${
-                    i === activeIndex
-                      ? 'border-tertiary bg-tertiary'
-                      : 'border-tertiary/40 bg-transparent group-hover:border-tertiary group-hover:bg-tertiary'
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            aria-label="Next review"
-            aria-controls="testimonials-track"
-            onClick={() => show(activeIndex + 1)}
-            className={`flex size-10 items-center justify-center rounded-full border border-tertiary/40 text-secondary hover:border-tertiary hover:text-tertiary ${control}`}
-          >
-            <ArrowRightIcon className="size-3.5 shrink-0" />
-          </button>
-
-          {/* Autoplay is off for reduced motion, so the toggle is not needed then. */}
-          {!carousel.reducedMotion && (
-            <button
-              type="button"
-              aria-label={userPaused ? 'Start automatic review rotation' : 'Stop automatic review rotation'}
-              onClick={() => setUserPaused((p) => !p)}
-              className={`flex size-10 items-center justify-center rounded-full text-text/80 hover:text-tertiary ${control}`}
-            >
-              {userPaused ? <PlayIcon /> : <PauseIcon />}
-            </button>
-          )}
-        </div>
-
-        <p aria-live="polite" aria-atomic="true" className="sr-only">
-          {announcement}
-        </p>
+        {/* Controls. The dots sit where the theme's do: 95px (60px tablet/mobile) under the slides. Autoplay is off for
+            reduced motion, so the pause toggle is not needed then. */}
+        <CarouselControls
+          noun="review"
+          labels={reviews.map((r) => r.treatment)}
+          activeIndex={activeIndex}
+          onShow={show}
+          controls={trackId}
+          announcement={announcement}
+          pause={carousel.reducedMotion ? null : { paused: userPaused, toggle: () => setUserPaused((p) => !p) }}
+          className="mt-[35px] xl:mt-[70px]"
+        />
       </div>
     </section>
   )
@@ -241,15 +219,16 @@ function TestimonialCard({ review }: { review: Testimonial }) {
         >
           {approved ? review.author : 'Name pending'}
         </span>
-        <span className="text-small text-text">{review.treatment}</span>
+        {/* The About page's reviews get their treatment label once the review is chosen. */}
+        <span className={`text-small ${review.treatment ? 'text-text' : 'text-text/60'}`}>{review.treatment || 'Treatment pending'}</span>
       </figcaption>
     </figure>
   )
 }
 
 // A figure that needs sign-off: shows the real value once set, otherwise a dashed "[placeholder]" chip that says
-// it is pending, so it never reads as a fact.
-function Pending({ value, placeholder }: { value: string | null; placeholder: string }) {
+// it is pending, so it never reads as a fact. Also used for the About page's Instagram handle.
+export function Pending({ value, placeholder }: { value: string | null; placeholder: string }) {
   if (value) return <>{value}</>
   return (
     <span

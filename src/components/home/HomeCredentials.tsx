@@ -13,21 +13,79 @@ import { useReveal } from '../useReveal'
 // unanimated jump back a copy when a move ends outside the middle.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
-const COUNT = credentials.logos.length
 const DELAY = 1000 // ms, the theme's autoplay_speed: the pause between moves
 const SPEED = 3500 // ms, the theme's speed: how long one move takes
 const SHORT_SWIPE = 300 // ms; a flick shorter than this moves one logo whatever its distance (Swiper's short swipe)
 
 const delay = (ms: number) => ({ '--reveal-delay': `${ms}ms` }) as CSSProperties
-// Keeps an index inside the middle copy.
-const wrap = (i: number) => COUNT + ((((i - COUNT) % COUNT) + COUNT) % COUNT)
+type Logo = (typeof credentials.logos)[number]
 
-export function HomeCredentials() {
+// The carousel shows 6 logos per view on desktop; with fewer, the loop would show the same logo twice side by side,
+// so a shorter list is a static, centred row instead.
+const CAROUSEL_MIN = 6
+
+// `label` and `logos` default to the home strip; the About page passes its own label and only the confirmed logos.
+export function HomeCredentials({ label = credentials.label, logos = credentials.logos }: { label?: string; logos?: Logo[] }) {
   const labelRef = useReveal<HTMLParagraphElement>()
+  const carousel = logos.length >= CAROUSEL_MIN
+
+  return (
+    <div className="flex flex-col gap-5 md:gap-[30px]">
+      <p
+        id="credentials-label"
+        ref={labelRef}
+        data-reveal="right"
+        className={`text-center text-h6 font-medium text-text uppercase ${carousel ? 'md:text-left' : ''}`}
+      >
+        {label}
+      </p>
+      {carousel ? <LogoCarousel logos={logos} /> : <LogoRow logos={logos} />}
+    </div>
+  )
+}
+
+function LogoImage({ logo }: { logo: Logo }) {
+  return (
+    <img
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      alt={logo.name}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+      className="inline-block h-auto max-w-full"
+    />
+  )
+}
+
+function LogoRow({ logos }: { logos: Logo[] }) {
+  const ref = useReveal<HTMLUListElement>()
+  return (
+    <ul
+      ref={ref}
+      data-reveal="up"
+      style={delay(100)}
+      aria-labelledby="credentials-label"
+      className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:gap-x-[70px]"
+    >
+      {logos.map((logo) => (
+        <li key={logo.src} className="max-w-[calc(50%-20px)] text-center md:max-w-none">
+          <LogoImage logo={logo} />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function LogoCarousel({ logos }: { logos: Logo[] }) {
+  const count = logos.length
+  // Keeps an index inside the middle copy.
+  const wrap = (i: number) => count + ((((i - count) % count) + count) % count)
   const sliderRef = useReveal<HTMLDivElement>()
   const trackRef = useRef<HTMLUListElement>(null)
 
-  const [index, setIndex] = useState(COUNT)
+  const [index, setIndex] = useState(count)
   const [animate, setAnimate] = useState(true)
   const [moving, setMoving] = useState(false)
   const [dragX, setDragX] = useState(0)
@@ -109,7 +167,7 @@ export function HomeCredentials() {
     const step = (first?.offsetWidth ?? 1) + gap
     let moves = Math.round(-d.dx / step)
     if (moves === 0 && performance.now() - d.t < SHORT_SWIPE && Math.abs(d.dx) > 10) moves = d.dx < 0 ? 1 : -1
-    moves = Math.max(-(COUNT - 1), Math.min(COUNT - 1, moves))
+    moves = Math.max(-(count - 1), Math.min(count - 1, moves))
     if (moves) setIndex((i) => i + moves)
   }
 
@@ -120,16 +178,7 @@ export function HomeCredentials() {
   } as CSSProperties
 
   return (
-    <div className="flex flex-col gap-5 md:gap-[30px]">
-      <p
-        id="credentials-label"
-        ref={labelRef}
-        data-reveal="right"
-        className="text-center text-h6 font-medium text-text uppercase md:text-left"
-      >
-        {credentials.label}
-      </p>
-
+    <>
       {/* Carousel (f477042) */}
       <div
         ref={sliderRef}
@@ -155,7 +204,7 @@ export function HomeCredentials() {
           className="flex items-center gap-(--gap) [--cols:2] [--gap:20px] [--slide:calc((100%_-_(var(--cols)_-_1)_*_var(--gap))_/_var(--cols))] md:[--cols:4] md:[--gap:40px] xl:[--cols:6] xl:[--gap:70px]"
         >
           {[0, 1, 2].flatMap((copy) =>
-            credentials.logos.map((logo) => {
+            logos.map((logo) => {
               const clone = copy !== 1
               return (
                 <li
@@ -165,22 +214,13 @@ export function HomeCredentials() {
                   {...(clone ? { inert: '' } : {})}
                   className="shrink-0 basis-(--slide) text-center"
                 >
-                  <img
-                    src={logo.src}
-                    width={logo.width}
-                    height={logo.height}
-                    alt={logo.name}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                    className="inline-block h-auto max-w-full"
-                  />
+                  <LogoImage logo={logo} />
                 </li>
               )
             }),
           )}
         </ul>
       </div>
-    </div>
+    </>
   )
 }

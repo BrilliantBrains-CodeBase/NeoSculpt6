@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { stats } from '../../data/home'
 import { useReveal } from '../useReveal'
+import { SmartLink } from '../SmartLink'
 
 // Home stats counters, directly under the hero: Rejuvita counter row (rejuvita-scrape/pages/home, container 8dcdccf with counters ed21b60, e281254,
 // f2cbdf8, 6e7d1d2; styles from elementor/css/post-39758.css and elementor/assets/css/widget-counter.min.css).
@@ -42,13 +43,25 @@ interface CounterProps {
   prefix?: string
   suffix?: string
   label: string
+  /** Links the label to a page (the About page's "Patients from Outside India"). */
+  href?: string
   index: number
+  className?: string
 }
 
 // Elementor `counter`: label below the number (flex column-reverse), digits centred with the prefix and suffix
 // hanging either side. Counts from 0 when it scrolls into view. The state starts at the final value, so the
-// prerendered HTML has the real numbers.
-function StatCounter({ value, prefix = '', suffix = '', label, index }: CounterProps) {
+// prerendered HTML has the real numbers. Also used by the About page's two rows of four (AboutNumbers), which sets its
+// own widths through `className`.
+export function StatCounter({
+  value,
+  prefix = '',
+  suffix = '',
+  label,
+  href,
+  index,
+  className = 'w-full md:w-[calc(50%-20px)] xl:w-auto',
+}: CounterProps) {
   const decimals = value.toString().split('.')[1]?.length ?? 0
   const format = (n: number) =>
     new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(n)
@@ -73,9 +86,20 @@ function StatCounter({ value, prefix = '', suffix = '', label, index }: CounterP
       ref={ref}
       data-reveal="pop"
       style={delay(index * 100)}
-      className="flex w-full flex-col-reverse md:w-[calc(50%-20px)] xl:w-auto"
+      className={`flex flex-col-reverse ${className}`}
     >
-      <dt className="flex justify-center font-heading text-[19px] leading-[2.5] text-secondary">{label}</dt>
+      <dt className="flex justify-center font-heading text-[19px] leading-[2.5] text-secondary">
+        {href ? (
+          <SmartLink
+            href={href}
+            className="underline decoration-tertiary/50 underline-offset-[6px] transition-colors duration-300 hover:text-tertiary focus-visible:text-tertiary"
+          >
+            {label}
+          </SmartLink>
+        ) : (
+          label
+        )}
+      </dt>
       <dd className="flex font-heading text-h3 text-secondary uppercase">
         <span className="sr-only">
           {prefix}

@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/generate-pages.mjs",
-    "gen:og": "node scripts/generate-pages.mjs --download-og",
+    "gen": "node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet",
+    "gen:og": "node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
     "dev": "vite-react-ssg dev",
     "build": "npm run gen && vite-react-ssg build && node scripts/postbuild.mjs",
     "preview": "vite preview",

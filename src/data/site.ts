@@ -57,3 +57,44 @@ export const legalNav = [
 
 export const medicalReviewLine =
   'Content written and medically reviewed under the guidance of Dr Sandeep Mahapatra, MD Dermatology. For patient education; it does not replace an in-person consultation.'
+
+// Instagram strip above the footer (About section 7 and every service page). No live feed integration exists, so this
+// is a curated set. Needs sign-off: the NeoSculpt6 handle (shown as a pending chip while `handle` is null) and its
+// profile URL; tiles link to `href` (or their own post) only once one is set. Never use the theme's model tiles. Each `subject` is the photo the slot is for; the placeholder's alt
+// text describes what it actually shows.
+export const instagram = {
+  handle: null as string | null,
+  href: null as string | null,
+  tiles: [
+    {
+      subject: 'Dr Sandeep marking a hairline',
+      src: '/og/hair-transplant-restoration__direct-hair-transplant-in-bangalore.jpg',
+      alt: 'A surgeon in a mask and gloves working on a man’s scalp during a hair transplant',
+    },
+    {
+      subject: 'Reception',
+      src: '/og/anti-aging-injectables__body-fillers-in-bangalore.jpg',
+      alt: 'A doctor and a patient seated in a bright consultation lounge with plants and a marble table',
+    },
+    {
+      subject: 'A consented result',
+      src: '/og/anti-aging-injectables__neck-tightening-treatment-in-bangalore.jpg',
+      alt: 'A patient checking her face in a hand mirror while a doctor examines her jawline',
+    },
+    {
+      subject: 'Dr Saranya in consultation',
+      src: '/og/cosmetic-surgery__breast-reduction-surgery-in-bangalore.jpg',
+      alt: 'A doctor taking notes on a tablet as a patient talks during a consultation',
+    },
+    {
+      subject: 'A technology device',
+      src: '/og/hair-transplant-restoration__low-level-laser-hair-therapy-lllt-in-bangalore.jpg',
+      alt: 'A patient seated under a red-light hair therapy device with a clinician beside him',
+    },
+    {
+      subject: 'The team',
+      src: '/og/hair-transplant-restoration__crown-hair-transplant-in-bangalore.jpg',
+      alt: 'A surgeon wearing loupes and a mask working on a patient’s crown in the procedure room',
+    },
+  ].map((t) => ({ ...t, width: 1024, height: 1024, href: null as string | null })),
+}
