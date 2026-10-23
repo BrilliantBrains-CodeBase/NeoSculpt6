@@ -1,0 +1,3056 @@
+[
+  {
+    "path": "/technology/",
+    "name": "Our Technology (hub)",
+    "kind": "technology-hub",
+    "source": "content/technology/technology-international-patient.md:89",
+    "seo": {
+      "title": "Technology - Neo Sculpt 6",
+      "description": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
+      "h1": "Technology",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology"
+      ],
+      "note": "The live title tag \"Technology - Neo Sculpt 6\" does not follow the \"… | NeoSculpt6\" pattern used on every other page and has no location keyword. It is kept as-is here. Optional upgrade if you want this page to rank: \"Advanced Aesthetic Technology in Bangalore | NeoSculpt6\"."
+    },
+    "order": [
+      "hero",
+      "cards",
+      "doctors",
+      "closing"
+    ],
+    "notes": [
+      {
+        "section": "cards",
+        "kind": "note",
+        "text": "On the live page each card text stops mid-sentence with \"…\". Below, each card uses the complete first sentence of that technology page's banner text instead, so nothing is cut off."
+      },
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live hub page. Shows who uses the technology (supports the doctor-expertise brief). Text is word for word from the live International Patients page."
+      },
+      {
+        "section": "closing",
+        "kind": "added",
+        "text": "Not on the live hub page. Uses the closing wording already on every technology page."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Technology",
+      "intro": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
+      "buttons": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "cards": [
+      {
+        "group": "Hair",
+        "title": "AI-Integrated Hair Analysis",
+        "label": "AI-Integrated Hair Analysis in Bangalore",
+        "text": "AI-Integrated Hair Analysis supports a more detailed review of hair density, scalp characteristics and hair-loss patterns during a consultation.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        }
+      },
+      {
+        "group": "Hair",
+        "title": "AI-Integrated Donor Assessment",
+        "label": "AI-Integrated Donor Assessment in Bangalore",
+        "text": "AI-Integrated Donor Assessment supports a closer review of the donor area for people considering hair restoration.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        }
+      },
+      {
+        "group": "Hair",
+        "title": "ARTAS Robotic Hair Transplant",
+        "label": "ARTAS Robotic Hair Transplant in Bangalore",
+        "text": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        }
+      },
+      {
+        "group": "Body",
+        "title": "Vaser Liposuction Technology",
+        "label": "Vaser Liposuction Technology in Bangalore",
+        "text": "Vaser is an ultrasound-assisted technology used in selected liposuction procedures.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/vaser-liposuction-technology/"
+        }
+      },
+      {
+        "group": "Skin",
+        "title": "Reaction Viora RF Tightening",
+        "label": "Reaction Viora RF Tightening in Bangalore",
+        "text": "Reaction Viora RF tightening is a radiofrequency-based technology considered in selected skin-firming and body-contouring plans.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        }
+      },
+      {
+        "group": "Skin",
+        "title": "CO2 Fractional Laser",
+        "label": "CO2 Fractional Laser in Bangalore",
+        "text": "CO2 fractional laser is a skin-resurfacing technology used in selected treatment plans for acne scars, uneven texture, fine lines and skin-remodelling concerns.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/co2-fractional-laser/"
+        }
+      },
+      {
+        "group": "Skin",
+        "title": "Q-Switch Laser",
+        "label": "Q-Switch Laser in Bangalore",
+        "text": "Q-Switch laser treatment uses short, targeted pulses of laser energy in selected plans for pigmentation-related concerns.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/q-switch-laser/"
+        }
+      },
+      {
+        "group": "Skin",
+        "title": "Excimer Laser & Targeted Phototherapy",
+        "label": "Excimer Laser and Targeted Phototherapy in Bangalore",
+        "text": "Excimer laser and targeted phototherapy are focused light-based treatment approaches considered for selected cases of vitiligo and inflammatory skin concerns.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        }
+      },
+      {
+        "group": "Body",
+        "title": "Body Contouring & Cryolipolysis Platforms",
+        "label": "Body Contouring and Cryolipolysis Platforms in Bangalore",
+        "text": "Body contouring and cryolipolysis platforms may be considered in selected non-surgical plans for localised body-shape concerns.",
+        "button": {
+          "label": "Read More",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      }
+    ],
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        },
+        {
+          "name": "Dr. Saranya T",
+          "chips": [
+            "MBBS",
+            "DNB General Surgery",
+            "MCh Plastic and Reconstructive Surgery"
+          ],
+          "qualifications": null,
+          "specialty": "Consultant Plastic Surgeon.",
+          "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
+          "button": {
+            "label": "Meet Dr. Saranya T",
+            "href": "/dr-saranya-t/"
+          }
+        }
+      ]
+    },
+    "closing": {
+      "h2": "Discuss Our Technology With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/ai-integrated-hair-analysis/",
+    "name": "AI-Integrated Hair Analysis",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:172",
+    "seo": {
+      "title": "AI-Integrated Hair Analysis in Bangalore | NeoSculpt6",
+      "description": "Explore AI-Integrated Hair Analysis at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "AI-Integrated Hair Analysis in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "AI-Integrated Hair Analysis"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "AI-Integrated Hair Analysis in Bangalore",
+      "intro": "AI-Integrated Hair Analysis supports a more detailed review of hair density, scalp characteristics and hair-loss patterns during a consultation. It is used alongside clinical examination and the patient’s history; it does not replace a doctor’s diagnosis.",
+      "buttons": [
+        {
+          "label": "Book a Hair and Scalp Assessment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is AI-Integrated Hair Analysis?",
+      "paragraphs": [
+        "The system helps create a clearer visual and data-led record of the scalp and hair. This can support discussion around density variation, affected zones, hair calibre and changes observed over time."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "A routine visual check remains important, but AI-supported analysis can add consistency to documentation and comparison. The specialist interprets the findings in the context of the person’s hair-loss pattern, scalp health, medical history and goals."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "More detailed baseline review is considered as part of a clinician-led AI-Integrated Hair Analysis discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "More detailed baseline review",
+          "text": null
+        },
+        {
+          "title": "Hair-density comparison",
+          "text": null
+        },
+        {
+          "title": "Scalp and pattern documentation",
+          "text": null
+        },
+        {
+          "title": "Progress-monitoring support",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How AI-Integrated Hair Analysis Planning Works",
+      "steps": [
+        {
+          "title": "Hair and scalp consultation",
+          "text": "The clinician reviews the concern, hair history and the information needed for a considered assessment."
+        },
+        {
+          "title": "Image capture and analysis",
+          "text": "Relevant images or measurements are documented to support the consultation and future comparison where appropriate."
+        },
+        {
+          "title": "Clinical interpretation",
+          "text": "Findings are reviewed with the person’s history, examination and goals; technology does not replace clinical judgement."
+        },
+        {
+          "title": "Personalised treatment discussion",
+          "text": "The specialist explains the options that may be appropriate, their limitations and the next step."
+        },
+        {
+          "title": "Review and monitoring plan",
+          "text": "Where relevant, a follow-up or monitoring approach is discussed."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Hair thinning",
+        "Pattern hair loss",
+        "Diffuse shedding",
+        "Early hair-loss concerns",
+        "Considering a hair-restoration consultation"
+      ],
+      "paragraphs": [
+        "It may be useful for people with hair thinning, pattern hair loss, diffuse shedding, early hair-loss concerns or those considering a hair-restoration consultation. The value of the analysis depends on the concern being assessed."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "The analysis supports assessment and planning. It cannot predict an individual response, confirm a diagnosis without clinical review or guarantee the outcome of a hair-restoration treatment."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "AI-Integrated Hair Analysis Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About AI-Integrated Hair Analysis",
+      "items": [
+        {
+          "q": "Does AI hair analysis diagnose hair loss?",
+          "a": "No. It supports the consultation with detailed visual information. Diagnosis and treatment recommendations remain clinical decisions."
+        },
+        {
+          "q": "Can it help before a hair transplant consultation?",
+          "a": "It can support the initial assessment of hair pattern and density. Donor evaluation and treatment suitability still require specialist review."
+        },
+        {
+          "q": "Can it be used to track progress?",
+          "a": "Where appropriate, repeat analysis can help document changes over time alongside clinical assessment."
+        },
+        {
+          "q": "Will I need treatment after the analysis?",
+          "a": "Not necessarily. The purpose is to understand the concern and discuss the most appropriate next step."
+        },
+        {
+          "q": "Is it suitable for women and men?",
+          "a": "Hair analysis may be used for adults of any gender when it is relevant to the consultation."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss AI-Integrated Hair Analysis With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Hair and Scalp Assessment",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "FUE Hair Transplant",
+          "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
+        },
+        {
+          "label": "PRP Hair Treatment",
+          "href": "/hair-transplant-restoration/prp-hair-treatment-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/ai-integrated-donor-assessment/",
+    "name": "AI-Integrated Donor Assessment",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:339",
+    "seo": {
+      "title": "AI-Integrated Donor Assessment in Bangalore | NeoSculpt6",
+      "description": "Explore AI-Integrated Donor Assessment at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "AI-Integrated Donor Assessment in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "AI-Integrated Donor Assessment"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "candidates",
+        "kind": "note",
+        "text": "The live text says \"DHT\". The clinic offers DHI hair transplant, so this is probably a typo for \"DHI\". Confirm and correct before publishing."
+      },
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "AI-Integrated Donor Assessment in Bangalore",
+      "intro": "AI-Integrated Donor Assessment supports a closer review of the donor area for people considering hair restoration. It forms one part of clinical planning and must be interpreted alongside scalp examination, hair characteristics, medical history and long-term goals.",
+      "buttons": [
+        {
+          "label": "Book a Donor Assessment Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is AI-Integrated Donor Assessment?",
+      "paragraphs": [
+        "The assessment helps document donor-area characteristics, density variation and the available hair pattern that may be relevant to a hair-transplant discussion. It does not confirm a graft number or suitability on its own."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "A donor area is not assessed only by its appearance. AI-supported documentation can add detail to the consultation, while the specialist considers donor stability, hair calibre, scalp condition, expected future hair loss and the proposed recipient area."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Structured donor-area review is considered as part of a clinician-led AI-Integrated Donor Assessment discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Structured donor-area review",
+          "text": null
+        },
+        {
+          "title": "Planning support for consultations",
+          "text": null
+        },
+        {
+          "title": "Clearer density documentation",
+          "text": null
+        },
+        {
+          "title": "Long-term strategy discussion",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How AI-Integrated Donor Assessment Planning Works",
+      "steps": [
+        {
+          "title": "Hair-loss history review",
+          "text": "The consultation reviews the hair-loss pattern, existing care and long-term priorities."
+        },
+        {
+          "title": "Donor-area imaging",
+          "text": "The donor area is documented as part of a structured assessment."
+        },
+        {
+          "title": "Clinical scalp examination",
+          "text": "The specialist assesses factors that cannot be confirmed by images alone."
+        },
+        {
+          "title": "Donor and recipient planning",
+          "text": "The discussion considers the donor area, recipient area and an appropriate long-term strategy."
+        },
+        {
+          "title": "Recommendation and next steps",
+          "text": "The team explains whether further assessment, treatment or a different pathway is appropriate."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Exploring FUE hair transplant",
+        "Exploring DHI hair transplant",
+        "Exploring ARTAS-assisted hair transplant",
+        "Exploring other hair-transplant pathways",
+        "Unsure about donor-area suitability before a procedure"
+      ],
+      "paragraphs": [
+        "It may be relevant for people exploring FUE, DHT, ARTAS-assisted or other hair-transplant pathways, and for people who need a clearer understanding of their donor-area suitability before considering a procedure."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "A donor assessment supports careful planning but cannot promise a fixed graft count, an exact density outcome or a particular result. Final recommendations follow clinical examination."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "AI-Integrated Donor Assessment Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About AI-Integrated Donor Assessment",
+      "items": [
+        {
+          "q": "Can an AI donor assessment tell me how many grafts I have?",
+          "a": "It can support donor-area documentation, but a final graft plan requires in-person specialist assessment."
+        },
+        {
+          "q": "Is it useful before a first hair transplant?",
+          "a": "Yes, it can form part of a structured consultation for people considering hair restoration."
+        },
+        {
+          "q": "Can it assess an already used donor area?",
+          "a": "It may help document the donor area, but the clinical recommendation depends on the complete examination and treatment history."
+        },
+        {
+          "q": "Does it replace manual examination?",
+          "a": "No. It complements, rather than replaces, specialist examination."
+        },
+        {
+          "q": "Can it be used for women as well?",
+          "a": "The assessment may be relevant where a hair-transplant consultation is being considered."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss AI-Integrated Donor Assessment With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Donor Assessment Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "FUE Hair Transplant",
+          "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
+        },
+        {
+          "label": "DHI Hair Transplant",
+          "href": "/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/"
+        },
+        {
+          "label": "Neo Follicle Hair Transplant",
+          "href": "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/artas-robotic-hair-transplant/",
+    "name": "ARTAS Robotic Hair Transplant",
+    "kind": "artas-detail",
+    "source": "content/technology/technology-international-patient.md:508",
+    "seo": {
+      "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
+      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
+      "h1": "ARTAS Robotic Hair Transplant in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "ARTAS Robotic Hair Transplant"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "comparison",
+      "process",
+      "benefits",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "page",
+        "kind": "note",
+        "text": "This page has its own layout on the live site (no \"How Is It Different\" / cost / FAQ blocks like the other eight). All live sections are kept in order; a cost block and FAQs are added so it matches the other technology pages."
+      },
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      },
+      {
+        "section": "cost",
+        "kind": "added",
+        "text": "Not on the live ARTAS page. Uses the same cost wording as the other eight technology pages."
+      },
+      {
+        "section": "faqs",
+        "kind": "added",
+        "text": "The live ARTAS page has no FAQs. These five are written only from this page's own wording (no new claims). Approve before publishing."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "ARTAS Robotic Hair Transplant in Bangalore",
+      "intro": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation. At NeoSculpt6, ARTAS technology is considered only after a detailed hair-loss, scalp and donor-area assessment.",
+      "buttons": [
+        {
+          "label": "Book an ARTAS Hair Transplant Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "How the Procedure Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is ARTAS iX Robotic Hair Restoration?",
+      "paragraphs": [
+        "ARTAS iX uses robotic technology and a high-definition stereoscopic vision system to identify suitable hair follicular units from the scalp. The system can support experts during follicular-unit harvesting, recipient-site creation and implantation as part of a clinically planned hair-transplant procedure.",
+        "Treatment planning remains specialist led. The choice of technique depends on the pattern of hair loss, donor availability, scalp condition, hair characteristics and the result the patient hopes to achieve."
+      ]
+    },
+    "comparison": {
+      "h2": "How Is ARTAS Different From Traditional Hair Transplant Procedures?",
+      "introLine": "Traditional hair restoration procedures include Follicular Unit Transplantation (FUT) and manual Follicular Unit Excision (FUE). The appropriate method depends on the individual assessment and treatment plan.",
+      "cards": [
+        {
+          "title": "Follicular Unit Transplantation (FUT)",
+          "text": "FUT involves removing a strip of scalp from the back of the head and separating the hair follicles from it for implantation into balding areas. Because it involves strip removal, FUT leaves a permanent linear scar, and some patients may experience scalp numbness, tingling, tightness or discomfort during recovery."
+        },
+        {
+          "title": "Manual Follicular Unit Excision (FUE)",
+          "text": "Manual FUE uses handheld instruments to extract individual hair grafts. The procedure relies on the expert’s or technician’s hand-eye coordination and involves repetitive graft extraction during surgery."
+        },
+        {
+          "title": "ARTAS iX Robotic Hair Restoration",
+          "text": "ARTAS iX uses robotic technology to assist experts with precise and repetitive movements during follicular-unit harvesting. It is designed to identify suitable grafts, assist with extraction, create recipient sites and implant harvested follicles as part of the planned procedure."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Does the ARTAS iX Procedure Work?",
+      "steps": [
+        {
+          "title": "High-Definition Stereoscopic Vision",
+          "text": "The ARTAS iX high-definition stereoscopic vision system identifies grafts suitable for harvesting and provides detailed visualisation during the procedure."
+        },
+        {
+          "title": "Precise Follicular-Unit Harvesting",
+          "text": "The ARTAS iX harvesting system helps the expert dissect and harvest grafts from the donor area. Robotic technology supports consistent repetitive movements throughout this stage of the procedure."
+        },
+        {
+          "title": "Recipient-Site Creation",
+          "text": "After harvesting, the ARTAS iX system can create recipient sites according to the individual treatment plan, hairline design and graft-placement strategy."
+        },
+        {
+          "title": "Site Making and Implantation",
+          "text": "ARTAS iX can support recipient-site making and implantation of harvested grafts. The treatment team plans every stage around the patient’s existing hair, donor area and restoration goal."
+        }
+      ]
+    },
+    "benefits": {
+      "h2": "What Are the Benefits of ARTAS iX?",
+      "subline": null,
+      "cards": [
+        {
+          "title": "No Linear Scar",
+          "text": "ARTAS-assisted follicular-unit extraction does not use a strip-removal approach, so it does not create a linear donor scar."
+        },
+        {
+          "title": "No Plugs, Stitches or Staples",
+          "text": "The procedure is designed around individual follicular units rather than the plug-graft approach used in older transplant methods. It does not involve strip closure with stitches or staples."
+        },
+        {
+          "title": "Precise Graft Harvesting and Implantation",
+          "text": "Robotic technology supports detailed imaging, graft identification and repeatable procedural movements during the planned stages of treatment."
+        },
+        {
+          "title": "Natural-Looking Hair-Restoration Planning",
+          "text": "Hairline design, graft placement and density goals are planned around the individual’s facial proportions, existing hair, donor availability and long-term expectations."
+        }
+      ],
+      "smallPrint": "Individual results, recovery experience and visible growth vary between patients."
+    },
+    "candidates": {
+      "h2": "Who Is ARTAS iX For?",
+      "items": [
+        "Men and women with androgenetic alopecia",
+        "Hair and donor characteristics suitable for the technology-assisted procedure",
+        "Hair-loss pattern, donor area and scalp condition assessed first"
+      ],
+      "paragraphs": [
+        "ARTAS iX may be considered for men and women with androgenetic alopecia where hair and donor characteristics are suitable for the technology-assisted procedure. Hair-loss pattern, donor area, scalp condition and hair characteristics are assessed before treatment is recommended.",
+        "The expert determines whether ARTAS-assisted treatment is appropriate after evaluating the patient’s hair loss and donor area."
+      ]
+    },
+    "expectations": {
+      "h2": "What Results Can You Expect From ARTAS iX?",
+      "paragraphs": [
+        "Hair restoration develops gradually after treatment. Visible change is reviewed over time, with hair-transplant progress commonly assessed at different stages of the growth cycle. Actual growth, density, recovery and final appearance vary between patients."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "ARTAS Robotic Hair Transplant Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About ARTAS Robotic Hair Transplant",
+      "items": [
+        {
+          "q": "What is ARTAS iX robotic hair restoration?",
+          "a": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation, including follicular-unit harvesting, recipient-site creation and implantation."
+        },
+        {
+          "q": "Is ARTAS different from FUT and manual FUE?",
+          "a": "Yes. FUT removes a strip of scalp and leaves a linear scar, and manual FUE uses handheld instruments. ARTAS iX uses robotic technology to assist experts with precise and repetitive movements during harvesting."
+        },
+        {
+          "q": "Does ARTAS leave a linear scar?",
+          "a": "ARTAS-assisted follicular-unit extraction does not use a strip-removal approach, so it does not create a linear donor scar."
+        },
+        {
+          "q": "Is ARTAS iX suitable for everyone?",
+          "a": "No. The expert determines whether ARTAS-assisted treatment is appropriate after evaluating the patient’s hair loss, donor area, scalp condition and hair characteristics."
+        },
+        {
+          "q": "When will I see results after an ARTAS hair transplant?",
+          "a": "Hair restoration develops gradually after treatment, and progress is reviewed at different stages of the growth cycle. Actual growth, density and final appearance vary between patients."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "ARTAS iX at NeoSculpt6",
+      "paragraph": "NeoSculpt6 combines specialist-led hair restoration with advanced hair analysis, donor assessment and ARTAS iX robotic hair-restoration technology where suitable. A consultation helps assess hair loss, donor area and suitability before a personalised restoration plan is recommended.",
+      "buttons": [
+        {
+          "label": "Book an ARTAS Hair Transplant Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "FUE Hair Transplant",
+          "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
+        },
+        {
+          "label": "DHI Hair Transplant",
+          "href": "/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/"
+        },
+        {
+          "label": "Neo Follicle Hair Transplant",
+          "href": "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/vaser-liposuction-technology/",
+    "name": "Vaser Liposuction Technology",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:694",
+    "seo": {
+      "title": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
+      "description": "Explore Vaser Liposuction Technology at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "Vaser Liposuction Technology in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "Vaser Liposuction Technology"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Vaser Liposuction Technology in Bangalore",
+      "intro": "Vaser is an ultrasound-assisted technology used in selected liposuction procedures. It may support fat-removal and contour-planning discussions when surgical body contouring is clinically appropriate.",
+      "buttons": [
+        {
+          "label": "Book a Body Contouring Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is Vaser Liposuction Technology?",
+      "paragraphs": [
+        "Vaser technology uses ultrasound energy as part of the liposuction process to emulsify targeted fat before removal. It is considered alongside the area of concern, skin quality, anatomy, medical suitability and the contour goal being discussed."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "Liposuction techniques are selected around the individual surgical plan. Vaser-assisted liposuction may be considered as one approach; it is not a weight-loss treatment and is not appropriate for every body concern."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Ultrasound-assisted approach is considered as part of a clinician-led Vaser Liposuction Technology discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Ultrasound-assisted approach",
+          "text": null
+        },
+        {
+          "title": "Targeted contour planning",
+          "text": null
+        },
+        {
+          "title": "Part of a personalised surgical plan",
+          "text": null
+        },
+        {
+          "title": "Structured recovery discussion",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Vaser Liposuction Technology Planning Works",
+      "steps": [
+        {
+          "title": "Body and medical assessment",
+          "text": "The consultation considers the treatment area, health history, skin quality and individual contour goal."
+        },
+        {
+          "title": "Area-specific contour planning",
+          "text": "The surgeon discusses the areas being assessed and the change that can realistically be expected."
+        },
+        {
+          "title": "Procedure explanation",
+          "text": "The proposed approach, alternatives, recovery and aftercare requirements are explained before a decision."
+        },
+        {
+          "title": "Surgical treatment where appropriate",
+          "text": "A procedure is considered only after the required assessment and informed discussion."
+        },
+        {
+          "title": "Recovery and follow-up review",
+          "text": "Aftercare, garments, activity guidance and review timing are tailored to the procedure."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Adults with localised fat concerns",
+        "Assessed as suitable for surgical body contouring",
+        "Suitability confirmed on health, anatomy and skin quality"
+      ],
+      "paragraphs": [
+        "It may be considered for adults with localised fat concerns who have been assessed as suitable for surgical body contouring. Suitability depends on health, anatomy, skin quality, expectations and the planned treatment area."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "The degree of contour change, recovery period and final result vary by anatomy, treatment area, skin quality and the procedure advised. A consultation is needed to discuss benefits, limitations, garments, aftercare and reviews."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Saranya T",
+          "chips": [
+            "MBBS",
+            "DNB General Surgery",
+            "MCh Plastic and Reconstructive Surgery"
+          ],
+          "qualifications": null,
+          "specialty": "Consultant Plastic Surgeon.",
+          "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
+          "button": {
+            "label": "Meet Dr. Saranya T",
+            "href": "/dr-saranya-t/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "Vaser Liposuction Technology Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About Vaser Liposuction Technology",
+      "items": [
+        {
+          "q": "Is Vaser liposuction a weight-loss procedure?",
+          "a": "No. It is considered for selected body-contouring concerns and is not a substitute for weight-loss treatment."
+        },
+        {
+          "q": "Which areas can be assessed?",
+          "a": "The consultation considers the concern, anatomy and skin quality before discussing whether a treatment area is suitable."
+        },
+        {
+          "q": "Will Vaser be suitable for everyone?",
+          "a": "No. A surgeon must assess medical suitability, contour goals and recovery requirements."
+        },
+        {
+          "q": "How is recovery planned?",
+          "a": "Your team explains aftercare, garments, activity guidance and the recommended review schedule for your procedure."
+        },
+        {
+          "q": "Can costs be confirmed before consultation?",
+          "a": "A preliminary estimate may be discussed, but the final plan and cost depend on surgical assessment."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss Vaser Liposuction Technology With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Body Contouring Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "Body Contouring",
+          "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
+        },
+        {
+          "label": "Tummy Tuck Surgery (Abdominoplasty)",
+          "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/reaction-viora-rf-tightening/",
+    "name": "Reaction Viora RF Tightening",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:861",
+    "seo": {
+      "title": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
+      "description": "Explore Reaction Viora RF Tightening at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "Reaction Viora RF Tightening in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "Reaction Viora RF Tightening"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Reaction Viora RF Tightening in Bangalore",
+      "intro": "Reaction Viora RF tightening is a radiofrequency-based technology considered in selected skin-firming and body-contouring plans. The appropriate approach depends on the treatment area, skin quality, medical suitability and the outcome being discussed.",
+      "buttons": [
+        {
+          "label": "Book a Skin Tightening Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is Reaction Viora RF Tightening?",
+      "paragraphs": [
+        "Radiofrequency treatment delivers controlled energy to selected tissue layers as part of a non-surgical treatment plan. It may be considered for concerns related to skin firmness and contour refinement when clinically appropriate."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "RF tightening is not a surgical substitute for every concern. During consultation, the clinician considers the degree of laxity, the condition of the skin, the area being treated and whether a non-surgical plan is appropriate."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Non-surgical treatment planning is considered as part of a clinician-led Reaction Viora RF Tightening discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Non-surgical treatment planning",
+          "text": null
+        },
+        {
+          "title": "Area-specific assessment",
+          "text": null
+        },
+        {
+          "title": "Session-based treatment approach",
+          "text": null
+        },
+        {
+          "title": "Progress review where appropriate",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Reaction Viora RF Tightening Planning Works",
+      "steps": [
+        {
+          "title": "Concern and skin assessment",
+          "text": "The clinician assesses the concern, treatment area, skin quality and relevant medical history."
+        },
+        {
+          "title": "Suitability review",
+          "text": "The appropriate pathway is discussed, including whether another technology or a surgical consultation may be more suitable."
+        },
+        {
+          "title": "Personalised session planning",
+          "text": "Where a session plan is advised, its likely frequency and review points are explained."
+        },
+        {
+          "title": "RF treatment sessions if advised",
+          "text": "Treatment is delivered according to the plan agreed after clinical assessment."
+        },
+        {
+          "title": "Aftercare and review",
+          "text": "Skincare, sun protection, recovery and review requirements are explained."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Selected skin-firmness concerns",
+        "Contour-refinement concerns",
+        "Adults exploring a non-surgical approach"
+      ],
+      "paragraphs": [
+        "It may be considered for adults seeking consultation for selected skin-firmness or contour-refinement concerns. The clinician will discuss whether RF treatment, another non-surgical approach or a surgical consultation is more appropriate."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "The number and frequency of sessions, the response observed and the aftercare advice vary. Your clinician will explain realistic expectations and any relevant treatment limitations before you decide."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "Reaction Viora RF Tightening Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About Reaction Viora RF Tightening",
+      "items": [
+        {
+          "q": "What is Reaction Viora RF used for?",
+          "a": "It may be considered in selected non-surgical plans for skin firmness and contour refinement after assessment."
+        },
+        {
+          "q": "Is RF tightening the same as surgery?",
+          "a": "No. The two approaches address different concerns and recovery needs. Your consultation determines which path is appropriate."
+        },
+        {
+          "q": "How many sessions are needed?",
+          "a": "Session number and frequency depend on the area, concern and individual treatment response."
+        },
+        {
+          "q": "Can it be combined with other care?",
+          "a": "Combination options are considered only where clinically appropriate for your treatment plan."
+        },
+        {
+          "q": "When will I know if it is suitable?",
+          "a": "Suitability is discussed after assessment of the treatment area, skin quality and goals."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss Reaction Viora RF Tightening With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Skin Tightening Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "HIFU Treatment",
+          "href": "/anti-aging-injectables/hifu-treatment-in-bangalore/"
+        },
+        {
+          "label": "Body Contouring",
+          "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/co2-fractional-laser/",
+    "name": "CO2 Fractional Laser",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:1028",
+    "seo": {
+      "title": "CO2 Fractional Laser in Bangalore | NeoSculpt6",
+      "description": "Explore CO2 Fractional Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "CO2 Fractional Laser in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "CO2 Fractional Laser"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "CO2 Fractional Laser in Bangalore",
+      "intro": "CO2 fractional laser is a skin-resurfacing technology used in selected treatment plans for acne scars, uneven texture, fine lines and skin-remodelling concerns. Treatment settings and recovery are planned after detailed skin assessment.",
+      "buttons": [
+        {
+          "label": "Book a CO2 Laser Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is CO2 Fractional Laser?",
+      "paragraphs": [
+        "Fractional CO2 treatment delivers controlled laser energy in a patterned way to selected areas of the skin. The approach, intensity and number of sessions depend on the concern, skin type, treatment area, previous treatments and downtime considerations."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "Resurfacing is not identical for every scar, texture concern or skin type. A clinician assesses active skin conditions, pigmentation risk, healing history and the recovery time a person can allow before recommending an approach."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Targeted resurfacing assessment is considered as part of a clinician-led CO2 Fractional Laser discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Targeted resurfacing assessment",
+          "text": null
+        },
+        {
+          "title": "Treatment-plan personalisation",
+          "text": null
+        },
+        {
+          "title": "Scar and texture discussion",
+          "text": null
+        },
+        {
+          "title": "Structured aftercare guidance",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How CO2 Fractional Laser Planning Works",
+      "steps": [
+        {
+          "title": "Detailed skin consultation",
+          "text": "The skin concern, relevant history and treatment goals are reviewed in detail."
+        },
+        {
+          "title": "Concern and risk assessment",
+          "text": "The clinician considers skin type, active concerns, previous procedures and recovery considerations."
+        },
+        {
+          "title": "Laser-setting and plan discussion",
+          "text": "The treatment approach is personalised to the concern and skin assessment."
+        },
+        {
+          "title": "Treatment session if advised",
+          "text": "The laser session follows the plan decided after consultation."
+        },
+        {
+          "title": "Aftercare and review",
+          "text": "Skincare, sun protection, recovery and review requirements are explained."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Selected acne scars",
+        "Uneven texture",
+        "Fine lines",
+        "Photoageing concerns"
+      ],
+      "paragraphs": [
+        "It may be assessed for selected acne scars, uneven texture, fine lines and photoageing concerns. Not every skin concern or skin type is suited to the same resurfacing plan."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "Skin response and recovery vary with treatment intensity and individual factors. The clinician explains expected aftercare, sun protection, skincare guidance, possible downtime and the review plan before treatment."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "CO2 Fractional Laser Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About CO2 Fractional Laser",
+      "items": [
+        {
+          "q": "What concerns can CO2 fractional laser assess?",
+          "a": "It may be considered for selected scar, texture and skin-renewal concerns after consultation."
+        },
+        {
+          "q": "Does every acne scar need the same treatment?",
+          "a": "No. Scar type, skin condition and pigmentation risk influence the recommended plan."
+        },
+        {
+          "q": "How much downtime is involved?",
+          "a": "Recovery varies with the treatment intensity and skin response. Your clinician will explain the expected downtime for your plan."
+        },
+        {
+          "q": "Can it be combined with other treatments?",
+          "a": "Combination care is considered only when appropriate to the skin concern and treatment plan."
+        },
+        {
+          "q": "How are costs decided?",
+          "a": "The estimate depends on the area, concern, settings, session plan and aftercare requirements."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss CO2 Fractional Laser With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a CO2 Laser Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "CO2 Fractional Laser Treatment",
+          "href": "/laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore/"
+        },
+        {
+          "label": "Acne Scar Laser Treatment",
+          "href": "/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/q-switch-laser/",
+    "name": "Q-Switch Laser",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:1195",
+    "seo": {
+      "title": "Q-Switch Laser in Bangalore | NeoSculpt6",
+      "description": "Explore Q-Switch Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "Q-Switch Laser in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "Q-Switch Laser"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Q-Switch Laser in Bangalore",
+      "intro": "Q-Switch laser treatment uses short, targeted pulses of laser energy in selected plans for pigmentation-related concerns. The treatment approach is based on skin assessment, the nature and pattern of pigmentation, treatment history and individual suitability.",
+      "buttons": [
+        {
+          "label": "Book a Pigmentation Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is Q-Switch Laser?",
+      "paragraphs": [
+        "Q-Switch technology delivers laser energy in very short pulses to selected pigment targets in the skin. It may be considered for specific pigmentation concerns, laser-toning plans and selected pigment-reduction protocols."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "Pigmentation has many causes, depths and patterns. A Q-Switch approach is not automatically suitable for every concern; the clinician considers skin type, sun exposure, active skin conditions, existing skincare and the risk of pigmentation change."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Pigment-focused consultation is considered as part of a clinician-led Q-Switch Laser discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Pigment-focused consultation",
+          "text": null
+        },
+        {
+          "title": "Skin-specific treatment planning",
+          "text": null
+        },
+        {
+          "title": "Session and skincare guidance",
+          "text": null
+        },
+        {
+          "title": "Review of response over time",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Q-Switch Laser Planning Works",
+      "steps": [
+        {
+          "title": "Pigmentation assessment",
+          "text": "The clinician reviews the cause, depth and pattern of pigmentation being considered."
+        },
+        {
+          "title": "Skin and treatment-history review",
+          "text": "Previous treatment, skincare, sun exposure and the risk of pigmentation change are considered."
+        },
+        {
+          "title": "Technology and plan discussion",
+          "text": "The appropriate technology, session approach and supportive skincare plan are discussed."
+        },
+        {
+          "title": "Laser sessions if advised",
+          "text": "Treatment sessions are planned around the concern and clinical response."
+        },
+        {
+          "title": "Sun-care and follow-up review",
+          "text": "Sun protection, skincare and review timing form part of the plan."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Uneven pigmentation",
+        "Tanning or dullness concerns",
+        "Selected pigment-reduction protocols"
+      ],
+      "paragraphs": [
+        "It may be assessed for uneven pigmentation, tanning or dullness concerns, and selected pigment-reduction protocols. Suitability depends on the pigment, treatment area, skin type and the clinical cause being considered."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "Pigment concerns can respond differently from one person to another. The clinician will discuss possible session planning, skincare support, sun protection and realistic expectations before treatment."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "Q-Switch Laser Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About Q-Switch Laser",
+      "items": [
+        {
+          "q": "What is Q-Switch laser used for?",
+          "a": "It may be considered for selected pigmentation concerns and laser-toning plans after assessment."
+        },
+        {
+          "q": "Can it treat every type of pigmentation?",
+          "a": "No. The cause, depth and pattern of pigmentation must be assessed before a technology is recommended."
+        },
+        {
+          "q": "Is sun protection important?",
+          "a": "Yes. Your clinician will explain the relevant sun-care and skincare guidance for your plan."
+        },
+        {
+          "q": "How many sessions might be advised?",
+          "a": "The session plan varies according to the concern, skin response and treatment goals."
+        },
+        {
+          "q": "Can it be used for tattoo or pigment reduction?",
+          "a": "Suitability for any pigment-reduction protocol depends on the pigment, skin type, area and treatment history."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss Q-Switch Laser With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Pigmentation Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [
+        {
+          "label": "Q-Switch Laser Treatment",
+          "href": "/laser-skin-aesthetic/q-switch-laser-treatment-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/excimer-laser-targeted-phototherapy/",
+    "name": "Excimer Laser & Targeted Phototherapy",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:1362",
+    "seo": {
+      "title": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
+      "description": "Explore Excimer Laser and Targeted Phototherapy at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "Excimer Laser and Targeted Phototherapy in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "Excimer Laser & Targeted Phototherapy"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "process",
+        "kind": "note",
+        "text": "On the live page the step numbers show twice (\"0101\", \"0202\" …). Show them once (01–05)."
+      },
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Excimer Laser and Targeted Phototherapy in Bangalore",
+      "intro": "Excimer laser and targeted phototherapy are focused light-based treatment approaches considered for selected cases of vitiligo and inflammatory skin concerns. Suitability, treatment frequency and expected response are assessed individually.",
+      "buttons": [
+        {
+          "label": "Book a Vitiligo Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is Excimer Laser and Targeted Phototherapy?",
+      "paragraphs": [
+        "Targeted phototherapy delivers light treatment to a localised area of concern rather than broadly exposing unaffected skin. Excimer laser may form part of a clinician-led plan when it is appropriate to the diagnosis and treatment area."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "The treatment plan is based on more than the appearance of a patch of skin. The clinician considers diagnosis, history, activity, distribution, stability, previous treatment and whether a localised light-based approach is appropriate."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Focused treatment-area planning is considered as part of a clinician-led Excimer Laser and Targeted Phototherapy discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Focused treatment-area planning",
+          "text": null
+        },
+        {
+          "title": "Localised light-treatment approach",
+          "text": null
+        },
+        {
+          "title": "Session-schedule guidance",
+          "text": null
+        },
+        {
+          "title": "Progress review over time",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Excimer Laser and Targeted Phototherapy Planning Works",
+      "steps": [
+        {
+          "title": "Diagnosis and history assessment",
+          "text": "The condition, history and clinical features are assessed before targeted light treatment is considered."
+        },
+        {
+          "title": "Stability and distribution review",
+          "text": "The clinician assesses activity, distribution and treatment-area factors relevant to planning."
+        },
+        {
+          "title": "Targeted treatment planning",
+          "text": "The localised treatment area and session schedule are planned around the diagnosed concern."
+        },
+        {
+          "title": "Sessions if advised",
+          "text": "Sessions are delivered according to the clinician-led plan."
+        },
+        {
+          "title": "Clinical progress review",
+          "text": "Skin response is reviewed and the approach may be adjusted where appropriate."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Selected vitiligo concerns",
+        "Certain inflammatory skin conditions"
+      ],
+      "paragraphs": [
+        "It may be assessed for selected vitiligo concerns and certain inflammatory skin conditions. Not every condition, stage of disease or treatment area is suited to the same approach."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "Response patterns, session number and the possible need for combination care vary. Your clinician will explain the proposed schedule, review process and realistic expectations for the diagnosed concern."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "Excimer Laser and Targeted Phototherapy Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About Excimer Laser and Targeted Phototherapy",
+      "items": [
+        {
+          "q": "What is targeted phototherapy?",
+          "a": "It is a focused light-based approach directed at a localised treatment area when clinically appropriate."
+        },
+        {
+          "q": "Can it be used for every vitiligo concern?",
+          "a": "No. Diagnosis, stability, distribution and the individual treatment history all matter."
+        },
+        {
+          "q": "How often are sessions planned?",
+          "a": "The schedule depends on the condition, treatment area and response observed during clinical review."
+        },
+        {
+          "q": "Does it replace other treatment?",
+          "a": "It may form part of a broader plan. The clinician decides whether combination care is appropriate."
+        },
+        {
+          "q": "How is progress reviewed?",
+          "a": "The team reviews the skin response over time and may adjust the plan based on clinical assessment."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss Excimer Laser and Targeted Phototherapy With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Vitiligo Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Body Contouring & Cryolipolysis Platforms",
+          "href": "/technology/body-contouring-cryolipolysis-platforms/"
+        }
+      ],
+      "related": [],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/technology/body-contouring-cryolipolysis-platforms/",
+    "name": "Body Contouring & Cryolipolysis Platforms",
+    "kind": "technology-detail",
+    "source": "content/technology/technology-international-patient.md:1531",
+    "seo": {
+      "title": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
+      "description": "Explore Body Contouring and Cryolipolysis Platforms at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+      "h1": "Body Contouring and Cryolipolysis Platforms in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "Technology",
+        "Body Contouring & Cryolipolysis Platforms"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "different",
+      "assessment",
+      "benefits",
+      "process",
+      "candidates",
+      "expectations",
+      "doctors",
+      "cost",
+      "reviews",
+      "faqs",
+      "closing",
+      "explore"
+    ],
+    "notes": [
+      {
+        "section": "process",
+        "kind": "note",
+        "text": "On the live page the step numbers show twice (\"0101\", \"0202\" …). Show them once (01–05)."
+      },
+      {
+        "section": "doctors",
+        "kind": "added",
+        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+      }
+    ],
+    "hero": {
+      "eyebrow": "Our Technology",
+      "h1": "Body Contouring and Cryolipolysis Platforms in Bangalore",
+      "intro": "Body contouring and cryolipolysis platforms may be considered in selected non-surgical plans for localised body-shape concerns. The right approach depends on the area of concern, anatomy, skin quality, lifestyle factors and whether a non-surgical option is appropriate.",
+      "buttons": [
+        {
+          "label": "Book a Body Contouring Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Learn How It Works",
+          "href": "#how-it-works"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "What Is Body Contouring and Cryolipolysis Platforms?",
+      "paragraphs": [
+        "Cryolipolysis is a cooling-based body-contouring approach used in selected treatment plans. It is considered alongside other technology options after an assessment of the body concern and the expected result that can realistically be achieved."
+      ]
+    },
+    "different": {
+      "h2": "How Is It Different From Other Approaches?",
+      "paragraphs": [
+        "Non-surgical body contouring is not the same as liposuction or weight-loss treatment. The consultation helps distinguish between concerns that may be suitable for a non-surgical plan and concerns that need a different approach."
+      ]
+    },
+    "assessment": {
+      "h2": "Why a Personalised Assessment Matters",
+      "paragraph": "Technology is selected around the individual concern, not the device alone. The consultation considers the area being treated, clinical history, suitability, treatment goals, available alternatives and the practical recovery or session plan."
+    },
+    "benefits": {
+      "h2": "Potential Benefits of a Planned Approach",
+      "subline": "Non-surgical body-contouring assessment is considered as part of a clinician-led Body Contouring and Cryolipolysis Platforms discussion, based on the individual concern and the treatment plan advised.",
+      "cards": [
+        {
+          "title": "Non-surgical body-contouring assessment",
+          "text": null
+        },
+        {
+          "title": "Area-specific planning",
+          "text": null
+        },
+        {
+          "title": "Technology-choice discussion",
+          "text": null
+        },
+        {
+          "title": "Progress and response review",
+          "text": null
+        }
+      ],
+      "smallPrint": null
+    },
+    "process": {
+      "eyebrow": "Our Process",
+      "h2": "How Body Contouring and Cryolipolysis Platforms Planning Works",
+      "steps": [
+        {
+          "title": "Body concern assessment",
+          "text": "The consultation considers the localised concern, goals and relevant health history."
+        },
+        {
+          "title": "Suitability and anatomy review",
+          "text": "The clinician assesses the area, anatomy and whether a non-surgical approach may be appropriate."
+        },
+        {
+          "title": "Technology and session-plan discussion",
+          "text": "The possible technology options, limitations and session plan are discussed."
+        },
+        {
+          "title": "Treatment sessions if advised",
+          "text": "Sessions proceed only when the individual plan is appropriate."
+        },
+        {
+          "title": "Review and next-step guidance",
+          "text": "The team explains how response is reviewed and whether further care may be appropriate."
+        }
+      ]
+    },
+    "candidates": {
+      "h2": "Who May Be Assessed?",
+      "items": [
+        "Adults with selected localised contour concerns",
+        "Wish to explore a non-surgical option"
+      ],
+      "paragraphs": [
+        "It may be assessed for adults with selected localised contour concerns who wish to explore a non-surgical option. Suitability depends on the area, skin quality, medical history, body goals and the approach being considered."
+      ]
+    },
+    "expectations": {
+      "h2": "Results, Recovery and Realistic Expectations",
+      "paragraphs": [
+        "The treatment plan, number of sessions and response vary. A consultation helps set realistic expectations and explain whether body contouring technology, lifestyle support, surgical consultation or another approach is appropriate."
+      ]
+    },
+    "doctors": {
+      "eyebrow": "Our Doctors",
+      "h2": "Board-Certified Team",
+      "paragraphs": [],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": [
+            "MBBS",
+            "MD Dermatology"
+          ],
+          "qualifications": null,
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        },
+        {
+          "name": "Dr. Saranya T",
+          "chips": [
+            "MBBS",
+            "DNB General Surgery",
+            "MCh Plastic and Reconstructive Surgery"
+          ],
+          "qualifications": null,
+          "specialty": "Consultant Plastic Surgeon.",
+          "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
+          "button": {
+            "label": "Meet Dr. Saranya T",
+            "href": "/dr-saranya-t/"
+          }
+        }
+      ]
+    },
+    "cost": {
+      "h2": "Body Contouring and Cryolipolysis Platforms Cost and Consultation in Bangalore",
+      "paragraphs": [
+        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+      ],
+      "buttons": [
+        {
+          "label": "Book a Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What Our Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions About Body Contouring and Cryolipolysis Platforms",
+      "items": [
+        {
+          "q": "Is cryolipolysis a weight-loss treatment?",
+          "a": "No. It is considered for selected localised body-contouring concerns and is not a substitute for weight-loss treatment."
+        },
+        {
+          "q": "How is the right technology chosen?",
+          "a": "The clinician considers the area, anatomy, skin quality, health history and goals before recommending an approach."
+        },
+        {
+          "q": "Can it replace liposuction?",
+          "a": "Non-surgical and surgical options address different concerns. Your consultation helps determine the appropriate pathway."
+        },
+        {
+          "q": "How many sessions may be needed?",
+          "a": "The recommended session plan depends on the concern, treatment area and response."
+        },
+        {
+          "q": "How are results reviewed?",
+          "a": "The team explains the expected review timeline and when progress should be assessed."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Discuss Body Contouring and Cryolipolysis Platforms With the NeoSculpt6 Team",
+      "paragraph": "A consultation helps determine whether this technology is relevant to your concern and what the appropriate next step may be.",
+      "buttons": [
+        {
+          "label": "Book a Body Contouring Consultation",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "explore": {
+      "heading": "Our Technology",
+      "links": [
+        {
+          "label": "AI-Integrated Hair Analysis",
+          "href": "/technology/ai-integrated-hair-analysis/"
+        },
+        {
+          "label": "AI-Integrated Donor Assessment",
+          "href": "/technology/ai-integrated-donor-assessment/"
+        },
+        {
+          "label": "ARTAS Robotic Hair Transplant",
+          "href": "/technology/artas-robotic-hair-transplant/"
+        },
+        {
+          "label": "Vaser Liposuction Technology",
+          "href": "/technology/vaser-liposuction-technology/"
+        },
+        {
+          "label": "Reaction Viora RF Tightening",
+          "href": "/technology/reaction-viora-rf-tightening/"
+        },
+        {
+          "label": "CO2 Fractional Laser",
+          "href": "/technology/co2-fractional-laser/"
+        },
+        {
+          "label": "Q-Switch Laser",
+          "href": "/technology/q-switch-laser/"
+        },
+        {
+          "label": "Excimer Laser & Targeted Phototherapy",
+          "href": "/technology/excimer-laser-targeted-phototherapy/"
+        }
+      ],
+      "related": [
+        {
+          "label": "Cryolipolysis Treatment",
+          "href": "/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/"
+        },
+        {
+          "label": "Body Contouring",
+          "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
+        },
+        {
+          "label": "Lipolaser Treatment",
+          "href": "/slimming-body-contouring/lipolaser-treatment-in-bangalore/"
+        }
+      ],
+      "contact": [
+        {
+          "label": "Book An Appointment",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp",
+          "href": null
+        }
+      ]
+    }
+  },
+  {
+    "path": "/international-patients/",
+    "name": "International Patients",
+    "kind": "international-patients",
+    "source": "content/technology/technology-international-patient.md:1709",
+    "seo": {
+      "title": "International Patient Care in Bangalore | NeoSculpt6",
+      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
+      "h1": "International Patient Care in Bangalore",
+      "robots": "index, follow",
+      "breadcrumb": [
+        "Home",
+        "International Patients"
+      ],
+      "note": null
+    },
+    "order": [
+      "hero",
+      "intro",
+      "steps",
+      "pathways",
+      "journey",
+      "travel",
+      "doctors",
+      "estimates",
+      "reviews",
+      "faqs",
+      "closing"
+    ],
+    "notes": [
+      {
+        "section": "pathways",
+        "kind": "note",
+        "text": "Fertility Care is the only pathway with no treatment links, and NeoSculpt6 has no fertility service pages. Confirm whether this tab should link to the Neo Fertility website or be removed."
+      }
+    ],
+    "hero": {
+      "eyebrow": "International Patients",
+      "h1": "International Patient Care in Bangalore",
+      "intro": "Plan your hair, skin, aesthetic, body-contouring or fertility consultation journey with clear clinical guidance before you travel to Bangalore. The process begins with your concern and the information your doctor needs—not with a preset package.",
+      "buttons": [
+        {
+          "label": "Start a Virtual Consultation",
+          "href": "/contact-us/"
+        },
+        {
+          "label": "Send Your Medical Records",
+          "href": "/contact-us/"
+        }
+      ]
+    },
+    "intro": {
+      "h2": "Not Medical Tourism Packages. A Care Plan.",
+      "paragraphs": [
+        "International care works best when the clinical pathway is understood before travel. NeoSculpt6 helps patients begin with a structured conversation, share the information relevant to their concern and understand what may need an in-person assessment. Recommendations are made around diagnosis, suitability, preparation and realistic treatment goals."
+      ]
+    },
+    "steps": {
+      "h2": "Three Steps. No Uncertainty.",
+      "cards": [
+        {
+          "title": "Share the Context",
+          "text": "Tell us what you would like help with, your country of residence, preferred travel window and any previous treatment history. This helps the team route your enquiry appropriately."
+        },
+        {
+          "title": "Share Relevant Records",
+          "text": "Depending on the concern, we may request reports, prescriptions, investigations, photographs or short videos. Hair enquiries may need scalp and donor-area photographs; other treatments have different information requirements."
+        },
+        {
+          "title": "Speak With the Right Team",
+          "text": "A preliminary review or virtual consultation helps you understand the relevant clinical pathway, preparation, likely clinic visits and the next decision to make before travelling."
+        }
+      ]
+    },
+    "pathways": {
+      "h2": "One Place. Six Clinical Pathways.",
+      "tabs": [
+        {
+          "tab": "01 / 06",
+          "h3": "Hair Restoration",
+          "paragraph": "For hair thinning, pattern hair loss and transplant enquiries, the pathway may include virtual review, donor assessment, scalp examination, graft planning where appropriate, treatment guidance and follow-up planning.",
+          "chips": [
+            {
+              "label": "Neo Follicle Hair Transplant",
+              "href": "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/"
+            },
+            {
+              "label": "FUE Hair Transplant",
+              "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
+            },
+            {
+              "label": "DHI Hair Transplant",
+              "href": "/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/"
+            },
+            {
+              "label": "PRP Hair Treatment",
+              "href": "/hair-transplant-restoration/prp-hair-treatment-in-bangalore/"
+            }
+          ],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        },
+        {
+          "tab": "02 / 06",
+          "h3": "Laser and Skin Aesthetic Care",
+          "paragraph": "For acne scars, pigmentation, texture concerns, vitiligo, laser procedures and skin refinement, recommendations depend on diagnosis, skin type, treatment history and recovery requirements.",
+          "chips": [
+            {
+              "label": "CO2 Fractional Laser Treatment",
+              "href": "/laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore/"
+            },
+            {
+              "label": "Q-Switch Laser Treatment",
+              "href": "/laser-skin-aesthetic/q-switch-laser-treatment-in-bangalore/"
+            },
+            {
+              "label": "Acne Scar Laser Treatment",
+              "href": "/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/"
+            },
+            {
+              "label": "Full Body Laser Hair Removal",
+              "href": "/laser-skin-aesthetic/full-body-laser-hair-removal-in-bangalore/"
+            }
+          ],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        },
+        {
+          "tab": "03 / 06",
+          "h3": "Anti-Aging and Injectables",
+          "paragraph": "For anti-ageing and injectable-treatment enquiries, the consultation focuses on skin and facial assessment, treatment goals, appropriate options, safety considerations and realistic outcomes.",
+          "chips": [
+            {
+              "label": "Botox Treatment",
+              "href": "/anti-aging-injectables/botox-treatment-in-bangalore/"
+            },
+            {
+              "label": "Dermal Filler Treatment",
+              "href": "/anti-aging-injectables/dermal-filler-treatment-in-bangalore/"
+            },
+            {
+              "label": "Profhilo",
+              "href": "/anti-aging-injectables/profhilo-in-bangalore/"
+            },
+            {
+              "label": "HIFU Treatment",
+              "href": "/anti-aging-injectables/hifu-treatment-in-bangalore/"
+            }
+          ],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        },
+        {
+          "tab": "04 / 06",
+          "h3": "Cosmetic Surgery",
+          "paragraph": "For surgical aesthetic enquiries, the in-person consultation focuses on anatomy, medical suitability, procedure options, recovery planning and what can realistically be achieved.",
+          "chips": [
+            {
+              "label": "Rhinoplasty",
+              "href": "/cosmetic-surgery/rhinoplasty-in-bangalore/"
+            },
+            {
+              "label": "Facelift Surgery",
+              "href": "/cosmetic-surgery/facelift-surgery-in-bangalore/"
+            },
+            {
+              "label": "Blepharoplasty (Eyelid Surgery)",
+              "href": "/cosmetic-surgery/blepharoplasty-eyelid-surgery-in-bangalore/"
+            },
+            {
+              "label": "Tummy Tuck Surgery (Abdominoplasty)",
+              "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/"
+            }
+          ],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        },
+        {
+          "tab": "05 / 06",
+          "h3": "Slimming and Body Contouring",
+          "paragraph": "For localised body-shape, fat-reduction, skin-tightening or body-contouring concerns, the team assesses the treatment area, skin quality, anatomy, lifestyle factors and whether a surgical or non-surgical approach may be appropriate.",
+          "chips": [
+            {
+              "label": "Body Contouring",
+              "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
+            },
+            {
+              "label": "Cryolipolysis Treatment",
+              "href": "/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/"
+            },
+            {
+              "label": "Lipolaser Treatment",
+              "href": "/slimming-body-contouring/lipolaser-treatment-in-bangalore/"
+            },
+            {
+              "label": "Medical Weight Loss Treatment",
+              "href": "/slimming-body-contouring/medical-weight-loss-treatment-in-bangalore/"
+            }
+          ],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        },
+        {
+          "tab": "06 / 06",
+          "h3": "Fertility Care",
+          "paragraph": "For fertility-related concerns, the team can explain the consultation pathway and the records or investigations that may be relevant before a treatment plan is considered.",
+          "chips": [],
+          "button": {
+            "label": "Start a Virtual Consultation",
+            "href": "/contact-us/"
+          }
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Your Journey",
+      "h2": "The Plan Continues After You Arrive.",
+      "steps": [
+        {
+          "title": "Initial Enquiry",
+          "text": "Share your concern and preferred timeline."
+        },
+        {
+          "title": "Records Review",
+          "text": "Provide the information requested for a preliminary review."
+        },
+        {
+          "title": "Virtual Consultation",
+          "text": "Discuss the likely pathway, suitability questions and preparation."
+        },
+        {
+          "title": "Visit Planning",
+          "text": "Plan appointments around the recommended consultation, treatment and early recovery period."
+        },
+        {
+          "title": "In-Person Clinical Assessment",
+          "text": "The specialist confirms the clinical factors that cannot be assessed fully online."
+        },
+        {
+          "title": "Treatment and Recovery",
+          "text": "If treatment is appropriate, you receive a personalised plan, aftercare instructions and recovery guidance."
+        },
+        {
+          "title": "Follow-Up",
+          "text": "Where appropriate, the team explains the recommended remote review process after you return home."
+        }
+      ]
+    },
+    "travel": {
+      "h2": "What to Arrange Before You Travel.",
+      "paragraphs": [
+        "Keep relevant reports, prescriptions and treatment history organised. Tell the team about medical conditions, allergies, medications and previous procedures so that the consultation can be planned safely.",
+        "The right length of stay depends on your treatment, number of required visits, procedure plan and early recovery review. Avoid tightly scheduled travel around consultations or procedures. Visa, travel and accommodation arrangements remain the responsibility of the patient and the relevant authorities."
+      ]
+    },
+    "doctors": {
+      "eyebrow": null,
+      "h2": "Clinical Advice Before Aesthetic Decisions.",
+      "paragraphs": [
+        "On arrival, the appropriate specialist completes the in-person assessment, reviews the treatment goals and confirms whether the proposed plan remains suitable. You should understand the expected outcome, limitations, aftercare, alternatives and follow-up before deciding how to proceed."
+      ],
+      "cards": [
+        {
+          "name": "Dr. Sandeep Mahapatra",
+          "chips": null,
+          "qualifications": "MBBS, MD Dermatology.",
+          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
+          "button": {
+            "label": "Meet Dr. Sandeep Mahapatra",
+            "href": "/about-dr-sandeep-mahapatra/"
+          }
+        },
+        {
+          "name": "Dr. Saranya T",
+          "chips": null,
+          "qualifications": "MBBS, DNB General Surgery, MCh Plastic and Reconstructive Surgery.",
+          "specialty": "Consultant Plastic Surgeon.",
+          "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
+          "button": {
+            "label": "Meet Dr. Saranya T",
+            "href": "/dr-saranya-t/"
+          }
+        }
+      ]
+    },
+    "estimates": {
+      "h2": "Treatment Estimates and Follow-Up, Explained Clearly.",
+      "paragraphs": [
+        "A preliminary estimate may be discussed after the relevant information has been reviewed. Final recommendations and costs depend on the clinical assessment, treatment complexity, number of sessions or visits, procedure time, technology used, recovery needs and follow-up requirements.",
+        "Some follow-up discussions can be managed remotely, depending on the treatment. Your care team will explain what is suitable for your plan and when an in-person review may be needed."
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Patient Stories",
+      "h2": "What International Patients Say",
+      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
+    },
+    "faqs": {
+      "eyebrow": "Quick Answers",
+      "h2": "Frequently Asked Questions",
+      "items": [
+        {
+          "q": "Can I begin with an online consultation?",
+          "a": "Yes. You can share your concern and relevant records before travelling. Some treatments still need an in-person assessment before the clinical recommendation is confirmed."
+        },
+        {
+          "q": "Which records should I share?",
+          "a": "The information depends on the concern. We may request medical reports, prescriptions, treatment history, photographs, videos or investigations. The team will explain what is relevant for your enquiry."
+        },
+        {
+          "q": "How long should I stay in Bangalore?",
+          "a": "The appropriate duration depends on the treatment, number of appointments, procedure plan and recovery review required. This can be discussed before your travel dates are finalised."
+        },
+        {
+          "q": "Can I receive a cost estimate before travelling?",
+          "a": "A preliminary estimate may be discussed once the relevant information is reviewed. Final cost depends on the in-person assessment and the personalised treatment plan."
+        },
+        {
+          "q": "Can I receive follow-up guidance after I return home?",
+          "a": "Where appropriate, follow-up may include scheduled photo reviews, video consultations, email communication or other agreed digital channels. The team will explain the recommended review process."
+        }
+      ],
+      "button": null
+    },
+    "closing": {
+      "h2": "Tell Us How We Can Help.",
+      "paragraph": "Start with your concern, not a treatment name. Share the information you have, and the NeoSculpt6 team will guide you to the appropriate next step.",
+      "buttons": [
+        {
+          "label": "Speak With the International Patient Team",
+          "href": "/contact-us/"
+        }
+      ]
+    }
+  }
+]

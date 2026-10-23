@@ -4,6 +4,7 @@ import { pageByPath } from '../data/entries'
 import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from '../data/site'
 import { faqs, physicians } from '../data/about'
 import { servicesByPath } from '../data/services'
+import { LIVE, technologyByPath } from '../data/technology'
 import type { Faq } from '../data/services/types'
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
@@ -115,14 +116,42 @@ function jsonLd(page: RoutePage, canonical: string) {
   }
   const service = page.type === 'service' ? servicesByPath.get(page.path) : undefined
   if (service) {
-    // service-page.md: FAQPage for the visible FAQs; Physician only for the doctor the page shows, without credentials
-    // or memberships (the page's chips are pending sign-off and it shows no memberships). MedicalWebPage is a WebPage subtype. No rating or review markup until the reviews are verified.
+    // service-page.md: FAQPage for the visible FAQs; a Physician for each doctor the page shows, without credentials
+    // or memberships (the page's chips are pending sign-off and it shows no memberships). MedicalWebPage is a WebPage
+    // subtype. No rating or review markup until the reviews are verified. A doctor not in `physicians` (Dr Lavanyaa M)
+    // gets name, profile, the page's speciality line and the clinic only.
     webpage['@type'] = 'MedicalWebPage'
-    const doctor = physicians.find((d) => d.name === service.doctor.doctor)
     graph.push(
       medicalClinic(),
-      ...(doctor ? [physicianNode(doctor, { credentials: false })] : []),
+      ...service.doctors.cards.map((card) => {
+        const known = physicians.find((d) => d.name === card.name)
+        if (known) return physicianNode(known, { credentials: false })
+        return {
+          '@type': 'Physician',
+          '@id': `${abs(card.href)}#physician`,
+          name: card.name,
+          url: abs(card.href),
+          jobTitle: card.specialty,
+          worksFor: { '@id': `${SITE_URL}/#clinic` },
+        }
+      }),
       faqPage(canonical, service.faqs.items),
+    )
+  }
+  const tech = LIVE.has(page.path) ? technologyByPath.get(page.path) : undefined
+  if (tech) {
+    // As on the service pages: a Physician for each doctor card without credentials (the cards' chips are the doc's,
+    // not the signed-off list) and FAQPage for the visible FAQs (the same strings, technology/index.ts). Technology
+    // pages are MedicalWebPage; the hub and International Patients (no FAQs on the hub) stay WebPage. No rating or
+    // review markup until the reviews are verified.
+    if (tech.kind === 'technology-detail' || tech.kind === 'artas-detail') webpage['@type'] = 'MedicalWebPage'
+    graph.push(
+      medicalClinic(),
+      ...tech.doctors.cards.flatMap((card) => {
+        const known = physicians.find((d) => d.href === card.href)
+        return known ? [physicianNode(known, { credentials: false })] : []
+      }),
+      ...('faqs' in tech ? [faqPage(canonical, tech.faqs.items)] : []),
     )
   }
   // Escape "<" so the JSON can never close the <script> tag early.

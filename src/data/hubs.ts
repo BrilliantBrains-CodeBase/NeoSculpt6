@@ -1,14 +1,17 @@
-// New pages that homepage.md links to but the old site never had. Meta here is a DRAFT for SEO sign-off;
-// generate-pages.mjs marks every field below as `todo`. Keep this file to erasable TypeScript only.
+// New pages the old site never had: pages homepage.md links to, doctor profiles, and new service pages from the
+// service docs. Meta here is a DRAFT for SEO sign-off unless `source` names the doc it was copied from;
+// generate-pages.mjs marks drafted fields as `todo`. Keep this file to erasable TypeScript only.
 // Words kept out on purpose (homepage.md): "best", "No. 1", "guaranteed", "permanent", "painless", "scarless".
 
 export interface HubDraft {
   path: string
-  type: 'hub' | 'doctor'
+  type: 'hub' | 'doctor' | 'service'
   name: string
   h1: string
   title: string
   description: string
+  /** The doc that gives this page's title, description and H1 word for word (not a draft). */
+  source?: string
 }
 
 export const hubs: HubDraft[] = [
@@ -69,11 +72,14 @@ export const hubs: HubDraft[] = [
   {
     path: '/technology/',
     type: 'hub',
-    name: 'Our Technology',
-    h1: 'Our Technology',
-    title: 'Our Technology in Bangalore | NeoSculpt6',
+    // The doc's breadcrumb ("Home › Technology › …"). Its title tag is the live one, kept as the doc says; the doc's
+    // note suggests "Advanced Aesthetic Technology in Bangalore | NeoSculpt6" if SEO approves a change.
+    name: 'Technology',
+    h1: 'Technology',
+    title: 'Technology - Neo Sculpt 6',
     description:
-      'AI hair and donor analysis, ARTAS robotic harvesting, Vaser, CO2 fractional and Q-Switch lasers at NeoSculpt6, Whitefield. Technology that supports the doctor.',
+      'Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.',
+    source: 'content/technology/technology-international-patient.md',
   },
   {
     path: '/dr-saranya-t/',
@@ -85,13 +91,37 @@ export const hubs: HubDraft[] = [
       'Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.',
   },
   {
+    // Profile linked from the Blepharoplasty and Chin Augmentation pages ("Know More → doctor profile page").
+    // Facts from content/service/Blepharoplasty-and-Chin-Augmentation.md; the profile copy itself is not written yet.
+    path: '/dr-lavanyaa-m/',
+    type: 'doctor',
+    name: 'Dr Lavanyaa M',
+    h1: 'Dr Lavanyaa M',
+    title: 'Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6',
+    description:
+      'Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.',
+  },
+  {
+    // New page (not on the live site). URL, title, H1 and description: content/service/Blepharoplasty-and-Chin-
+    // Augmentation.md, "SEO (new page)".
+    path: '/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/',
+    type: 'service',
+    name: 'Chin Augmentation Surgery',
+    h1: 'Chin Augmentation Surgery in Bangalore for a Balanced Facial Profile',
+    title: 'Chin Augmentation Surgery in Bangalore - Neo Sculpt 6',
+    description:
+      'Chin augmentation surgery in Bangalore at NeoSculpt6: chin implant or sliding genioplasty to improve a weak or recessed chin and facial profile. Book a consultation.',
+    source: 'content/service/Blepharoplasty-and-Chin-Augmentation.md',
+  },
+  {
     path: '/international-patients/',
     type: 'hub',
     name: 'International Patients',
-    h1: 'International and NRI Patients',
-    title: 'International & NRI Patients in Bangalore | NeoSculpt6',
+    h1: 'International Patient Care in Bangalore',
+    title: 'International Patient Care in Bangalore | NeoSculpt6',
     description:
-      'Plan your treatment in Bangalore before you fly: video consultation, written plan and cost, travel support and follow-up from home with NeoSculpt6.',
+      'Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.',
+    source: 'content/technology/technology-international-patient.md',
   },
   {
     path: '/results/',

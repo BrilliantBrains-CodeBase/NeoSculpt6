@@ -335,26 +335,26 @@
   {
     "path": "/technology/",
     "type": "hub",
-    "name": "Our Technology",
+    "name": "Technology",
     "section": null,
-    "title": "Our Technology in Bangalore | NeoSculpt6",
-    "description": "AI hair and donor analysis, ARTAS robotic harvesting, Vaser, CO2 fractional and Q-Switch lasers at NeoSculpt6, Whitefield. Technology that supports the doctor.",
-    "h1": "Our Technology",
+    "title": "Technology - Neo Sculpt 6",
+    "description": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
+    "h1": "Technology",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/",
     "og": {
       "type": "article",
-      "title": "Our Technology in Bangalore | NeoSculpt6",
-      "description": "AI hair and donor analysis, ARTAS robotic harvesting, Vaser, CO2 fractional and Q-Switch lasers at NeoSculpt6, Whitefield. Technology that supports the doctor.",
+      "title": "Technology - Neo Sculpt 6",
+      "description": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
       "url": "https://neosculpt6.com/technology/",
       "image": "/og/default.png",
-      "imageAlt": "Our Technology in Bangalore | NeoSculpt6",
+      "imageAlt": "Technology - Neo Sculpt 6",
       "siteName": "NeoSculpt6"
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Our Technology in Bangalore | NeoSculpt6",
-      "description": "AI hair and donor analysis, ARTAS robotic harvesting, Vaser, CO2 fractional and Q-Switch lasers at NeoSculpt6, Whitefield. Technology that supports the doctor.",
+      "title": "Technology - Neo Sculpt 6",
+      "description": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -363,18 +363,19 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "draft"
+      "title": "doc",
+      "description": "doc"
     },
     "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
+      "new page: og image is the default (no page photo yet)",
+      "title: The live title tag \"Technology - Neo Sculpt 6\" does not follow the \"… | NeoSculpt6\" pattern used on every other page and has no location keyword. It is kept as-is here. Optional upgrade if you want this page to rank: \"Advanced Aesthetic Technology in Bangalore | NeoSculpt6\"."
     ],
-    "category": "Our Technology",
+    "category": "Technology",
     "video": null,
     "lastmod": null,
     "oldSite": null
@@ -427,28 +428,126 @@
     "oldSite": null
   },
   {
-    "path": "/international-patients/",
-    "type": "hub",
-    "name": "International Patients",
+    "path": "/dr-lavanyaa-m/",
+    "type": "doctor",
+    "name": "Dr Lavanyaa M",
     "section": null,
-    "title": "International & NRI Patients in Bangalore | NeoSculpt6",
-    "description": "Plan your treatment in Bangalore before you fly: video consultation, written plan and cost, travel support and follow-up from home with NeoSculpt6.",
-    "h1": "International and NRI Patients",
+    "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
+    "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
+    "h1": "Dr Lavanyaa M",
     "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/international-patients/",
+    "canonical": "https://neosculpt6.com/dr-lavanyaa-m/",
     "og": {
       "type": "article",
-      "title": "International & NRI Patients in Bangalore | NeoSculpt6",
-      "description": "Plan your treatment in Bangalore before you fly: video consultation, written plan and cost, travel support and follow-up from home with NeoSculpt6.",
-      "url": "https://neosculpt6.com/international-patients/",
+      "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
+      "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
+      "url": "https://neosculpt6.com/dr-lavanyaa-m/",
       "image": "/og/default.png",
-      "imageAlt": "International & NRI Patients in Bangalore | NeoSculpt6",
+      "imageAlt": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
       "siteName": "NeoSculpt6"
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "International & NRI Patients in Bangalore | NeoSculpt6",
-      "description": "Plan your treatment in Bangalore before you fly: video consultation, written plan and cost, travel support and follow-up from home with NeoSculpt6.",
+      "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
+      "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Dr Lavanyaa M",
+        "path": "/dr-lavanyaa-m/"
+      }
+    ],
+    "sources": {
+      "title": "draft",
+      "description": "draft"
+    },
+    "todo": [
+      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
+    ],
+    "category": "Dr Lavanyaa M",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/",
+    "type": "service",
+    "name": "Chin Augmentation Surgery",
+    "section": "/cosmetic-surgery/",
+    "title": "Chin Augmentation Surgery in Bangalore - Neo Sculpt 6",
+    "description": "Chin augmentation surgery in Bangalore at NeoSculpt6: chin implant or sliding genioplasty to improve a weak or recessed chin and facial profile. Book a consultation.",
+    "h1": "Chin Augmentation Surgery in Bangalore for a Balanced Facial Profile",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/",
+    "og": {
+      "type": "article",
+      "title": "Chin Augmentation Surgery in Bangalore - Neo Sculpt 6",
+      "description": "Chin augmentation surgery in Bangalore at NeoSculpt6: chin implant or sliding genioplasty to improve a weak or recessed chin and facial profile. Book a consultation.",
+      "url": "https://neosculpt6.com/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/",
+      "image": "/og/default.png",
+      "imageAlt": "Chin Augmentation Surgery in Bangalore - Neo Sculpt 6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Chin Augmentation Surgery in Bangalore - Neo Sculpt 6",
+      "description": "Chin augmentation surgery in Bangalore at NeoSculpt6: chin implant or sliding genioplasty to improve a weak or recessed chin and facial profile. Book a consultation.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Cosmetic Surgery",
+        "path": "/cosmetic-surgery/"
+      },
+      {
+        "name": "Chin Augmentation Surgery",
+        "path": "/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/"
+      }
+    ],
+    "sources": {
+      "title": "doc",
+      "description": "doc"
+    },
+    "todo": [
+      "new page: og image is the default (no page photo yet)"
+    ],
+    "category": "Cosmetic Surgery",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/international-patients/",
+    "type": "hub",
+    "name": "International Patients",
+    "section": null,
+    "title": "International Patient Care in Bangalore | NeoSculpt6",
+    "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
+    "h1": "International Patient Care in Bangalore",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/international-patients/",
+    "og": {
+      "type": "article",
+      "title": "International Patient Care in Bangalore | NeoSculpt6",
+      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
+      "url": "https://neosculpt6.com/international-patients/",
+      "image": "/og/default.png",
+      "imageAlt": "International Patient Care in Bangalore | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "International Patient Care in Bangalore | NeoSculpt6",
+      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -462,11 +561,11 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "draft"
+      "title": "doc",
+      "description": "doc"
     },
     "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
+      "new page: og image is the default (no page photo yet)"
     ],
     "category": "International Patients",
     "video": null,
@@ -9145,7 +9244,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9154,8 +9253,8 @@
       }
     ],
     "sources": {
-      "title": "live",
-      "description": "live"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [],
     "category": "Technology pages",
@@ -9176,14 +9275,14 @@
     "name": "AI-Integrated Donor Assessment",
     "section": "/technology/",
     "title": "AI-Integrated Donor Assessment in Bangalore | NeoSculpt6",
-    "description": "AI-Integrated Donor Assessment at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "AI-Integrated Donor Assessment",
+    "description": "Explore AI-Integrated Donor Assessment at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "AI-Integrated Donor Assessment in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/ai-integrated-donor-assessment/",
     "og": {
       "type": "article",
       "title": "AI-Integrated Donor Assessment in Bangalore | NeoSculpt6",
-      "description": "AI-Integrated Donor Assessment at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore AI-Integrated Donor Assessment at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/ai-integrated-donor-assessment/",
       "image": "/og/default.png",
       "imageAlt": "AI-Integrated Donor Assessment in Bangalore | NeoSculpt6",
@@ -9192,7 +9291,7 @@
     "twitter": {
       "card": "summary_large_image",
       "title": "AI-Integrated Donor Assessment in Bangalore | NeoSculpt6",
-      "description": "AI-Integrated Donor Assessment at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore AI-Integrated Donor Assessment at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -9201,7 +9300,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9210,13 +9309,10 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [
-      "title: draft (page is 404 on the old site)",
-      "description: generated draft",
-      "h1: missing on old page, derived",
       "og:image: default (no image on old page)"
     ],
     "category": "Technology pages",
@@ -9237,14 +9333,14 @@
     "name": "Vaser Liposuction Technology",
     "section": "/technology/",
     "title": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
-    "description": "Vaser Liposuction Technology at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "Vaser Liposuction Technology",
+    "description": "Explore Vaser Liposuction Technology at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "Vaser Liposuction Technology in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/vaser-liposuction-technology/",
     "og": {
       "type": "article",
       "title": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
-      "description": "Vaser Liposuction Technology at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore Vaser Liposuction Technology at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/vaser-liposuction-technology/",
       "image": "/og/default.png",
       "imageAlt": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
@@ -9253,7 +9349,7 @@
     "twitter": {
       "card": "summary_large_image",
       "title": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
-      "description": "Vaser Liposuction Technology at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore Vaser Liposuction Technology at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -9262,7 +9358,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9271,13 +9367,10 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [
-      "title: draft (page is 404 on the old site)",
-      "description: generated draft",
-      "h1: missing on old page, derived",
       "og:image: default (no image on old page)"
     ],
     "category": "Technology pages",
@@ -9298,14 +9391,14 @@
     "name": "Reaction Viora RF Tightening",
     "section": "/technology/",
     "title": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
-    "description": "Reaction Viora RF Tightening at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "Reaction Viora RF Tightening",
+    "description": "Explore Reaction Viora RF Tightening at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "Reaction Viora RF Tightening in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/reaction-viora-rf-tightening/",
     "og": {
       "type": "article",
       "title": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
-      "description": "Reaction Viora RF Tightening at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore Reaction Viora RF Tightening at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/reaction-viora-rf-tightening/",
       "image": "/og/default.png",
       "imageAlt": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
@@ -9314,7 +9407,7 @@
     "twitter": {
       "card": "summary_large_image",
       "title": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
-      "description": "Reaction Viora RF Tightening at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "description": "Explore Reaction Viora RF Tightening at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -9323,7 +9416,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9332,13 +9425,10 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [
-      "title: draft (page is 404 on the old site)",
-      "description: generated draft",
-      "h1: missing on old page, derived",
       "og:image: default (no image on old page)"
     ],
     "category": "Technology pages",
@@ -9356,17 +9446,17 @@
   {
     "path": "/technology/co2-fractional-laser/",
     "type": "technology",
-    "name": "CO2 Fractional Laser Treatment",
+    "name": "CO2 Fractional Laser",
     "section": "/technology/",
-    "title": "CO2 Fractional Laser Treatment in Bangalore - Neo Sculpt 6",
-    "description": "CO2 Fractional Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "CO2 Fractional Laser Treatment in Bangalore",
+    "title": "CO2 Fractional Laser in Bangalore | NeoSculpt6",
+    "description": "Explore CO2 Fractional Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "CO2 Fractional Laser in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/co2-fractional-laser/",
     "og": {
       "type": "article",
-      "title": "CO2 Fractional Laser Treatment in Bangalore - Neo Sculpt 6",
-      "description": "CO2 Fractional Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "CO2 Fractional Laser in Bangalore | NeoSculpt6",
+      "description": "Explore CO2 Fractional Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/co2-fractional-laser/",
       "image": "/og/technology__co2-fractional-laser.jpg",
       "imageAlt": "CO2 Fractional Laser Treatment in Bangalore",
@@ -9374,8 +9464,8 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "CO2 Fractional Laser Treatment in Bangalore - Neo Sculpt 6",
-      "description": "CO2 Fractional Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "CO2 Fractional Laser in Bangalore | NeoSculpt6",
+      "description": "Explore CO2 Fractional Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/technology__co2-fractional-laser.jpg"
     },
     "breadcrumbs": [
@@ -9384,21 +9474,19 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
-        "name": "CO2 Fractional Laser Treatment",
+        "name": "CO2 Fractional Laser",
         "path": "/technology/co2-fractional-laser/"
       }
     ],
     "sources": {
-      "title": "live",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
-    "todo": [
-      "description: generated draft"
-    ],
+    "todo": [],
     "category": "Technology pages",
     "video": null,
     "lastmod": null,
@@ -9414,17 +9502,17 @@
   {
     "path": "/technology/q-switch-laser/",
     "type": "technology",
-    "name": "Q-Switch Laser Treatment",
+    "name": "Q-Switch Laser",
     "section": "/technology/",
-    "title": "Q-Switch Laser Treatment in Bangalore - Neo Sculpt 6",
-    "description": "Q-Switch Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "Q-Switch Laser Treatment in Bangalore",
+    "title": "Q-Switch Laser in Bangalore | NeoSculpt6",
+    "description": "Explore Q-Switch Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "Q-Switch Laser in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/q-switch-laser/",
     "og": {
       "type": "article",
-      "title": "Q-Switch Laser Treatment in Bangalore - Neo Sculpt 6",
-      "description": "Q-Switch Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Q-Switch Laser in Bangalore | NeoSculpt6",
+      "description": "Explore Q-Switch Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/q-switch-laser/",
       "image": "/og/technology__q-switch-laser.jpg",
       "imageAlt": "Q-Switch Laser Treatment in Bangalore",
@@ -9432,8 +9520,8 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Q-Switch Laser Treatment in Bangalore - Neo Sculpt 6",
-      "description": "Q-Switch Laser at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Q-Switch Laser in Bangalore | NeoSculpt6",
+      "description": "Explore Q-Switch Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/technology__q-switch-laser.jpg"
     },
     "breadcrumbs": [
@@ -9442,21 +9530,19 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
-        "name": "Q-Switch Laser Treatment",
+        "name": "Q-Switch Laser",
         "path": "/technology/q-switch-laser/"
       }
     ],
     "sources": {
-      "title": "live",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
-    "todo": [
-      "description: generated draft"
-    ],
+    "todo": [],
     "category": "Technology pages",
     "video": null,
     "lastmod": null,
@@ -9474,24 +9560,24 @@
     "type": "technology",
     "name": "Excimer Laser & Targeted Phototherapy",
     "section": "/technology/",
-    "title": "Excimer Laser & Targeted Phototherapy in Bangalore | NeoSculpt6",
-    "description": "Excimer Laser & Targeted Phototherapy at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "Excimer Laser & Targeted Phototherapy",
+    "title": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
+    "description": "Explore Excimer Laser and Targeted Phototherapy at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "Excimer Laser and Targeted Phototherapy in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/excimer-laser-targeted-phototherapy/",
     "og": {
       "type": "article",
-      "title": "Excimer Laser & Targeted Phototherapy in Bangalore | NeoSculpt6",
-      "description": "Excimer Laser & Targeted Phototherapy at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
+      "description": "Explore Excimer Laser and Targeted Phototherapy at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/excimer-laser-targeted-phototherapy/",
       "image": "/og/default.png",
-      "imageAlt": "Excimer Laser & Targeted Phototherapy in Bangalore | NeoSculpt6",
+      "imageAlt": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
       "siteName": "NeoSculpt6"
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Excimer Laser & Targeted Phototherapy in Bangalore | NeoSculpt6",
-      "description": "Excimer Laser & Targeted Phototherapy at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
+      "description": "Explore Excimer Laser and Targeted Phototherapy at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -9500,7 +9586,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9509,13 +9595,10 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [
-      "title: draft (page is 404 on the old site)",
-      "description: generated draft",
-      "h1: missing on old page, derived",
       "og:image: default (no image on old page)"
     ],
     "category": "Technology pages",
@@ -9535,24 +9618,24 @@
     "type": "technology",
     "name": "Body Contouring & Cryolipolysis Platforms",
     "section": "/technology/",
-    "title": "Body Contouring & Cryolipolysis Platforms in Bangalore | NeoSculpt6",
-    "description": "Body Contouring & Cryolipolysis Platforms at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
-    "h1": "Body Contouring & Cryolipolysis Platforms",
+    "title": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
+    "description": "Explore Body Contouring and Cryolipolysis Platforms at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
+    "h1": "Body Contouring and Cryolipolysis Platforms in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/body-contouring-cryolipolysis-platforms/",
     "og": {
       "type": "article",
-      "title": "Body Contouring & Cryolipolysis Platforms in Bangalore | NeoSculpt6",
-      "description": "Body Contouring & Cryolipolysis Platforms at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
+      "description": "Explore Body Contouring and Cryolipolysis Platforms at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "url": "https://neosculpt6.com/technology/body-contouring-cryolipolysis-platforms/",
       "image": "/og/default.png",
-      "imageAlt": "Body Contouring & Cryolipolysis Platforms in Bangalore | NeoSculpt6",
+      "imageAlt": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
       "siteName": "NeoSculpt6"
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Body Contouring & Cryolipolysis Platforms in Bangalore | NeoSculpt6",
-      "description": "Body Contouring & Cryolipolysis Platforms at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.",
+      "title": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
+      "description": "Explore Body Contouring and Cryolipolysis Platforms at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
       "image": "/og/default.png"
     },
     "breadcrumbs": [
@@ -9561,7 +9644,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9570,13 +9653,10 @@
       }
     ],
     "sources": {
-      "title": "draft",
-      "description": "generated"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [
-      "title: draft (page is 404 on the old site)",
-      "description: generated draft",
-      "h1: missing on old page, derived",
       "og:image: default (no image on old page)"
     ],
     "category": "Technology pages",
@@ -9596,15 +9676,15 @@
     "type": "technology",
     "name": "ARTAS Robotic Hair Transplant",
     "section": "/technology/",
-    "title": "ARTAS Robotic Hair Transplant - Neo Sculpt 6",
-    "description": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation. At NeoSculpt6, ARTAS technology is",
+    "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
+    "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
     "h1": "ARTAS Robotic Hair Transplant in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/artas-robotic-hair-transplant/",
     "og": {
       "type": "article",
-      "title": "ARTAS Robotic Hair Transplant - Neo Sculpt 6",
-      "description": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation. At NeoSculpt6, ARTAS technology is",
+      "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
+      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
       "url": "https://neosculpt6.com/technology/artas-robotic-hair-transplant/",
       "image": "/og/technology__artas-robotic-hair-transplant.webp",
       "imageAlt": "ARTAS Robotic Hair Transplant",
@@ -9612,8 +9692,8 @@
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "ARTAS Robotic Hair Transplant - Neo Sculpt 6",
-      "description": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation. At NeoSculpt6, ARTAS technology is",
+      "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
+      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
       "image": "/og/technology__artas-robotic-hair-transplant.webp"
     },
     "breadcrumbs": [
@@ -9622,7 +9702,7 @@
         "path": "/"
       },
       {
-        "name": "Our Technology",
+        "name": "Technology",
         "path": "/technology/"
       },
       {
@@ -9631,8 +9711,8 @@
       }
     ],
     "sources": {
-      "title": "live",
-      "description": "live"
+      "title": "technology-doc",
+      "description": "technology-doc"
     },
     "todo": [],
     "category": "Technology pages",

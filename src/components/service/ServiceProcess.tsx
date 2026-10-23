@@ -10,9 +10,10 @@ import { delay, eyebrow } from '../shared'
 // open (the doc's pattern). Every step's text is in the HTML (Accordion). Below xl the photo sits under the text.
 // The heading uses the H3 type size: the doc's 9-word H2 ran to six lines in the half-width column (the theme's is
 // "How it Works").
+// Technology pages set `id="how-it-works"`, the target of the hero's "Learn How It Works" button.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
-export function ServiceProcess({ process }: { process: ServiceContent['process'] }) {
+export function ServiceProcess({ process, id = 'service-process' }: { process: ServiceContent['process']; id?: string }) {
   const eyebrowRef = useReveal<HTMLParagraphElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
   const listRef = useReveal<HTMLDivElement>()
@@ -20,8 +21,8 @@ export function ServiceProcess({ process }: { process: ServiceContent['process']
 
   return (
     <section
-      id="service-process"
-      aria-labelledby="service-process-heading"
+      id={id}
+      aria-labelledby={`${id}-heading`}
       className="mb-20 flex flex-col md:mb-[100px] xl:mb-[150px] xl:min-h-[830px] xl:flex-row"
     >
       <div
@@ -32,7 +33,7 @@ export function ServiceProcess({ process }: { process: ServiceContent['process']
         <p ref={eyebrowRef} data-reveal="up" className={eyebrow}>
           {process.eyebrow}
         </p>
-        <h2 id="service-process-heading" ref={titleRef} data-reveal="up" style={delay(150)} className="mb-5 font-heading text-h3 text-balance text-secondary uppercase">
+        <h2 id={`${id}-heading`} ref={titleRef} data-reveal="up" style={delay(150)} className="mb-5 font-heading text-h3 text-balance text-secondary uppercase">
           {process.h2}
         </h2>
         <div ref={listRef} data-reveal="up" style={delay(300)} className="border-t border-border">

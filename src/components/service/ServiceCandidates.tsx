@@ -9,14 +9,22 @@ import { delay, h2 } from '../shared'
 // 40px gap: H2, tick checklist, paragraph. Each tick item is the doc's checklist title with its supporting line
 // underneath (the doc's benefit-card text), so the titles are not repeated in a second card grid. The paragraph under
 // the checklist is the doc's suitability caveat and is never dropped. Ticks are decorative.
-// Below xl the photo sits above the text.
+// Below xl the photo sits above the text. Technology pages' ticks are titles only (`text: null`): the doc takes them from
+// the live paragraph, which stays underneath.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
-export function ServiceCandidates({ candidates }: { candidates: ServiceContent['candidates'] }) {
+// The note may be several paragraphs (ARTAS has two), each kept as the doc's own paragraph.
+type Candidates = Omit<ServiceContent['candidates'], 'cards' | 'note'> & {
+  cards: { title: string; text: string | null }[]
+  note: string | string[] | null
+}
+
+export function ServiceCandidates({ candidates }: { candidates: Candidates }) {
   const imageRef = useReveal<HTMLDivElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
   const listRef = useReveal<HTMLUListElement>()
   const noteRef = useReveal<HTMLParagraphElement>()
+  const notesRef = useReveal<HTMLDivElement>()
 
   return (
     <section
@@ -46,15 +54,22 @@ export function ServiceCandidates({ candidates }: { candidates: ServiceContent['
               <TickIcon className="mt-1 size-4 shrink-0 text-tertiary" />
               <div className="flex flex-col gap-1">
                 <h3 className="font-heading text-h5 text-secondary uppercase">{card.title}</h3>
-                <p className="text-small">{card.text}</p>
+                {card.text && <p className="text-small">{card.text}</p>}
               </div>
             </li>
           ))}
         </ul>
-        {candidates.note && (
+        {typeof candidates.note === 'string' && (
           <p ref={noteRef} data-reveal="up" style={delay(150)} className="border-t border-border pt-[30px]">
             {candidates.note}
           </p>
+        )}
+        {Array.isArray(candidates.note) && candidates.note.length > 0 && (
+          <div ref={notesRef} data-reveal="up" style={delay(150)} className="flex flex-col gap-5 border-t border-border pt-[30px]">
+            {candidates.note.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
         )}
       </div>
     </section>

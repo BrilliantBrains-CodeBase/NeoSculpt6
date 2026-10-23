@@ -4,13 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet",
-    "gen:og": "node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
+    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet",
+    "gen:og": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
     "dev": "vite-react-ssg dev",
-    "build": "npm run gen && vite-react-ssg build && node scripts/postbuild.mjs",
+    "build": "node scripts/patch-react-dom-server.mjs && npm run gen && vite-react-ssg build && node scripts/postbuild.mjs",
     "preview": "vite preview",
     "verify": "node scripts/verify-seo.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node scripts/patch-react-dom-server.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

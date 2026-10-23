@@ -37,7 +37,7 @@ export function ServiceTemplate({ page }: TemplateProps) {
       <ServiceWhyChoose whyChoose={content.whyChoose} />
       <ServiceProcess process={content.process} />
       <ServiceCandidates candidates={content.candidates} />
-      <ServiceDoctor doctor={content.doctor} />
+      <ServiceDoctor doctors={content.doctors} />
       <ServiceTechnology technology={content.technology} />
       <ServiceCost cost={content.cost} />
 

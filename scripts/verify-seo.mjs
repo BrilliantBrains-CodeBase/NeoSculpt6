@@ -9,6 +9,7 @@ import { pillars, results, signature, doctors, testimonials, technology, journal
 import { posts, postHref, specialities } from '../src/data/posts.ts'
 import * as about from '../src/data/about.ts'
 import { services } from '../src/data/services/index.ts'
+import { LIVE as TECH_LIVE, SOURCE_EXCEPTIONS, technologyPages } from '../src/data/technology/index.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DIST = path.join(ROOT, 'dist')
@@ -366,14 +367,10 @@ for (const s of services) {
     s.consultation.video?.title ?? '',
     ...s.closing.chips,
     ...s.candidates.cards.flatMap((c) => [c.title, c.text]),
-    s.doctor.doctor,
-    s.doctor.eyebrow,
-    s.doctor.h2,
-    s.doctor.specialty,
-    s.doctor.profileLabel,
-    s.doctor.blockEyebrow,
-    ...s.doctor.chips,
-    ...s.doctor.paragraphs,
+    s.doctors.eyebrow,
+    s.doctors.h2,
+    ...s.doctors.cards.flatMap((d) => [d.name, d.specialty, d.profileLabel, d.blockEyebrow, ...d.chips, ...d.paragraphs]),
+    ...s.intro.points.flatMap((c) => [c.title, c.text]),
     s.technology.h2,
     ...(s.technology.subline ? [s.technology.subline] : []),
     ...s.technology.cards.flatMap((c) => [c.title, c.text]),
@@ -403,13 +400,11 @@ for (const s of services) {
     if (n !== 1) fail(p, `FAQ question shown ${n} times in the FAQ list: "${q}"`)
   }
 
-  const doctorCard = doctors.cards.find((c) => c.name === s.doctor.doctor)
-  if (!doctorCard) fail(p, `no doctor card for ${s.doctor.doctor}`)
   const links = [
     ...record.breadcrumbs.slice(0, -1).map((c) => c.path),
     ...s.sidebar.links.map((l) => l.href),
     s.sidebar.viewAll.href,
-    ...(doctorCard ? [doctorCard.href] : []),
+    ...s.doctors.cards.map((d) => d.href),
     ...ctaHrefs(ctas).filter((h) => h.startsWith('/')),
   ]
   for (const href of links) {
@@ -421,9 +416,10 @@ for (const s of services) {
     if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing`)
   }
   for (const href of ctaHrefs(ctas).filter((h) => h.startsWith('tel:'))) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
-  if (s.sidebar.links.some((l) => !l.href.startsWith(record.section ?? '-'))) fail(p, 'sidebar links outside the page’s speciality')
+  // The doc's own list decides which pages it names (some cross hubs: fillers on a surgery page); each must be a service.
+  for (const l of s.sidebar.links) if (pages.find((r) => r.path === l.href)?.type !== 'service') fail(p, `sidebar link is not a service page: ${l.href}`)
 
-  const images = [s.hero.image, s.consultation.image, s.process.image, s.candidates.image, s.doctor.portrait, s.closing.image].filter(Boolean)
+  const images = [s.hero.image, s.consultation.image, s.process.image, s.candidates.image, ...s.doctors.cards.map((d) => d.portrait), s.closing.image].filter(Boolean)
   for (const { src, alt } of images) {
     if (!fs.existsSync(path.join(DIST, src))) fail(p, `image missing: ${src}`)
     if (!alt?.trim()) fail(p, `no alt text: ${src}`)
@@ -449,15 +445,165 @@ for (const s of services) {
   if (JSON.stringify(faq.map((e) => [e.name, e.acceptedAnswer.text])) !== JSON.stringify(s.faqs.items.map((f) => [f.q, f.a]))) {
     fail(p, 'FAQPage schema does not match the visible FAQ')
   }
-  const physician = graph.find((n) => n['@type'] === 'Physician')
-  if (physician && physician.name !== s.doctor.doctor) fail(p, `Physician schema names ${physician.name}, the page shows ${s.doctor.doctor}`)
-  if (physician?.hasCredential || physician?.memberOf) fail(p, 'Physician schema lists credentials the page does not show as verified')
+  const physicians = graph.filter((n) => n['@type'] === 'Physician')
+  const shown = s.doctors.cards.map((d) => d.name)
+  if (JSON.stringify(physicians.map((n) => n.name)) !== JSON.stringify(shown)) {
+    fail(p, `Physician schema names ${physicians.map((n) => n.name).join(', ')}, the page shows ${shown.join(', ')}`)
+  }
+  if (physicians.some((n) => n.hasCredential || n.memberOf)) fail(p, 'Physician schema lists credentials the page does not show as verified')
   if (/AggregateRating|"Review"/.test(ld)) fail(p, 'rating or review schema before the reviews are verified')
 
   for (const item of s.pending) servicePending.push([item.replace(/:.*$/, ''), `${p.split('/').at(-2)}: ${item.replace(/^[^:]*:\s*/, '')}`])
 }
 const serviceRoutes = pages.filter((r) => r.type === 'service').length
 const serviceImages = new Set(services.flatMap((s) => [s.hero.image, s.consultation.image, s.process.image, s.candidates.image].map((i) => i.src)))
+
+// Technology hub, technology pages and International Patients (content/technology/technology-international-patient.md,
+// src/data/technology/). For all 11: pages.json carries the doc's title tag, description, H1, robots and breadcrumb
+// (the head check above then holds the built page to it). For each page in LIVE, as for the service pages: sections
+// in the doc's order, every string visible, links and images, FAQ schema equal to the visible FAQ, and none of the
+// words the content rules keep out. Doc notes and missing items are listed for sign-off.
+const techJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/technology/parsed.json'), 'utf8'))
+const BANNED = /\b(best|No\. ?1|guaranteed|permanent|painless|no side effects|scarless|Portland|Medicross|gmail)\b/i
+const techPending = []
+for (const doc of techJson) {
+  const p = doc.path
+  const record = pages.find((r) => r.path === p)
+  if (!record) {
+    fail(p, 'technology doc page has no route')
+    continue
+  }
+  for (const key of ['title', 'description', 'h1', 'robots']) {
+    if (record[key] !== doc.seo[key]) fail(p, `${key} "${record[key]}" ≠ doc "${doc.seo[key]}"`)
+  }
+  const crumbs = record.breadcrumbs.map((c) => c.name)
+  if (crumbs.join(' › ') !== doc.seo.breadcrumb.join(' › ')) fail(p, `breadcrumb "${crumbs.join(' › ')}" ≠ doc "${doc.seo.breadcrumb.join(' › ')}"`)
+}
+// Section ids per page kind, in the doc's order (TechnologyTemplate, HubTemplate).
+const TECH_ORDER = {
+  'technology-detail': ['technology-banner', 'service-intro', 'service-consultation', 'technology-assessment', 'technology-benefits', 'how-it-works', 'service-candidates', 'technology-expectations', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'technology-explore', 'instagram'],
+  'artas-detail': ['technology-banner', 'service-intro', 'technology-comparison', 'how-it-works', 'technology-benefits', 'service-candidates', 'technology-expectations', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'technology-explore', 'instagram'],
+  'technology-hub': ['technology-banner', 'technology-cards', 'service-doctor', 'service-cta', 'instagram'],
+  'international-patients': ['technology-banner', 'service-intro', 'service-why-choose', 'technology-pathways', 'patient-journey', 'service-consultation', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'instagram'],
+}
+// Every visible string in a record: all text values except what is not shown (paths, ids, image data, notes,
+// pending items, review placeholders).
+const HIDDEN_KEYS = new Set(['path', 'source', 'order', 'notes', 'pending', 'kind', 'image', 'portrait', 'href', 'action', 'initials', 'reviews', 'highlight', 'columns'])
+const visibleStrings = (v, out = []) => {
+  if (typeof v === 'string') out.push(v)
+  else if (Array.isArray(v)) v.forEach((x) => visibleStrings(x, out))
+  else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) if (!HIDDEN_KEYS.has(k)) visibleStrings(x, out)
+  return out
+}
+const collect = (v, test, out = []) => {
+  if (Array.isArray(v)) v.forEach((x) => collect(x, test, out))
+  else if (v && typeof v === 'object') {
+    if (test(v)) out.push(v)
+    for (const x of Object.values(v)) collect(x, test, out)
+  }
+  return out
+}
+for (const t of technologyPages) {
+  const p = t.path
+  if (!TECH_LIVE.has(p)) {
+    techPending.push(`${p}: template not switched on yet (${t.kind})`)
+    continue
+  }
+  const record = pages.find((r) => r.path === p)
+  const raw = fs.existsSync(fileFor(p)) ? fs.readFileSync(fileFor(p), 'utf8') : ''
+  const html = decode(raw)
+  const text = bodyText(raw)
+
+  const order = TECH_ORDER[t.kind]
+  const positions = order.map((id) => html.indexOf(`id="${id}"`))
+  order.forEach((id, i) => positions[i] < 0 && fail(p, `section id="${id}" missing`))
+  if (positions.every((x) => x >= 0) && positions.some((x, i) => i > 0 && x < positions[i - 1])) fail(p, 'sections are not in the doc order')
+  if (html.indexOf('id="instagram"') > html.indexOf('<footer')) fail(p, 'Instagram row is not above the footer')
+  if ((raw.match(/<h1[\s>]/g) ?? []).length !== 1) fail(p, 'expected exactly one <h1>')
+
+  for (const str of visibleStrings(t).filter(Boolean)) if (!text.includes(str)) fail(p, `not on the page: "${str.length > 60 ? str.slice(0, 60) + '…' : str}"`)
+  // Steps numbered once ("01. Title", never "0101").
+  for (const list of [t.process?.steps, t.journey?.steps].filter(Boolean)) {
+    list.forEach((s, i) => {
+      if (!text.includes(`${String(i + 1).padStart(2, '0')}. ${s.title}`)) fail(p, `step "${s.title}" is not numbered once`)
+    })
+  }
+  // Content rules, allowing only the source phrases listed for sign-off (SOURCE_EXCEPTIONS).
+  let main = bodyText(raw.slice(0, raw.indexOf('<footer')))
+  for (const phrase of SOURCE_EXCEPTIONS[p] ?? []) {
+    if (!main.includes(phrase)) fail(p, `listed source exception not on the page: "${phrase}"`)
+    main = main.split(phrase).join(' ')
+  }
+  const banned = main.match(BANNED)
+  if (banned) fail(p, `"${banned[0]}" on the page (content rules)`)
+
+  const ctas = collect(t, (o) => typeof o.label === 'string' && ('href' in o || 'action' in o))
+  const hrefs = [...new Set([...record.breadcrumbs.slice(0, -1).map((c) => c.path), ...t.doctors.cards.map((d) => d.href), ...ctas.filter((c) => c.href).map((c) => c.href)])]
+  for (const href of hrefs.filter((h) => h.startsWith('/'))) {
+    if (!fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
+    if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing from the built page`)
+  }
+  for (const href of hrefs.filter((h) => h.startsWith('#'))) {
+    if (!html.includes(`id="${href.slice(1)}"`)) fail(p, `${href} has no target on the page`)
+    if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing`)
+  }
+  for (const href of hrefs.filter((h) => /^(tel:|https?:)/.test(h))) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
+  const books = ctas.filter((c) => c.action === 'book').length
+  if (books && !/<button[^>]*type="button"/.test(raw)) fail(p, 'booking buttons missing')
+
+  const images = collect(t, (o) => typeof o.src === 'string' && typeof o.alt === 'string')
+  if (new Set(images.map((i) => i.src)).size !== images.length) fail(p, 'the same photo is used twice on the page')
+  for (const { src, alt } of images) {
+    if (!fs.existsSync(path.join(DIST, src))) fail(p, `image missing: ${src}`)
+    if (!alt?.trim()) fail(p, `no alt text: ${src}`)
+    if (!html.includes(`src="${src}"`)) fail(p, `image not on the page: ${src}`)
+  }
+  for (const img of [...raw.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))) {
+    if (!img.width || !img.height) fail(p, `<img> without width/height: ${img.src}`)
+  }
+
+  const steps = (t.process?.steps.length ?? 0) + (t.journey?.steps.length ?? 0) + (t.faqs?.items.length ?? 0)
+  const accordions = (raw.match(/<button[^>]*aria-expanded="(true|false)"[^>]*aria-controls="[^"]+"/g) ?? []).length
+  if (accordions < steps) fail(p, `${accordions} accordion buttons with aria-controls, expected ${steps}`)
+  if (t.reviews) {
+    if (!raw.includes('aria-controls="success-stories-track"')) fail(p, 'carousel controls missing for success-stories-track')
+    for (const r of t.reviews.items) if ((r.quote || r.author) && !r.consent) fail(p, 'review text set without consent')
+  }
+  if (t.pathways) {
+    const tabs = raw.match(/role="tab"/g)?.length ?? 0
+    const panels = raw.match(/role="tabpanel"/g)?.length ?? 0
+    const selected = raw.match(/role="tab"[^>]*aria-selected="true"|aria-selected="true"[^>]*role="tab"/g)?.length ?? 0
+    if (tabs !== t.pathways.tabs.length || panels !== tabs) fail(p, `${tabs} tabs and ${panels} panels, expected ${t.pathways.tabs.length}`)
+    if (selected !== 1) fail(p, `${selected} selected tabs`)
+    if ((raw.match(/role="tabpanel"[^>]*hidden=""/g)?.length ?? 0) !== tabs - 1) fail(p, 'exactly one tab panel should be shown')
+  }
+
+  const ld = parseHead(raw).ld[0] ?? '{}'
+  const graph = JSON.parse(ld)['@graph'] ?? []
+  const types = graph.flatMap((n) => [n['@type']].flat())
+  const wantTypes = ['MedicalClinic', 'Physician', ...(t.faqs ? ['FAQPage'] : []), ...(/detail$/.test(t.kind) ? ['MedicalWebPage'] : [])]
+  for (const type of wantTypes) if (!types.includes(type)) fail(p, `JSON-LD has no ${type}`)
+  if (!t.faqs && types.includes('FAQPage')) fail(p, 'FAQPage schema on a page without FAQs')
+  if (t.faqs) {
+    const faq = graph.find((n) => n['@type'] === 'FAQPage')?.mainEntity ?? []
+    const faqText = bodyText(raw.match(/<section[^>]*id="service-faqs"[\s\S]*?<\/section>/)?.[0] ?? '')
+    if (JSON.stringify(faq.map((e) => [e.name, e.acceptedAnswer.text])) !== JSON.stringify(t.faqs.items.map((f) => [f.q, f.a]))) {
+      fail(p, 'FAQPage schema does not match the FAQ data')
+    }
+    for (const e of faq) if (!faqText.includes(e.name) || !faqText.includes(e.acceptedAnswer.text)) fail(p, `FAQPage entry not visible in the FAQ list: "${e.name}"`)
+  }
+  const physiciansLd = graph.filter((n) => n['@type'] === 'Physician')
+  if (JSON.stringify(physiciansLd.map((n) => n.url)) !== JSON.stringify(t.doctors.cards.map((d) => SITE_URL + d.href))) fail(p, 'Physician schema does not match the doctor cards')
+  if (physiciansLd.some((n) => n.hasCredential || n.memberOf)) fail(p, 'Physician schema lists credentials the page does not show as verified')
+  if (/AggregateRating|"Review"/.test(ld)) fail(p, 'rating or review schema before the reviews are verified')
+
+  for (const item of t.pending) techPending.push(`${p}: ${item}`)
+}
+
+// A character the prerender split mid-way (U+FFFD in the HTML).
+for (const r of pages.filter((x) => x.type !== 'redirect')) {
+  if (fs.existsSync(fileFor(r.path)) && fs.readFileSync(fileFor(r.path), 'utf8').includes('�')) fail(r.path, 'broken character (U+FFFD) in the built HTML')
+}
 
 const pendingLegal =legalNav.filter(({ href }) => !fs.existsSync(fileFor(href))).map(({ href }) => href)
 
@@ -492,6 +638,8 @@ for (const [kind, items] of byKind) {
   for (const [, item] of items.slice(0, 6)) console.log(`      ${item.length > 150 ? item.slice(0, 150) + '…' : item}`)
   if (items.length > 6) console.log(`      … and ${items.length - 6} more`)
 }
+console.log(`technology: ${[...TECH_LIVE].length} of ${technologyPages.length} pages built from technology-international-patient.md; SEO checked for all; pending sign-off:`)
+for (const item of techPending) console.log(`  - ${item.length > 200 ? item.slice(0, 200) + '…' : item}`)
 console.log(`menu links: ${navLinks.length} checked${pendingLegal.length ? `; legal pages not built yet: ${pendingLegal.join(', ')}` : ''}`)
 console.log(`duplicate titles: ${dups('title').length}, duplicate descriptions: ${dups('description').length}`)
 console.log(`pages with todo items: ${pages.filter((p) => p.todo?.length).length} (see src/data/seo-report.csv)`)

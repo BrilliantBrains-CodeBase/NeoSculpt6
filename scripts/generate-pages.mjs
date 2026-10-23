@@ -49,6 +49,13 @@ const ABOUT = {
 const CONTACT_DESCRIPTION =
   'Visit NeoSculpt6 on Whitefield Main Road, Bangalore 560066, beside BMW Deutsche Motoren. Open Mon–Sat, 7am–7pm. Call +91 99640 60483 to book.'
 
+// Technology pages and the two pages that go with them (/technology/, /international-patients/): SEO fixed by
+// content/technology/technology-international-patient.md, read from its parse (scripts/parse-technology-pages.mjs, run
+// first by `npm run gen`). The nine technology pages have no SEO CSV rows, so the doc's title tag, description, H1 and
+// breadcrumb name replace the live ones; the two hubs copy the same values into src/data/hubs.ts (`source`).
+const TECH_JSON = path.join(DATA_DIR, 'technology/parsed.json')
+const TECH_SEO = new Map(fs.existsSync(TECH_JSON) ? JSON.parse(fs.readFileSync(TECH_JSON, 'utf8')).map((r) => [r.path, r.seo]) : [])
+
 const REDIRECTS = { '/service/': '/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/' }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -196,6 +203,7 @@ async function main() {
     const live404 = row.http_status === 404
     const todo = []
     const sources = {}
+    const techSeo = TECH_SEO.get(p)
 
     if (REDIRECTS[p]) {
       redirects.push({ from: p, to: REDIRECTS[p], status: 301 })
@@ -214,6 +222,7 @@ async function main() {
     let title
     if (type === 'home') [title, sources.title] = [HOME.title, 'homepage.md']
     else if (type === 'about') [title, sources.title] = [ABOUT.title, 'about-us.md']
+    else if (techSeo) [title, sources.title] = [techSeo.title, 'technology-doc']
     else if (row.planned_meta_title) [title, sources.title] = [decode(row.planned_meta_title), 'seo-csv']
     else if (live404) [title, sources.title] = [`${row.service} in Bangalore | NeoSculpt6`, 'draft']
     else [title, sources.title] = [decode(meta.title), 'live']
@@ -224,6 +233,7 @@ async function main() {
     let description
     if (type === 'home') [description, sources.description] = [HOME.description, 'homepage.md']
     else if (type === 'about') [description, sources.description] = [ABOUT.description, 'about-us.md']
+    else if (techSeo) [description, sources.description] = [techSeo.description, 'technology-doc']
     else if (row.planned_meta_description) [description, sources.description] = [decode(row.planned_meta_description), 'seo-csv']
     else if (type === 'legacy-demo') [description, sources.description] = [liveDesc, 'live']
     else if (isRealDescription(liveDesc)) [description, sources.description] = [liveDesc, 'live']
@@ -233,7 +243,7 @@ async function main() {
     if (sources.description === 'generated') todo.push('description: generated draft')
 
     // h1 (rendered now; real content comes later)
-    let h1 = type === 'home' ? HOME.h1 : type === 'about' ? ABOUT.h1 : decode(data.h1 || row.h1)
+    let h1 = type === 'home' ? HOME.h1 : type === 'about' ? ABOUT.h1 : techSeo ? techSeo.h1 : decode(data.h1 || row.h1)
     if (!h1) {
       h1 = type === 'contact' ? 'Contact Us' : live404 ? row.service : shortName(title)
       todo.push('h1: missing on old page, derived')
@@ -258,7 +268,7 @@ async function main() {
         todo,
         extra: {
           category: row.category,
-          ...(type === 'technology' || type === 'service' ? { name: live404 ? row.service : shortName(title) } : {}),
+          ...(type === 'technology' || type === 'service' ? { name: techSeo?.breadcrumb.at(-1) ?? (live404 ? row.service : shortName(title)) } : {}),
           ...(type === 'about' ? { name: ABOUT.name } : {}),
           video: row.video_planned || null,
           lastmod: og['og:updated_time'] || sitemapLastmod[p] || null,
@@ -277,6 +287,7 @@ async function main() {
   }
 
   for (const hub of hubs) {
+    const fromDoc = Boolean(hub.source)
     pages.push(
       record({
         p: hub.path,
@@ -285,9 +296,17 @@ async function main() {
         description: hub.description,
         h1: hub.h1,
         ogImage: DEFAULT_OG_IMAGE,
-        sources: { title: 'draft', description: 'draft' },
-        todo: ['new page: title, description and h1 are drafts (src/data/hubs.ts)'],
-        extra: { name: hub.name, category: hub.name, video: null, lastmod: null, oldSite: null },
+        sources: fromDoc ? { title: 'doc', description: 'doc' } : { title: 'draft', description: 'draft' },
+        todo: fromDoc
+          ? ['new page: og image is the default (no page photo yet)', ...(TECH_SEO.get(hub.path)?.note ? [`title: ${TECH_SEO.get(hub.path).note}`] : [])]
+          : ['new page: title, description and h1 are drafts (src/data/hubs.ts)'],
+        extra: {
+          name: hub.name,
+          category: hub.type === 'service' ? (hubFor(hub.path)?.name ?? hub.name) : hub.name,
+          video: null,
+          lastmod: null,
+          oldSite: null,
+        },
       }),
     )
   }

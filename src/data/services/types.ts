@@ -20,6 +20,22 @@ export interface ServiceImage {
   alt: string
 }
 
+/** A doctor on a service page: who they are (services/index.ts `DOCTORS`) and the page's own copy about them. */
+export interface ServiceDoctor {
+  name: string
+  /** Profile page; every doctor has one (Dr Lavanyaa M's is a draft). */
+  href: string
+  initials: string
+  /** Fills the card's circle; initials show while it is null. */
+  portrait: ServiceImage | null
+  specialty: string
+  chips: string[]
+  profileLabel: string
+  /** The current-site doctor block's eyebrow; null where the page has no doctor block (technology pages). */
+  blockEyebrow: string | null
+  paragraphs: string[]
+}
+
 /** A numbered row from the doc's `|#|title|text|` tables: cards, process steps, candidates, technology, cost. */
 export interface NumberedCard {
   title: string
@@ -38,8 +54,8 @@ export interface ServiceContent {
   source: string
   /** 1. Page banner. The H1 is page.h1; the breadcrumb is page.crumbs. */
   hero: { intro: string; ctas: Cta[]; phoneLabel: string; image: ServiceImage }
-  /** 2. Introduction. */
-  intro: { h2: string; paragraphs: string[] }
+  /** 2. Introduction. `points`: an optional row of small cards under the text (a doc's "Extra" block). */
+  intro: { h2: string; paragraphs: string[]; points: NumberedCard[] }
   /** 3. Consultation highlight. */
   consultation: {
     h2: string
@@ -57,18 +73,15 @@ export interface ServiceContent {
   /** 6. Candidates: one tick item per card (title + supporting line); `note` is the paragraph under the list (two pages
    *  have none). */
   candidates: { h2: string; note: string | null; cards: NumberedCard[]; image: ServiceImage }
-  /** 7. Your doctor. `doctor` picks the card (name, profile link, initials) from data/home.ts `doctors.cards`;
-   *  `portrait` fills the card's circle (initials while it is null). */
-  doctor: {
-    doctor: 'Dr Sandeep Mahapatra' | 'Dr Saranya T'
-    portrait: ServiceImage | null
+  /** 7. Your doctor: one card per doctor the doc names for this page, in its order (most pages have one). */
+  doctors: {
     eyebrow: string
     h2: string
-    specialty: string
-    chips: string[]
-    profileLabel: string
-    blockEyebrow: string
-    paragraphs: string[]
+    cards: ServiceDoctor[]
+    /** A paragraph block under the heading (International Patients); service pages have none. */
+    intro?: string[]
+    /** Two cards side by side on desktop (technology pages); service pages stack them. */
+    columns?: boolean
   }
   /** 8. Technology and infrastructure. */
   technology: { h2: string; subline: string | null; cards: NumberedCard[] }
@@ -78,11 +91,11 @@ export interface ServiceContent {
   strips: { heading: string; text: string; cta: Cta | null }[]
   /** 11. Success stories. Real Google reviews only; pending entries show as pending cards. */
   reviews: { h2: string; items: Testimonial[] }
-  /** 12. FAQs. Also the page's FAQPage schema, from the same strings. */
-  faqs: { eyebrow: string; h2: string; items: Faq[]; cta: Cta }
-  /** 13. Closing call to action. `chips` are short highlight tags (some pages); `image` is null until an approved
-   *  photo is supplied. */
-  closing: { kicker: string; h2: string; paragraph: string; chips: string[]; ctas: Cta[]; image: ServiceImage | null }
+  /** 12. FAQs. Also the page's FAQPage schema, from the same strings. `cta` is null where the doc gives no button. */
+  faqs: { eyebrow: string; h2: string; items: Faq[]; cta: Cta | null }
+  /** 13. Closing call to action. `kicker` is null where the doc has none (technology pages); `chips` are short
+   *  highlight tags (some pages); `image` is null until an approved photo is supplied. */
+  closing: { kicker: string | null; h2: string; paragraph: string; chips: string[]; ctas: Cta[]; image: ServiceImage | null }
   /** Sidebar "Explore our services". */
   sidebar: { heading: string; links: NavLink[]; viewAll: NavLink; contactHeading: string; contactText: string; cta: Cta }
   /** Page-specific items that need sign-off before launch (prices, figures, notes); `npm run verify` lists them. */

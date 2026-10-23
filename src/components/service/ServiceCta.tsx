@@ -5,7 +5,7 @@ import { CtaRow } from './CtaButton'
 
 // Service section 13: the current site's dark CTA band with the clinic reception photo (service-page.md §13), drawn
 // like the home Find My Treatment band (HomeFindTreatment): full-width photo under a dark overlay, centred copy.
-// Kicker (Arapey italic), H2, paragraph, the doc's highlight chips where it has them, then its buttons. Without an approved photo the band is plain
+// Kicker (Arapey italic; technology pages have none), H2, paragraph, the doc's highlight chips where it has them, then its buttons. Without an approved photo the band is plain
 // `alternate`. Sits directly above the Instagram row and the footer, with the theme's shorter gap before the row (as
 // under its "Quick answers" card); no newsletter form.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
@@ -39,9 +39,11 @@ export function ServiceCta({ closing }: { closing: ServiceContent['closing'] }) 
       )}
 
       <div className="mx-auto flex w-full max-w-[860px] flex-col items-center gap-5 text-center md:gap-[30px]">
-        <p ref={kickerRef} data-reveal="up" className={`${italicLine} text-tertiary`}>
-          {closing.kicker}
-        </p>
+        {closing.kicker && (
+          <p ref={kickerRef} data-reveal="up" className={`${italicLine} text-tertiary`}>
+            {closing.kicker}
+          </p>
+        )}
         <h2 id="service-cta-heading" ref={titleRef} data-reveal="up" style={delay(150)} className={`${h2} text-balance`}>
           {closing.h2}
         </h2>

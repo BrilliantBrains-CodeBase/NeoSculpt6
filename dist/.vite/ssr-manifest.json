@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-BOjaFMGz.js"
+    "/assets/client-B4ovlL8t.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-BOjaFMGz.js"
+    "/assets/client-B4ovlL8t.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-BOjaFMGz.js"
+    "/assets/client-B4ovlL8t.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -110,6 +110,13 @@
   "src/components/service/ServiceTechnology.tsx": [],
   "src/components/service/ServiceWhyChoose.tsx": [],
   "src/components/shared.tsx": [],
+  "src/components/technology/TechnologyBanner.tsx": [],
+  "src/components/technology/TechnologyBenefits.tsx": [],
+  "src/components/technology/TechnologyCards.tsx": [],
+  "src/components/technology/TechnologyComparison.tsx": [],
+  "src/components/technology/TechnologyExplore.tsx": [],
+  "src/components/technology/TechnologyHighlight.tsx": [],
+  "src/components/technology/TechnologyPathways.tsx": [],
   "src/components/useLoopCarousel.ts": [],
   "src/components/useModal.ts": [],
   "src/components/useParallax.ts": [],
@@ -125,6 +132,8 @@
   "src/data/services/parsed.json": [],
   "src/data/services/photos.json": [],
   "src/data/site.ts": [],
+  "src/data/technology/index.ts": [],
+  "src/data/technology/parsed.json": [],
   "src/layouts/SiteLayout.tsx": [],
   "src/main.tsx": [],
   "src/routes.tsx": [],

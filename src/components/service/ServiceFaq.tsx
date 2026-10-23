@@ -8,6 +8,7 @@ import { CtaButton } from './CtaButton'
 // a centred 980px `alternate` card, 20px radius, padding 100/80px (80/50 tablet, 60/20 mobile), 30px gap: eyebrow,
 // title, the toggles, then the red "Make an Appointment" button. The title is the doc's H2 (the theme's is an H3).
 // The same questions and answers are the page's FAQPage schema (Seo.tsx); every answer is in the HTML (Accordion).
+// The button shows only when the doc gives one (technology pages have none).
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 export function ServiceFaq({ faqs }: { faqs: ServiceContent['faqs'] }) {
@@ -32,9 +33,11 @@ export function ServiceFaq({ faqs }: { faqs: ServiceContent['faqs'] }) {
         <div ref={listRef} data-reveal="up" style={delay(300)} className="border-t border-border">
           <Accordion items={faqs.items.map(({ q, a }) => ({ title: q, body: a }))} />
         </div>
-        <div ref={ctaRef} data-reveal="pop" style={delay(450)} className="mt-[30px] text-center">
-          <CtaButton cta={faqs.cta} />
-        </div>
+        {faqs.cta && (
+          <div ref={ctaRef} data-reveal="pop" style={delay(450)} className="mt-[30px] text-center">
+            <CtaButton cta={faqs.cta} />
+          </div>
+        )}
       </div>
     </section>
   )
