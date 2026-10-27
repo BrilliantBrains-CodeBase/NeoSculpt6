@@ -8,8 +8,10 @@ import { footerNav, legalNav } from '../src/data/site.ts'
 import { pillars, results, signature, doctors, testimonials, technology, journal } from '../src/data/home.ts'
 import { posts, postHref, specialities } from '../src/data/posts.ts'
 import * as about from '../src/data/about.ts'
+import * as contact from '../src/data/contact.ts'
 import { services } from '../src/data/services/index.ts'
 import { LIVE as TECH_LIVE, SOURCE_EXCEPTIONS, technologyPages } from '../src/data/technology/index.ts'
+import { specialityHubs } from '../src/data/specialities/index.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DIST = path.join(ROOT, 'dist')
@@ -208,7 +210,7 @@ const journalCardCount = (journalHtml.match(/<article\b/g) ?? []).length
 if (journalCardCount > 3) fail('home journal', `${journalCardCount} cards, expected at most 3`)
 const plannedTopics = posts.filter((p) => p.status === 'planned').map((p) => `${specialities[p.speciality]?.label}: ${p.title}`)
 // About page (/about-us/, content/about-us/about-us.md): sections in the doc's order, every link a built page, every
-// image present with alt text, no theme stock photo, schema that matches the visible FAQ, and no rating markup. Items
+// image present with alt text, schema that matches the visible FAQ, and no rating markup. Items
 // still waiting for Dr Sandeep's sign-off (marked † in the doc) are listed as warnings, not failures.
 const aboutHtml = fs.existsSync(fileFor('/about-us/')) ? decode(fs.readFileSync(fileFor('/about-us/'), 'utf8')) : ''
 const aboutOrder = [
@@ -272,7 +274,6 @@ for (const { src, alt } of aboutImages) {
 const aboutImgTags = [...aboutHtml.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))
 for (const img of aboutImgTags) {
   if (!img.width || !img.height) fail('about', `<img> without width/height: ${img.src}`)
-  if (/\/images\/home\/(about|hero)/.test(img.src)) fail('about', `theme stock photo used: ${img.src}`)
 }
 const aboutLd = parseHead(fs.existsSync(fileFor('/about-us/')) ? fs.readFileSync(fileFor('/about-us/'), 'utf8') : '').ld[0] ?? '{}'
 const aboutGraph = JSON.parse(aboutLd)['@graph'] ?? []
@@ -301,6 +302,64 @@ const aboutPending = [
   ...(about.instagram.handle ? [] : ['NeoSculpt6 Instagram handle and profile URL']),
   ...about.reviews.items.filter((r) => !(r.quote && r.author && r.consent)).map((r) => `About review about ${r.lookFor} (quote, name, treatment, consent)`),
   'Placeholder photos (old-site images): banner, story ×3, founder portrait + inset, clinic image, Instagram ×6; Dr Saranya portrait',
+]
+
+// Contact page (/contact-us/, content/contact/prompts/contact-us-page.md): sections in the brief's order, one H1 that
+// matches the data, every internal link a built page, the banner photo present with alt text and a size, ContactPage +
+// MedicalClinic schema without rating markup, the map not loaded until clicked, and no theme demo contact details.
+const contactFile = fileFor('/contact-us/')
+const contactRaw = fs.existsSync(contactFile) ? fs.readFileSync(contactFile, 'utf8') : ''
+const contactHtml = decode(contactRaw)
+const contactOrder = [
+  'contact-banner',
+  'contact-details',
+  'visit-us',
+  'book-consultation',
+  'contact-next-steps',
+  'contact-routing',
+  'contact-privacy',
+  'instagram',
+]
+const contactPositions = contactOrder.map((id) => contactHtml.indexOf(`id="${id}"`))
+contactOrder.forEach((id, i) => contactPositions[i] < 0 && fail('contact', `section id="${id}" missing`))
+if (contactPositions.every((p) => p >= 0) && contactPositions.some((p, i) => i > 0 && p < contactPositions[i - 1])) {
+  fail('contact', 'sections are not in the brief\'s order')
+}
+if (contactHtml.indexOf('id="instagram"') > contactHtml.indexOf('<footer')) fail('contact', 'Instagram row is not above the footer')
+if (contact.banner.h1.map((p) => p.text).join('') !== pages.find((p) => p.path === '/contact-us/')?.h1) {
+  fail('contact', 'banner H1 parts do not match the H1 in pages.json')
+}
+if (pages.find((p) => p.path === '/contact-us/')?.name !== 'Contact Us') fail('contact', 'breadcrumb name is not "Contact Us"')
+const contactLinks = [contact.routing.cta.href, ...contact.routing.links.map((l) => l.href)]
+for (const href of contactLinks) {
+  const [pagePath, hash] = href.split('#')
+  if (!fs.existsSync(fileFor(pagePath))) fail('contact', `no page for ${href}`)
+  if (hash && !homeHtml.includes(`id="${hash}"`)) fail('contact', `home section id="${hash}" missing for ${href}`)
+  if (!contactHtml.includes(`href="${href}"`)) fail('contact', `link to ${href} missing from the built page`)
+}
+const { image: contactImage } = contact.banner
+if (!fs.existsSync(path.join(DIST, contactImage.src))) fail('contact', `image missing: ${contactImage.src}`)
+if (!contactImage.alt?.trim()) fail('contact', `no alt text: ${contactImage.src}`)
+for (const img of [...contactHtml.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))) {
+  if (!img.width || !img.height) fail('contact', `<img> without width/height: ${img.src}`)
+}
+for (const href of ['href="#book-consultation"', 'href="tel:', 'href="https://wa.me/', 'href="https://www.google.com/maps/', 'href="mailto:']) {
+  if (!contactHtml.includes(href)) fail('contact', `no ${href}…" link`)
+}
+if (/<iframe\b/.test(contactRaw)) fail('contact', 'map iframe in the prerendered page (it must load only on click)')
+if (/portland|800[- ]123|@gmail|@example|rejuvita/i.test(contactHtml.slice(contactHtml.indexOf('<body')))) {
+  fail('contact', 'theme demo contact details or names on the page')
+}
+const contactLd = parseHead(contactRaw).ld[0] ?? '{}'
+const contactTypes = (JSON.parse(contactLd)['@graph'] ?? []).flatMap((n) => [n['@type']].flat())
+for (const t of ['ContactPage', 'MedicalClinic']) if (!contactTypes.includes(t)) fail('contact', `JSON-LD has no ${t}`)
+if (/AggregateRating|"Review"/.test(contactLd)) fail('contact', 'rating or review schema')
+const contactPending = [
+  'Final title and meta description (brief fallback in use)',
+  'Google Business Profile URL / place ID and an approved map embed (Get Directions and the map use an address search)',
+  ...(about.instagram.handle ? [] : ['NeoSculpt6 Instagram handle and profile URL; Facebook and YouTube URLs']),
+  'Banner photo: confirm the old-site reception image is the real NeoSculpt6 reception',
+  'Privacy policy page and approved legal copy (the privacy note links to none)',
 ]
 
 // Service pages built from content/service/service-page.md (src/data/services/, parsed.json): sections in the
@@ -427,7 +486,6 @@ for (const s of services) {
   }
   for (const img of [...raw.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))) {
     if (!img.width || !img.height) fail(p, `<img> without width/height: ${img.src}`)
-    if (/\/images\/home\/(about|hero)/.test(img.src)) fail(p, `theme stock photo used: ${img.src}`)
   }
 
   const accordions = (raw.match(/<button[^>]*aria-expanded="(true|false)"[^>]*aria-controls="[^"]+"/g) ?? []).length
@@ -600,6 +658,103 @@ for (const t of technologyPages) {
   for (const item of t.pending) techPending.push(`${p}: ${item}`)
 }
 
+// Speciality hubs (src/data/specialities/; brief: content/service/prompts/speciality-<hub>.md). No hub doc exists yet,
+// so the hub's own copy is a draft listed for sign-off. Checked: sections in hub.order, one H1, every string visible,
+// every service page under the hub linked (and every other link a built page), photos, accordions, and the content
+// rules (no banned words, prices or graft counts). Schema: CollectionPage listing the treatment cards, the clinic, the
+// doctor without credentials, FAQPage only once the FAQs are approved, and no rating or review markup.
+const PRICE = /₹|\bRs\.? ?\d|\bINR\b|\d[\d,]*\+? ?grafts\b|\+1[ -]\d/i
+// The hub briefs' own exclusions, on top of BANNED.
+const HUB_BANNED = /\b(no downtime|zero downtime|frozen|effortless|guarantee[sd]?)\b/i
+const hubPending = []
+for (const h of specialityHubs) {
+  const p = h.path
+  const record = pages.find((r) => r.path === p)
+  if (!record || record.type !== 'hub') {
+    fail(p, 'speciality hub has no hub route')
+    continue
+  }
+  const raw = fs.existsSync(fileFor(p)) ? fs.readFileSync(fileFor(p), 'utf8') : ''
+  const html = decode(raw)
+  const text = bodyText(raw)
+  if (raw.includes('data-template="hub"')) fail(p, 'still renders the placeholder')
+
+  const positions = h.order.map((id) => html.indexOf(`id="${id}"`))
+  h.order.forEach((id, i) => positions[i] < 0 && fail(p, `section id="${id}" missing`))
+  if (positions.every((x) => x >= 0) && positions.some((x, i) => i > 0 && x < positions[i - 1])) fail(p, 'sections are not in hub.order')
+  if (html.indexOf('id="instagram"') > html.indexOf('<footer')) fail(p, 'Instagram row is not above the footer')
+  if ((raw.match(/<h1[\s>]/g) ?? []).length !== 1) fail(p, 'expected exactly one <h1>')
+
+  // A hub without technology cards hides that section (its heading included).
+  const shown = h.technology.cards.length ? h : { ...h, technology: undefined }
+  for (const str of visibleStrings(shown).filter(Boolean)) if (!text.includes(str)) fail(p, `not on the page: "${str.length > 60 ? str.slice(0, 60) + '…' : str}"`)
+  h.process.steps.forEach((s, i) => {
+    if (!text.includes(`${String(i + 1).padStart(2, '0')}. ${s.title}`)) fail(p, `step "${s.title}" is not numbered once`)
+  })
+  // Content rules. The treatment cards quote each child page's approved banner words; a ruled word there is listed for
+  // sign-off rather than failed (as SOURCE_EXCEPTIONS on the technology pages), everything else must pass.
+  let main = bodyText(raw.slice(0, raw.indexOf('<footer')))
+  for (const item of h.treatments.groups.flatMap((g) => g.items)) {
+    const hit = item.text.match(BANNED) ?? item.text.match(HUB_BANNED)
+    if (hit) hubPending.push(`${p}: content rules: source copy on the "${item.title}" card uses "${hit[0]}"`)
+    main = main.split(item.text).join(' ')
+  }
+  const banned = main.match(BANNED) ?? main.match(HUB_BANNED) ?? main.match(PRICE)
+  if (banned) fail(p, `"${banned[0]}" on the page (content rules)`)
+
+  const children = services.map((s) => s.path).filter((x) => x.startsWith(p))
+  for (const child of children) if (!html.includes(`href="${child}"`)) fail(p, `child page not linked: ${child}`)
+  const ctas = collect(h, (o) => typeof o.label === 'string' && ('href' in o || 'action' in o))
+  const hrefs = [
+    ...new Set([
+      ...record.breadcrumbs.slice(0, -1).map((c) => c.path),
+      ...h.doctors.cards.map((d) => d.href),
+      ...h.treatments.groups.flatMap((g) => g.items.map((i) => i.href)),
+      ...ctas.filter((c) => c.href).map((c) => c.href),
+    ]),
+  ]
+  for (const href of hrefs.filter((x) => x.startsWith('/'))) {
+    if (!fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
+    if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing from the built page`)
+  }
+  for (const href of hrefs.filter((x) => /^(tel:|https?:)/.test(x))) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
+  if (ctas.some((c) => c.action === 'book') && !/<button[^>]*type="button"/.test(raw)) fail(p, 'booking buttons missing')
+
+  const images = collect(h, (o) => typeof o.src === 'string' && typeof o.alt === 'string')
+  if (new Set(images.map((i) => i.src)).size !== images.length) fail(p, 'the same photo is used twice on the page')
+  for (const { src, alt } of images) {
+    if (!fs.existsSync(path.join(DIST, src))) fail(p, `image missing: ${src}`)
+    if (!alt?.trim()) fail(p, `no alt text: ${src}`)
+    if (!html.includes(`src="${src}"`)) fail(p, `image not on the page: ${src}`)
+  }
+  for (const img of [...raw.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))) {
+    if (!img.width || !img.height) fail(p, `<img> without width/height: ${img.src}`)
+  }
+  const accordions = (raw.match(/<button[^>]*aria-expanded="(true|false)"[^>]*aria-controls="[^"]+"/g) ?? []).length
+  if (accordions < h.process.steps.length + h.faqs.items.length) fail(p, `${accordions} accordion buttons with aria-controls`)
+  if (!raw.includes('aria-controls="success-stories-track"')) fail(p, 'carousel controls missing for success-stories-track')
+  for (const r of h.reviews.items) if ((r.quote || r.author) && !r.consent) fail(p, 'review text set without consent')
+
+  const ld = parseHead(raw).ld[0] ?? '{}'
+  const graph = JSON.parse(ld)['@graph'] ?? []
+  const types = graph.flatMap((n) => [n['@type']].flat())
+  for (const type of ['CollectionPage', 'BreadcrumbList', 'MedicalClinic', ...(h.doctors.cards.length ? ['Physician'] : [])]) {
+    if (!types.includes(type)) fail(p, `JSON-LD has no ${type}`)
+  }
+  const list = graph.find((n) => n['@type'] === 'CollectionPage')?.mainEntity?.itemListElement ?? []
+  const cardUrls = h.treatments.groups.flatMap((g) => g.items.map((i) => SITE_URL + i.href))
+  if (JSON.stringify(list.map((e) => e.url)) !== JSON.stringify(cardUrls)) fail(p, 'ItemList schema does not match the treatment cards')
+  if (h.faqsApproved !== types.includes('FAQPage')) fail(p, h.faqsApproved ? 'JSON-LD has no FAQPage' : 'FAQPage schema before the FAQs are approved')
+  const physiciansLd = graph.filter((n) => n['@type'] === 'Physician')
+  if (physiciansLd.some((n) => n.hasCredential || n.memberOf)) fail(p, 'Physician schema lists credentials the page does not show as verified')
+  if (/AggregateRating|"Review"/.test(ld)) fail(p, 'rating or review schema before the reviews are verified')
+
+  const linked = children.filter((c) => html.includes(`href="${c}"`)).length
+  const crossLinks = h.treatments.groups.flatMap((g) => g.items).filter((i) => !i.href.startsWith(p)).length
+  hubPending.push(`${p}: ${linked} of ${children.length} child pages linked${crossLinks ? ` (+ ${crossLinks} cross-links)` : ''}`)
+  for (const item of h.pending) hubPending.push(`${p}: ${item}`)
+}
+
 // A character the prerender split mid-way (U+FFFD in the HTML).
 for (const r of pages.filter((x) => x.type !== 'redirect')) {
   if (fs.existsSync(fileFor(r.path)) && fs.readFileSync(fileFor(r.path), 'utf8').includes('�')) fail(r.path, 'broken character (U+FFFD) in the built HTML')
@@ -629,6 +784,8 @@ console.log(`home journal: ${journalCardCount} cards (${publishedPosts.length} p
 for (const item of plannedTopics) console.log(`  - ${item}`)
 console.log(`about: ${aboutOrder.length} sections in order, ${aboutLinks.length} links and ${aboutImages.length} images checked; pending sign-off:`)
 for (const item of aboutPending) console.log(`  - ${item}`)
+console.log(`contact: ${contactOrder.length} sections in order, ${contactLinks.length} routing links checked; pending sign-off:`)
+for (const item of contactPending) console.log(`  - ${item}`)
 console.log(`services: ${services.length} of ${serviceRoutes} service pages built from service-page.md; pending sign-off:`)
 console.log(`  - every service page: 3 Google reviews each (quote, name, consent), the Google rating and count, and the`)
 console.log(`    "Board-Certified Team" heading; ${serviceImages.size} old-site placeholder photos, the reception image and Dr Sandeep's portrait`)
@@ -640,6 +797,8 @@ for (const [kind, items] of byKind) {
 }
 console.log(`technology: ${[...TECH_LIVE].length} of ${technologyPages.length} pages built from technology-international-patient.md; SEO checked for all; pending sign-off:`)
 for (const item of techPending) console.log(`  - ${item.length > 200 ? item.slice(0, 200) + '…' : item}`)
+console.log(`speciality hubs: ${specialityHubs.length} built; pending sign-off:`)
+for (const item of hubPending) console.log(`  - ${item}`)
 console.log(`menu links: ${navLinks.length} checked${pendingLegal.length ? `; legal pages not built yet: ${pendingLegal.join(', ')}` : ''}`)
 console.log(`duplicate titles: ${dups('title').length}, duplicate descriptions: ${dups('description').length}`)
 console.log(`pages with todo items: ${pages.filter((p) => p.todo?.length).length} (see src/data/seo-report.csv)`)

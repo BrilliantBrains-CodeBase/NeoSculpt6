@@ -8,7 +8,7 @@ export interface NavLink {
 }
 
 export interface MegaColumn extends NavLink {
-  // TODO: replace the old-site og images with NeoSculpt6 photography.
+  // The speciality's Treatment Pillars photo (public/images/pillars/), as on the home page tabs.
   image: string
   items: NavLink[]
 }
@@ -22,7 +22,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Hair Restoration',
     href: '/hair-transplant-restoration/',
-    image: '/og/hair-transplant-restoration__neo-follicle-hair-transplant-in-bangalore.jpg',
+    image: '/images/pillars/hair-transplant-restoration.webp',
     items: [
       { label: 'Neo Follicle Hair Transplant', href: '/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/' },
       { label: 'FUE Hair Transplant', href: '/hair-transplant-restoration/fue-hair-transplant-in-bangalore/' },
@@ -34,7 +34,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Body Contouring',
     href: '/slimming-body-contouring/',
-    image: '/og/slimming-body-contouring__body-contouring-in-bangalore.jpg',
+    image: '/images/pillars/slimming-body-contouring.webp',
     items: [
       { label: 'Body Contouring', href: '/slimming-body-contouring/body-contouring-in-bangalore/' },
       { label: 'Cryolipolysis', href: '/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/' },
@@ -46,7 +46,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Anti-Ageing',
     href: '/anti-aging-injectables/',
-    image: '/og/anti-aging-injectables__botox-treatment-in-bangalore.jpg',
+    image: '/images/pillars/anti-aging-injectables.webp',
     items: [
       { label: 'Botox', href: '/anti-aging-injectables/botox-treatment-in-bangalore/' },
       { label: 'Dermal Fillers', href: '/anti-aging-injectables/dermal-filler-treatment-in-bangalore/' },
@@ -58,7 +58,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Laser & Skin',
     href: '/laser-skin-aesthetic/',
-    image: '/og/laser-skin-aesthetic__co2-fractional-laser-treatment-in-bangalore.jpg',
+    image: '/images/pillars/laser-skin-aesthetic.webp',
     items: [
       { label: 'CO2 Fractional Laser', href: '/laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore/' },
       { label: 'Acne Scar Laser', href: '/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/' },
@@ -70,7 +70,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Cosmetic Surgery',
     href: '/cosmetic-surgery/',
-    image: '/og/cosmetic-surgery__rhinoplasty-in-bangalore.jpg',
+    image: '/images/pillars/cosmetic-surgery.webp',
     items: [
       { label: 'Rhinoplasty', href: '/cosmetic-surgery/rhinoplasty-in-bangalore/' },
       { label: 'Facelift', href: '/cosmetic-surgery/facelift-surgery-in-bangalore/' },
@@ -82,7 +82,7 @@ export const specialities: MegaColumn[] = [
   {
     label: 'Intimate Wellness',
     href: '/cosmetic-gynecology/',
-    image: '/og/cosmetic-gynecology__vaginal-rejuvenation-treatment-in-bangalore.jpg',
+    image: '/images/pillars/cosmetic-gynecology.webp',
     items: [
       { label: 'Labiaplasty', href: '/cosmetic-gynecology/labiaplasty-surgery-in-bangalore/' },
       { label: 'Laser Vaginal Tightening', href: '/cosmetic-gynecology/laser-vaginal-tightening-in-bangalore/' },
@@ -126,6 +126,8 @@ export const primaryNav: NavItem[] = [
   { label: 'Contact', href: '/contact-us/' },
 ]
 
-// Booking form options (homepage.md section 12).
-export const bookingServices = ['Hair', 'Face & Anti-Ageing', 'Skin & Laser', 'Body & Weight', 'Cosmetic Surgery', 'Intimate Wellness', 'Not sure']
+// Booking form options (homepage.md section 12). The form's answers become a pre-filled WhatsApp message, so the
+// intimate-care option uses a neutral label ("Private consultation", not the doc's "Intimate Wellness"): the chat
+// never names an intimate concern (speciality-cosmetic-gynecology.md, privacy).
+export const bookingServices = ['Hair', 'Face & Anti-Ageing', 'Skin & Laser', 'Body & Weight', 'Cosmetic Surgery', 'Private consultation', 'Not sure']
 export const bookingDoctors = ['Dr Sandeep Mahapatra', 'Dr Saranya T', 'Not sure — suggest for me']

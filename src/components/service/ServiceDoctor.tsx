@@ -3,6 +3,7 @@ import { useReveal } from '../useReveal'
 import { SmartLink } from '../SmartLink'
 import { ArrowRightIcon } from '../icons'
 import { delay, eyebrow, h2, italicLine } from '../shared'
+import { CtaButton } from './CtaButton'
 
 // Service section 7: Rejuvita "Board-Certified Team" (services__rhinoplasty; card styles post-111.css): centred
 // eyebrow and title, then the doctor cards. Each card is one wide `alternate` card (20px radius) that also holds the
@@ -12,7 +13,8 @@ import { delay, eyebrow, h2, italicLine } from '../shared'
 // tracked for sign-off in the page's `pending` list. Technology pages have no doctor block (`blockEyebrow: null`) and a
 // profile button that already names the doctor ("Meet Dr. Sandeep Mahapatra"); where their doc sets two cards side by
 // side (`columns`), each card stacks its portrait above the text from xl up as well, and International Patients adds
-// its section paragraph under the heading (`intro`). Below xl the portrait sits above the text.
+// its section paragraph under the heading (`intro`). Speciality hubs add a booking button beside the
+// profile link (`cta`). Below xl the portrait sits above the text.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 export function ServiceDoctor({ doctors }: { doctors: ServiceContent['doctors'] }) {
@@ -100,14 +102,17 @@ function DoctorPanel({ doctor, compact = false }: { doctor: Doctor; compact?: bo
             </li>
           ))}
         </ul>
-        <SmartLink
-          href={doctor.href}
-          className="mt-2.5 inline-flex items-center gap-2.5 border-t border-border pt-5 text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-4 outline-tertiary hover:text-primary focus-visible:text-primary focus-visible:outline-2"
-        >
-          {doctor.profileLabel}
-          {!doctor.profileLabel.includes(doctor.name) && <span className="sr-only">: {doctor.name}</span>}
-          <ArrowRightIcon className="size-3 shrink-0" />
-        </SmartLink>
+        <div className="mt-2.5 flex flex-wrap items-center gap-x-[30px] gap-y-5 border-t border-border pt-5">
+          <SmartLink
+            href={doctor.href}
+            className="inline-flex items-center gap-2.5 text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-4 outline-tertiary hover:text-primary focus-visible:text-primary focus-visible:outline-2"
+          >
+            {doctor.profileLabel}
+            {!doctor.profileLabel.includes(doctor.name) && <span className="sr-only">: {doctor.name}</span>}
+            <ArrowRightIcon className="size-3 shrink-0" />
+          </SmartLink>
+          {doctor.cta && <CtaButton cta={doctor.cta} />}
+        </div>
       </div>
     </article>
   )

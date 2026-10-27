@@ -18,6 +18,8 @@ export interface ServiceImage {
   height: number
   /** Describes what the photo shows (placeholders included), never the treatment it is meant to stand for. */
   alt: string
+  /** CSS object-position for a crop that would otherwise cut the subject (wide banners from portrait photos). */
+  position?: string
 }
 
 /** A doctor on a service page: who they are (services/index.ts `DOCTORS`) and the page's own copy about them. */
@@ -34,6 +36,8 @@ export interface ServiceDoctor {
   /** The current-site doctor block's eyebrow; null where the page has no doctor block (technology pages). */
   blockEyebrow: string | null
   paragraphs: string[]
+  /** A button beside the profile link (speciality hubs: "Book a Consultation"); service pages have none. */
+  cta?: Cta
 }
 
 /** A numbered row from the doc's `|#|title|text|` tables: cards, process steps, candidates, technology, cost. */

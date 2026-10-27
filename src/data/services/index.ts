@@ -1,31 +1,43 @@
 // Service pages, keyed by canonical path. The copy is content/service/service-page.md (and later docs that replace or
 // add pages, e.g. Blepharoplasty-and-Chin-Augmentation.md), parsed word for word into parsed.json by
 // scripts/parse-service-pages.mjs (run by `npm run gen`); this module adds what the docs do not hold: button actions,
-// the doctors' names, profile links and portraits, and placeholder photos. ServiceTemplate renders every page here.
+// the doctors' names, profile links and portraits, and the photos. ServiceTemplate renders every page here.
 // Keep this folder to erasable TypeScript only (verify-seo.mjs imports it with Node's type stripping).
 //
-// Photos: every service page has its own old-site image (photos.json: what each one shows, and whether it is a
-// consultation, procedure or assessment scene). The hero uses the page's own. The consultation, process and candidates
-// sections borrow from the same speciality, but only consultation and assessment scenes: another page's procedure
-// photo would show a treatment this page is not about (a body-contouring device on an eyelid page). Never a photo the
-// page already shows (hero, other sections, the Instagram row). All are placeholders until NeoSculpt6 supplies
-// approved photos.
+// Photos: NeoSculpt6 supplied its own photos for 152 pages (new-photos.json, imported by scripts/import-photos.mjs;
+// only Chin Augmentation has none yet). Every page also has its old-site image
+// (photos.json). Both list what each photo shows and whether it is a consultation, procedure, assessment or other
+// (page-specific) scene. The hero is the page's first supplied photo, else its old-site one. The page's other supplied
+// photos fill the consultation, process and candidates sections, each taking the scene that suits it best. Sections
+// still empty borrow from the same speciality, supplied photos first, but only consultation and assessment scenes:
+// another page's procedure photo would show a treatment this page is not about (a body-contouring device on an eyelid
+// page). Never a photo the page already shows (hero, other sections, the Instagram row).
 
 import parsedJson from './parsed.json' with { type: 'json' }
 import photosJson from './photos.json' with { type: 'json' }
+import newPhotosJson from './new-photos.json' with { type: 'json' }
 import { doctors } from '../home.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
 import type { Cta, ServiceContent, ServiceDoctor, ServiceImage } from './types.ts'
 
 type Parsed = (typeof parsedJson)[number]
-type Photo = { src: string; page: string; kind: 'c' | 'p' | 'a' | 'o' | null; alt: string | null; same: number; unusable?: string }
+type Kind = 'c' | 'p' | 'a' | 'o' | null
+type OldPhoto = { src: string; page: string; kind: Kind; alt: string | null; same: number; unusable?: string }
+type NewPhoto = { src: string; page: string; kind: Kind; alt: string | null; width: number; height: number; n: number; same?: string; unusable?: string }
+// One list for both: `same` groups identical photos, `supplied` marks NeoSculpt6's own.
+type Photo = { src: string; page: string; kind: Kind; alt: string; width: number; height: number; same: string; supplied: boolean }
 
-const photos = photosJson as Photo[]
-const hubOf = (path: string) => path.split('/')[1]
-const usable = (p: Photo): p is Photo & { alt: string } => !p.unusable && Boolean(p.alt)
-const image = (p: Photo & { alt: string }): ServiceImage => ({ src: p.src, width: 1024, height: 1024, alt: p.alt })
 const instagramSrcs = new Set(instagram.tiles.map((t) => t.src))
+const hubOf = (path: string) => path.split('/')[1]
+const supplied: Photo[] = (newPhotosJson as NewPhoto[])
+  .filter((p): p is NewPhoto & { alt: string } => !p.unusable && Boolean(p.alt))
+  .sort((a, b) => a.n - b.n)
+  .map((p) => ({ src: p.src, page: p.page, kind: p.kind, alt: p.alt, width: p.width, height: p.height, same: p.same ?? p.src, supplied: true }))
+const oldSite: Photo[] = (photosJson as OldPhoto[])
+  .filter((p): p is OldPhoto & { alt: string } => !p.unusable && Boolean(p.alt))
+  .map((p) => ({ src: p.src, page: p.page, kind: p.kind, alt: p.alt, width: 1024, height: 1024, same: `old-${p.same}`, supplied: false }))
+const image = (p: Photo): ServiceImage => ({ src: p.src, width: p.width, height: p.height, alt: p.alt })
 
 // The NeoSculpt6 reception (old-site rendering with the logo), for every closing band.
 // TODO: confirm it shows the real reception, or replace it with a photo of it.
@@ -86,31 +98,42 @@ const EXTRA_LINKS: Record<string, NavLink[]> = {
 const seed = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7)
 
 function pickPhotos(path: string) {
-  const own = photos.find((p) => p.src === `/og/${path.replace(/^\/|\/$/g, '').replace(/\//g, '__')}.jpg`)
-  const pool = photos.filter((p) => usable(p) && hubOf(p.page) === hubOf(path) && !instagramSrcs.has(p.src))
-  const used = new Set<number>()
-  const take = (kinds: Photo['kind'][], offset: number) => {
-    for (const kind of kinds) {
-      const options = pool.filter((p) => p.kind === kind && !used.has(p.same))
-      if (options.length) {
-        const chosen = options[(seed(path) + offset) % options.length] as Photo & { alt: string }
-        used.add(chosen.same)
-        return image(chosen)
+  const pool = [...supplied, ...oldSite].filter((p) => hubOf(p.page) === hubOf(path) && !instagramSrcs.has(p.src))
+  // The Instagram row under every page already shows these.
+  const used = new Set<string>(supplied.filter((p) => instagramSrcs.has(p.src)).map((p) => p.same))
+  const use = (p: Photo) => {
+    used.add(p.same)
+    return image(p)
+  }
+  // Borrowed from another page of the speciality: supplied photos first, then old-site ones.
+  const borrow = (kinds: Kind[], offset: number) => {
+    for (const isSupplied of [true, false]) {
+      for (const kind of kinds) {
+        const options = pool.filter((p) => p.supplied === isSupplied && p.kind === kind && !used.has(p.same))
+        if (options.length) return use(options[(seed(path) + offset) % options.length])
       }
     }
     throw new Error(`no photo left for ${path}`)
   }
-  let hero: ServiceImage
-  if (own && usable(own)) {
-    used.add(own.same)
-    hero = image(own)
-  } else hero = take(['c', 'a'], 0)
-  return {
-    hero,
-    consultation: take(['c', 'a'], 1),
-    process: take(['c', 'a'], 2),
-    candidates: take(['a', 'c'], 3),
+
+  const ownSupplied = supplied.filter((p) => p.page === path && !used.has(p.same))
+  const ownOld = oldSite.find((p) => p.src === `/og/${path.replace(/^\/|\/$/g, '').replace(/\//g, '__')}.jpg`)
+  const heroPhoto = ownSupplied[0] ?? ownOld
+  const hero = heroPhoto ? use(heroPhoto) : borrow(['c', 'a'], 0)
+
+  // The page's own extra photos, each section taking the scene that suits it best.
+  const extras = ownSupplied.slice(1).filter((p) => !used.has(p.same))
+  const own = (prefer: Kind[]) => {
+    for (const kind of prefer) {
+      const p = extras.find((x) => x.kind === kind && !used.has(x.same))
+      if (p) return use(p)
+    }
+    return null
   }
+  const consultation = own(['c', 'a', 'o', 'p']) ?? borrow(['c', 'a'], 1)
+  const process = own(['p', 'o', 'c', 'a']) ?? borrow(['c', 'a'], 2)
+  const candidates = own(['a', 'c', 'o', 'p']) ?? borrow(['a', 'c'], 3)
+  return { hero, consultation, process, candidates }
 }
 
 // Items on this page that need sign-off, beyond what every page shares (reviews, rating, photos, Instagram handle).

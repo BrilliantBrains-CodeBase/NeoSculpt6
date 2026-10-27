@@ -3,6 +3,7 @@ import type { TechnologyHub } from '../../data/technology/types'
 import { useReveal } from '../useReveal'
 import { SmartLink } from '../SmartLink'
 import { ArrowRightIcon } from '../icons'
+import { delay, h2, italicLine } from '../shared'
 
 // Technology hub section 2: the nine technology cards, the black template's service-card grid (3 per row, image on
 // top; technology-international-patient.md hub §2). Each card: photo, the doc's group ("Hair", "Body", "Skin") as a
@@ -10,14 +11,49 @@ import { ArrowRightIcon } from '../icons'
 // replaces the live cards' cut-off text; never truncated here) and "Read More", whose accessible name adds the
 // title. Information cards only: no prices, ratings, badges or cart controls. Cards come grouped Hair → Body → Skin
 // (technology/index.ts). Three per row on desktop, two on tablet, one on mobile; photos keep a fixed 4:3 crop.
+// Speciality hubs show a subset under their own centred H2 and sub-line (`heading`); the card titles are then H3s.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
-export function TechnologyCards({ cards }: { cards: TechnologyHub['cards'] }) {
+// A short row (one or two cards, on a speciality hub) is centred at the three-column card width rather than left in a
+// half-empty grid.
+const GRID: Record<number, string> = {
+  0: '',
+  1: 'md:mx-auto md:max-w-[440px]',
+  2: 'md:grid-cols-2 xl:mx-auto xl:max-w-[920px]',
+  3: 'md:grid-cols-2 xl:grid-cols-3',
+}
+
+export function TechnologyCards({
+  cards,
+  id = 'technology-cards',
+  heading,
+}: {
+  cards: TechnologyHub['cards']
+  id?: string
+  heading?: { h2: string; subline: string }
+}) {
+  const titleRef = useReveal<HTMLHeadingElement>()
+  const sublineRef = useReveal<HTMLParagraphElement>()
   const listRef = useReveal<HTMLUListElement>()
+  const Title = heading ? 'h3' : 'h2'
 
   return (
-    <section id="technology-cards" className="mx-auto mb-20 w-full max-w-[1400px] px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10">
-      <ul ref={listRef} data-reveal-stagger="" className="grid grid-cols-1 gap-[30px] md:grid-cols-2 xl:grid-cols-3 xl:gap-10">
+    <section
+      id={id}
+      aria-labelledby={heading ? `${id}-heading` : undefined}
+      className="mx-auto mb-20 w-full max-w-[1400px] px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+    >
+      {heading && (
+        <div className="mb-10 flex flex-col items-center gap-5 md:mb-[60px]">
+          <h2 id={`${id}-heading`} ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center text-balance`}>
+            {heading.h2}
+          </h2>
+          <p ref={sublineRef} data-reveal="up" style={delay(150)} className={`${italicLine} max-w-[860px] text-center text-secondary`}>
+            {heading.subline}
+          </p>
+        </div>
+      )}
+      <ul ref={listRef} data-reveal-stagger="" className={`grid grid-cols-1 gap-[30px] xl:gap-10 ${GRID[Math.min(cards.length, 3)]}`}>
         {cards.map((card, i) => (
           <li key={card.cta.href} style={{ '--i': i } as CSSProperties}>
             <article className="group flex h-full flex-col overflow-hidden rounded-[20px] bg-alternate">
@@ -34,7 +70,7 @@ export function TechnologyCards({ cards }: { cards: TechnologyHub['cards'] }) {
               </div>
               <div className="flex flex-1 flex-col items-start gap-[15px] p-[30px] md:p-10">
                 <p className="rounded-full border border-border px-4 py-1 text-meta text-tertiary">{card.group}</p>
-                <h2 className="font-heading text-h4 text-secondary uppercase">{card.title}</h2>
+                <Title className="font-heading text-h4 text-secondary uppercase">{card.title}</Title>
                 <p className="text-meta text-primary">{card.label}</p>
                 <p className="text-small">{card.text}</p>
                 <SmartLink

@@ -7,9 +7,9 @@
 // published unconfirmed stay hidden until their `signedOff` flag is set: the founder quote, the Neo Follicle crossing
 // date, and the ISHRS / AHRS / DHI Global logos (see `memberships.confirmed`).
 //
-// TODO (images): there is no NeoSculpt6 clinic photography yet. Every image below is an old-site page image from
-// public/og/, used as a placeholder; alt text describes what each one actually shows. Replace them with real, consented
-// clinic photos (the slot each one is for is noted beside it) and update the alt text.
+// Images: NeoSculpt6 service photos (public/images/services/), picked for the slot noted beside each, none of them in the
+// Instagram row (src/data/site.ts). TODO: Dr Sandeep's portrait is still the old-site photo; the clinic has not supplied
+// reception or portrait photos yet.
 // Imports carry .ts: scripts/verify-seo.mjs loads this file in Node.
 
 import { credentials, doctors, pillars, signature, testimonials, type DoctorPortrait, type Testimonial } from './home.ts'
@@ -25,10 +25,10 @@ export const banner = {
   subline: 'A doctor-led clinic for hair, face, skin, body and intimate wellness. Part of Neo Group.',
   // Slot: wide shot of the NeoSculpt6 reception or consultation room.
   image: {
-    src: '/og/anti-aging-injectables__anti-aging-wellness-drips-in-bangalore.jpg',
-    width: 1024,
-    height: 1024,
-    alt: 'A doctor in a white coat talking with a patient in armchairs in a bright, plant-filled consultation lounge',
+    src: '/images/services/hair-transplant-restoration/fue-hair-transplant-in-bangalore-2.webp',
+    width: 1200,
+    height: 1200,
+    alt: 'A doctor explaining hair-loss diagrams to a man across a desk',
   } as Image,
 }
 
@@ -41,24 +41,24 @@ export const story = {
   images: {
     // Slot: a clean, real procedure room.
     procedure: {
-      src: '/og/anti-aging-injectables__skin-rejuvenation-treatment-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'A clinician treating a patient’s face with a handheld device as she lies on a treatment bed',
+      src: '/images/services/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore-2.webp',
+      width: 1200,
+      height: 1200,
+      alt: 'A surgeon wearing loupes implanting grafts along a man’s hairline in the operating room',
     } as Image,
     // Slot: doctor and patient in consultation.
     consultation: {
-      src: '/og/hair-transplant-restoration__burn-scar-hair-transplant-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'A doctor showing a patient photos of hairline options across a consultation desk',
+      src: '/images/services/cosmetic-surgery/mommy-makeover-surgery-in-bangalore-1.webp',
+      width: 900,
+      height: 1200,
+      alt: 'A surgeon explaining body diagrams to a woman across a consultation desk',
     } as Image,
     // Slot: tall portrait of Dr Sandeep consulting a patient.
     tall: {
-      src: '/og/hair-transplant-restoration__failed-hair-transplant-repair-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'A doctor examining a man’s hair while the patient holds up a hand mirror',
+      src: '/images/services/hair-transplant-restoration/dhi-hair-transplant-in-bangalore-1.webp',
+      width: 900,
+      height: 1200,
+      alt: 'A doctor discussing a hairline plan with a balding man in the clinic',
     } as Image,
   },
 }
@@ -164,10 +164,10 @@ export const founder = {
     alt: 'Dr Sandeep Mahapatra in a white coat, standing in a clinic room',
   } as Image,
   inset: {
-    src: '/og/anti-aging-injectables__glutathione-iv-drip-treatment-in-bangalore.jpg',
-    width: 1024,
-    height: 1024,
-    alt: 'A patient resting in a treatment chair while a clinician adjusts her drip',
+    src: '/images/services/hair-transplant-restoration/dhi-hair-transplant-in-bangalore-4.webp',
+    width: 900,
+    height: 1200,
+    alt: 'A doctor examining a man’s crown with a lit dermatoscope, magnified hair images on the screen',
   } as Image,
 }
 
@@ -212,10 +212,10 @@ export const clinicTech = {
   cta: { label: 'Explore Our Technology', href: '/technology/' },
   // Slot: a procedure room or a device in use.
   image: {
-    src: '/og/cosmetic-surgery__ncecs-treatment-in-bangalore.jpg',
+    src: '/images/services/slimming-body-contouring/cryolipolysis-treatment-in-bangalore-3.webp',
     width: 1024,
-    height: 1024,
-    alt: 'A clinician in a mask and gloves preparing a sample at a lab bench beside a microscope',
+    height: 765,
+    alt: 'A clinician setting up a cryolipolysis applicator for a patient lying on the treatment bed',
   } as Image,
   ticker: signature.ticker.flatMap((t) => (t === 'Cryolipolysis' ? ['Excimer Phototherapy', t] : [t])),
 }

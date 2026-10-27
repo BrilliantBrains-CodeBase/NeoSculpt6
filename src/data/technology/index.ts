@@ -9,16 +9,17 @@
 // pages (the Contact page is not built yet). "#…" stays an on-page anchor, "Call …" rings the clinic, "WhatsApp"
 // opens the chat, and every other destination is a link.
 //
-// Photos (all placeholders until NeoSculpt6 supplies approved ones): each technology page's hero is its card photo
-// on the home page (data/home.ts `technology`, the same file, size and alt). The image bands are old-site consultation
-// and assessment scenes chosen per page in PHOTOS (picked by hand: an automatic pick put a chest-hair exam on the ARTAS
-// page and a torso model on Excimer), never one the page already shows nor an Instagram tile. Their alt text is
-// photos.json's, which describes the scene only. The closing band uses the clinic reception, as on the service pages.
+// Photos: each technology page's hero is its card photo on the home page (data/home.ts `technology`, the same file,
+// size and alt). The image bands are consultation and assessment scenes (NeoSculpt6 photos where one fits, else
+// old-site ones) chosen per page in PHOTOS (picked by hand: an automatic pick put a chest-hair exam on the ARTAS
+// page and a torso model on Excimer), never one the page already shows nor an Instagram tile. Their alt text is the
+// photo list's, which describes the scene only. The closing band uses the clinic reception, as on the service pages.
 
 import parsedJson from './parsed.json' with { type: 'json' }
 import { technology as homeTechnology } from '../home.ts'
 import { clinic } from '../site.ts'
 import photosJson from '../services/photos.json' with { type: 'json' }
+import newPhotosJson from '../services/new-photos.json' with { type: 'json' }
 import { doctorFor, reception } from '../services/index.ts'
 import type { NavLink } from '../nav.ts'
 import type { Cta, ServiceDoctor, ServiceImage } from '../services/types.ts'
@@ -113,7 +114,7 @@ const navLinks = (links: DocLink[]): NavLink[] => links.filter((l): l is NavLink
 function cardImage(path: string): ServiceImage {
   const card = homeTechnology.cards.find((c) => c.href === path)
   if (!card) throw new Error(`no home technology card for ${path}`)
-  return { src: card.image, width: card.width, height: card.height, alt: card.alt }
+  return { src: card.image, width: card.width, height: card.height, alt: card.alt, position: card.bannerPosition }
 }
 
 // An abstract clinic texture (the home stats band), for the two pages that are not about one device.
@@ -125,64 +126,67 @@ const texture: ServiceImage = {
 }
 
 // The image bands' photos, by page: [how it is different (or travel), how it works (or journey), candidates]. Each is
-// an old-site photo file name under /og/ (photos.json), a consultation or assessment scene that fits the band.
+// a scene that fits the band: "new:<hub>/<file>" is a NeoSculpt6 photo (public/images/services/, new-photos.json), any
+// other name an old-site photo under /og/ (photos.json).
 const PHOTOS: Record<string, [string | null, string, string | null]> = {
   '/technology/ai-integrated-hair-analysis/': [
-    'hair-transplant-restoration__dhi-hair-transplant-in-bangalore', // reviewing scalp images on a monitor
-    'hair-transplant-restoration__burn-scar-hair-transplant-in-bangalore', // hairline diagrams at the desk
-    'hair-transplant-restoration__neo-follicle-hair-transplant-in-bangalore', // digital scope, images on a tablet
+    'new:hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore-1', // scalp photos on a monitor at the desk
+    'new:hair-transplant-restoration/burn-scar-hair-transplant-in-bangalore-1', // scalp under a lit dermatoscope
+    'new:hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore-3', // scalp photos on a tablet
   ],
   '/technology/ai-integrated-donor-assessment/': [
-    'hair-transplant-restoration__neo-follicle-stem-cell-therapy-in-bangalore', // scope, magnified scalp on a screen
-    'hair-transplant-restoration__unshaven-hair-transplant-in-bangalore', // hairline under a dermatoscope
-    'hair-transplant-restoration__nri-hair-transplant-consultation-in-bangalore', // thinning hairline, magnifier
+    'new:hair-transplant-restoration/failed-hair-transplant-repair-in-bangalore-1', // thinning scalp under a dermatoscope
+    'new:hair-transplant-restoration/dhi-hair-transplant-in-bangalore-1', // discussing a hairline plan
+    'new:hair-transplant-restoration/fue-hair-transplant-in-bangalore-4', // a woman's hairline under a dermatoscope
   ],
   '/technology/artas-robotic-hair-transplant/': [
     null,
-    'hair-transplant-restoration__burn-scar-hair-transplant-in-bangalore', // hairline diagrams (planning)
-    'hair-transplant-restoration__female-hair-transplant-in-bangalore', // a woman's scalp under a magnifier
+    'new:hair-transplant-restoration/fue-hair-transplant-in-bangalore-2', // hair-loss diagrams (planning)
+    'new:hair-transplant-restoration/dhi-hair-transplant-in-bangalore-3', // examining a woman's hair parting
   ],
   '/technology/vaser-liposuction-technology/': [
-    'slimming-body-contouring__obesity-treatment-in-bangalore', // consultation, body chart on the wall
-    'slimming-body-contouring__belly-tummy-fat-reduction-in-bangalore', // body-contouring image on a monitor
-    'slimming-body-contouring__post-weight-loss-body-planning-in-bangalore', // talking beside a mirror
+    'new:cosmetic-surgery/mommy-makeover-surgery-in-bangalore-1', // body diagrams across the desk
+    'new:slimming-body-contouring/body-contouring-in-bangalore-4', // body-contouring options on a tablet
+    'new:slimming-body-contouring/body-contouring-in-bangalore-3', // measuring the waist
   ],
   '/technology/reaction-viora-rf-tightening/': [
-    'anti-aging-injectables__skin-vive-in-bangalore', // a facial image on a tablet
-    'anti-aging-injectables__skin-boosters-treatment-in-bangalore', // pointing to the jaw, tablet in hand
-    'anti-aging-injectables__non-surgical-double-chin-tightening-treatment-in-bangalore', // examining the neck
+    'new:anti-aging-injectables/anti-ageing-treatment-in-bangalore-1', // facial skin under a dermatoscope
+    'new:cosmetic-surgery/facelift-surgery-in-bangalore-1', // assessing the jawline and neck
+    'new:anti-aging-injectables/facial-volume-restoration-in-bangalore-1', // assessing cheek volume
   ],
   '/technology/co2-fractional-laser/': [
-    'laser-skin-aesthetic__laser-skin-resurfacing-in-bangalore', // tablet, laser equipment behind
-    'laser-skin-aesthetic__acne-scar-laser-treatment-in-bangalore', // consultation about acne marks
-    'laser-skin-aesthetic__dark-circle-treatment-in-bangalore', // examining the skin under the eye
+    'new:laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore-1', // the fractional laser arm in use
+    'new:laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore-1', // treating acne scars
+    'new:laser-skin-aesthetic/dark-circle-treatment-in-bangalore-1', // examining the skin under the eye
   ],
   '/technology/q-switch-laser/': [
-    'laser-skin-aesthetic__melasma-treatment-in-bangalore', // consultation with a tablet
-    'laser-skin-aesthetic__laser-hair-reduction-in-bangalore', // skin images on a tablet
-    'laser-skin-aesthetic__pigmentation-treatment-in-bangalore', // pigmentation under a dermatoscope
+    'new:laser-skin-aesthetic/q-switch-laser-treatment-in-bangalore-1', // the Q-switch handpiece on a dark patch
+    'new:laser-skin-aesthetic/melasma-treatment-in-bangalore-1', // pigmentation under a skin scanner
+    'new:laser-skin-aesthetic/pigmentation-treatment-in-bangalore-1', // pigmentation under a dermatoscope
   ],
   '/technology/excimer-laser-targeted-phototherapy/': [
-    'cosmetic-surgery__melanocyte-transfer-surgery-in-bangalore', // magnified skin images on a monitor
-    'cosmetic-surgery__scar-revision-surgery-in-bangalore', // examining a patch of skin on the forearm
+    'new:cosmetic-surgery/ncecs-treatment-in-bangalore-1', // preparing a vitiligo patch on the forearm
+    'new:cosmetic-surgery/vitiligo-treatment-in-bangalore-1', // treating a vitiligo patch
     'cosmetic-surgery__vitiligo-treatment-in-bangalore', // skin on the hand under a dermatoscope
   ],
   '/technology/body-contouring-cryolipolysis-platforms/': [
-    'slimming-body-contouring__arm-fat-reduction-in-bangalore', // body images on a tablet
-    'slimming-body-contouring__love-handle-reduction-in-bangalore', // body image on the monitor
-    'slimming-body-contouring__hip-fat-reduction-in-bangalore', // back images on a monitor
+    'new:slimming-body-contouring/body-contouring-in-bangalore-4', // body-contouring options on a tablet
+    'new:slimming-body-contouring/cryolipolysis-treatment-in-bangalore-3', // setting up an applicator
+    'new:slimming-body-contouring/cryolipolysis-treatment-in-bangalore-2', // measuring the waist before treatment
   ],
   '/international-patients/': [
-    'cosmetic-surgery__breast-augmentation-surgery-in-bangalore', // talking across a consultation table (travel)
-    'slimming-body-contouring__mounjaro-weight-loss-consultation-in-bangalore', // notes across the desk (journey)
+    'new:cosmetic-surgery/mommy-makeover-surgery-in-bangalore-1', // talking across a consultation desk (travel)
+    'new:slimming-body-contouring/glp-1-weight-loss-program-in-bangalore-1', // notes across the desk (journey)
     null,
   ],
 }
-const photoBySrc = new Map((photosJson as { src: string; alt: string | null; unusable?: string }[]).map((p) => [p.src, p]))
+type Photo = { src: string; alt: string | null; width?: number; height?: number; unusable?: string }
+const photoBySrc = new Map([...(photosJson as Photo[]), ...(newPhotosJson as Photo[])].map((p) => [p.src, p]))
 function photo(name: string): ServiceImage {
-  const p = photoBySrc.get(`/og/${name}.jpg`)
+  const src = name.startsWith('new:') ? `/images/services/${name.slice(4)}.webp` : `/og/${name}.jpg`
+  const p = photoBySrc.get(src)
   if (!p?.alt || p.unusable) throw new Error(`technology photo not usable: ${name}`)
-  return { src: p.src, width: 1024, height: 1024, alt: p.alt }
+  return { src: p.src, width: p.width ?? 1024, height: p.height ?? 1024, alt: p.alt }
 }
 function bands(path: string) {
   const picks = PHOTOS[path]
@@ -314,7 +318,9 @@ function buildDetail(p: DocDetail): TechnologyDetail | ArtasDetail {
       contact: p.explore.contact.map(cta),
     },
     pending: pendingFor(p, [
-      `photos: hero (${hero.src}) and the image bands are placeholders; doctor portraits and the reception photo too`,
+      hero.src.startsWith('/images/services/')
+        ? `photos: hero (${hero.src}) and image bands are NeoSculpt6 treatment photos, not of this platform; doctor portraits and the reception photo are placeholders`
+        : `photos: hero (${hero.src}) and the image bands are placeholders; doctor portraits and the reception photo too`,
       related.length
         ? 'explore: "Related Treatments" (the doc\'s table label) shown as the heading of the related-treatment links'
         : 'explore: no related treatments (the doc leaves them out: no matching service page confirmed)',

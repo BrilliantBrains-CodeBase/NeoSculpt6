@@ -24,6 +24,12 @@ export const clinic = {
   hours: { label: 'Mon–Sat: 7am–7pm', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '07:00', closes: '19:00' },
   // TODO: swap for the Google Business Profile link once we have it.
   mapsHref: 'https://www.google.com/maps/search/?api=1&query=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066',
+  // Contact page map (homepage.md section F). Google's keyless embed for the address search; it loads only after the
+  // visitor clicks "Show Map". TODO: swap for the Business Profile's own embed once it is approved.
+  mapEmbedSrc:
+    'https://www.google.com/maps?q=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066&output=embed',
+  // homepage.md section F, "Nearby areas line".
+  nearbyAreas: 'Convenient for patients from Whitefield, ITPL, Mahadevapura, Brookefield, KR Puram, Marathahalli and Hoskote.',
   // TODO: add the real profile URLs. The footer shows an icon only once its URL is filled in.
   social: { facebook: '', instagram: '', youtube: '' },
   // TODO: add Google Business Profile and Practo URLs (schema only, no footer icon).
@@ -60,41 +66,55 @@ export const medicalReviewLine =
 
 // Instagram strip above the footer (About section 7 and every service page). No live feed integration exists, so this
 // is a curated set. Needs sign-off: the NeoSculpt6 handle (shown as a pending chip while `handle` is null) and its
-// profile URL; tiles link to `href` (or their own post) only once one is set. Never use the theme's model tiles. Each `subject` is the photo the slot is for; the placeholder's alt
-// text describes what it actually shows.
+// profile URL; tiles link to `href` (or their own post) only once one is set. Never use the theme's model tiles. Each `subject` is the photo the slot is for; the alt text describes
+// what the current photo actually shows.
 export const instagram = {
   handle: null as string | null,
   href: null as string | null,
+  // Tiles are NeoSculpt6 photos that are not a service page's hero and not on the About page, so no page shows one twice
+  // (service pages skip the three service photos here: src/data/services/index.ts).
   tiles: [
     {
       subject: 'Dr Sandeep marking a hairline',
-      src: '/og/hair-transplant-restoration__direct-hair-transplant-in-bangalore.jpg',
-      alt: 'A surgeon in a mask and gloves working on a man’s scalp during a hair transplant',
+      src: '/images/services/hair-transplant-restoration/dhi-hair-transplant-in-bangalore-2.webp',
+      width: 1200,
+      height: 900,
+      alt: 'A doctor marking a man’s hairline with a laser guide and measuring tool',
     },
     {
       subject: 'Reception',
-      src: '/og/anti-aging-injectables__body-fillers-in-bangalore.jpg',
-      alt: 'A doctor and a patient seated in a bright consultation lounge with plants and a marble table',
+      src: '/images/services/slimming-body-contouring/body-contouring-in-bangalore-2.webp',
+      width: 1200,
+      height: 900,
+      alt: 'A doctor talking with a woman in a consultation room',
     },
     {
       subject: 'A consented result',
-      src: '/og/anti-aging-injectables__neck-tightening-treatment-in-bangalore.jpg',
-      alt: 'A patient checking her face in a hand mirror while a doctor examines her jawline',
+      src: '/images/home/hero-square.webp',
+      width: 941,
+      height: 941,
+      alt: 'A smiling woman with glowing skin looking up in soft sunlight',
     },
     {
       subject: 'Dr Saranya in consultation',
-      src: '/og/cosmetic-surgery__breast-reduction-surgery-in-bangalore.jpg',
-      alt: 'A doctor taking notes on a tablet as a patient talks during a consultation',
+      src: '/images/services/hair-transplant-restoration/fue-hair-transplant-in-bangalore-3.webp',
+      width: 1200,
+      height: 900,
+      alt: 'A doctor talking with a woman about her hair loss, scalp images on the screen behind',
     },
     {
       subject: 'A technology device',
-      src: '/og/hair-transplant-restoration__low-level-laser-hair-therapy-lllt-in-bangalore.jpg',
-      alt: 'A patient seated under a red-light hair therapy device with a clinician beside him',
+      src: '/images/home/about-inset.webp',
+      width: 480,
+      height: 640,
+      alt: 'A white aesthetic treatment device on wheels',
     },
     {
       subject: 'The team',
-      src: '/og/hair-transplant-restoration__crown-hair-transplant-in-bangalore.jpg',
-      alt: 'A surgeon wearing loupes and a mask working on a patient’s crown in the procedure room',
+      src: '/images/home/about.webp',
+      width: 881,
+      height: 1100,
+      alt: 'A doctor treating a woman’s forehead with a skin-tightening handpiece, the device’s screen beside them',
     },
-  ].map((t) => ({ ...t, width: 1024, height: 1024, href: null as string | null })),
+  ].map((t) => ({ ...t, href: null as string | null })),
 }

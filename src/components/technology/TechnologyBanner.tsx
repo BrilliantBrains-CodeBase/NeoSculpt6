@@ -33,6 +33,7 @@ export function TechnologyBanner({ page, hero }: { page: RoutePage; hero: Banner
             alt={hero.image.alt}
             fetchPriority="high"
             decoding="async"
+            style={hero.image.position ? { objectPosition: hero.image.position } : undefined}
             className="size-full object-cover"
           />
         </div>

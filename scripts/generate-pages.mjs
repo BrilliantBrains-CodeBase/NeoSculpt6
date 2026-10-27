@@ -19,6 +19,21 @@ const SCRAPED = path.resolve(ROOT, '../scraped')
 const PUBLIC = path.join(ROOT, 'public')
 const OG_DIR = path.join(PUBLIC, 'og')
 const DATA_DIR = path.join(ROOT, 'src/data')
+// NeoSculpt6's own service photos: a page that has one shares its first photo (public/og/new/, made by
+// scripts/import-photos.mjs) instead of the old site's og:image.
+const SUPPLIED_OG = new Map(
+  JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'services/new-photos.json'), 'utf8'))
+    .filter((p) => p.n === 1 && p.alt)
+    .map((p) => [p.page, p.alt]),
+)
+// Technology pages the old site gave no og:image share the photo of their treatment's service page.
+const TECH_OG_FROM = {
+  '/technology/ai-integrated-donor-assessment/': '/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/',
+  '/technology/vaser-liposuction-technology/': '/cosmetic-surgery/liposuction-surgery-in-bangalore/',
+  '/technology/reaction-viora-rf-tightening/': '/anti-aging-injectables/rf-skin-tightening-treatment-in-bangalore/',
+  '/technology/excimer-laser-targeted-phototherapy/': '/cosmetic-surgery/phototherapy-for-vitiligo-in-bangalore/',
+  '/technology/body-contouring-cryolipolysis-platforms/': '/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/',
+}
 const DOWNLOAD = process.argv.includes('--download-og')
 
 const LOGO_URL = 'https://neosculpt6.com/wp-content/uploads/2024/07/cropped-Neo-Sculpt-6_logo_2.png'
@@ -46,8 +61,15 @@ const ABOUT = {
   ogImageAlt: 'Dr Sandeep Mahapatra, founder of NeoSculpt6, in a clinic consultation room',
 }
 
-const CONTACT_DESCRIPTION =
-  'Visit NeoSculpt6 on Whitefield Main Road, Bangalore 560066, beside BMW Deutsche Motoren. Open Mon–Sat, 7am–7pm. Call +91 99640 60483 to book.'
+// Contact page SEO: the fallback title and description in content/contact/prompts/contact-us-page.md ("SEO and
+// metadata"), used until the content owner approves final ones. The live page's title was "Contact Us - Neo Sculpt 6".
+const CONTACT = {
+  name: 'Contact Us',
+  title: 'Contact NeoSculpt6 | Doctor-Led Aesthetic Clinic in Whitefield, Bangalore',
+  description:
+    'Contact NeoSculpt6 in Whitefield, Bangalore to book a doctor-led consultation for hair, skin, laser, anti-ageing, body contouring and cosmetic surgery care.',
+  todo: ['title and description: brief fallback, pending content-owner approval (contact-us-page.md)'],
+}
 
 // Technology pages and the two pages that go with them (/technology/, /international-patients/): SEO fixed by
 // content/technology/technology-international-patient.md, read from its parse (scripts/parse-technology-pages.mjs, run
@@ -222,6 +244,7 @@ async function main() {
     let title
     if (type === 'home') [title, sources.title] = [HOME.title, 'homepage.md']
     else if (type === 'about') [title, sources.title] = [ABOUT.title, 'about-us.md']
+    else if (type === 'contact') [title, sources.title] = [CONTACT.title, 'contact-us-page.md']
     else if (techSeo) [title, sources.title] = [techSeo.title, 'technology-doc']
     else if (row.planned_meta_title) [title, sources.title] = [decode(row.planned_meta_title), 'seo-csv']
     else if (live404) [title, sources.title] = [`${row.service} in Bangalore | NeoSculpt6`, 'draft']
@@ -233,11 +256,11 @@ async function main() {
     let description
     if (type === 'home') [description, sources.description] = [HOME.description, 'homepage.md']
     else if (type === 'about') [description, sources.description] = [ABOUT.description, 'about-us.md']
+    else if (type === 'contact') [description, sources.description] = [CONTACT.description, 'contact-us-page.md']
     else if (techSeo) [description, sources.description] = [techSeo.description, 'technology-doc']
     else if (row.planned_meta_description) [description, sources.description] = [decode(row.planned_meta_description), 'seo-csv']
     else if (type === 'legacy-demo') [description, sources.description] = [liveDesc, 'live']
     else if (isRealDescription(liveDesc)) [description, sources.description] = [liveDesc, 'live']
-    else if (type === 'contact') [description, sources.description] = [CONTACT_DESCRIPTION, 'generated']
     else if (type === 'technology') [description, sources.description] = [technologyDescription(row.service), 'generated']
     else [description, sources.description] = [serviceDescription(shortName(title)), 'generated']
     if (sources.description === 'generated') todo.push('description: generated draft')
@@ -249,10 +272,19 @@ async function main() {
       todo.push('h1: missing on old page, derived')
     }
     if (type === 'home') todo.push(...HOME.todo)
+    if (type === 'contact') todo.push(...CONTACT.todo)
 
     const og = meta.og ?? {}
+    const ogFrom = type === 'service' ? p : type === 'technology' ? TECH_OG_FROM[p] : null
+    const supplied = ogFrom && SUPPLIED_OG.has(ogFrom) && fs.existsSync(path.join(OG_DIR, 'new', `${fileSlug(ogFrom)}.jpg`)) ? ogFrom : null
     const ogImage =
-      type === 'legacy-demo' ? DEFAULT_OG_IMAGE : type === 'about' ? ABOUT.ogImage : await localOgImage(p, og['og:image'], todo)
+      type === 'legacy-demo'
+        ? DEFAULT_OG_IMAGE
+        : type === 'about'
+          ? ABOUT.ogImage
+          : supplied
+            ? `/og/new/${fileSlug(supplied)}.jpg`
+            : await localOgImage(p, og['og:image'], todo)
 
     pages.push(
       record({
@@ -263,13 +295,14 @@ async function main() {
         h1,
         robots: type === 'legacy-demo' ? 'noindex, follow' : 'index, follow',
         ogImage,
-        ogImageAlt: type === 'about' ? ABOUT.ogImageAlt : decode(og['og:image:alt']),
+        ogImageAlt: type === 'about' ? ABOUT.ogImageAlt : supplied ? SUPPLIED_OG.get(supplied) : decode(og['og:image:alt']),
         sources,
         todo,
         extra: {
           category: row.category,
           ...(type === 'technology' || type === 'service' ? { name: techSeo?.breadcrumb.at(-1) ?? (live404 ? row.service : shortName(title)) } : {}),
           ...(type === 'about' ? { name: ABOUT.name } : {}),
+          ...(type === 'contact' ? { name: CONTACT.name } : {}),
           video: row.video_planned || null,
           lastmod: og['og:updated_time'] || sitemapLastmod[p] || null,
           oldSite: {

@@ -5,12 +5,13 @@ import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from
 import { faqs, physicians } from '../data/about'
 import { servicesByPath } from '../data/services'
 import { LIVE, technologyByPath } from '../data/technology'
+import { specialityByPath } from '../data/specialities'
 import type { Faq } from '../data/services/types'
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
 const crumbName = (p: string) => (p === '/' ? 'Home' : (pageByPath.get(p)?.name ?? p))
 
-// The clinic, shared by the home and about pages.
+// The clinic, shared by the home, about, contact, service and technology pages.
 function medicalClinic() {
   return {
     '@type': 'MedicalClinic',
@@ -114,6 +115,12 @@ function jsonLd(page: RoutePage, canonical: string) {
     webpage['@type'] = ['WebPage', 'AboutPage']
     graph.push(medicalClinic(), ...physicians.map((doc) => physicianNode(doc)), faqPage(canonical, faqs.items))
   }
+  if (page.type === 'contact') {
+    // contact-us-page.md: ContactPage · MedicalClinic (name, address, phone, email, hours from site.ts). No map or
+    // profile URL until the Google Business Profile is confirmed, and no rating markup.
+    webpage['@type'] = ['WebPage', 'ContactPage']
+    graph.push(medicalClinic())
+  }
   const service = page.type === 'service' ? servicesByPath.get(page.path) : undefined
   if (service) {
     // service-page.md: FAQPage for the visible FAQs; a Physician for each doctor the page shows, without credentials
@@ -152,6 +159,27 @@ function jsonLd(page: RoutePage, canonical: string) {
         return known ? [physicianNode(known, { credentials: false })] : []
       }),
       ...('faqs' in tech ? [faqPage(canonical, tech.faqs.items)] : []),
+    )
+  }
+  const hub = page.type === 'hub' ? specialityByPath.get(page.path) : undefined
+  if (hub) {
+    // Speciality hubs: a CollectionPage whose main entity lists every treatment card's page, in page order; the clinic;
+    // a Physician for the doctor card without credentials (none are signed off). FAQPage only once the hub's drafted
+    // FAQs are approved (`faqsApproved`). No rating or review markup until the reviews are verified.
+    webpage['@type'] = 'CollectionPage'
+    const items = hub.treatments.groups.flatMap((g) => g.items)
+    webpage.mainEntity = {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, i) => ({ '@type': 'ListItem', position: i + 1, name: item.title, url: abs(item.href) })),
+    }
+    graph.push(
+      medicalClinic(),
+      ...hub.doctors.cards.flatMap((card) => {
+        const known = physicians.find((d) => d.href === card.href)
+        return known ? [physicianNode(known, { credentials: false })] : []
+      }),
+      ...(hub.faqsApproved ? [faqPage(canonical, hub.faqs.items)] : []),
     )
   }
   // Escape "<" so the JSON can never close the <script> tag early.

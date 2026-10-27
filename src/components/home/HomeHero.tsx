@@ -27,7 +27,7 @@ export function HomeHero() {
   return (
     <section
       style={{ backgroundImage: `url(${hero.image})` }}
-      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-top bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
+      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-[position:70%_top] bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
     >
       {/* Theme overlay: radial vignette to `alternate`, 80% opacity. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0000_0%,#0b0b0d_100%)] opacity-80" />

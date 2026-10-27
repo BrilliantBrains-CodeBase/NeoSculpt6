@@ -14,7 +14,7 @@ export const hero = {
     'Hair, face, skin and body, diagnosed, planned and treated by the same senior doctors who will stand behind your result.',
   primaryCta: 'Book a Consultation',
   secondaryCta: { label: 'Find My Treatment', href: '/#find-my-treatment' }, // the concern form in section 15
-  // TODO: theme stock image. Replace with a real NeoSculpt6 portrait shoot (consented model or patient) before launch.
+  // NeoSculpt6 hero photo (scripts/import-photos.mjs). The face sits right of centre, so the crop keeps the right side.
   image: '/images/home/hero.webp',
   // Needs sign-off before launch (marked † in the doc): years in practice, transplant count, MD Gold Medalist,
   // DHI certification, ISHRS membership. The † marks are not shown on the page.
@@ -72,19 +72,18 @@ export const about = {
   ],
   text: 'At NeoSculpt6 you are not handed to a counsellor or a technician. Your concern is assessed, your plan is designed and your procedure is led by a senior specialist and the same doctor follows your recovery. Dermatology and plastic surgery, under one roof.',
   cta: { label: 'Meet Our Specialists', href: '/#our-doctors' }, // section 9 takes id="our-doctors"
-  // TODO: theme stock images. Replace with Dr Sandeep Mahapatra and Dr Saranya T together in the clinic (large) and
-  // the NeoSculpt6 reception or procedure room (inset) before launch. The alt text describes those photos.
+  // NeoSculpt6 photos (scripts/import-photos.mjs: about/1.png large, about/2.png inset).
   image: {
     src: '/images/home/about.webp',
-    width: 580,
-    height: 685,
-    alt: 'Dr Sandeep Mahapatra and Dr Saranya T together at the NeoSculpt6 clinic in Whitefield, Bangalore',
+    width: 881,
+    height: 1100,
+    alt: 'A doctor treating a woman’s forehead with a skin-tightening handpiece, the device’s screen beside them',
   },
   inset: {
     src: '/images/home/about-inset.webp',
-    width: 260,
-    height: 290,
-    alt: 'The NeoSculpt6 reception in Whitefield, Bangalore',
+    width: 480,
+    height: 640,
+    alt: 'A white aesthetic treatment device on wheels',
   },
 }
 
@@ -92,8 +91,8 @@ export const about = {
 // existing pages (most match the mega-menu in src/data/nav.ts); `npm run verify` checks every href and image.
 // Needs sign-off before launch (marked † in the doc): 10,000+ transplants, 4,000+ Botox and 2,000+ filler
 // treatments, 50,000+ laser procedures, and a female clinician on request. The † marks are not shown on the page.
-// TODO: the images are the old site's hub images. Replace them with NeoSculpt6 photography: covered, clinical shots
-// for Body Contouring and Cosmetic Surgery, and a soft botanical image (never a body) for Intimate Wellness.
+// Images: NeoSculpt6's Treatment Pillars photos (public/images/pillars/, imported by scripts/import-photos.mjs), also used
+// by the header mega-menu (src/data/nav.ts).
 export const pillars = {
   h2: [{ text: 'Our ' }, { text: 'Core', gold: true }, { text: ' Specialities' }],
   tabs: [
@@ -110,8 +109,8 @@ export const pillars = {
         { label: 'PRP & GFC', href: '/hair-transplant-restoration/prp-hair-treatment-in-bangalore/' },
       ],
       cta: { label: 'Explore Hair Restoration', href: '/hair-transplant-restoration/' },
-      image: '/og/hair-transplant-restoration__neo-follicle-hair-transplant-in-bangalore.jpg',
-      imageAlt: 'Hair transplant and restoration at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/hair-transplant-restoration.webp',
+      imageAlt: 'A gloved clinician drawing a new hairline on a balding man’s scalp',
     },
     {
       label: 'Body Contouring',
@@ -126,8 +125,8 @@ export const pillars = {
         { label: 'Post-Pregnancy Belly Correction', href: '/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/' },
       ],
       cta: { label: 'Explore Body Contouring', href: '/slimming-body-contouring/' },
-      image: '/og/slimming-body-contouring__body-contouring-in-bangalore.jpg',
-      imageAlt: 'Slimming and body contouring at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/slimming-body-contouring.webp',
+      imageAlt: 'A clinician treating a woman’s abdomen with a body-contouring device',
     },
     {
       label: 'Anti-Ageing',
@@ -141,8 +140,8 @@ export const pillars = {
         { label: 'Viora Reaction RF Tightening', href: '/anti-aging-injectables/rf-skin-tightening-treatment-in-bangalore/' },
       ],
       cta: { label: 'Explore Anti-Ageing', href: '/anti-aging-injectables/' },
-      image: '/og/anti-aging-injectables__botox-treatment-in-bangalore.jpg',
-      imageAlt: 'Anti-ageing and injectable treatments at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/anti-aging-injectables.webp',
+      imageAlt: 'A clinician giving a filler injection in a relaxed woman’s cheek',
     },
     {
       label: 'Laser & Skin',
@@ -157,8 +156,8 @@ export const pillars = {
         { label: 'Excimer Phototherapy', href: '/cosmetic-surgery/phototherapy-for-vitiligo-in-bangalore/' },
       ],
       cta: { label: 'Explore Laser & Skin', href: '/laser-skin-aesthetic/' },
-      image: '/og/laser-skin-aesthetic__co2-fractional-laser-treatment-in-bangalore.jpg',
-      imageAlt: 'Laser and skin aesthetic treatments at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/laser-skin-aesthetic.webp',
+      imageAlt: 'A clinician treating a woman’s face with a laser handpiece while she wears eye shields',
     },
     {
       label: 'Cosmetic Surgery',
@@ -173,8 +172,8 @@ export const pillars = {
         { label: 'Breast Surgery', href: '/cosmetic-surgery/breast-augmentation-surgery-in-bangalore/' },
       ],
       cta: { label: 'Explore Cosmetic Surgery', href: '/cosmetic-surgery/' },
-      image: '/og/cosmetic-surgery__rhinoplasty-in-bangalore.jpg',
-      imageAlt: 'Cosmetic surgery with Dr Saranya T at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/cosmetic-surgery.webp',
+      imageAlt: 'Gloved hands framing a woman’s face and jaw during a surgical assessment',
     },
     {
       label: 'Intimate Wellness',
@@ -187,8 +186,8 @@ export const pillars = {
         { label: 'Intimate Pigmentation', href: '/cosmetic-gynecology/intimate-pigmentation-treatment-in-bangalore/' },
       ],
       cta: { label: 'Explore Intimate Wellness', href: '/cosmetic-gynecology/' },
-      image: '/og/cosmetic-gynecology__vaginal-rejuvenation-treatment-in-bangalore.jpg',
-      imageAlt: 'Cosmetic gynaecology and intimate wellness at NeoSculpt6, Whitefield, Bangalore',
+      image: '/images/pillars/cosmetic-gynecology.webp',
+      imageAlt: 'A woman in soft loungewear making a heart shape with her hands over her stomach',
     },
   ],
 }
@@ -198,71 +197,70 @@ export const pillars = {
 export const popular = {
   h2: [{ text: 'Our ' }, { text: 'Popular', gold: true }, { text: ' Treatments' }],
   cta: { label: 'View All Treatments', href: '/#specialities' }, // section 4 takes id="specialities"
-  // TODO: old-site images (as in the header mega-menu). Replace with NeoSculpt6 photography before launch, and
-  // update the alt text to match.
+  // Each card shows its page's first NeoSculpt6 photo (src/data/services/new-photos.json).
   cards: [
     {
       category: { label: 'Hair Restoration', href: '/hair-transplant-restoration/' },
       title: 'Neo Follicle Hair Transplant',
       href: '/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/',
-      image: '/og/hair-transplant-restoration__neo-follicle-hair-transplant-in-bangalore.jpg',
-      alt: 'Doctor examining a patient’s thinning crown with a scalp camera before a hair transplant in Whitefield, Bangalore',
+      image: '/images/services/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore-1.webp',
+      alt: 'A doctor going over scalp photos on a monitor with a man at his desk',
     },
     {
       category: { label: 'Hair Restoration', href: '/hair-transplant-restoration/' },
       title: 'FUE Hair Transplant',
       href: '/hair-transplant-restoration/fue-hair-transplant-in-bangalore/',
-      image: '/og/hair-transplant-restoration__fue-hair-transplant-in-bangalore.jpg',
-      alt: 'Surgeon wearing loupes harvesting grafts from the back of the scalp during an FUE hair transplant',
+      image: '/images/services/hair-transplant-restoration/fue-hair-transplant-in-bangalore-1.webp',
+      alt: 'A surgeon wearing loupes extracting grafts from a man’s scalp',
     },
     {
       category: { label: 'Body Contouring', href: '/slimming-body-contouring/' },
       title: 'Body Contouring',
       href: '/slimming-body-contouring/body-contouring-in-bangalore/',
-      image: '/og/slimming-body-contouring__body-contouring-in-bangalore.jpg',
-      alt: 'Clinician treating a reclining patient with a non-surgical body contouring device',
+      image: '/images/services/slimming-body-contouring/body-contouring-in-bangalore-1.webp',
+      alt: 'A doctor treating a patient’s abdomen with a body-contouring handpiece',
     },
     {
       category: { label: 'Body Contouring', href: '/slimming-body-contouring/' },
       title: 'GLP-1 Weight Loss',
       href: '/slimming-body-contouring/glp-1-weight-loss-program-in-bangalore/',
-      image: '/og/slimming-body-contouring__glp-1-weight-loss-program-in-bangalore.jpg',
-      alt: 'Doctor explaining a medically supervised GLP-1 weight loss plan to a patient on a tablet',
+      image: '/images/services/slimming-body-contouring/glp-1-weight-loss-program-in-bangalore-1.webp',
+      alt: 'A doctor taking notes while talking with a patient across a consultation desk',
     },
     {
       category: { label: 'Body Contouring', href: '/slimming-body-contouring/' },
       title: 'Post-Pregnancy Belly Correction',
       href: '/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/',
-      image: '/og/slimming-body-contouring__post-pregnancy-belly-correction-in-bangalore.jpg',
-      alt: 'Doctor discussing post-pregnancy belly correction options with a patient in the consultation room',
+      image: '/images/services/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore-1.webp',
+      alt: 'A clinician measuring a woman’s waist with a tape measure',
     },
     {
       category: { label: 'Anti-Ageing', href: '/anti-aging-injectables/' },
       title: 'Botox & Dermal Fillers',
       href: '/anti-aging-injectables/',
-      image: '/og/anti-aging-injectables__botox-treatment-in-bangalore.jpg',
-      alt: 'Doctor assessing a patient’s face in a hand mirror before Botox and dermal filler treatment',
+      image: '/images/services/anti-aging-injectables/botox-treatment-in-bangalore-1.webp',
+      alt: 'A doctor injecting Botox between a woman’s eyebrows',
     },
     {
       category: { label: 'Laser & Skin', href: '/laser-skin-aesthetic/' },
       title: 'Acne Scar Laser',
       href: '/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/',
-      image: '/og/laser-skin-aesthetic__acne-scar-laser-treatment-in-bangalore.jpg',
-      alt: 'Dermatologist reviewing acne scar laser treatment options with a patient on a tablet',
+      image: '/images/services/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore-1.webp',
+      alt: 'A clinician treating acne scars on a woman’s cheek with a laser handpiece while she wears eye shields',
     },
     {
       category: { label: 'Laser & Skin', href: '/laser-skin-aesthetic/' },
       title: 'Laser Hair Removal',
       href: '/laser-skin-aesthetic/full-body-laser-hair-removal-in-bangalore/',
-      image: '/og/laser-skin-aesthetic__full-body-laser-hair-removal-in-bangalore.jpg',
-      alt: 'Doctor explaining full body laser hair removal to a patient beside the laser platform',
+      image: '/images/services/laser-skin-aesthetic/full-body-laser-hair-removal-in-bangalore-1.webp',
+      alt: 'A clinician treating a woman’s legs with a laser hair-removal handpiece as she lies on the bed in towels',
     },
     {
       category: { label: 'Cosmetic Surgery', href: '/cosmetic-surgery/' },
       title: 'Rhinoplasty',
       href: '/cosmetic-surgery/rhinoplasty-in-bangalore/',
-      image: '/og/cosmetic-surgery__rhinoplasty-in-bangalore.jpg',
-      alt: 'Surgeon showing a patient a profile sketch of the planned nose shape during a rhinoplasty consultation',
+      image: '/images/services/cosmetic-surgery/rhinoplasty-in-bangalore-1.webp',
+      alt: 'A surgeon examining the shape of a woman’s nose',
     },
   ],
 }
@@ -370,10 +368,10 @@ export const signature = {
 // 9. Meet your doctors. The theme has 3 cards; ours centres the 2 doctor cards (homepage.md §9). `specialty` is the
 // pink line, copied from the doc as written. The H2 is two lines, as the doc sets them.
 // Needs sign-off before launch (marked † in the doc): the sub-line's claim. The † is not shown.
-// TODO: portraits. Each card shows an initials circle while `portrait` is null. Add real, consented clinic portraits
-// of both doctors with the same background, lighting and crop (square, ~880×880 webp in /images/home/doctors/), e.g.
-// { src: '/images/home/doctors/dr-sandeep-mahapatra.webp', width: 880, height: 880, alt: 'Dr Sandeep Mahapatra,
-// dermatologist and hair transplant surgeon, in the NeoSculpt6 clinic, Whitefield, Bangalore' }.
+// Portraits: square head-and-shoulders crops in /images/home/doctors/, shown as circles (a card shows an initials circle
+// while `portrait` is null). Dr Sandeep's is cropped from his clinic portrait (/og/about-dr-sandeep-mahapatra.jpeg), Dr
+// Saranya's from the studio photo the clinic sent on 2026-10-26. TODO: the two backgrounds differ (clinic room vs plain
+// white); reshoot both in the clinic with the same lighting if the clinic wants them to match.
 // TODO: add each doctor's real profile URLs. An icon shows only once its href is filled in (as in the footer).
 export type DoctorSocial = { network: 'instagram' | 'youtube' | 'linkedin'; href: string }
 export type DoctorPortrait = { src: string; width: number; height: number; alt: string }
@@ -390,7 +388,12 @@ export const doctors = {
       specialty: 'Dermatologist · Hair Transplant Surgeon',
       href: '/about-dr-sandeep-mahapatra/',
       initials: 'SM',
-      portrait: null as DoctorPortrait | null,
+      portrait: {
+        src: '/images/home/doctors/dr-sandeep-mahapatra.webp',
+        width: 620,
+        height: 620,
+        alt: 'Dr Sandeep Mahapatra in a white coat, standing in a clinic room',
+      } as DoctorPortrait | null,
       social: [
         { network: 'instagram', href: '' },
         { network: 'youtube', href: '' },
@@ -401,7 +404,12 @@ export const doctors = {
       specialty: 'M.Ch Plastic & Reconstructive Surgeon',
       href: '/dr-saranya-t/',
       initials: 'ST',
-      portrait: null as DoctorPortrait | null,
+      portrait: {
+        src: '/images/home/doctors/dr-saranya-t.webp',
+        width: 760,
+        height: 760,
+        alt: 'Dr Saranya T in a white coat against a plain white background',
+      } as DoctorPortrait | null,
       social: [
         { network: 'instagram', href: '' },
         { network: 'linkedin', href: '' },
@@ -521,12 +529,11 @@ export const priceGuide = {
 
 // 13. Our Technology (replaces the theme's Shop row). Each card: platform name, the doc's one line (in the theme's
 // price slot) and a "Learn More" link to its technology page; `npm run verify` checks every link and image.
-// `position` is the image's object-position, to keep the subject in the tall card crop.
-// TODO: only AI Hair Analysis, CO2 and Q-Switch have a photo of their own (the ARTAS page's photo is the same file as
-// AI Hair Analysis). The other six are the closest old-site clinic photos: Donor Assessment (DHI consult), ARTAS (FUE
-// harvest, also used in section 5), Vaser (liposuction page), Viora RF (HIFU page), Excimer (vitiligo exam) and
-// Cryolipolysis (its treatment page). Replace them with photos of each NeoSculpt6 platform before launch, and update
-// the alt text to match.
+// `position` is the image's object-position, to keep the subject in the tall card crop; `bannerPosition` does the same
+// for the wide banner on the technology page.
+// Photos: AI Hair Analysis, CO2 and Q-Switch have a photo of their own (the ARTAS page's old photo was the same file as
+// AI Hair Analysis). The other six are NeoSculpt6 service photos of the same treatment (src/data/services/new-photos.json).
+// TODO: replace them with photos of each NeoSculpt6 platform when the clinic supplies them, and update the alt text.
 export const technology = {
   eyebrow: 'Our Technology',
   h2: [[{ text: 'Advanced Platforms.' }], [{ text: 'Clinical Judgement First.', gold: true }]] as {
@@ -550,37 +557,38 @@ export const technology = {
       title: 'AI-Integrated Donor Assessment',
       text: 'Measures your donor reserve before any graft number is quoted.',
       href: '/technology/ai-integrated-donor-assessment/',
-      image: '/og/hair-transplant-restoration__dhi-hair-transplant-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Doctor showing a patient scans of his scalp on a monitor during a hair consultation',
+      image: '/images/services/hair-transplant-restoration/dhi-hair-transplant-in-bangalore-4.webp',
+      width: 900,
+      height: 1200,
+      alt: 'A doctor examining a man’s crown with a lit dermatoscope, magnified hair images on the screen',
     },
     {
       title: 'ARTAS Robotic Hair Transplant',
       text: 'Image-guided robotic harvesting for suitable candidates.',
       href: '/technology/artas-robotic-hair-transplant/',
-      image: '/og/hair-transplant-restoration__fue-hair-transplant-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Surgeon wearing loupes harvesting grafts from the donor area at the back of a patient’s scalp',
+      image: '/images/services/hair-transplant-restoration/fue-hair-transplant-in-bangalore-1.webp',
+      width: 961,
+      height: 1200,
+      alt: 'A surgeon wearing loupes extracting grafts from a man’s scalp',
     },
     {
       title: 'Vaser Liposuction',
       text: 'Ultrasound-assisted fat removal for refined body contouring.',
       href: '/technology/vaser-liposuction-technology/',
-      image: '/og/cosmetic-surgery__liposuction-surgery-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Clinician treating a reclining patient’s abdomen with a body contouring handpiece',
+      image: '/images/services/cosmetic-surgery/liposuction-surgery-in-bangalore-1.webp',
+      width: 900,
+      height: 1200,
+      bannerPosition: 'center 30%',
+      alt: 'A surgeon marking a woman’s waist and hips before liposuction',
     },
     {
       title: 'Viora Reaction RF',
       text: 'Radiofrequency skin tightening for face and body.',
       href: '/technology/reaction-viora-rf-tightening/',
-      image: '/og/anti-aging-injectables__hifu-treatment-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Clinician treating a patient’s jawline with a skin tightening handpiece',
+      image: '/images/services/anti-aging-injectables/rf-skin-tightening-treatment-in-bangalore-1.webp',
+      width: 900,
+      height: 1200,
+      alt: 'A clinician treating a woman’s jaw with an RF tightening handpiece, the device behind them',
     },
     {
       title: 'CO2 Fractional Laser',
@@ -604,21 +612,22 @@ export const technology = {
       title: 'Excimer Laser & Phototherapy',
       text: 'Focused light therapy for vitiligo and selected skin conditions.',
       href: '/technology/excimer-laser-targeted-phototherapy/',
-      image: '/og/cosmetic-surgery__phototherapy-for-vitiligo-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Dermatologist examining a vitiligo patch on a patient’s hand with a dermatoscope',
+      image: '/images/services/cosmetic-surgery/phototherapy-for-vitiligo-in-bangalore-1.webp',
+      width: 900,
+      height: 1200,
+      bannerPosition: 'center 25%',
+      alt: 'A patient holding her forearm to a phototherapy cabinet while a clinician sets the controls',
     },
     {
       title: 'Cryolipolysis Platforms',
       text: 'Non-surgical fat reduction for localised areas.',
       href: '/technology/body-contouring-cryolipolysis-platforms/',
-      image: '/og/slimming-body-contouring__cryolipolysis-treatment-in-bangalore.jpg',
-      width: 1024,
-      height: 1024,
-      alt: 'Doctor fitting non-surgical fat reduction applicators to a patient’s abdomen',
+      image: '/images/services/slimming-body-contouring/cryolipolysis-treatment-in-bangalore-1.webp',
+      width: 1200,
+      height: 900,
+      alt: 'A clinician fitting cryolipolysis applicators to a patient’s abdomen',
     },
-  ] as { title: string; text: string; href: string; image: string; width: number; height: number; position?: string; alt: string }[],
+  ] as { title: string; text: string; href: string; image: string; width: number; height: number; position?: string; bannerPosition?: string; alt: string }[],
 }
 
 // 14. Journal. The cards come from src/data/posts.ts (latest 3 published posts, topped up with "Coming soon"
