@@ -3,7 +3,8 @@
 //
 // The folder is either a whole drop (layout below; hero, about and pillars are optional) or a Services folder on its own
 // (<Hub>/<Service name>/*.png). Folder layout:
-//   hero image/*.png                    → public/images/home/hero.webp
+//   hero image/*.png                    → public/images/home/hero-supplied.webp (not shown: the home hero is the
+//                                         theme image, by the client's choice) + hero-square.webp
 //   about/1.png, about/2.png            → public/images/home/about.webp, about-inset.webp
 //   Treatment Pillars/<Tab label>.png   → public/images/pillars/<hub>.webp
 //   Services/<Hub>/<Service name>/*.png → public/images/services/<hub>/<page-slug>-<n>.webp
@@ -85,8 +86,8 @@ function jpeg(input, output, max) {
 const HAS_HOME = fs.existsSync(path.join(SRC, 'hero image'))
 if (HAS_HOME) {
   const heroFile = pngs(path.join(SRC, 'hero image'))[0]
-  webp(path.join(SRC, 'hero image', heroFile), path.join(PUBLIC, 'images/home/hero.webp'), 2000)
-  console.log('hero', size(path.join(PUBLIC, 'images/home/hero.webp')))
+  webp(path.join(SRC, 'hero image', heroFile), path.join(PUBLIC, 'images/home/hero-supplied.webp'), 2000)
+  console.log('hero (supplied)', size(path.join(PUBLIC, 'images/home/hero-supplied.webp')))
   // Square crop around the face (right of centre) for the Instagram row (src/data/site.ts).
   {
     const input = path.join(SRC, 'hero image', heroFile)

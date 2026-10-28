@@ -5,7 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { primaryNav, findMyTreatment } from '../src/data/nav.ts'
 import { footerNav, legalNav } from '../src/data/site.ts'
-import { pillars, results, signature, doctors, testimonials, technology, journal } from '../src/data/home.ts'
+import { pillars, results, signature, doctors, doctorSpotlight, testimonials, technology, journal } from '../src/data/home.ts'
 import { posts, postHref, specialities } from '../src/data/posts.ts'
 import * as about from '../src/data/about.ts'
 import * as contact from '../src/data/contact.ts'
@@ -158,6 +158,14 @@ const testimonialLabels = ['Hair Transplant', 'Body Contouring', 'Acne Scar Lase
 const testimonialsPending = []
 const homeHtml = fs.existsSync(fileFor('/')) ? decode(fs.readFileSync(fileFor('/'), 'utf8')) : ''
 if (!homeHtml.includes('id="testimonials"')) fail('home testimonials', 'section not on the built home page')
+// Home extra A (Dr Sandeep spotlight): on the page, directly before the popular carousel, with the team section
+// (id="our-doctors") still further down; the experience line only once approved. Its portrait and profile link are
+// About's `founder`, checked with the About images and links.
+const spotlightAt = homeHtml.indexOf(`id="${doctorSpotlight.id}"`)
+if (spotlightAt < 0) fail('home spotlight', `section id="${doctorSpotlight.id}" missing from the home page`)
+else if (!(spotlightAt < homeHtml.indexOf('id="popular-heading"'))) fail('home spotlight', 'not placed before Our Popular Treatments')
+if (!homeHtml.includes('id="our-doctors"')) fail('home doctors', 'section id="our-doctors" missing from the home page')
+if (!doctorSpotlight.experience.approved && homeHtml.includes(doctorSpotlight.experience.text)) fail('home spotlight', 'experience line shown before approval')
 for (const label of testimonialLabels) {
   if (!testimonials.reviews.some((r) => r.treatment === label)) fail('home testimonials', `no card for ${label}`)
   if (!homeHtml.includes(label)) fail('home testimonials', `${label} missing from the built home page`)
@@ -174,8 +182,25 @@ testimonialsPending.push('Practo: 2,054 recommendations for Dr Sandeep (†)')
 if (/AggregateRating/.test(homeHtml) && !testimonials.rating.value) {
   fail('home testimonials', 'AggregateRating schema on the home page before the rating is signed off')
 }
-// Home section 13 (Our Technology): every card link and the button are built pages, and every card image exists.
-const technologyLinks = [...technology.cards, technology.cta]
+// Home technology banner (section 13's replacement): both crops exist and are on the page, with size and alt; its
+// words are live text under the H2; it sits directly above Real Results. Every card link (the technology pages use
+// the cards) is a built page, and every card image exists.
+const techBanner = technology.banner
+for (const img of [techBanner.image, techBanner.mobileImage]) {
+  if (!fs.existsSync(path.join(DIST, img.src))) fail('home technology', `banner image missing: ${img.src}`)
+  if (!homeHtml.includes(img.src)) fail('home technology', `banner image not on the home page: ${img.src}`)
+}
+if (!techBanner.alt.trim()) fail('home technology', 'banner has no alt text')
+for (const str of [...techBanner.h2.flat().map((p) => p.text), techBanner.text]) {
+  if (!homeHtml.includes(str)) fail('home technology', `banner text not on the home page: "${str}"`)
+}
+if (!homeHtml.includes('id="technology-heading"')) fail('home technology', 'section heading id="technology-heading" missing')
+const bannerAt = homeHtml.indexOf('id="technology-banner"')
+// Only Real Results' own <section> tag (it opens just before its id) may sit between the two.
+if (bannerAt < 0 || bannerAt > homeHtml.indexOf('id="results"') || homeHtml.slice(bannerAt, homeHtml.indexOf('id="results"')).split('<section').length !== 2) {
+  fail('home technology', 'banner is not directly above Real Results')
+}
+const technologyLinks = technology.cards
 for (const { href } of technologyLinks) {
   if (!fs.existsSync(fileFor(href))) fail('home technology', `no page for ${href}`)
 }
@@ -777,6 +802,8 @@ console.log(`old URLs: ${manifest.length}, all routed: ${!failures.some((f) => f
 console.log(`sitemap: ${locs.length} URLs`)
 console.log(`home pillar links: ${pillarLinks.length} checked`)
 console.log(`home doctor profiles: ${doctors.cards.length} checked`)
+console.log('home doctor spotlight: pending sign-off:')
+for (const item of [...doctorSpotlight.pending, ...(doctorSpotlight.experience.approved ? [] : [`Experience line "${doctorSpotlight.experience.text}" (hidden)`])]) console.log(`  - ${item}`)
 console.log(`home technology links: ${technologyLinks.length} checked`)
 console.log(`home testimonials: ${testimonials.reviews.length} cards checked; pending sign-off:`)
 for (const item of testimonialsPending) console.log(`  - ${item}`)

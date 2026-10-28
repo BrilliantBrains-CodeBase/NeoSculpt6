@@ -7,14 +7,15 @@ export const hero = {
   // (checked by `npm run verify`). `gold` sets the theme's tertiary highlight.
   h1: [
     [{ text: 'Doctor-Led' }],
-    [{ text: 'Aesthetic', gold: true }, { text: ' Care in' }],
+    [{ text: 'Aesthetic', gold: true }, { text: ' Clinic in' }],
     [{ text: 'Whitefield, Bangalore', gold: true }],
   ],
   subline:
     'Hair, face, skin and body, diagnosed, planned and treated by the same senior doctors who will stand behind your result.',
   primaryCta: 'Book a Consultation',
   secondaryCta: { label: 'Find My Treatment', href: '/#find-my-treatment' }, // the concern form in section 15
-  // NeoSculpt6 hero photo (scripts/import-photos.mjs). The face sits right of centre, so the crop keeps the right side.
+  // TODO: theme stock image (Rejuvita 84-home-1-1.webp), restored on 2026-10-28 at the client's request in place of the
+  // supplied hero photo (kept unused at /images/home/hero-supplied.webp; its square crop is an Instagram tile).
   image: '/images/home/hero.webp',
   // Needs sign-off before launch (marked † in the doc): years in practice, transplant count, MD Gold Medalist,
   // DHI certification, ISHRS membership. The † marks are not shown on the page.
@@ -72,7 +73,8 @@ export const about = {
   ],
   text: 'At NeoSculpt6 you are not handed to a counsellor or a technician. Your concern is assessed, your plan is designed and your procedure is led by a senior specialist and the same doctor follows your recovery. Dermatology and plastic surgery, under one roof.',
   cta: { label: 'Meet Our Specialists', href: '/#our-doctors' }, // section 9 takes id="our-doctors"
-  // NeoSculpt6 photos (scripts/import-photos.mjs: about/1.png large, about/2.png inset).
+  // NeoSculpt6 photos: the large one is scripts/import-photos.mjs's about/1.png; the inset is "Dual Medical Aesthetic
+  // Devices on Black" (2026-10-28), resized by hand. about-inset.webp (about/2.png) stays as an Instagram tile.
   image: {
     src: '/images/home/about.webp',
     width: 881,
@@ -80,10 +82,10 @@ export const about = {
     alt: 'A doctor treating a woman’s forehead with a skin-tightening handpiece, the device’s screen beside them',
   },
   inset: {
-    src: '/images/home/about-inset.webp',
-    width: 480,
-    height: 640,
-    alt: 'A white aesthetic treatment device on wheels',
+    src: '/images/home/about-inset-devices.webp',
+    width: 640,
+    height: 800,
+    alt: 'Two white aesthetic treatment devices side by side on a black background, one with a skin-scan screen',
   },
 }
 
@@ -418,6 +420,29 @@ export const doctors = {
   ],
 }
 
+// Extra A: Dr Sandeep spotlight, placed between the pillars (4) and the popular carousel (5) as
+// content/home-page/prompts/04-doctor-spotlight-before-popular-treatments.md sets it (homepage.md had it after 3).
+// Eyebrow, name, title line, paragraph, education checklist, portrait and profile link are the About page's `founder`
+// (src/data/about.ts, about-us.md §C), read by the component directly so the two pages can't drift. Only the
+// home-only bits live here. The † marks are not shown; `pending` is what Dr Sandeep must confirm before launch, and
+// `npm run verify` lists it. The experience line stays hidden until `approved` is set.
+export const doctorSpotlight = {
+  id: 'doctor-spotlight',
+  bookingLabel: 'Book a Consultation', // opens the booking popup
+  experience: { text: '20+ years of clinical experience in skin, hair and aesthetic care', approved: false },
+  pending: [
+    'More than two decades in practice (†)',
+    '10,000+ hair transplants performed (†)',
+    '18+ surgeons trained (†)',
+    '55+ specialists formed under his guidance (†)',
+    'MBBS honours, gold medals in two subjects, MGM Medical College (†)',
+    'MD Dermatology, Venereology & Leprosy, Gold Medalist, RIMS Ranchi (†)',
+    'Certified DHI Specialist, DHI Global, Greece (†)',
+    'Basic and advanced Botox and dermal filler certification, Allergan (†)',
+    'Portrait: old-site clinic photo, not the new clinic shoot',
+  ],
+}
+
 // Section 12: booking form (homepage.md §12). Shared by the home section (HomeBooking) and the popup (BookingDialog).
 // The form's fields and microcopy live in components/booking/BookingForm.tsx.
 export const booking = {
@@ -534,14 +559,22 @@ export const priceGuide = {
 // Photos: AI Hair Analysis, CO2 and Q-Switch have a photo of their own (the ARTAS page's old photo was the same file as
 // AI Hair Analysis). The other six are NeoSculpt6 service photos of the same treatment (src/data/services/new-photos.json).
 // TODO: replace them with photos of each NeoSculpt6 platform when the clinic supplies them, and update the alt text.
+// The home page shows `banner` in place of the card row (supplied 2026-10-28: "Advanced Aesthetic Technology Banner"),
+// full width above Real Results and without the section's "Explore Our Technology" button;
+// the cards stay here because the technology pages use them (their hero photos, src/data/technology/index.ts).
+// The banner image carries its own headline; `h2` and `text` are the same words as live text, shown on phones (where
+// the image is the devices-only crop and its lettering would be too small) and read by screen readers everywhere, so
+// the image alt describes the devices only.
+// TODO (sign-off): "targeted, visible and long-lasting results" is an outcome promise the content rules keep out
+// ("permanent", guarantees); it is in the image itself, so changing it needs a new image.
 export const technology = {
-  eyebrow: 'Our Technology',
-  h2: [[{ text: 'Advanced Platforms.' }], [{ text: 'Clinical Judgement First.', gold: true }]] as {
-    text: string
-    gold?: boolean
-  }[][],
-  subline: "Technology supports diagnosis and precision; it never replaces the doctor's decision.",
-  cta: { label: 'Explore Our Technology', href: '/technology/' },
+  banner: {
+    h2: [[{ text: 'Advanced Technology.' }], [{ text: 'Expert-Led Treatments.', gold: true }]] as { text: string; gold?: boolean }[][],
+    text: 'AI-driven hair analysis, Q-Switch laser and Viora Reaction RF for targeted, visible and long-lasting results.',
+    image: { src: '/images/home/technology-banner.webp', width: 2103, height: 748 },
+    mobileImage: { src: '/images/home/technology-banner-mobile.webp', width: 1045, height: 748 },
+    alt: 'Three treatment platforms on a cream backdrop: an AI hair and scalp analysis station, a Q-Switch laser with its articulated arm, and a Viora Reaction RF unit',
+  },
   cards: [
     {
       title: 'AI-Integrated Hair Analysis',

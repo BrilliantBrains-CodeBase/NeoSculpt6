@@ -14,6 +14,10 @@ export const button =
 export const lightButton =
   'inline-block rounded-[7px] bg-text px-[35px] py-[14px] text-center text-button font-semibold text-background uppercase transition-colors duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background md:whitespace-nowrap'
 
+// The pillars' outlined button (HomePillars), for a quieter secondary action next to `button`.
+export const outlineButton =
+  'inline-block rounded-[7px] border border-secondary px-[35px] py-[14px] text-center text-button font-semibold text-secondary uppercase transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-alternate focus-visible:border-primary focus-visible:bg-primary focus-visible:text-alternate md:whitespace-nowrap'
+
 export const eyebrow = 'text-h6 font-medium text-text uppercase'
 export const h2 = 'font-heading text-h2 text-secondary uppercase'
 export const italicLine = 'font-accent-serif text-[18px] leading-[1.35] italic md:text-[20px] xl:text-[22px]'

@@ -3,6 +3,7 @@ import { HomeStats } from '../components/home/HomeStats'
 import { HomeAbout } from '../components/home/HomeAbout'
 import { HomePopular } from '../components/home/HomePopular'
 import { HomePillars } from '../components/home/HomePillars'
+import { HomeDoctorSpotlight } from '../components/home/HomeDoctorSpotlight'
 import { HomeResults } from '../components/home/HomeResults'
 import { HomeSignature } from '../components/home/HomeSignature'
 import { HomeDoctors } from '../components/home/HomeDoctors'
@@ -20,10 +21,13 @@ export function HomeTemplate() {
       <HomeHero />
       <HomeStats />
       <HomeAbout />
-      {/* Section A (Dr Sandeep spotlight) goes between About (which also holds section 3) and the pillars. */}
       <HomePillars />
-      {/* Section B (concern chips) goes between the pillars and the popular carousel. */}
+      {/* Section B (concern chips) goes between the pillars and the spotlight. */}
+      {/* Section A (Dr Sandeep spotlight): before the popular carousel, as prompts/04 places it. */}
+      <HomeDoctorSpotlight />
       <HomePopular />
+      {/* The technology banner (section 13's replacement), full width, directly above Real Results. */}
+      <HomeTechnology />
       <HomeResults />
       {/* Section 7 (stats) sits under the hero. */}
       <HomeSignature />
@@ -35,7 +39,7 @@ export function HomeTemplate() {
       {/* Then D (international) and E (FAQs). */}
       {/* Section 12 (HomeBooking, the full appointment form) is left out: the phone-only Find My Treatment strip
           below is the page's one lead form. The full form stays in the "Book a Consultation" popup. */}
-      <HomeTechnology />
+      {/* Section 13 (Our Technology) is now the banner above Real Results. */}
       <HomeJournal />
       <HomeFindTreatment />
       {/* Section F (visit us / map) goes here, before the footer. */}

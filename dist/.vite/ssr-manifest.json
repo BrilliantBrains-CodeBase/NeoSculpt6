@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-Dr8NRtyV.js"
+    "/assets/client-BZ7ZtIGc.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-Dr8NRtyV.js"
+    "/assets/client-BZ7ZtIGc.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-Dr8NRtyV.js"
+    "/assets/client-BZ7ZtIGc.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -91,6 +91,7 @@
   "src/components/header/SiteHeader.tsx": [],
   "src/components/home/HomeAbout.tsx": [],
   "src/components/home/HomeCredentials.tsx": [],
+  "src/components/home/HomeDoctorSpotlight.tsx": [],
   "src/components/home/HomeDoctors.tsx": [],
   "src/components/home/HomeFindTreatment.tsx": [],
   "src/components/home/HomeHero.tsx": [],

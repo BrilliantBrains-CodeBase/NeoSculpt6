@@ -10,6 +10,8 @@ import { Marquee } from '../Marquee'
 // padding is the theme's, not --header-offset.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop, and 1601+ (wide desktop).
 // The H1 is ~15% under the theme's size so our 7-word SEO heading still sits on three lines (homepage.md, fit note).
+// Aboreto has one weight, so a thin text stroke (in each span's own colour) brings the smaller H1 up to the theme's
+// visual weight; font-bold would be a faux bold.
 
 const button =
   'inline-block rounded-[7px] px-[35px] py-[14px] text-button font-semibold whitespace-nowrap uppercase transition-colors duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background'
@@ -27,7 +29,7 @@ export function HomeHero() {
   return (
     <section
       style={{ backgroundImage: `url(${hero.image})` }}
-      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-[position:70%_top] bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
+      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-top bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
     >
       {/* Theme overlay: radial vignette to `alternate`, 80% opacity. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0000_0%,#0b0b0d_100%)] opacity-80" />
@@ -42,7 +44,7 @@ export function HomeHero() {
             ref={titleRef}
             data-reveal="right"
             style={delay(300)}
-            className="font-heading text-[length:calc(var(--fs-h1)*0.85)] leading-[1.1] tracking-[-1px] text-secondary uppercase"
+            className="font-heading text-[length:calc(var(--fs-h1)*0.85)] leading-[1.1] tracking-[-1px] text-secondary uppercase [-webkit-text-stroke-width:0.015em]"
           >
             {hero.h1.map((line, i) => (
               <Fragment key={i}>

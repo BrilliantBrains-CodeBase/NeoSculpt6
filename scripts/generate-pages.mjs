@@ -45,7 +45,7 @@ const HOME = {
   title: 'NeoSculpt6 | Doctor-Led Aesthetic Clinic in Bangalore',
   description:
     'Hair transplant, cosmetic surgery, body contouring, lasers and injectables in Whitefield, Bangalore, led by Dr Sandeep Mahapatra, MD (Gold Medalist).',
-  h1: 'Doctor-Led Aesthetic Care in Whitefield, Bangalore',
+  h1: 'Doctor-Led Aesthetic Clinic in Whitefield, Bangalore',
   todo: ['description: "Gold Medalist" claim needs sign-off (homepage.md †)'],
 }
 
