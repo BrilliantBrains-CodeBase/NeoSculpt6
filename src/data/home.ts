@@ -16,10 +16,9 @@ export const hero = {
     'Hair, face, skin and body, diagnosed, planned and treated by the same senior doctors who will stand behind your result.',
   primaryCta: 'Book a Consultation',
   secondaryCta: { label: 'Find My Treatment', href: '/#find-my-treatment' }, // the concern form in section 15
-  // TRIAL (2026-10-30): rose-toned grade of the clinic photo ("Rosy Dermatology Treatment Session", same 1672×941
-  // framing). To go back, set /images/home/hero-clinic.webp (the neutral clinic photo, supplied 2026-10-28).
+  // NeoSculpt6 clinic photo (doctor treating a patient, subject on the right; 1672×941), supplied 2026-10-28.
   // Unused alternatives: /images/home/hero.webp (the Rejuvita theme image) and hero-supplied.webp (earlier photo).
-  image: '/images/home/hero-rosy.webp',
+  image: '/images/home/hero-clinic.webp',
   // Needs sign-off before launch (marked † in the doc): years in practice, transplant count, MD Gold Medalist,
   // DHI certification, ISHRS membership. The † marks are not shown on the page.
   ticker: [
