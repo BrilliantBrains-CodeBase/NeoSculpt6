@@ -39,7 +39,7 @@ export function HomeBooking() {
       {/* Form column (f5d9017): `alternate` with the theme's background photo and a top-left vignette. */}
       <div
         style={{ backgroundImage: 'url(/images/home/stats-bg.webp)' }}
-        className="relative isolate flex min-w-0 flex-col items-center justify-center gap-5 overflow-hidden rounded-[20px] bg-alternate bg-cover bg-center bg-no-repeat px-5 py-20 md:px-[30px] xl:w-1/2 xl:rounded-none xl:px-20 xl:py-[150px]"
+        className="relative isolate flex min-w-0 flex-col items-center max-md:items-start justify-center gap-5 overflow-hidden rounded-[20px] bg-alternate bg-cover bg-center bg-no-repeat px-5 py-20 md:px-[30px] xl:w-1/2 xl:rounded-none xl:px-20 xl:py-[150px]"
       >
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_top_left,#0b0b0d00_0%,#0b0b0d_40%)] opacity-80" />
         <h2
@@ -47,7 +47,7 @@ export function HomeBooking() {
           ref={titleRef}
           data-reveal="up"
           style={delay(150)}
-          className="w-full max-w-[660px] text-center font-heading text-h3 text-secondary uppercase text-balance"
+          className="w-full max-w-[660px] text-center max-md:text-left font-heading text-h3 text-secondary uppercase text-balance"
         >
           {booking.h2.map((line, i) => (
             <span key={i} className="block">
@@ -63,7 +63,7 @@ export function HomeBooking() {
           ref={textRef}
           data-reveal="up"
           style={delay(300)}
-          className="mb-5 w-full max-w-[660px] text-center font-accent-serif text-[18px] leading-[1.35] text-secondary italic md:text-[20px] xl:mb-10 xl:text-[22px]"
+          className="mb-5 w-full max-w-[660px] text-center max-md:text-left font-accent-serif text-[18px] leading-[1.35] text-secondary italic md:text-[20px] xl:mb-10 xl:text-[22px]"
         >
           {booking.subline}
         </p>

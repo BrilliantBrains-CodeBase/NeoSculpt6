@@ -11,14 +11,14 @@ import { MobileMenu } from './MobileMenu'
 // Rejuvita header template 120 (rejuvita-scrape/pages/home/rendered.html, elementor/css/post-120.css): an
 // announcement bar, then a transparent row laid over the first section (absolute, not sticky).
 // Row layouts (theme breakpoints, plus `wide` because our menu is longer than the theme's):
-//   >=1536 (wide)  menu 36% | logo 28% centred | phone + outlined button 36%    <- the theme's desktop layout
-//   1181-1535 (xl) logo | menu | button                                        <- compact, so the menu never wraps
-//   768-1180 (md)  logo | button + burger                                      <- theme tablet
+//   >=1760 (wide)  menu 36% | logo 28% centred | phone + outlined button 36%    <- the theme's desktop layout
+//   1300-1759 (nav) logo | menu | button                                       <- compact, so the menu never wraps
+//   768-1299 (md)  logo | button + burger                                      <- theme tablet
 //   <=767          logo | burger                                               <- theme mobile
 // Copy: homepage.md "Global elements".
 
 const outlineButton =
-  'rounded-[7px] border border-secondary px-[35px] py-[14px] xl:px-[28px] wide:px-[35px] text-button font-semibold whitespace-nowrap text-secondary uppercase transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-background focus-visible:border-primary focus-visible:bg-primary focus-visible:text-background'
+  'rounded-[7px] border border-secondary px-[35px] py-[14px] nav:px-[28px] wide:px-[35px] text-button font-semibold whitespace-nowrap text-secondary uppercase transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-background focus-visible:border-primary focus-visible:bg-primary focus-visible:text-background'
 
 export function SiteHeader() {
   const { pathname } = useLocation()
@@ -58,7 +58,7 @@ export function SiteHeader() {
           <Logo />
         </div>
 
-        <div ref={navRef} data-reveal className="order-2 ml-[30px] hidden xl:block wide:order-1 wide:ml-0 wide:w-[36%]">
+        <div ref={navRef} data-reveal className="order-2 ml-[30px] hidden nav:block wide:order-1 wide:ml-0 wide:w-[36%]">
           <DesktopNav />
         </div>
 
@@ -79,7 +79,7 @@ export function SiteHeader() {
             aria-label="Open menu"
             aria-expanded={menuOpen}
             aria-haspopup="dialog"
-            className="text-secondary transition-colors duration-300 hover:text-tertiary focus-visible:text-tertiary xl:hidden"
+            className="text-secondary transition-colors duration-300 hover:text-tertiary focus-visible:text-tertiary nav:hidden"
           >
             <BurgerIcon />
           </button>

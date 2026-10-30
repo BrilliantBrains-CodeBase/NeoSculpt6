@@ -38,9 +38,9 @@ export function HomeJournal() {
     <section
       id="journal"
       aria-labelledby="journal-heading"
-      className="mb-20 flex flex-col items-center gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mb-20 flex flex-col items-center max-md:items-start gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <p ref={eyebrowRef} data-reveal="up" className="text-center text-h6 font-medium text-text uppercase">
+      <p ref={eyebrowRef} data-reveal="up" className="text-center max-md:text-left text-h6 font-medium text-text uppercase">
         {journal.eyebrow}
       </p>
       <h2
@@ -48,7 +48,7 @@ export function HomeJournal() {
         ref={titleRef}
         data-reveal="up"
         style={delay(150)}
-        className="mb-10 text-center font-heading text-h2 text-secondary uppercase md:mb-[60px]"
+        className="mb-10 text-center max-md:text-left font-heading text-h2 text-secondary uppercase md:mb-[60px]"
       >
         {journal.h2.map((line, i) => (
           <span key={i} className="block">

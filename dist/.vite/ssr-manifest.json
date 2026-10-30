@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-BZ7ZtIGc.js"
+    "/assets/client-xHO58s1H.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-BZ7ZtIGc.js"
+    "/assets/client-xHO58s1H.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-BZ7ZtIGc.js"
+    "/assets/client-xHO58s1H.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -55,9 +55,11 @@
   "src/components/BeforeAfter.tsx": [],
   "src/components/Breadcrumbs.tsx": [],
   "src/components/CarouselControls.tsx": [],
+  "src/components/FollowSheet.tsx": [],
   "src/components/InstagramStrip.tsx": [],
   "src/components/Logo.tsx": [],
   "src/components/Marquee.tsx": [],
+  "src/components/MobileActionBar.tsx": [],
   "src/components/NotFound.tsx": [],
   "src/components/PageShell.tsx": [],
   "src/components/RedirectPage.tsx": [],
@@ -81,11 +83,17 @@
   "src/components/contact/ClinicFacts.tsx": [],
   "src/components/contact/ContactBanner.tsx": [],
   "src/components/contact/ContactBooking.tsx": [],
-  "src/components/contact/ContactDetails.tsx": [],
-  "src/components/contact/ContactPrivacy.tsx": [],
-  "src/components/contact/ContactRouting.tsx": [],
-  "src/components/contact/ContactSteps.tsx": [],
   "src/components/contact/ContactVisit.tsx": [],
+  "src/components/doctor/DoctorAvatar.tsx": [],
+  "src/components/doctor/DoctorBooking.tsx": [],
+  "src/components/doctor/DoctorCredentials.tsx": [],
+  "src/components/doctor/DoctorExpertise.tsx": [],
+  "src/components/doctor/DoctorHero.tsx": [],
+  "src/components/doctor/DoctorMetrics.tsx": [],
+  "src/components/doctor/DoctorPhilosophy.tsx": [],
+  "src/components/doctor/DoctorProcess.tsx": [],
+  "src/components/doctor/DoctorProfilePage.tsx": [],
+  "src/components/doctor/DoctorSectionHeader.tsx": [],
   "src/components/header/DesktopNav.tsx": [],
   "src/components/header/MobileMenu.tsx": [],
   "src/components/header/SiteHeader.tsx": [],
@@ -135,6 +143,8 @@
   "src/components/useReveal.ts": [],
   "src/data/about.ts": [],
   "src/data/contact.ts": [],
+  "src/data/doctors.json": [],
+  "src/data/doctors.ts": [],
   "src/data/entries.ts": [],
   "src/data/home.ts": [],
   "src/data/nav.ts": [],

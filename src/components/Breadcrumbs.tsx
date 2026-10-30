@@ -1,9 +1,10 @@
 import { Fragment, type CSSProperties, type Ref } from 'react'
-import { Link } from 'react-router-dom'
-import { pageByPath } from '../data/entries'
+import { crumbName } from '../data/entries'
+import { SmartLink } from './SmartLink'
 
 // Page-banner breadcrumb (About banner, service hero). Names come from routes.json, the same names the page's
 // BreadcrumbList schema uses (Seo.tsx), so the two never differ. The current page is the last item, not a link.
+// A step can be a home anchor ("Our Doctors" → /#our-doctors); SmartLink makes that a plain link so the page scrolls.
 
 export function Breadcrumbs({
   crumbs,
@@ -19,7 +20,7 @@ export function Breadcrumbs({
   style?: CSSProperties
   className?: string
 }) {
-  const items = crumbs.map((path) => ({ path, name: path === '/' ? 'Home' : (pageByPath.get(path)?.name ?? path) }))
+  const items = crumbs.map((path) => ({ path, name: crumbName(path) }))
 
   return (
     <nav ref={navRef} data-reveal={reveal} style={style} aria-label="Breadcrumb" className={className || undefined}>
@@ -39,12 +40,12 @@ export function Breadcrumbs({
                     {crumb.name}
                   </span>
                 ) : (
-                  <Link
-                    to={crumb.path}
+                  <SmartLink
+                    href={crumb.path}
                     className="underline-offset-4 transition-colors duration-300 hover:text-tertiary hover:underline focus-visible:text-tertiary focus-visible:underline"
                   >
                     {crumb.name}
-                  </Link>
+                  </SmartLink>
                 )}
               </li>
             </Fragment>

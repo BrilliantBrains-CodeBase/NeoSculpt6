@@ -20,12 +20,12 @@ export function TechnologyComparison({ comparison }: { comparison: ArtasDetail['
     <section
       id="technology-comparison"
       aria-labelledby="technology-comparison-heading"
-      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center max-md:items-start gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <h2 id="technology-comparison-heading" ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center text-balance`}>
+      <h2 id="technology-comparison-heading" ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center max-md:text-left text-balance`}>
         {comparison.h2}
       </h2>
-      <p ref={introRef} data-reveal="up" style={delay(150)} className="max-w-[860px] text-center">
+      <p ref={introRef} data-reveal="up" style={delay(150)} className="max-w-[860px] text-center max-md:text-left">
         {comparison.introLine}
       </p>
       <ul ref={listRef} data-reveal-stagger="" className="mt-5 grid w-full grid-cols-1 gap-5 md:mt-10 md:gap-[30px] xl:grid-cols-3">

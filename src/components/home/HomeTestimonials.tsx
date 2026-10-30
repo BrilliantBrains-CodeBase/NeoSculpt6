@@ -79,14 +79,14 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
       aria-labelledby={headingId}
       // Same file as the theme's 84-background-1-2.webp.
       style={{ backgroundImage: 'url(/images/home/stats-bg.webp)' }}
-      className="relative isolate mb-20 flex flex-col items-center gap-[30px] bg-cover bg-center bg-no-repeat px-5 pt-20 pb-[65px] md:mb-[100px] md:px-0 md:pt-[100px] md:pb-[90px] xl:mb-[150px] xl:pt-[150px] xl:pb-[140px]"
+      className="relative isolate mb-20 flex flex-col items-center max-md:items-start gap-[30px] bg-cover bg-center bg-no-repeat px-5 pt-20 pb-[65px] md:mb-[100px] md:px-0 md:pt-[100px] md:pb-[90px] xl:mb-[150px] xl:pt-[150px] xl:pb-[140px]"
     >
       {/* Theme overlay: radial vignette to `alternate` from 40%, 80% opacity. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0b0b0d00_0%,#0b0b0d_40%)] opacity-80" />
 
       {/* Eyebrow (e39ad11) */}
       {eyebrow && (
-        <p ref={eyebrowRef} data-reveal="up" style={delay(150)} className="text-center text-h6 font-medium text-text uppercase">
+        <p ref={eyebrowRef} data-reveal="up" style={delay(150)} className="text-center max-md:text-left text-h6 font-medium text-text uppercase">
           {eyebrow}
         </p>
       )}
@@ -97,7 +97,7 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
         ref={titleRef}
         data-reveal="up"
         style={delay(300)}
-        className="text-center font-heading text-h2 text-secondary uppercase md:px-[30px] xl:px-10"
+        className="text-center max-md:text-left font-heading text-h2 text-secondary uppercase md:px-[30px] xl:px-10"
       >
         {h2.map((part) => (
           <span key={part.text} className={part.gold ? 'text-tertiary' : undefined}>
@@ -111,7 +111,7 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
         ref={sublineRef}
         data-reveal="up"
         style={delay(450)}
-        className="mb-5 text-center font-accent-serif text-[18px] leading-[1.35] text-text italic md:mb-10 md:px-[30px] md:text-[20px] xl:mb-[50px] xl:px-10 xl:text-[22px]"
+        className="mb-5 text-center max-md:text-left font-accent-serif text-[18px] leading-[1.35] text-text italic md:mb-10 md:px-[30px] md:text-[20px] xl:mb-[50px] xl:px-10 xl:text-[22px]"
       >
         Rated <Pending value={rating.value} placeholder="x.x" /> on Google from{' '}
         <Pending value={rating.count?.toLocaleString('en-IN') ?? null} placeholder="nn" /> reviews
@@ -183,7 +183,7 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
 function TestimonialCard({ review }: { review: Testimonial }) {
   const approved = isApproved(review)
   return (
-    <figure className="flex flex-col items-center gap-[30px] text-center">
+    <figure className="flex flex-col items-center max-md:items-start gap-[30px] text-center max-md:text-left">
       {approved ? (
         <p role="img" aria-label="Rated 5 out of 5" className="flex gap-[5px] text-primary">
           {Array.from({ length: 5 }, (_, i) => (
@@ -211,7 +211,7 @@ function TestimonialCard({ review }: { review: Testimonial }) {
         </div>
       )}
 
-      <figcaption className="flex flex-col items-center">
+      <figcaption className="flex flex-col items-center max-md:items-start">
         <span
           className={`font-accent-serif text-[18px] leading-[1.35] italic md:text-[20px] xl:text-[22px] ${
             approved ? 'text-secondary' : 'text-text/60'

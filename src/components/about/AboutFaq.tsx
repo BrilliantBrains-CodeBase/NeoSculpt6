@@ -19,7 +19,7 @@ export function AboutFaq() {
       className="bg-alternate px-5 py-20 md:px-[30px] md:py-[100px] xl:px-10 xl:py-[150px]"
     >
       <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-10 md:gap-[60px]">
-        <h2 id="clinic-faqs-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center`}>
+        <h2 id="clinic-faqs-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center max-md:text-left`}>
           <Parts parts={faqs.h2} />
         </h2>
 

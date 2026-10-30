@@ -25,8 +25,8 @@ export interface ServiceImage {
 /** A doctor on a service page: who they are (services/index.ts `DOCTORS`) and the page's own copy about them. */
 export interface ServiceDoctor {
   name: string
-  /** Profile page; every doctor has one (Dr Lavanyaa M's is a draft). */
-  href: string
+  /** Profile page, or null for a doctor without one (Dr Lavanyaa M): the card then has no profile link. */
+  href: string | null
   initials: string
   /** Fills the card's circle; initials show while it is null. */
   portrait: ServiceImage | null

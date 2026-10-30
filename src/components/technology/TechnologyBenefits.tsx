@@ -22,13 +22,13 @@ export function TechnologyBenefits({ benefits }: { benefits: TechnologyDetail['b
     <section
       id="technology-benefits"
       aria-labelledby="technology-benefits-heading"
-      className="mx-auto mb-20 flex w-full max-w-[1160px] flex-col items-center gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1160px] flex-col items-center max-md:items-start gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <h2 id="technology-benefits-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center text-balance`}>
+      <h2 id="technology-benefits-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center max-md:text-left text-balance`}>
         {benefits.h2}
       </h2>
       {benefits.subline && (
-        <p ref={sublineRef} data-reveal="up" style={delay(150)} className="max-w-[760px] text-center">
+        <p ref={sublineRef} data-reveal="up" style={delay(150)} className="max-w-[760px] text-center max-md:text-left">
           {benefits.subline}
         </p>
       )}
@@ -48,7 +48,7 @@ export function TechnologyBenefits({ benefits }: { benefits: TechnologyDetail['b
         ))}
       </ul>
       {benefits.smallPrint && (
-        <p ref={printRef} data-reveal="up" className="mt-5 text-center text-meta">
+        <p ref={printRef} data-reveal="up" className="mt-5 text-center max-md:text-left text-meta">
           {benefits.smallPrint}
         </p>
       )}

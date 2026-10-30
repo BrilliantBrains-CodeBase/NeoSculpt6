@@ -1,5 +1,5 @@
 import type { RoutePage } from '../../data/types'
-import { banner, details } from '../../data/contact'
+import { actions, banner } from '../../data/contact'
 import { clinic } from '../../data/site'
 import { useReveal } from '../useReveal'
 import { Breadcrumbs } from '../Breadcrumbs'
@@ -43,7 +43,7 @@ export function ContactBanner({ page }: { page: RoutePage }) {
           </p>
           <div ref={actionsRef} data-reveal="right" style={delay(600)} className="flex flex-wrap items-center gap-x-[30px] gap-y-5">
             <a href="#book-consultation" className={button}>
-              {details.actions.book}
+              {actions.book}
             </a>
             <a
               href={clinic.phoneHref}

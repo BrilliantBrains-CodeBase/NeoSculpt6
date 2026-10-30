@@ -44,11 +44,11 @@ export function TechnologyCards({
       className="mx-auto mb-20 w-full max-w-[1400px] px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
       {heading && (
-        <div className="mb-10 flex flex-col items-center gap-5 md:mb-[60px]">
-          <h2 id={`${id}-heading`} ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center text-balance`}>
+        <div className="mb-10 flex flex-col items-center max-md:items-start gap-5 md:mb-[60px]">
+          <h2 id={`${id}-heading`} ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center max-md:text-left text-balance`}>
             {heading.h2}
           </h2>
-          <p ref={sublineRef} data-reveal="up" style={delay(150)} className={`${italicLine} max-w-[860px] text-center text-secondary`}>
+          <p ref={sublineRef} data-reveal="up" style={delay(150)} className={`${italicLine} max-w-[860px] text-center max-md:text-left text-secondary`}>
             {heading.subline}
           </p>
         </div>

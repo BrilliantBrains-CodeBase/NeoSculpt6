@@ -38,7 +38,7 @@ export function ServiceCta({ closing }: { closing: ServiceContent['closing'] }) 
         </>
       )}
 
-      <div className="mx-auto flex w-full max-w-[860px] flex-col items-center gap-5 text-center md:gap-[30px]">
+      <div className="mx-auto flex w-full max-w-[860px] flex-col items-center max-md:items-start gap-5 text-center max-md:text-left md:gap-[30px]">
         {closing.kicker && (
           <p ref={kickerRef} data-reveal="up" className={`${italicLine} text-tertiary`}>
             {closing.kicker}
@@ -51,7 +51,7 @@ export function ServiceCta({ closing }: { closing: ServiceContent['closing'] }) 
           {closing.paragraph}
         </p>
         {closing.chips.length > 0 && (
-          <ul aria-label="Highlights" className="flex flex-wrap justify-center gap-2.5">
+          <ul aria-label="Highlights" className="flex flex-wrap justify-center max-md:justify-start gap-2.5">
             {closing.chips.map((chip) => (
               <li key={chip} className="rounded-full border border-secondary/30 px-4 py-1.5 text-meta text-secondary">
                 {chip}
@@ -60,7 +60,7 @@ export function ServiceCta({ closing }: { closing: ServiceContent['closing'] }) 
           </ul>
         )}
         <div ref={ctaRef} data-reveal="up" style={delay(450)}>
-          <CtaRow ctas={closing.ctas} className="justify-center" />
+          <CtaRow ctas={closing.ctas} className="justify-center max-md:justify-start" />
         </div>
       </div>
     </section>

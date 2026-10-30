@@ -35,7 +35,7 @@ export function HomeCredentials({ label = credentials.label, logos = credentials
         id="credentials-label"
         ref={labelRef}
         data-reveal="right"
-        className={`text-center text-h6 font-medium text-text uppercase ${carousel ? 'md:text-left' : ''}`}
+        className={`text-center max-md:text-left text-h6 font-medium text-text uppercase ${carousel ? 'md:text-left' : ''}`}
       >
         {label}
       </p>
@@ -67,10 +67,10 @@ function LogoRow({ logos }: { logos: Logo[] }) {
       data-reveal="up"
       style={delay(100)}
       aria-labelledby="credentials-label"
-      className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:gap-x-[70px]"
+      className="flex flex-wrap items-center justify-center max-md:justify-start gap-x-10 gap-y-5 md:gap-x-[70px]"
     >
       {logos.map((logo) => (
-        <li key={logo.src} className="max-w-[calc(50%-20px)] text-center md:max-w-none">
+        <li key={logo.src} className="max-w-[calc(50%-20px)] text-center max-md:text-left md:max-w-none">
           <LogoImage logo={logo} />
         </li>
       ))}
@@ -212,7 +212,7 @@ function LogoCarousel({ logos }: { logos: Logo[] }) {
                   aria-hidden={clone || undefined}
                   // React 18 has no `inert` prop; the empty string sets the attribute.
                   {...(clone ? { inert: '' } : {})}
-                  className="shrink-0 basis-(--slide) text-center"
+                  className="shrink-0 basis-(--slide) text-center max-md:text-left"
                 >
                   <LogoImage logo={logo} />
                 </li>

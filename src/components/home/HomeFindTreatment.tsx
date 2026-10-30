@@ -29,7 +29,7 @@ export function HomeFindTreatment() {
       {/* Darker than the theme's 30% so the form labels stay readable over the photo. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/55" />
 
-      <div className="mx-auto flex w-full max-w-[860px] flex-col items-center gap-5 text-center md:gap-[30px]">
+      <div className="mx-auto flex w-full max-w-[860px] flex-col items-center max-md:items-start gap-5 text-center max-md:text-left md:gap-[30px]">
         <h2 id={headingId} ref={titleRef} data-reveal="up" style={delay(300)} className="font-heading text-h2 text-balance text-secondary uppercase">
           {findTreatment.h2.map((line, i) => (
             <span key={i} className="block">

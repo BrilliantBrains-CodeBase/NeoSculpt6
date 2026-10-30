@@ -2,6 +2,8 @@
 // Every internal path must be a route in pages.json; scripts/verify-seo.mjs checks this after the build.
 // Keep this file to erasable TypeScript only (verify-seo.mjs imports it with Node's type stripping).
 
+import { publishedDoctors } from './doctors.ts'
+
 export interface NavLink {
   label: string
   href: string
@@ -115,11 +117,16 @@ export const primaryNav: NavItem[] = [
   },
   { label: 'Results', href: '/#results' },
   {
+    label: 'Doctors',
+    href: '/#our-doctors',
+    // Every published doctor profile (src/data/doctors.json), in the file's order.
+    children: publishedDoctors.map((d) => ({ label: d.displayName, href: d.path })),
+  },
+  {
     label: 'About',
-    href: '/about-dr-sandeep-mahapatra/',
+    href: '/about-us/',
     children: [
-      { label: 'Dr Sandeep Mahapatra', href: '/about-dr-sandeep-mahapatra/' },
-      { label: 'Dr Saranya T', href: '/dr-saranya-t/' },
+      { label: 'About NeoSculpt6', href: '/about-us/' },
       { label: 'International Patients', href: '/international-patients/' },
     ],
   },
@@ -130,4 +137,6 @@ export const primaryNav: NavItem[] = [
 // intimate-care option uses a neutral label ("Private consultation", not the doc's "Intimate Wellness"): the chat
 // never names an intimate concern (speciality-cosmetic-gynecology.md, privacy).
 export const bookingServices = ['Hair', 'Face & Anti-Ageing', 'Skin & Laser', 'Body & Weight', 'Cosmetic Surgery', 'Private consultation', 'Not sure']
-export const bookingDoctors = ['Dr Sandeep Mahapatra', 'Dr Saranya T', 'Not sure — suggest for me']
+// Doctors: every published profile, then Dr Lavanyaa M (a clinic doctor named on two service pages, with no profile
+// page yet), then "not sure".
+export const bookingDoctors = [...publishedDoctors.map((d) => d.displayName), 'Dr Lavanyaa M', 'Not sure — suggest for me']

@@ -12,6 +12,18 @@ import * as contact from '../src/data/contact.ts'
 import { services } from '../src/data/services/index.ts'
 import { LIVE as TECH_LIVE, SOURCE_EXCEPTIONS, technologyPages } from '../src/data/technology/index.ts'
 import { specialityHubs } from '../src/data/specialities/index.ts'
+import {
+  DOCTOR_SECTIONS,
+  approved,
+  credentialLine,
+  doctorByPath,
+  doctorSections,
+  pendingItems,
+  portraitFor,
+  publicQuote,
+  publicSocialLinks,
+  publishedDoctors,
+} from '../src/data/doctors.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DIST = path.join(ROOT, 'dist')
@@ -329,39 +341,24 @@ const aboutPending = [
   'Placeholder photos (old-site images): banner, story ×3, founder portrait + inset, clinic image, Instagram ×6; Dr Saranya portrait',
 ]
 
-// Contact page (/contact-us/, content/contact/prompts/contact-us-page.md): sections in the brief's order, one H1 that
-// matches the data, every internal link a built page, the banner photo present with alt text and a size, ContactPage +
-// MedicalClinic schema without rating markup, the map not loaded until clicked, and no theme demo contact details.
+// Contact page (/contact-us/, content/contact/prompts/contact-us-page.md, trimmed to banner / form / map at the user's
+// request): sections in order, one H1 that matches the data, the banner photo present with alt text and a size, the
+// contact links, a lazy keyless map embed, ContactPage + MedicalClinic schema without rating markup, and no theme demo
+// contact details.
 const contactFile = fileFor('/contact-us/')
 const contactRaw = fs.existsSync(contactFile) ? fs.readFileSync(contactFile, 'utf8') : ''
 const contactHtml = decode(contactRaw)
-const contactOrder = [
-  'contact-banner',
-  'contact-details',
-  'visit-us',
-  'book-consultation',
-  'contact-next-steps',
-  'contact-routing',
-  'contact-privacy',
-  'instagram',
-]
+const contactOrder = ['contact-banner', 'book-consultation', 'visit-us', 'instagram']
 const contactPositions = contactOrder.map((id) => contactHtml.indexOf(`id="${id}"`))
 contactOrder.forEach((id, i) => contactPositions[i] < 0 && fail('contact', `section id="${id}" missing`))
 if (contactPositions.every((p) => p >= 0) && contactPositions.some((p, i) => i > 0 && p < contactPositions[i - 1])) {
-  fail('contact', 'sections are not in the brief\'s order')
+  fail('contact', 'sections are not in order (banner, form, map, Instagram)')
 }
 if (contactHtml.indexOf('id="instagram"') > contactHtml.indexOf('<footer')) fail('contact', 'Instagram row is not above the footer')
 if (contact.banner.h1.map((p) => p.text).join('') !== pages.find((p) => p.path === '/contact-us/')?.h1) {
   fail('contact', 'banner H1 parts do not match the H1 in pages.json')
 }
 if (pages.find((p) => p.path === '/contact-us/')?.name !== 'Contact Us') fail('contact', 'breadcrumb name is not "Contact Us"')
-const contactLinks = [contact.routing.cta.href, ...contact.routing.links.map((l) => l.href)]
-for (const href of contactLinks) {
-  const [pagePath, hash] = href.split('#')
-  if (!fs.existsSync(fileFor(pagePath))) fail('contact', `no page for ${href}`)
-  if (hash && !homeHtml.includes(`id="${hash}"`)) fail('contact', `home section id="${hash}" missing for ${href}`)
-  if (!contactHtml.includes(`href="${href}"`)) fail('contact', `link to ${href} missing from the built page`)
-}
 const { image: contactImage } = contact.banner
 if (!fs.existsSync(path.join(DIST, contactImage.src))) fail('contact', `image missing: ${contactImage.src}`)
 if (!contactImage.alt?.trim()) fail('contact', `no alt text: ${contactImage.src}`)
@@ -371,7 +368,13 @@ for (const img of [...contactHtml.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[
 for (const href of ['href="#book-consultation"', 'href="tel:', 'href="https://wa.me/', 'href="https://www.google.com/maps/', 'href="mailto:']) {
   if (!contactHtml.includes(href)) fail('contact', `no ${href}…" link`)
 }
-if (/<iframe\b/.test(contactRaw)) fail('contact', 'map iframe in the prerendered page (it must load only on click)')
+const contactIframes = [...contactRaw.matchAll(/<iframe\b[^>]*>/g)].map((m) => attrs(m[0]))
+if (contactIframes.length !== 1) fail('contact', `${contactIframes.length} map iframes, expected 1`)
+for (const f of contactIframes) {
+  if (!f.title?.trim()) fail('contact', 'map iframe has no title')
+  if (f.loading !== 'lazy') fail('contact', 'map iframe is not lazy-loaded')
+  if (/[?&]key=/.test(f.src ?? '')) fail('contact', 'API key in the map embed URL')
+}
 if (/portland|800[- ]123|@gmail|@example|rejuvita/i.test(contactHtml.slice(contactHtml.indexOf('<body')))) {
   fail('contact', 'theme demo contact details or names on the page')
 }
@@ -381,7 +384,7 @@ for (const t of ['ContactPage', 'MedicalClinic']) if (!contactTypes.includes(t))
 if (/AggregateRating|"Review"/.test(contactLd)) fail('contact', 'rating or review schema')
 const contactPending = [
   'Final title and meta description (brief fallback in use)',
-  'Google Business Profile URL / place ID and an approved map embed (Get Directions and the map use an address search)',
+  'Google Business Profile URL / place ID and its own map embed (the map and Get Directions use an address search)',
   ...(about.instagram.handle ? [] : ['NeoSculpt6 Instagram handle and profile URL; Facebook and YouTube URLs']),
   'Banner photo: confirm the old-site reception image is the real NeoSculpt6 reception',
   'Privacy policy page and approved legal copy (the privacy note links to none)',
@@ -488,7 +491,7 @@ for (const s of services) {
     ...record.breadcrumbs.slice(0, -1).map((c) => c.path),
     ...s.sidebar.links.map((l) => l.href),
     s.sidebar.viewAll.href,
-    ...s.doctors.cards.map((d) => d.href),
+    ...s.doctors.cards.flatMap((d) => (d.href ? [d.href] : [])),
     ...ctaHrefs(ctas).filter((h) => h.startsWith('/')),
   ]
   for (const href of links) {
@@ -621,7 +624,7 @@ for (const t of technologyPages) {
   if (banned) fail(p, `"${banned[0]}" on the page (content rules)`)
 
   const ctas = collect(t, (o) => typeof o.label === 'string' && ('href' in o || 'action' in o))
-  const hrefs = [...new Set([...record.breadcrumbs.slice(0, -1).map((c) => c.path), ...t.doctors.cards.map((d) => d.href), ...ctas.filter((c) => c.href).map((c) => c.href)])]
+  const hrefs = [...new Set([...record.breadcrumbs.slice(0, -1).map((c) => c.path), ...t.doctors.cards.flatMap((d) => (d.href ? [d.href] : [])), ...ctas.filter((c) => c.href).map((c) => c.href)])]
   for (const href of hrefs.filter((h) => h.startsWith('/'))) {
     if (!fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
     if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing from the built page`)
@@ -733,7 +736,7 @@ for (const h of specialityHubs) {
   const hrefs = [
     ...new Set([
       ...record.breadcrumbs.slice(0, -1).map((c) => c.path),
-      ...h.doctors.cards.map((d) => d.href),
+      ...h.doctors.cards.flatMap((d) => (d.href ? [d.href] : [])),
       ...h.treatments.groups.flatMap((g) => g.items.map((i) => i.href)),
       ...ctas.filter((c) => c.href).map((c) => c.href),
     ]),
@@ -787,6 +790,117 @@ for (const r of pages.filter((x) => x.type !== 'redirect')) {
 
 const pendingLegal =legalNav.filter(({ href }) => !fs.existsSync(fileFor(href))).map(({ href }) => href)
 
+// Doctor profiles (src/data/doctors.json → DoctorProfilePage): the route and SEO are the record's; the sections are in
+// the shared order, left out only when they have no approved content; every approved string is on the page and no
+// pending one is; the schema is ProfilePage + Physician + MedicalClinic with exactly the approved credentials and
+// memberships, and no rating, review or statistics markup. Every doctor route has a published record.
+const doctorPending = []
+for (const r of pages.filter((x) => x.type === 'doctor')) if (!doctorByPath.has(r.path)) fail(r.path, 'doctor route without a published doctors.json record')
+for (const d of publishedDoctors) {
+  const p = d.path
+  const record = pages.find((r) => r.path === p)
+  if (record?.type !== 'doctor') {
+    fail(p, 'published doctor without a doctor route (run npm run gen)')
+    continue
+  }
+  for (const [key, value] of [['title', d.seo.title], ['description', d.seo.description], ['h1', d.seo.h1], ['robots', d.seo.robots], ['name', d.displayName]]) {
+    if (record[key] !== value) fail(p, `pages.json ${key} "${record[key]}" is not the doctors.json record's "${value}"`)
+  }
+  if (record.og.image !== d.seo.ogImage) fail(p, `og image ${record.og.image} is not the record's ${d.seo.ogImage}`)
+  if (JSON.stringify(record.breadcrumbs.map((c) => c.path)) !== JSON.stringify(['/', '/#our-doctors', p])) fail(p, 'breadcrumb is not Home › Our Doctors › doctor')
+
+  const raw = fs.existsSync(fileFor(p)) ? fs.readFileSync(fileFor(p), 'utf8') : ''
+  const html = decode(raw)
+  const mainRaw = raw.slice(Math.max(0, raw.indexOf('<main')), raw.indexOf('<footer') > 0 ? raw.indexOf('<footer') : undefined)
+  const main = bodyText(mainRaw)
+
+  // Section order: the shared order, minus the sections with nothing approved to show.
+  const expected = doctorSections(d)
+  const at = expected.map((id) => raw.indexOf(`id="${id}"`))
+  expected.forEach((id, i) => at[i] < 0 && fail(p, `section id="${id}" missing`))
+  if (at.some((x, i) => i > 0 && x < at[i - 1])) fail(p, `sections out of order: expected ${expected.join(' → ')}`)
+  for (const id of DOCTOR_SECTIONS.filter((x) => !expected.includes(x))) if (raw.includes(`id="${id}"`)) fail(p, `section id="${id}" shown with nothing approved in it`)
+  for (const id of expected.filter((x) => x !== 'instagram')) if (!raw.includes(`aria-labelledby="${id}-heading"`)) fail(p, `section ${id} has no aria-labelledby heading`)
+
+  // Approved content is visible.
+  const shown = [
+    d.displayName,
+    d.hero.eyebrow,
+    d.role,
+    d.hero.intro,
+    credentialLine(d),
+    ...(d.philosophy ? [d.philosophy.eyebrow, d.philosophy.heading, ...d.philosophy.paragraphs] : []),
+    ...d.expertise.flatMap((x) => [x.title, x.description]),
+    ...approved(d.qualifications).flatMap((q) => [q.title, q.institution]),
+    ...approved(d.recognition).flatMap((r) => [r.title, r.organisation]),
+    ...approved(d.metrics).map((m) => m.label),
+    d.process.eyebrow,
+    d.process.heading,
+    d.process.intro,
+    ...d.process.steps.flatMap((x) => [x.title, x.description]),
+    publicQuote(d),
+    d.ctas.profileLabel,
+    d.ctas.contactLabel,
+    d.ctas.bookingEyebrow,
+    d.ctas.bookingHeading,
+  ].filter(Boolean)
+  for (const str of shown) if (!main.includes(str)) fail(p, `not on the page: "${str.length > 60 ? str.slice(0, 60) + '…' : str}"`)
+
+  // Pending content is not.
+  const hidden = [
+    ...d.qualifications.filter((q) => q.approval !== 'approved').flatMap((q) => [q.title, q.institution]),
+    ...d.recognition.filter((r) => r.approval !== 'approved').map((r) => r.organisation),
+    ...d.metrics.filter((m) => m.approval !== 'approved').map((m) => m.label),
+    d.quote.approval !== 'approved' ? d.quote.text : null,
+  ].filter(Boolean)
+  for (const str of hidden) if (main.includes(str)) fail(p, `pending item on the page: "${str}"`)
+  const banned = main.match(BANNED)
+  if (banned) fail(p, `"${banned[0]}" on the page (content rules)`)
+  if (/\+1 800|lorem ipsum/i.test(main)) fail(p, 'theme-demo contact details or filler text on the page')
+
+  // Links: breadcrumb, expertise, contact, booking hand-offs.
+  const links = ['/', '/#our-doctors', d.ctas.contactHref, ...d.expertise.flatMap((x) => (x.href ? [x.href] : []))]
+  for (const href of links) {
+    if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing from the built page`)
+    if (href.startsWith('/') && !href.includes('#') && !fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
+  }
+  for (const href of ['tel:+919964060483', 'https://wa.me/919964060483']) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
+  if (!raw.includes('Request My Consultation')) fail(p, 'booking form missing')
+
+  // Images: the approved portrait (or the initials), and width/height/alt on every image in the content.
+  const portrait = portraitFor(d)
+  if (portrait && !html.includes(`src="${portrait.src}"`)) fail(p, `portrait not on the page: ${portrait.src}`)
+  if (portrait && !fs.existsSync(path.join(DIST, portrait.src))) fail(p, `portrait file missing: ${portrait.src}`)
+  if (!portrait && d.hero.portrait.src && html.includes(`src="${d.hero.portrait.src}"`)) fail(p, 'unapproved portrait on the page')
+  for (const img of [...mainRaw.matchAll(/<img\b[^>]*>/g)].map((m) => attrs(m[0]))) {
+    if (!img.width || !img.height) fail(p, `<img> without width/height: ${img.src}`)
+    if (img.alt === undefined) fail(p, `<img> without alt: ${img.src}`)
+  }
+
+  // Schema from the same record.
+  const ld = parseHead(raw).ld[0] ?? '{}'
+  const graph = JSON.parse(ld)['@graph'] ?? []
+  const types = graph.flatMap((n) => [n['@type']].flat())
+  for (const t of ['ProfilePage', 'Physician', 'MedicalClinic', 'BreadcrumbList']) if (!types.includes(t)) fail(p, `JSON-LD has no ${t}`)
+  const physician = graph.find((n) => n['@type'] === 'Physician')
+  if (physician) {
+    if (physician.name !== d.displayName) fail(p, `Physician name "${physician.name}" ≠ "${d.displayName}"`)
+    if (physician.jobTitle !== d.role) fail(p, 'Physician jobTitle is not the visible role')
+    const creds = (physician.hasCredential ?? []).map((c) => c.name)
+    if (JSON.stringify(creds) !== JSON.stringify(approved(d.qualifications).map((q) => q.title))) fail(p, `Physician credentials ${creds.join(', ')} are not the approved list`)
+    const orgs = (physician.memberOf ?? []).map((o) => o.name)
+    if (JSON.stringify(orgs) !== JSON.stringify(approved(d.recognition).map((r) => r.organisation))) fail(p, `Physician memberOf ${orgs.join(', ')} is not the approved list`)
+    const sameAs = physician.sameAs ?? []
+    if (JSON.stringify(sameAs) !== JSON.stringify(publicSocialLinks(d).map((x) => x.href))) fail(p, 'Physician sameAs is not the approved social links')
+    if (Boolean(physician.image) !== Boolean(portrait)) fail(p, 'Physician image does not match the approved portrait')
+  }
+  const crumbs = graph.find((n) => n['@type'] === 'BreadcrumbList')?.itemListElement?.map((i) => i.name) ?? []
+  if (JSON.stringify(crumbs) !== JSON.stringify(['Home', 'Our Doctors', d.displayName])) fail(p, `BreadcrumbList is ${crumbs.join(' › ')}`)
+  if (/AggregateRating|"Review"|"InteractionCounter"/.test(ld)) fail(p, 'rating, review or statistics schema on a doctor profile')
+
+  for (const item of pendingItems(d)) doctorPending.push(`${p}: ${item}`)
+}
+
 if (!fs.existsSync(path.join(DIST, 'robots.txt'))) fail('robots.txt', 'missing')
 if (!fs.existsSync(path.join(DIST, '404.html'))) fail('404.html', 'missing')
 
@@ -811,7 +925,7 @@ console.log(`home journal: ${journalCardCount} cards (${publishedPosts.length} p
 for (const item of plannedTopics) console.log(`  - ${item}`)
 console.log(`about: ${aboutOrder.length} sections in order, ${aboutLinks.length} links and ${aboutImages.length} images checked; pending sign-off:`)
 for (const item of aboutPending) console.log(`  - ${item}`)
-console.log(`contact: ${contactOrder.length} sections in order, ${contactLinks.length} routing links checked; pending sign-off:`)
+console.log(`contact: ${contactOrder.length} sections in order, map embed and contact links checked; pending sign-off:`)
 for (const item of contactPending) console.log(`  - ${item}`)
 console.log(`services: ${services.length} of ${serviceRoutes} service pages built from service-page.md; pending sign-off:`)
 console.log(`  - every service page: 3 Google reviews each (quote, name, consent), the Google rating and count, and the`)
@@ -826,6 +940,8 @@ console.log(`technology: ${[...TECH_LIVE].length} of ${technologyPages.length} p
 for (const item of techPending) console.log(`  - ${item.length > 200 ? item.slice(0, 200) + '…' : item}`)
 console.log(`speciality hubs: ${specialityHubs.length} built; pending sign-off:`)
 for (const item of hubPending) console.log(`  - ${item}`)
+console.log(`doctor profiles: ${publishedDoctors.length} built from doctors.json; pending sign-off (hidden until approved):`)
+for (const item of doctorPending) console.log(`  - ${item.length > 200 ? item.slice(0, 200) + '…' : item}`)
 console.log(`menu links: ${navLinks.length} checked${pendingLegal.length ? `; legal pages not built yet: ${pendingLegal.join(', ')}` : ''}`)
 console.log(`duplicate titles: ${dups('title').length}, duplicate descriptions: ${dups('description').length}`)
 console.log(`pages with todo items: ${pages.filter((p) => p.todo?.length).length} (see src/data/seo-report.csv)`)

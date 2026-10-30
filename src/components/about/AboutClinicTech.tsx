@@ -20,7 +20,7 @@ export function AboutClinicTech() {
 
   return (
     <section id="inside-neosculpt6" aria-labelledby="inside-neosculpt6-heading" className="flex flex-col bg-alternate">
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col-reverse items-center px-5 md:px-[30px] xl:flex-row xl:justify-center xl:px-10 xl:pt-[100px]">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col-reverse items-center max-md:items-start px-5 md:px-[30px] xl:flex-row xl:justify-center xl:px-10 xl:pt-[100px]">
         <div ref={imageRef} data-reveal="up" className="w-full max-w-[660px] xl:w-1/2">
           <img
             src={clinicTech.image.src}
@@ -33,7 +33,7 @@ export function AboutClinicTech() {
           />
         </div>
 
-        <div className="flex w-full flex-col items-center gap-[30px] py-20 text-center md:py-[100px] xl:w-1/2 xl:gap-10 xl:p-[50px] min-[1601px]:p-[100px]">
+        <div className="flex w-full flex-col items-center max-md:items-start gap-[30px] py-20 text-center max-md:text-left md:py-[100px] xl:w-1/2 xl:gap-10 xl:p-[50px] min-[1601px]:p-[100px]">
           <p ref={eyebrowRef} data-reveal="up" className={eyebrow}>
             {clinicTech.eyebrow}
           </p>

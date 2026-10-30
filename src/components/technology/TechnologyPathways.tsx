@@ -38,9 +38,9 @@ export function TechnologyPathways({ pathways }: { pathways: InternationalPatien
     <section
       id="technology-pathways"
       aria-labelledby="technology-pathways-heading"
-      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center gap-10 px-5 md:mb-[100px] md:gap-[60px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center max-md:items-start gap-10 px-5 md:mb-[100px] md:gap-[60px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <h2 id="technology-pathways-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center text-balance`}>
+      <h2 id="technology-pathways-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center max-md:text-left text-balance`}>
         {pathways.h2}
       </h2>
 

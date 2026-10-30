@@ -6,6 +6,9 @@
 //   node scripts/generate-pages.mjs --download-og   # also fetches missing og images from the live site
 //
 // Precedence (agreed): title = SEO CSV > live <title>; description = SEO CSV > live text if real > draft.
+// Doctor profiles are the exception: their route, title, description, H1, robots and og image all come from the
+// doctor's record in src/data/doctors.json (the same record the page renders); an SEO CSV row that disagrees is
+// flagged as a todo.
 // Robots are index,follow and canonicals are self-referencing; the live site's noindex/YouTube canonicals
 // are not carried over. Theme-demo leftovers keep their live title but are noindex and kept out of the sitemap.
 
@@ -13,6 +16,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../src/data/site.ts'
 import { hubs } from '../src/data/hubs.ts'
+import { publishedDoctors, doctorByPath, portraitFor } from '../src/data/doctors.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const SCRAPED = path.resolve(ROOT, '../scraped')
@@ -126,7 +130,7 @@ function pageType(row, p) {
   if (row.likely_theme_demo) return 'legacy-demo'
   if (p === '/') return 'home'
   if (p === '/contact-us/') return 'contact'
-  if (p === '/about-dr-sandeep-mahapatra/') return 'doctor'
+  if (doctorByPath.has(p)) return 'doctor'
   if (p.startsWith('/technology/')) return 'technology'
   return 'service'
 }
@@ -166,6 +170,8 @@ function record({ p, type, title, description, h1, robots = 'index, follow', ogI
   const name = extra.name ?? shortName(title)
   const breadcrumbs = [{ name: 'Home', path: '/' }]
   if (hub) breadcrumbs.push({ name: hub.name, path: hub.path })
+  // Doctor profiles: Home › Our Doctors (the home page's doctors section) › doctor.
+  if (type === 'doctor') breadcrumbs.push({ name: 'Our Doctors', path: '/#our-doctors' })
   if (p !== '/') breadcrumbs.push({ name, path: p })
   return {
     path: p,
@@ -192,6 +198,37 @@ function record({ p, type, title, description, h1, robots = 'index, follow', ogI
     todo,
     ...extra,
   }
+}
+
+function oldSiteOf(row, data) {
+  return {
+    url: row.url,
+    status: row.http_status,
+    title: decode(data.meta?.title ?? ''),
+    description: decode(data.meta?.description ?? ''),
+    dataJson: `scraped/${row.data_json}`,
+    contentMd: row.content_md ? `scraped/${row.content_md}` : null,
+  }
+}
+
+// A doctor profile's record, all from its doctors.json entry. Content still awaiting sign-off is listed as todo.
+function doctorRecord(doctor, todo, { lastmod, oldSite }) {
+  if (doctor.contentReview.medicalReviewStatus !== 'approved') todo.push('doctor: profile copy awaiting medical review (doctors.json contentReview)')
+  if (!portraitFor(doctor)) todo.push('doctor: portrait not approved, initials shown')
+  if (doctor.seo.ogImage === DEFAULT_OG_IMAGE) todo.push('og:image: default (no approved og image in doctors.json)')
+  return record({
+    p: doctor.path,
+    type: 'doctor',
+    title: doctor.seo.title,
+    description: doctor.seo.description,
+    h1: doctor.seo.h1,
+    robots: doctor.seo.robots,
+    ogImage: doctor.seo.ogImage,
+    ogImageAlt: doctor.seo.ogImage === doctor.hero.portrait.src ? doctor.hero.portrait.alt : undefined,
+    sources: { title: 'doctor-json', description: 'doctor-json' },
+    todo,
+    extra: { name: doctor.displayName, category: 'Doctors', video: null, lastmod, oldSite },
+  })
 }
 
 async function main() {
@@ -241,6 +278,16 @@ async function main() {
     }
 
     // title
+    const doctor = type === 'doctor' ? doctorByPath.get(p) : null
+    if (doctor) {
+      const csvTitle = decode(row.planned_meta_title ?? '')
+      const csvDesc = decode(row.planned_meta_description ?? '')
+      if (csvTitle && csvTitle !== doctor.seo.title) todo.push(`title: SEO CSV has "${csvTitle}"; doctors.json wins`)
+      if (csvDesc && csvDesc !== doctor.seo.description) todo.push(`description: SEO CSV has "${csvDesc}"; doctors.json wins`)
+      pages.push(doctorRecord(doctor, todo, { lastmod: (data.meta?.og ?? {})['og:updated_time'] || sitemapLastmod[p] || null, oldSite: oldSiteOf(row, data) }))
+      continue
+    }
+
     let title
     if (type === 'home') [title, sources.title] = [HOME.title, 'homepage.md']
     else if (type === 'about') [title, sources.title] = [ABOUT.title, 'about-us.md']
@@ -305,14 +352,7 @@ async function main() {
           ...(type === 'contact' ? { name: CONTACT.name } : {}),
           video: row.video_planned || null,
           lastmod: og['og:updated_time'] || sitemapLastmod[p] || null,
-          oldSite: {
-            url: row.url,
-            status: row.http_status,
-            title: decode(meta.title),
-            description: liveDesc,
-            dataJson: `scraped/${row.data_json}`,
-            contentMd: row.content_md ? `scraped/${row.content_md}` : null,
-          },
+          oldSite: oldSiteOf(row, data),
           ...(type === 'legacy-demo' ? { legacy: 'theme-demo' } : {}),
         },
       }),
@@ -342,6 +382,12 @@ async function main() {
         },
       }),
     )
+  }
+
+  // Doctor profiles the old site never had (every published record in doctors.json without a captured page).
+  const captured = new Set(pages.map((r) => r.path))
+  for (const doctor of publishedDoctors) {
+    if (!captured.has(doctor.path)) pages.push(doctorRecord(doctor, [], { lastmod: null, oldSite: null }))
   }
 
   // order: home, hubs, old pages in capture order, legacy demo last

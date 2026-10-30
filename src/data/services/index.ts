@@ -66,7 +66,8 @@ function cta(label: string): Cta {
 
 // The doctors the docs name ("Dr Sandeep Mahapatra" / "Dr. Sandeep", "Dr. Saranya", "Dr. Lavanyaa M"): name, profile
 // and portrait. Dr Sandeep and Dr Saranya are the home page's doctor cards; Dr Lavanyaa M is new in the 2026-10
-// Blepharoplasty and Chin Augmentation doc, with a draft profile page (src/data/hubs.ts) and no portrait yet.
+// Blepharoplasty and Chin Augmentation doc, with no profile page (removed until her profile is signed off) and no
+// portrait yet, so her card has no profile link.
 const homeCard = (name: string) => {
   const card = doctors.cards.find((c) => c.name === name)
   if (!card) throw new Error(`no home doctor card for ${name}`)
@@ -75,7 +76,7 @@ const homeCard = (name: string) => {
 const DOCTORS = [
   { match: /sandeep/i, ...pick(homeCard('Dr Sandeep Mahapatra')), portrait: sandeepPortrait as ServiceImage | null },
   { match: /saranya/i, ...pick(homeCard('Dr Saranya T')), portrait: null },
-  { match: /lavanyaa/i, name: 'Dr Lavanyaa M', href: '/dr-lavanyaa-m/', initials: 'LM', portrait: null },
+  { match: /lavanyaa/i, name: 'Dr Lavanyaa M', href: null as string | null, initials: 'LM', portrait: null },
 ]
 function pick({ name, href, initials }: { name: string; href: string; initials: string }) {
   return { name, href, initials }
@@ -143,7 +144,7 @@ function pendingFor(p: Parsed, cards: ServiceDoctor[]): string[] {
     const figures = d.chips.filter((c) => /\d/.test(c))
     if (cards[i].name === 'Dr Sandeep Mahapatra' && figures.length) out.push(`doctor figures: ${figures.join(', ')} (homepage.md †)`)
     if (cards[i].name === 'Dr Lavanyaa M') {
-      out.push(`new doctor: Dr Lavanyaa M (${d.chips.join(', ')}): credentials, portrait and the draft profile page /dr-lavanyaa-m/`)
+      out.push(`new doctor: Dr Lavanyaa M (${d.chips.join(', ')}): credentials, portrait and a profile page (none yet, so no profile link)`)
     }
   }
   const prices = p.cost.factors.filter((f) => /\bRs\.?|₹/.test(f.text))

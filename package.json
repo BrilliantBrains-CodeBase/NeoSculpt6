@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet",
+    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet && node scripts/validate-doctors.mjs --quiet",
+    "validate:doctors": "node scripts/validate-doctors.mjs",
     "gen:og": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
     "dev": "vite-react-ssg dev",
     "build": "node scripts/patch-react-dom-server.mjs && npm run gen && vite-react-ssg build && node scripts/postbuild.mjs",

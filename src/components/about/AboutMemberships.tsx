@@ -26,7 +26,7 @@ export function AboutMemberships() {
         <HomeCredentials label={memberships.label} logos={confirmedLogos} />
 
         <div className="flex flex-col gap-10">
-          <h3 ref={titleRef} data-reveal="up" className="text-center font-heading text-h3 text-secondary uppercase">
+          <h3 ref={titleRef} data-reveal="up" className="text-center max-md:text-left font-heading text-h3 text-secondary uppercase">
             <Parts parts={memberships.h3} />
           </h3>
           <ul ref={cardsRef} data-reveal-stagger="" className="mx-auto grid w-full max-w-[1000px] grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px]">

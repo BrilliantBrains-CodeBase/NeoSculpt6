@@ -10,7 +10,7 @@ import { FacebookIcon, InstagramIcon, MailIcon, PhoneIcon, YoutubeIcon } from '.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 const h6 = 'text-h6 font-medium uppercase'
-const columnTitle = 'mb-5 text-center font-heading text-h4 text-secondary xl:mb-[30px]'
+const columnTitle = 'mb-5 text-center max-md:text-left font-heading text-h4 text-secondary xl:mb-[30px]'
 
 const socialLinks = [
   { key: 'facebook', label: 'Facebook', href: clinic.social.facebook, icon: <FacebookIcon /> },
@@ -27,10 +27,10 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-background bg-[url(/images/footer-bg.webp)] bg-cover bg-center bg-no-repeat">
-      <div className="flex flex-col items-center px-5 pt-[60px] pb-10 md:gap-[60px] md:px-[30px] md:pt-10 xl:gap-[100px] xl:px-10">
+      <div className="flex flex-col items-center max-md:items-start px-5 pt-[60px] pb-10 md:gap-[60px] md:px-[30px] md:pt-10 xl:gap-[100px] xl:px-10">
         {/* Row 1: menu */}
         <nav ref={menuRef} data-reveal aria-label="Footer" className="w-full pb-[50px] md:pb-0">
-          <ul className="flex flex-wrap justify-center gap-x-10 md:gap-x-[60px] md:gap-y-3">
+          <ul className="flex flex-wrap justify-center max-md:justify-start gap-x-10 md:gap-x-[60px] md:gap-y-3">
             {footerNav.map((item) => (
               <li key={item.href}>
                 <SmartLink
@@ -46,13 +46,13 @@ export function SiteFooter() {
 
         {/* Row 2: address / logo / contacts. On tablet the logo takes its own row first, as in the
             theme's <=1180px rules; our address and email are too long for three columns at 768px. */}
-        <div className="mb-[45px] flex w-full flex-col items-center gap-12 md:mb-0 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-10 xl:flex-nowrap xl:items-center xl:gap-0">
+        <div className="mb-[45px] flex w-full flex-col items-center max-md:items-start gap-12 md:mb-0 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-10 xl:flex-nowrap xl:items-center xl:gap-0">
           <div className="w-full md:basis-[calc(50%-20px)] xl:basis-1/3">
             <h2 className={columnTitle}>Address</h2>
             <ul
               ref={addressRef}
               data-reveal-stagger
-              className="flex flex-col items-center gap-2.5 text-center text-text xl:gap-[15px]"
+              className="flex flex-col items-center max-md:items-start gap-2.5 text-center max-md:text-left text-text xl:gap-[15px]"
             >
               <li style={{ '--i': 0 } as CSSProperties}>
                 <a
@@ -72,19 +72,19 @@ export function SiteFooter() {
           <div
             ref={logoRef}
             data-reveal
-            className="flex w-full flex-col items-center gap-[25px] md:order-first md:basis-full xl:order-none xl:basis-1/3"
+            className="flex w-full flex-col items-center max-md:items-start gap-[25px] md:order-first md:basis-full xl:order-none xl:basis-1/3"
           >
             <Link to="/" aria-label={`${clinic.name} home`}>
               <img
                 src="/images/logo-stacked.webp"
                 alt={`${clinic.name}, The Art of Transformation`}
-                width={607}
+                width={690}
                 height={510}
                 loading="lazy"
                 className="h-[150px] w-auto md:h-[120px] xl:h-[170px]"
               />
             </Link>
-            <p className={`${h6} text-center text-tertiary`}>
+            <p className={`${h6} text-center max-md:text-left text-tertiary`}>
               {clinic.tagline.split(' · ').map((part) => (
                 <span key={part} className="block text-balance">
                   {part}
@@ -96,11 +96,11 @@ export function SiteFooter() {
           <div
             ref={contactsRef}
             data-reveal
-            className="flex w-full flex-col items-center gap-5 md:basis-[calc(50%-20px)] xl:basis-1/3"
+            className="flex w-full flex-col items-center max-md:items-start gap-5 md:basis-[calc(50%-20px)] xl:basis-1/3"
           >
             <div className="mb-2.5 w-full">
               <h2 className={columnTitle}>Contacts</h2>
-              <ul className={`${h6} flex flex-col items-center gap-[15px] text-secondary`}>
+              <ul className={`${h6} flex flex-col items-center max-md:items-start gap-[15px] text-secondary`}>
                 <li>
                   <a href={clinic.phoneHref} className="group inline-flex items-center gap-[9px] transition-colors duration-300 hover:text-primary">
                     <PhoneIcon />
@@ -116,7 +116,7 @@ export function SiteFooter() {
               </ul>
             </div>
             {socialLinks.length > 0 && (
-              <ul className="flex flex-wrap justify-center gap-x-[7px] gap-y-5">
+              <ul className="flex flex-wrap justify-center max-md:justify-start gap-x-[7px] gap-y-5">
                 {socialLinks.map((s) => (
                   <li key={s.key}>
                     <a
@@ -136,7 +136,7 @@ export function SiteFooter() {
         </div>
 
         {/* Row 3: sister clinics, medical review line, legal + copyright */}
-        <div className="flex w-full flex-col items-center gap-3 text-center text-small text-text">
+        <div className="flex w-full flex-col items-center max-md:items-start gap-3 text-center max-md:text-left text-small text-text">
           <p>
             Our sister clinics:{' '}
             {clinic.sisterClinics.map((c, i) => (

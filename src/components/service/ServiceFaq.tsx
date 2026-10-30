@@ -24,17 +24,17 @@ export function ServiceFaq({ faqs }: { faqs: ServiceContent['faqs'] }) {
       className="mb-20 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
       <div className="mx-auto flex w-full max-w-[980px] flex-col gap-[30px] rounded-[20px] bg-alternate px-5 py-[60px] md:px-[50px] md:py-20 xl:px-20 xl:py-[100px]">
-        <p ref={eyebrowRef} data-reveal="up" className={`${eyebrow} text-center`}>
+        <p ref={eyebrowRef} data-reveal="up" className={`${eyebrow} text-center max-md:text-left`}>
           {faqs.eyebrow}
         </p>
-        <h2 id="service-faqs-heading" ref={titleRef} data-reveal="up" style={delay(150)} className={`${h2} text-center text-balance`}>
+        <h2 id="service-faqs-heading" ref={titleRef} data-reveal="up" style={delay(150)} className={`${h2} text-center max-md:text-left text-balance`}>
           {faqs.h2}
         </h2>
         <div ref={listRef} data-reveal="up" style={delay(300)} className="border-t border-border">
           <Accordion items={faqs.items.map(({ q, a }) => ({ title: q, body: a }))} />
         </div>
         {faqs.cta && (
-          <div ref={ctaRef} data-reveal="pop" style={delay(450)} className="mt-[30px] text-center">
+          <div ref={ctaRef} data-reveal="pop" style={delay(450)} className="mt-[30px] text-center max-md:text-left">
             <CtaButton cta={faqs.cta} />
           </div>
         )}

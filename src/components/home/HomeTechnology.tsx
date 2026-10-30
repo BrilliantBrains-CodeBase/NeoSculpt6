@@ -29,7 +29,7 @@ export function HomeTechnology() {
         />
       </picture>
 
-      <div ref={textRef} data-reveal="up" className="flex flex-col items-center gap-5 bg-background px-5 py-[50px] text-center md:sr-only">
+      <div ref={textRef} data-reveal="up" className="flex flex-col items-center max-md:items-start gap-5 bg-background px-5 py-[50px] text-center max-md:text-left md:sr-only">
         <h2 id="technology-heading" className="font-heading text-h2 text-secondary uppercase">
           {banner.h2.map((line, i) => (
             <span key={i} className="block">

@@ -17,7 +17,7 @@ export function TechnologyHighlight({ assessment }: { assessment: { h2: string; 
       <div
         ref={ref}
         data-reveal="up"
-        className="flex flex-col items-center gap-5 border-y border-tertiary/40 py-[50px] text-center md:py-[60px] xl:py-20"
+        className="flex flex-col items-center max-md:items-start gap-5 border-y border-tertiary/40 py-[50px] text-center max-md:text-left md:py-[60px] xl:py-20"
       >
         <h2 id="technology-assessment-heading" className="font-heading text-h3 text-balance text-secondary uppercase">
           {assessment.h2}

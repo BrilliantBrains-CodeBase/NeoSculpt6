@@ -196,7 +196,7 @@ export const saranya = {
   portrait: null as DoctorPortrait | null,
 }
 
-// 3. Our Professional Team. The two cards are the home page's (`doctors.cards`), centred at the theme's 3-column width.
+// 3. Our Professional Team. The cards are the home page's (`doctors.cards`: every published doctor), laid out by DoctorGrid.
 export const team = {
   eyebrow: 'Meet Our Doctors',
   h2: [{ text: 'Expertise Matched to the ' }, { text: 'Right Concern', gold: true }] as Part[],

@@ -40,7 +40,7 @@ export function BookingDialog() {
           />
         </div>
         <div className="flex flex-1 flex-col gap-[30px] px-5 py-[60px] md:p-[50px] md:gap-[50px] xl:p-20">
-          <h2 id={titleId} className="text-center font-heading text-h3 text-secondary uppercase text-balance">
+          <h2 id={titleId} className="text-center max-md:text-left font-heading text-h3 text-secondary uppercase text-balance">
             {booking.h2.map((line, i) => (
               <span key={i}>
                 {i > 0 && ' '}

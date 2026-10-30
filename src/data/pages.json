@@ -381,100 +381,6 @@
     "oldSite": null
   },
   {
-    "path": "/dr-saranya-t/",
-    "type": "doctor",
-    "name": "Dr Saranya T",
-    "section": null,
-    "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-    "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-    "h1": "Dr Saranya T",
-    "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/dr-saranya-t/",
-    "og": {
-      "type": "article",
-      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-      "url": "https://neosculpt6.com/dr-saranya-t/",
-      "image": "/og/default.png",
-      "imageAlt": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "siteName": "NeoSculpt6"
-    },
-    "twitter": {
-      "card": "summary_large_image",
-      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-      "image": "/og/default.png"
-    },
-    "breadcrumbs": [
-      {
-        "name": "Home",
-        "path": "/"
-      },
-      {
-        "name": "Dr Saranya T",
-        "path": "/dr-saranya-t/"
-      }
-    ],
-    "sources": {
-      "title": "draft",
-      "description": "draft"
-    },
-    "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
-    ],
-    "category": "Dr Saranya T",
-    "video": null,
-    "lastmod": null,
-    "oldSite": null
-  },
-  {
-    "path": "/dr-lavanyaa-m/",
-    "type": "doctor",
-    "name": "Dr Lavanyaa M",
-    "section": null,
-    "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
-    "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
-    "h1": "Dr Lavanyaa M",
-    "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/dr-lavanyaa-m/",
-    "og": {
-      "type": "article",
-      "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
-      "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
-      "url": "https://neosculpt6.com/dr-lavanyaa-m/",
-      "image": "/og/default.png",
-      "imageAlt": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
-      "siteName": "NeoSculpt6"
-    },
-    "twitter": {
-      "card": "summary_large_image",
-      "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
-      "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
-      "image": "/og/default.png"
-    },
-    "breadcrumbs": [
-      {
-        "name": "Home",
-        "path": "/"
-      },
-      {
-        "name": "Dr Lavanyaa M",
-        "path": "/dr-lavanyaa-m/"
-      }
-    ],
-    "sources": {
-      "title": "draft",
-      "description": "draft"
-    },
-    "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
-    ],
-    "category": "Dr Lavanyaa M",
-    "video": null,
-    "lastmod": null,
-    "oldSite": null
-  },
-  {
     "path": "/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/",
     "type": "service",
     "name": "Chin Augmentation Surgery",
@@ -615,6 +521,164 @@
       "new page: title, description and h1 are drafts (src/data/hubs.ts)"
     ],
     "category": "Results",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/dr-saranya-t/",
+    "type": "doctor",
+    "name": "Dr Saranya T",
+    "section": null,
+    "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+    "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
+    "h1": "Dr Saranya T",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/dr-saranya-t/",
+    "og": {
+      "type": "article",
+      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
+      "url": "https://neosculpt6.com/dr-saranya-t/",
+      "image": "/og/default.png",
+      "imageAlt": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Our Doctors",
+        "path": "/#our-doctors"
+      },
+      {
+        "name": "Dr Saranya T",
+        "path": "/dr-saranya-t/"
+      }
+    ],
+    "sources": {
+      "title": "doctor-json",
+      "description": "doctor-json"
+    },
+    "todo": [
+      "doctor: profile copy awaiting medical review (doctors.json contentReview)",
+      "og:image: default (no approved og image in doctors.json)"
+    ],
+    "category": "Doctors",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/dr-thyagaraj/",
+    "type": "doctor",
+    "name": "Dr Thyagaraj",
+    "section": null,
+    "title": "Dr Thyagaraj | Senior Plastic Surgeon (MS, MCh) | NeoSculpt6",
+    "description": "Meet Dr Thyagaraj, Senior Plastic Surgeon (MS, MCh) trained in breast reconstruction, body contouring and facial surgery, at NeoSculpt6, Whitefield, Bangalore.",
+    "h1": "Dr. Thyagaraj",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/dr-thyagaraj/",
+    "og": {
+      "type": "article",
+      "title": "Dr Thyagaraj | Senior Plastic Surgeon (MS, MCh) | NeoSculpt6",
+      "description": "Meet Dr Thyagaraj, Senior Plastic Surgeon (MS, MCh) trained in breast reconstruction, body contouring and facial surgery, at NeoSculpt6, Whitefield, Bangalore.",
+      "url": "https://neosculpt6.com/dr-thyagaraj/",
+      "image": "/og/default.png",
+      "imageAlt": "Dr Thyagaraj | Senior Plastic Surgeon (MS, MCh) | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Dr Thyagaraj | Senior Plastic Surgeon (MS, MCh) | NeoSculpt6",
+      "description": "Meet Dr Thyagaraj, Senior Plastic Surgeon (MS, MCh) trained in breast reconstruction, body contouring and facial surgery, at NeoSculpt6, Whitefield, Bangalore.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Our Doctors",
+        "path": "/#our-doctors"
+      },
+      {
+        "name": "Dr Thyagaraj",
+        "path": "/dr-thyagaraj/"
+      }
+    ],
+    "sources": {
+      "title": "doctor-json",
+      "description": "doctor-json"
+    },
+    "todo": [
+      "doctor: profile copy awaiting medical review (doctors.json contentReview)",
+      "doctor: portrait not approved, initials shown",
+      "og:image: default (no approved og image in doctors.json)"
+    ],
+    "category": "Doctors",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/dr-payal-mahapatra/",
+    "type": "doctor",
+    "name": "Dr Payal Mahapatra",
+    "section": null,
+    "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+    "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+    "h1": "Dr. Payal Mahapatra",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
+    "og": {
+      "type": "article",
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "url": "https://neosculpt6.com/dr-payal-mahapatra/",
+      "image": "/og/default.png",
+      "imageAlt": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Our Doctors",
+        "path": "/#our-doctors"
+      },
+      {
+        "name": "Dr Payal Mahapatra",
+        "path": "/dr-payal-mahapatra/"
+      }
+    ],
+    "sources": {
+      "title": "doctor-json",
+      "description": "doctor-json"
+    },
+    "todo": [
+      "doctor: profile copy awaiting medical review (doctors.json contentReview)",
+      "doctor: portrait not approved, initials shown",
+      "og:image: default (no approved og image in doctors.json)"
+    ],
+    "category": "Doctors",
     "video": null,
     "lastmod": null,
     "oldSite": null
@@ -9776,7 +9840,7 @@
   {
     "path": "/about-dr-sandeep-mahapatra/",
     "type": "doctor",
-    "name": "Dr. Sandeep Mahapatra | Dermatologist, Hair Transplant & Cosmetic Expert",
+    "name": "Dr Sandeep Mahapatra",
     "section": null,
     "title": "Dr. Sandeep Mahapatra | Dermatologist, Hair Transplant & Cosmetic Expert",
     "description": "Meet Dr. Sandeep Mahapatra, Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon at NeoSculpt6 in Bangalore.",
@@ -9789,7 +9853,7 @@
       "description": "Meet Dr. Sandeep Mahapatra, Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon at NeoSculpt6 in Bangalore.",
       "url": "https://neosculpt6.com/about-dr-sandeep-mahapatra/",
       "image": "/og/about-dr-sandeep-mahapatra.jpeg",
-      "imageAlt": "About Dr. Sandeep Mahapatra",
+      "imageAlt": "Dr Sandeep Mahapatra in a white clinical coat at NeoSculpt6",
       "siteName": "NeoSculpt6"
     },
     "twitter": {
@@ -9804,16 +9868,22 @@
         "path": "/"
       },
       {
-        "name": "Dr. Sandeep Mahapatra | Dermatologist, Hair Transplant & Cosmetic Expert",
+        "name": "Our Doctors",
+        "path": "/#our-doctors"
+      },
+      {
+        "name": "Dr Sandeep Mahapatra",
         "path": "/about-dr-sandeep-mahapatra/"
       }
     ],
     "sources": {
-      "title": "live",
-      "description": "live"
+      "title": "doctor-json",
+      "description": "doctor-json"
     },
-    "todo": [],
-    "category": "Site Pages",
+    "todo": [
+      "doctor: profile copy awaiting medical review (doctors.json contentReview)"
+    ],
+    "category": "Doctors",
     "video": null,
     "lastmod": "2026-09-29T05:21:53+00:00",
     "oldSite": {

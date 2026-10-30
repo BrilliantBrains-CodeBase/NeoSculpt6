@@ -9,6 +9,7 @@ import { SmartLink } from '../SmartLink'
 // that section's background, overlay and padding.
 // Bottom padding is trimmed (80/60/40px) because the About section follows on a matching background.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
+// On mobile the counters sit in a 2×2 grid, with a big number over a small label.
 
 const DURATION = 2000 // ms, the theme's data-duration
 // jQuery numerator's default `swing` easing, which Elementor's counter uses.
@@ -27,12 +28,12 @@ export function HomeStats() {
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0b0b0d00_0%,#0b0b0d_40%)] opacity-80" />
 
       <div className="mx-auto w-full max-w-[1400px]">
-        <dl className="flex flex-wrap gap-[25px] md:gap-[35px] xl:flex-nowrap xl:justify-between">
+        <dl className="grid grid-cols-2 gap-x-5 gap-y-[35px] md:flex md:flex-wrap md:gap-[35px] xl:flex-nowrap xl:justify-between">
           {stats.items.map((item, i) => (
             <StatCounter key={item.label} {...item} index={i} />
           ))}
         </dl>
-        <p className="mt-[50px] text-center text-small text-text/70">{stats.note}</p>
+        <p className="mt-[50px] text-center max-md:text-left text-small text-text/70">{stats.note}</p>
       </div>
     </section>
   )
@@ -86,9 +87,9 @@ export function StatCounter({
       ref={ref}
       data-reveal="pop"
       style={delay(index * 100)}
-      className={`flex flex-col-reverse ${className}`}
+      className={`flex flex-col-reverse max-md:justify-end ${className}`}
     >
-      <dt className="flex justify-center font-heading text-[19px] leading-[2.5] text-secondary">
+      <dt className="flex justify-center max-md:justify-start font-heading text-[19px] leading-[2.5] text-secondary max-md:mt-2.5 max-md:text-[13px] max-md:leading-[1.4] max-md:tracking-[1px]">
         {href ? (
           <SmartLink
             href={href}
@@ -100,13 +101,13 @@ export function StatCounter({
           label
         )}
       </dt>
-      <dd className="flex font-heading text-h3 text-secondary uppercase">
+      <dd className="flex font-heading text-h3 text-secondary uppercase max-md:text-[clamp(28px,9vw,40px)] max-md:leading-none">
         <span className="sr-only">
           {prefix}
           {format(value)}
           {suffix}
         </span>
-        <span aria-hidden="true" className="grow text-end whitespace-pre-wrap">
+        <span aria-hidden="true" className="grow text-end whitespace-pre-wrap max-md:grow-0">
           {prefix}
         </span>
         <span aria-hidden="true">{display}</span>

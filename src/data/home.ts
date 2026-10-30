@@ -1,5 +1,7 @@
 // Home page copy, one export per section. Source: content/home-page/homepage.md (section numbers match the doc).
 
+import { cardPortraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
+
 // 1. Hero + credential ticker.
 export const hero = {
   eyebrow: 'NeoSculpt6 · Whitefield, Bangalore',
@@ -14,9 +16,10 @@ export const hero = {
     'Hair, face, skin and body, diagnosed, planned and treated by the same senior doctors who will stand behind your result.',
   primaryCta: 'Book a Consultation',
   secondaryCta: { label: 'Find My Treatment', href: '/#find-my-treatment' }, // the concern form in section 15
-  // TODO: theme stock image (Rejuvita 84-home-1-1.webp), restored on 2026-10-28 at the client's request in place of the
-  // supplied hero photo (kept unused at /images/home/hero-supplied.webp; its square crop is an Instagram tile).
-  image: '/images/home/hero.webp',
+  // TRIAL (2026-10-30): rose-toned grade of the clinic photo ("Rosy Dermatology Treatment Session", same 1672×941
+  // framing). To go back, set /images/home/hero-clinic.webp (the neutral clinic photo, supplied 2026-10-28).
+  // Unused alternatives: /images/home/hero.webp (the Rejuvita theme image) and hero-supplied.webp (earlier photo).
+  image: '/images/home/hero-rosy.webp',
   // Needs sign-off before launch (marked † in the doc): years in practice, transplant count, MD Gold Medalist,
   // DHI certification, ISHRS membership. The † marks are not shown on the page.
   ticker: [
@@ -53,7 +56,8 @@ export const stats = {
   items: [
     { value: 20, suffix: '+', label: 'Years of Clinical Practice' },
     { value: 10000, suffix: '+', label: 'Hair Transplants Performed' },
-    { value: 50000, suffix: '+', label: 'Laser Procedures' },
+    // Not in homepage.md (it lists 50,000+ Laser Procedures here); changed on request, needs the same sign-off.
+    { value: 30000, suffix: '+', label: 'Cosmetic Surgeries Performed' },
     { value: 500, suffix: '+', label: 'Patients from Outside India' },
   ],
   note: "Figures reflect Dr Sandeep Mahapatra's cumulative clinical experience.",
@@ -115,6 +119,22 @@ export const pillars = {
       imageAlt: 'A gloved clinician drawing a new hairline on a balding man’s scalp',
     },
     {
+      label: 'Cosmetic Surgery',
+      title: 'Cosmetic Surgery',
+      text: 'Face, breast and body surgery planned around anatomy, safety and recovery, led by Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon.',
+      items: [
+        { label: 'Rhinoplasty', href: '/cosmetic-surgery/rhinoplasty-in-bangalore/' },
+        { label: 'Facelift', href: '/cosmetic-surgery/facelift-surgery-in-bangalore/' },
+        { label: 'Blepharoplasty', href: '/cosmetic-surgery/blepharoplasty-eyelid-surgery-in-bangalore/' },
+        { label: 'Tummy Tuck', href: '/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/' },
+        { label: 'Gynaecomastia', href: '/cosmetic-surgery/gynecomastia-surgery-in-bangalore/' },
+        { label: 'Breast Surgery', href: '/cosmetic-surgery/breast-augmentation-surgery-in-bangalore/' },
+      ],
+      cta: { label: 'Explore Cosmetic Surgery', href: '/cosmetic-surgery/' },
+      image: '/images/pillars/cosmetic-surgery.webp',
+      imageAlt: 'Gloved hands framing a woman’s face and jaw during a surgical assessment',
+    },
+    {
       label: 'Body Contouring',
       title: 'Slimming & Body Contouring',
       text: 'Surgical, non-surgical and medical options for stubborn fat and body shape, in one plan, from Vaser liposuction and cryolipolysis to doctor-supervised GLP-1 programmes.',
@@ -160,22 +180,6 @@ export const pillars = {
       cta: { label: 'Explore Laser & Skin', href: '/laser-skin-aesthetic/' },
       image: '/images/pillars/laser-skin-aesthetic.webp',
       imageAlt: 'A clinician treating a woman’s face with a laser handpiece while she wears eye shields',
-    },
-    {
-      label: 'Cosmetic Surgery',
-      title: 'Cosmetic Surgery',
-      text: 'Face, breast and body surgery planned around anatomy, safety and recovery, led by Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon.',
-      items: [
-        { label: 'Rhinoplasty', href: '/cosmetic-surgery/rhinoplasty-in-bangalore/' },
-        { label: 'Facelift', href: '/cosmetic-surgery/facelift-surgery-in-bangalore/' },
-        { label: 'Blepharoplasty', href: '/cosmetic-surgery/blepharoplasty-eyelid-surgery-in-bangalore/' },
-        { label: 'Tummy Tuck', href: '/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/' },
-        { label: 'Gynaecomastia', href: '/cosmetic-surgery/gynecomastia-surgery-in-bangalore/' },
-        { label: 'Breast Surgery', href: '/cosmetic-surgery/breast-augmentation-surgery-in-bangalore/' },
-      ],
-      cta: { label: 'Explore Cosmetic Surgery', href: '/cosmetic-surgery/' },
-      image: '/images/pillars/cosmetic-surgery.webp',
-      imageAlt: 'Gloved hands framing a woman’s face and jaw during a surgical assessment',
     },
     {
       label: 'Intimate Wellness',
@@ -367,15 +371,16 @@ export const signature = {
   ],
 }
 
-// 9. Meet your doctors. The theme has 3 cards; ours centres the 2 doctor cards (homepage.md §9). `specialty` is the
-// pink line, copied from the doc as written. The H2 is two lines, as the doc sets them.
+// 9. Meet your doctors (homepage.md §9): one card per published doctor (src/data/doctors.json). Up to three cards sit
+// centred at the theme's 3-column width; four or more fill rows of four (DoctorGrid). `specialty` is the record's
+// shortRole. The H2 is two lines, as the doc sets them.
 // Needs sign-off before launch (marked † in the doc): the sub-line's claim. The † is not shown.
-// Portraits: square head-and-shoulders crops in /images/home/doctors/, shown as circles (a card shows an initials circle
-// while `portrait` is null). Dr Sandeep's is cropped from his clinic portrait (/og/about-dr-sandeep-mahapatra.jpeg), Dr
-// Saranya's from the studio photo the clinic sent on 2026-10-26. TODO: the two backgrounds differ (clinic room vs plain
-// white); reshoot both in the clinic with the same lighting if the clinic wants them to match.
-// TODO: add each doctor's real profile URLs. An icon shows only once its href is filled in (as in the footer).
-export type DoctorSocial = { network: 'instagram' | 'youtube' | 'linkedin'; href: string }
+// Portraits: square head-and-shoulders crops (the record's cardPortrait, else its hero portrait), shown as circles; a
+// card shows an initials circle until the portrait is approved. Dr Sandeep's is cropped from his clinic portrait, Dr
+// Saranya's from the studio photo the clinic sent on 2026-10-26. TODO: the backgrounds differ (clinic room vs plain
+// white); reshoot in the clinic with the same lighting if the clinic wants them to match.
+// Social icons show once a profile URL is approved in doctors.json.
+export type DoctorSocial = { network: 'instagram' | 'facebook' | 'youtube' | 'linkedin'; href: string }
 export type DoctorPortrait = { src: string; width: number; height: number; alt: string }
 
 export const doctors = {
@@ -384,40 +389,17 @@ export const doctors = {
   subline: 'The specialist who plans your treatment leads it and reviews your recovery.',
   profileLabel: 'Open Profile',
   cta: 'Book a Consultation', // opens the booking popup
-  cards: [
-    {
-      name: 'Dr Sandeep Mahapatra',
-      specialty: 'Dermatologist · Hair Transplant Surgeon',
-      href: '/about-dr-sandeep-mahapatra/',
-      initials: 'SM',
-      portrait: {
-        src: '/images/home/doctors/dr-sandeep-mahapatra.webp',
-        width: 620,
-        height: 620,
-        alt: 'Dr Sandeep Mahapatra in a white coat, standing in a clinic room',
-      } as DoctorPortrait | null,
-      social: [
-        { network: 'instagram', href: '' },
-        { network: 'youtube', href: '' },
-      ] as DoctorSocial[],
-    },
-    {
-      name: 'Dr Saranya T',
-      specialty: 'M.Ch Plastic & Reconstructive Surgeon',
-      href: '/dr-saranya-t/',
-      initials: 'ST',
-      portrait: {
-        src: '/images/home/doctors/dr-saranya-t.webp',
-        width: 760,
-        height: 760,
-        alt: 'Dr Saranya T in a white coat against a plain white background',
-      } as DoctorPortrait | null,
-      social: [
-        { network: 'instagram', href: '' },
-        { network: 'linkedin', href: '' },
-      ] as DoctorSocial[],
-    },
-  ],
+  // One card per published doctor in src/data/doctors.json, in the file's order, so a new doctor appears here, on the
+  // About team and in the header menu without other edits. Portrait: the record's square crop once approved (initials
+  // until then); social icons: approved profile URLs only.
+  cards: publishedDoctors.map((d) => ({
+    name: d.displayName,
+    specialty: d.shortRole,
+    href: d.path,
+    initials: d.initials,
+    portrait: cardPortraitFor(d) as DoctorPortrait | null,
+    social: publicSocialLinks(d).map(({ network, href }) => ({ network, href })) as DoctorSocial[],
+  })),
 }
 
 // Extra A: Dr Sandeep spotlight, placed between the pillars (4) and the popular carousel (5) as

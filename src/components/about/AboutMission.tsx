@@ -37,12 +37,12 @@ export function AboutMission() {
 
       {/* Values */}
       <section aria-labelledby="values-heading" className="mx-auto flex w-full max-w-[1400px] flex-col gap-10 md:gap-[60px]">
-        <h2 id="values-heading" ref={valuesTitleRef} data-reveal="up" className={`${h2} text-center`}>
+        <h2 id="values-heading" ref={valuesTitleRef} data-reveal="up" className={`${h2} text-center max-md:text-left`}>
           <Parts parts={mission.valuesH2} />
         </h2>
         <ul ref={valuesRef} data-reveal-stagger="" className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-[30px] xl:gap-[60px]">
           {mission.values.map((value, i) => (
-            <li key={value.title} style={{ '--i': i } as CSSProperties} className="flex flex-col items-center gap-5 text-center">
+            <li key={value.title} style={{ '--i': i } as CSSProperties} className="flex flex-col items-center max-md:items-start gap-5 text-center max-md:text-left">
               <span aria-hidden="true" className="grid size-[80px] place-items-center rounded-full border border-border text-primary">
                 <FlowerIcon />
               </span>
@@ -55,7 +55,7 @@ export function AboutMission() {
 
       {/* Process */}
       <section aria-labelledby="process-heading" className="mx-auto flex w-full max-w-[1400px] flex-col gap-10 md:gap-[60px]">
-        <h2 id="process-heading" ref={processTitleRef} data-reveal="up" style={delay(150)} className={`${h2} text-center`}>
+        <h2 id="process-heading" ref={processTitleRef} data-reveal="up" style={delay(150)} className={`${h2} text-center max-md:text-left`}>
           <Parts parts={mission.processH2} />
         </h2>
         <ol ref={stepsRef} data-reveal-stagger="" className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-[30px] xl:grid-cols-4">

@@ -19,7 +19,7 @@ export function ServiceIntro({ intro, id = 'service-intro' }: { intro: ServiceCo
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="mx-auto mb-20 flex w-full max-w-[1160px] flex-col items-center gap-10 px-5 text-center md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1160px] flex-col items-center max-md:items-start gap-10 px-5 text-center max-md:text-left md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
       <h2 id={`${id}-heading`} ref={titleRef} data-reveal="up" className={`${h2} text-balance`}>
         {intro.h2}

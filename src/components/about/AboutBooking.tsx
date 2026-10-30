@@ -17,8 +17,8 @@ export function AboutBooking() {
 
   return (
     <section id="book-consultation" aria-labelledby="book-consultation-heading" className="px-5 py-20 md:px-[30px] md:py-[100px] xl:px-10 xl:py-[150px]">
-      <div className="mx-auto flex w-full max-w-[940px] flex-col items-center gap-5 rounded-[20px] bg-alternate px-5 py-[60px] md:px-[60px] md:py-20 xl:px-20">
-        <p ref={eyebrowRef} data-reveal="up" className={`${eyebrow} text-center`}>
+      <div className="mx-auto flex w-full max-w-[940px] flex-col items-center max-md:items-start gap-5 rounded-[20px] bg-alternate px-5 py-[60px] md:px-[60px] md:py-20 xl:px-20">
+        <p ref={eyebrowRef} data-reveal="up" className={`${eyebrow} text-center max-md:text-left`}>
           {booking.eyebrow}
         </p>
         <h2
@@ -26,7 +26,7 @@ export function AboutBooking() {
           ref={titleRef}
           data-reveal="up"
           style={delay(150)}
-          className="mb-5 text-center font-heading text-h3 text-secondary uppercase text-balance md:mb-10"
+          className="mb-5 text-center max-md:text-left font-heading text-h3 text-secondary uppercase text-balance md:mb-10"
         >
           {booking.h2.map((line, i) => (
             <span key={i} className="block">

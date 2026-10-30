@@ -29,14 +29,14 @@ export function HomeHero() {
   return (
     <section
       style={{ backgroundImage: `url(${hero.image})` }}
-      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-top bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
+      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-[position:85%_top] bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
     >
       {/* Theme overlay: radial vignette to `alternate`, 80% opacity. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0000_0%,#0b0b0d_100%)] opacity-80" />
 
-      <div className="flex w-full flex-col items-center gap-[30px] px-5 pt-[200px] md:gap-10 md:px-0 md:pt-20 xl:items-end xl:justify-between xl:pt-[235px] xl:pb-[50px] min-[1601px]:min-h-[calc(100vh-65px)] min-[1601px]:pt-[250px] min-[1601px]:pb-[130px]">
+      <div className="flex w-full flex-col items-center max-md:items-start gap-[30px] px-5 pt-[200px] md:gap-10 md:px-0 md:pt-20 xl:items-start xl:pt-[235px] xl:pb-[50px] min-[1601px]:min-h-[calc(100vh-65px)] min-[1601px]:pt-[250px] min-[1601px]:pb-[130px]">
         {/* Title box (a57980f) */}
-        <div className="mt-[60px] flex w-full flex-col items-center gap-[15px] text-center md:mt-0 md:mb-[120px] md:gap-[30px] md:px-[30px] xl:mb-0 xl:w-[730px] xl:items-start xl:gap-10 xl:self-start xl:pr-0 xl:pl-10 xl:text-left min-[1601px]:w-[calc(5%+700px)] min-[1601px]:pl-[5%]">
+        <div className="mt-[60px] flex w-full flex-col items-center max-md:items-start gap-[15px] text-center max-md:text-left md:mt-0 md:mb-[120px] md:gap-[30px] md:px-[30px] xl:mb-0 xl:w-[730px] xl:items-start xl:gap-10 xl:self-start xl:pr-0 xl:pl-10 xl:text-left min-[1601px]:w-[calc(5%+700px)] min-[1601px]:pl-[5%]">
           <p ref={eyebrowRef} data-reveal="right" style={delay(150)} className="text-h6 font-medium text-text uppercase">
             {hero.eyebrow}
           </p>
@@ -61,17 +61,18 @@ export function HomeHero() {
           </h1>
         </div>
 
-        {/* Sub-line and buttons (e4b5279) */}
-        <div className="mt-[60px] flex w-full flex-col items-center gap-[15px] md:mt-0 md:w-[620px] md:gap-[30px] md:px-[30px] xl:w-[600px] xl:items-stretch xl:gap-2.5 xl:self-end xl:pr-10 xl:pl-0 min-[1601px]:w-[700px] min-[1601px]:pr-[5%]">
+        {/* Sub-line and buttons (e4b5279). On desktop they sit under the H1 on the left, not bottom-right as in the
+            theme: the hero photo's doctor and patient fill the right half. */}
+        <div className="mt-[60px] flex w-full flex-col items-center max-md:items-start gap-[15px] md:mt-0 md:w-[620px] md:gap-[30px] md:px-[30px] xl:w-[600px] xl:items-stretch xl:gap-2.5 xl:self-start xl:pr-0 xl:pl-10 min-[1601px]:w-[calc(5%+600px)] min-[1601px]:pl-[5%]">
           <p
             ref={sublineRef}
             data-reveal="left"
             style={delay(450)}
-            className="text-center font-accent-serif text-[18px] leading-[1.35] text-secondary italic md:text-[20px] xl:mb-[30px] xl:text-left xl:text-[22px]"
+            className="text-center max-md:text-left font-accent-serif text-[18px] leading-[1.35] text-secondary italic md:text-[20px] xl:mb-[30px] xl:text-left xl:text-[22px]"
           >
             {hero.subline}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-[25px] gap-y-[15px] xl:justify-start min-[1601px]:flex-nowrap">
+          <div className="flex flex-wrap items-center justify-center max-md:justify-start gap-x-[25px] gap-y-[15px] xl:justify-start min-[1601px]:flex-nowrap">
             <div ref={primaryRef} data-reveal="left" style={delay(750)}>
               <button type="button" onClick={openBooking} className={`${button} bg-accent text-secondary`}>
                 {hero.primaryCta}

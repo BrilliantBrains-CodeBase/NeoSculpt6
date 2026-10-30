@@ -31,14 +31,14 @@ export function HomeSignature() {
       className="mb-20 flex flex-col bg-alternate md:mb-[100px] xl:mb-[150px] xl:min-h-screen min-[1601px]:min-h-[750px]"
     >
       {/* Row (3d4b247): image left, text right on desktop; text above the image below that. */}
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col-reverse items-center px-5 md:px-[30px] xl:flex-1 xl:flex-row xl:justify-center xl:px-10 xl:pt-[50px]">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col-reverse items-center max-md:items-start px-5 md:px-[30px] xl:flex-1 xl:flex-row xl:justify-center xl:px-10 xl:pt-[50px]">
         {/* Hotspot image (688f56b): 660px wide on desktop, full width up to 660px below that. */}
         <div ref={imageRef} data-reveal="up" className="w-full max-w-[660px] xl:w-1/2">
           <HotspotImage />
         </div>
 
         {/* Text column (af2b9b5) */}
-        <div className="flex w-full flex-col items-center gap-[30px] py-20 text-center md:py-[100px] xl:w-1/2 xl:gap-10 xl:p-[50px] min-[1601px]:p-[100px]">
+        <div className="flex w-full flex-col items-center max-md:items-start gap-[30px] py-20 text-center max-md:text-left md:py-[100px] xl:w-1/2 xl:gap-10 xl:p-[50px] min-[1601px]:p-[100px]">
           <p ref={eyebrowRef} data-reveal="up" className="text-h6 font-medium text-text uppercase">
             {signature.eyebrow}
           </p>

@@ -1,15 +1,15 @@
 import { Head } from 'vite-react-ssg'
 import type { RoutePage } from '../data/types'
-import { pageByPath } from '../data/entries'
+import { crumbName } from '../data/entries'
 import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from '../data/site'
 import { faqs, physicians } from '../data/about'
 import { servicesByPath } from '../data/services'
 import { LIVE, technologyByPath } from '../data/technology'
 import { specialityByPath } from '../data/specialities'
+import { approved, doctorByPath, portraitFor, publicSocialLinks } from '../data/doctors'
 import type { Faq } from '../data/services/types'
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
-const crumbName = (p: string) => (p === '/' ? 'Home' : (pageByPath.get(p)?.name ?? p))
 
 // The clinic, shared by the home, about, contact, service and technology pages.
 function medicalClinic() {
@@ -125,8 +125,8 @@ function jsonLd(page: RoutePage, canonical: string) {
   if (service) {
     // service-page.md: FAQPage for the visible FAQs; a Physician for each doctor the page shows, without credentials
     // or memberships (the page's chips are pending sign-off and it shows no memberships). MedicalWebPage is a WebPage
-    // subtype. No rating or review markup until the reviews are verified. A doctor not in `physicians` (Dr Lavanyaa M)
-    // gets name, profile, the page's speciality line and the clinic only.
+    // subtype. No rating or review markup until the reviews are verified. A doctor not in `physicians` (Dr Lavanyaa M,
+    // who has no profile page) gets name, the page's speciality line and the clinic only.
     webpage['@type'] = 'MedicalWebPage'
     graph.push(
       medicalClinic(),
@@ -135,9 +135,9 @@ function jsonLd(page: RoutePage, canonical: string) {
         if (known) return physicianNode(known, { credentials: false })
         return {
           '@type': 'Physician',
-          '@id': `${abs(card.href)}#physician`,
+          '@id': card.href ? `${abs(card.href)}#physician` : `${canonical}#physician-${card.initials.toLowerCase()}`,
           name: card.name,
-          url: abs(card.href),
+          ...(card.href ? { url: abs(card.href) } : {}),
           jobTitle: card.specialty,
           worksFor: { '@id': `${SITE_URL}/#clinic` },
         }
@@ -181,6 +181,39 @@ function jsonLd(page: RoutePage, canonical: string) {
       }),
       ...(hub.faqsApproved ? [faqPage(canonical, hub.faqs.items)] : []),
     )
+  }
+  const doctor = page.type === 'doctor' ? doctorByPath.get(page.path) : undefined
+  if (doctor) {
+    // Doctor profiles (doctor-page-boilerplate.md): ProfilePage whose main entity is the Physician, plus the clinic.
+    // Everything comes from the same doctors.json record the page renders, filtered to approved items: credentials,
+    // memberships, portrait and social profiles appear only once signed off. No rating, review or statistics markup.
+    webpage['@type'] = ['WebPage', 'ProfilePage']
+    webpage.mainEntity = { '@id': `${canonical}#physician` }
+    const portrait = portraitFor(doctor)
+    const credentials = approved(doctor.qualifications)
+    const memberships = approved(doctor.recognition)
+    const social = publicSocialLinks(doctor)
+    graph.push(medicalClinic(), {
+      '@type': 'Physician',
+      '@id': `${canonical}#physician`,
+      name: doctor.displayName,
+      url: canonical,
+      jobTitle: doctor.role,
+      medicalSpecialty: `https://schema.org/${doctor.schemaSpecialty}`,
+      worksFor: { '@id': `${SITE_URL}/#clinic` },
+      ...(portrait ? { image: abs(portrait.src) } : {}),
+      ...(credentials.length
+        ? {
+            hasCredential: credentials.map((q) => ({
+              '@type': 'EducationalOccupationalCredential',
+              name: q.title,
+              ...(q.institution ? { recognizedBy: { '@type': 'Organization', name: q.institution } } : {}),
+            })),
+          }
+        : {}),
+      ...(memberships.length ? { memberOf: memberships.map((r) => ({ '@type': 'Organization', name: r.organisation })) } : {}),
+      ...(social.length ? { sameAs: social.map((s) => s.href) } : {}),
+    })
   }
   // Escape "<" so the JSON can never close the <script> tag early.
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')

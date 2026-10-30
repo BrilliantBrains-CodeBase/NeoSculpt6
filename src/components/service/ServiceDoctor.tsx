@@ -26,7 +26,7 @@ export function ServiceDoctor({ doctors }: { doctors: ServiceContent['doctors'] 
     <section
       id="service-doctor"
       aria-labelledby="service-doctor-heading"
-      className="mx-auto mb-20 flex w-full max-w-[1260px] flex-col items-center gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1260px] flex-col items-center max-md:items-start gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
       {doctors.eyebrow && (
         <p ref={eyebrowRef} data-reveal="up" className={eyebrow}>
@@ -38,12 +38,12 @@ export function ServiceDoctor({ doctors }: { doctors: ServiceContent['doctors'] 
         ref={titleRef}
         data-reveal="up"
         style={delay(150)}
-        className={doctors.intro?.length ? `${h2} text-center text-balance` : `${h2} mb-10 text-center md:mb-[60px]`}
+        className={doctors.intro?.length ? `${h2} text-center max-md:text-left text-balance` : `${h2} mb-10 text-center max-md:text-left md:mb-[60px]`}
       >
         {doctors.h2}
       </h2>
       {doctors.intro?.length ? (
-        <div ref={introRef} data-reveal="up" style={delay(300)} className="mb-10 flex max-w-[860px] flex-col gap-5 text-center md:mb-[60px]">
+        <div ref={introRef} data-reveal="up" style={delay(300)} className="mb-10 flex max-w-[860px] flex-col gap-5 text-center max-md:text-left md:mb-[60px]">
           {doctors.intro.map((p) => (
             <p key={p}>{p}</p>
           ))}
@@ -102,17 +102,21 @@ function DoctorPanel({ doctor, compact = false }: { doctor: Doctor; compact?: bo
             </li>
           ))}
         </ul>
-        <div className="mt-2.5 flex flex-wrap items-center gap-x-[30px] gap-y-5 border-t border-border pt-5">
-          <SmartLink
-            href={doctor.href}
-            className="inline-flex items-center gap-2.5 text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-4 outline-tertiary hover:text-primary focus-visible:text-primary focus-visible:outline-2"
-          >
-            {doctor.profileLabel}
-            {!doctor.profileLabel.includes(doctor.name) && <span className="sr-only">: {doctor.name}</span>}
-            <ArrowRightIcon className="size-3 shrink-0" />
-          </SmartLink>
-          {doctor.cta && <CtaButton cta={doctor.cta} />}
-        </div>
+        {(doctor.href || doctor.cta) && (
+          <div className="mt-2.5 flex flex-wrap items-center gap-x-[30px] gap-y-5 border-t border-border pt-5">
+            {doctor.href && (
+              <SmartLink
+                href={doctor.href}
+                className="inline-flex items-center gap-2.5 text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-4 outline-tertiary hover:text-primary focus-visible:text-primary focus-visible:outline-2"
+              >
+                {doctor.profileLabel}
+                {!doctor.profileLabel.includes(doctor.name) && <span className="sr-only">: {doctor.name}</span>}
+                <ArrowRightIcon className="size-3 shrink-0" />
+              </SmartLink>
+            )}
+            {doctor.cta && <CtaButton cta={doctor.cta} />}
+          </div>
+        )}
       </div>
     </article>
   )

@@ -43,7 +43,7 @@ export function HomeAbout() {
             id="about-heading"
             ref={sectionTitleRef}
             data-reveal="up"
-            className="text-center font-heading text-h2 text-secondary uppercase"
+            className="text-center max-md:text-left font-heading text-h2 text-secondary uppercase"
           >
             {about.h2.map((part) => (
               <span key={part.text} className={part.gold ? 'text-tertiary' : undefined}>

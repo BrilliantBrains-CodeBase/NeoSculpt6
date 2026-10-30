@@ -35,13 +35,13 @@ export function ServiceTechnology({ technology }: { technology: ServiceContent['
     <section
       id="service-technology"
       aria-labelledby="service-technology-heading"
-      className="mb-20 flex flex-col items-center gap-5 md:mb-[100px] xl:mb-[150px]"
+      className="mb-20 flex flex-col items-center max-md:items-start gap-5 md:mb-[100px] xl:mb-[150px]"
     >
       <h2
         id="service-technology-heading"
         ref={titleRef}
         data-reveal="up"
-        className={`${h2} max-w-[1080px] px-5 text-center text-balance md:px-[30px] xl:px-10`}
+        className={`${h2} max-w-[1080px] px-5 text-center max-md:text-left text-balance md:px-[30px] xl:px-10`}
       >
         {technology.h2}
       </h2>
@@ -50,7 +50,7 @@ export function ServiceTechnology({ technology }: { technology: ServiceContent['
           ref={sublineRef}
           data-reveal="up"
           style={delay(150)}
-          className={`${italicLine} max-w-[900px] px-5 text-center text-secondary md:px-[30px] xl:px-10`}
+          className={`${italicLine} max-w-[900px] px-5 text-center max-md:text-left text-secondary md:px-[30px] xl:px-10`}
         >
           {technology.subline}
         </p>

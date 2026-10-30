@@ -2,10 +2,12 @@
 /* Rejuvita design tokens (copied from rejuvita-scrape/design/theme.css). */
 @import './theme.css';
 
-/* Header: the theme layout (menu left, logo centred) only fits our menu from 1536px (measured: the five items
-   need ~560px); 1181-1535 uses a compact row. */
+/* Header: the six-item menu (~670px) needs the header's own breakpoints. Below `nav` the burger shows; from `nav`
+   a compact row (logo | menu | button); the theme layout (menu left, logo centred) only fits from `wide`.
+   Measured so the menu keeps >=30px from the button / logo at each lower edge. */
 @theme {
-  --breakpoint-wide: 1536px;
+  --breakpoint-nav: 1300px;
+  --breakpoint-wide: 1760px;
 }
 
 /* The header is absolute over the first section (Rejuvita `cmsmasters-header-position-absolute`), so the first
@@ -59,15 +61,15 @@
   0% { opacity: 0; }
   to { opacity: 1; }
 }
-.js [data-reveal]:not(.is-revealed),
-.js [data-reveal-stagger]:not(.is-revealed) > * {
+.js [data-reveal]:not([data-revealed]),
+.js [data-reveal-stagger]:not([data-revealed]) > * {
   opacity: 0;
 }
-[data-reveal].is-revealed {
+[data-reveal][data-revealed] {
   animation: cmsmasters-fade-in 1.25s both;
   animation-delay: var(--reveal-delay, 0ms);
 }
-[data-reveal-stagger].is-revealed > * {
+[data-reveal-stagger][data-revealed] > * {
   animation: cmsmasters-fade-in 1.25s both;
   animation-delay: calc(var(--i, 0) * var(--reveal-stagger, 200ms));
 }
@@ -81,10 +83,10 @@
   0% { opacity: 0; transform: translateX(-60px); }
   to { opacity: 1; transform: translateX(0); }
 }
-[data-reveal='right'].is-revealed {
+[data-reveal='right'][data-revealed] {
   animation-name: cmsmasters-fade-in-right;
 }
-[data-reveal='left'].is-revealed {
+[data-reveal='left'][data-revealed] {
   animation-name: cmsmasters-fade-in-left;
 }
 /* data-reveal="up" rises as it fades in (Rejuvita `cmsmasters-fade-in-up`, the theme's most used entrance). */
@@ -92,7 +94,7 @@
   0% { opacity: 0; transform: translateY(60px); }
   to { opacity: 1; transform: translateY(0); }
 }
-[data-reveal='up'].is-revealed {
+[data-reveal='up'][data-revealed] {
   animation-name: cmsmasters-fade-in-up;
 }
 /* data-reveal="pop" scales up as it fades in (Rejuvita `cmsmasters-pop-in`, used on images and counters). */
@@ -100,7 +102,7 @@
   0% { opacity: 0; transform: scale(0.75); }
   to { opacity: 1; transform: scale(1); }
 }
-[data-reveal='pop'].is-revealed {
+[data-reveal='pop'][data-revealed] {
   animation-name: cmsmasters-pop-in;
 }
 
@@ -149,12 +151,12 @@
   .hotspot-beat {
     animation: none;
   }
-  .js [data-reveal]:not(.is-revealed),
-  .js [data-reveal-stagger]:not(.is-revealed) > * {
+  .js [data-reveal]:not([data-revealed]),
+  .js [data-reveal-stagger]:not([data-revealed]) > * {
     opacity: 1;
   }
-  [data-reveal].is-revealed,
-  [data-reveal-stagger].is-revealed > * {
+  [data-reveal][data-revealed],
+  [data-reveal-stagger][data-revealed] > * {
     animation: none;
   }
 }

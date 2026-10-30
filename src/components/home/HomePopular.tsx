@@ -27,13 +27,13 @@ export function HomePopular() {
   return (
     <section
       aria-labelledby="popular-heading"
-      className="flex flex-col items-center gap-[60px] px-5 pb-20 md:gap-[70px] md:px-0 md:pb-[100px] xl:pb-[150px]"
+      className="flex flex-col items-center max-md:items-start gap-[60px] px-5 pb-20 md:gap-[70px] md:px-0 md:pb-[100px] xl:pb-[150px]"
     >
       <h2
         id="popular-heading"
         ref={titleRef}
         data-reveal="up"
-        className="text-center font-heading text-h2 text-secondary uppercase md:px-[30px] xl:px-10"
+        className="text-center max-md:text-left font-heading text-h2 text-secondary uppercase md:px-[30px] xl:px-10"
       >
         {popular.h2.map((part) => (
           <span key={part.text} className={part.gold ? 'text-tertiary' : undefined}>

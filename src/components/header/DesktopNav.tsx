@@ -36,7 +36,7 @@ export function DesktopNav({ className = '' }: { className?: string }) {
 
   return (
     <nav ref={navRef} aria-label="Main" className={className}>
-      {/* 30px apart as in the theme; 24px in the compact 1181-1535 row so it clears the button at 1181. */}
+      {/* 30px apart as in the theme; 24px in the compact row (1300-1759) so it clears the button at 1300. */}
       <ul className="flex items-center gap-6 wide:gap-[30px]">
         {primaryNav.map((item) => (
           <NavEntry
@@ -134,12 +134,12 @@ function Dropdown({ id, links, open }: { id: string; links: NavLink[]; open: boo
 // Rejuvita mega-menu template 158 (elementor/css/post-158.css): bg `border`, radius 20, an Aboreto h3 title
 // ("View" + a gold link), then image cards (radius 20, darken to 40% black on hover, h5 title -> `primary`).
 // Ours has one column per speciality (homepage.md "Specialities mega-menu") with its top treatments under the card,
-// so it spans the header row instead of the theme's 1075px, with 60px padding (40px below 1536).
+// so it spans the header row instead of the theme's 1075px, with 60px padding (40px below 1536px).
 function MegaMenu({ id, columns, open }: { id: string; columns: MegaColumn[]; open: boolean }) {
   return (
     // Item bottom = row centre + half the 22px item line, then the theme's 25px gap as hover bridge.
-    <div id={id} className={`absolute inset-x-[30px] top-[calc(50%+11px)] z-10 pt-[25px] wide:inset-x-10 ${panelState(open)}`}>
-      <div className="mx-auto max-w-[1360px] rounded-[20px] bg-border p-10 shadow-[0_2px_10px_rgba(0,0,0,0.1)] wide:p-[60px]">
+    <div id={id} className={`absolute inset-x-[30px] top-[calc(50%+11px)] z-10 pt-[25px] 2xl:inset-x-10 ${panelState(open)}`}>
+      <div className="mx-auto max-w-[1360px] rounded-[20px] bg-border p-10 shadow-[0_2px_10px_rgba(0,0,0,0.1)] 2xl:p-[60px]">
         <div className="mb-[30px] flex items-end justify-between gap-10">
           <p className="font-heading text-h3 text-secondary uppercase">
             View{' '}
@@ -154,7 +154,7 @@ function MegaMenu({ id, columns, open }: { id: string; columns: MegaColumn[]; op
             </SmartLink>
           </p>
         </div>
-        <ul className="grid grid-cols-6 gap-5 wide:gap-[30px]">
+        <ul className="grid grid-cols-6 gap-5 2xl:gap-[30px]">
           {columns.map((col) => (
             <li key={col.href}>
               <SmartLink href={col.href} className="group/card block">

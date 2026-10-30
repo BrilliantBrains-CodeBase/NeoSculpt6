@@ -1,11 +1,12 @@
-// New pages the old site never had: pages homepage.md links to, doctor profiles, and new service pages from the
-// service docs. Meta here is a DRAFT for SEO sign-off unless `source` names the doc it was copied from;
+// New pages the old site never had: pages homepage.md links to and new service pages from the service docs. Doctor
+// profiles are not here: their routes and SEO come from src/data/doctors.json.
+// Meta here is a DRAFT for SEO sign-off unless `source` names the doc it was copied from;
 // generate-pages.mjs marks drafted fields as `todo`. Keep this file to erasable TypeScript only.
 // Words kept out on purpose (homepage.md): "best", "No. 1", "guaranteed", "permanent", "painless", "scarless".
 
 export interface HubDraft {
   path: string
-  type: 'hub' | 'doctor' | 'service'
+  type: 'hub' | 'service'
   name: string
   h1: string
   title: string
@@ -80,26 +81,6 @@ export const hubs: HubDraft[] = [
     description:
       'Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.',
     source: 'content/technology/technology-international-patient.md',
-  },
-  {
-    path: '/dr-saranya-t/',
-    type: 'doctor',
-    name: 'Dr Saranya T',
-    h1: 'Dr Saranya T',
-    title: 'Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6',
-    description:
-      'Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.',
-  },
-  {
-    // Profile linked from the Blepharoplasty and Chin Augmentation pages ("Know More → doctor profile page").
-    // Facts from content/service/Blepharoplasty-and-Chin-Augmentation.md; the profile copy itself is not written yet.
-    path: '/dr-lavanyaa-m/',
-    type: 'doctor',
-    name: 'Dr Lavanyaa M',
-    h1: 'Dr Lavanyaa M',
-    title: 'Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6',
-    description:
-      'Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.',
   },
   {
     // New page (not on the live site). URL, title, H1 and description: content/service/Blepharoplasty-and-Chin-

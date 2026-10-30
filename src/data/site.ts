@@ -12,6 +12,8 @@ export const clinic = {
   phone: '+91 99640 60483',
   phoneHref: 'tel:+919964060483',
   whatsappHref: 'https://wa.me/919964060483',
+  // TODO: external AI analysis tool URL. Until it's filled in, the mobile bar's "AI Analysis" opens Find My Treatment.
+  aiAnalysisHref: '',
   email: 'Support@neosculpt6.com',
   address: {
     streetAddress: '2nd floor, above Honda Big Wings, Sadaramangala Village, Whitefield Main Road',
@@ -24,8 +26,8 @@ export const clinic = {
   hours: { label: 'Mon–Sat: 7am–7pm', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '07:00', closes: '19:00' },
   // TODO: swap for the Google Business Profile link once we have it.
   mapsHref: 'https://www.google.com/maps/search/?api=1&query=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066',
-  // Contact page map (homepage.md section F). Google's keyless embed for the address search; it loads only after the
-  // visitor clicks "Show Map". TODO: swap for the Business Profile's own embed once it is approved.
+  // Contact page map (homepage.md section F). Google's keyless embed for the address search, shown by default and
+  // lazy-loaded. TODO: swap for the Business Profile's own embed once it is approved.
   mapEmbedSrc:
     'https://www.google.com/maps?q=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066&output=embed',
   // homepage.md section F, "Nearby areas line".

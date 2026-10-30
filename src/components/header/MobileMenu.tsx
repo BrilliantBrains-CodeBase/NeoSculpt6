@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLocation } from 'react-router-dom'
 import { clinic } from '../../data/site'
 import { findMyTreatment, primaryNav, type NavLink } from '../../data/nav'
@@ -9,7 +10,7 @@ import { SmartLink } from '../SmartLink'
 import { ChevronDownIcon, CloseIcon, MapPinIcon, PhoneIcon, WhatsAppIcon } from '../icons'
 import { isCurrent } from './DesktopNav'
 
-// Rejuvita mobile menu popup 138 (elementor/css/post-138.css), shown <=1180px from the burger: a 500px panel
+// Rejuvita mobile menu popup 138 (elementor/css/post-138.css), shown <=1299px from the burger: a 500px panel
 // (full width <=767px) sliding in from the right over a black/80 overlay, bg `alternate`, padding 50 (30 mobile).
 // Top: Aboreto h3 items, `secondary`, hover/current `primary`, submenus under a chevron in 13px tracked caps.
 // Bottom: icon links (the theme's phone + "Our Locations"; we add WhatsApp and drop its search and cart) and a
@@ -30,8 +31,10 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   }
   const iconLink = 'inline-flex items-center gap-2 font-semibold text-button text-secondary uppercase transition-colors duration-300 hover:text-primary focus-visible:text-primary'
 
-  return (
-    <div className="fixed inset-0 z-[10000] xl:hidden">
+  // Portalled to <body>: inside the header (z-99) the menu could not rise above the mobile action bar (z-9990).
+  // It only mounts in the browser (usePresence), so document is always there.
+  return createPortal(
+    <div className="fixed inset-0 z-[10000] nav:hidden">
       <div
         aria-hidden="true"
         onClick={onClose}
@@ -141,6 +144,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

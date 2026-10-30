@@ -36,7 +36,7 @@ export function HomePriceGuide() {
       aria-labelledby="price-guide-heading"
       className="mb-20 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center gap-5 text-center">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center max-md:items-start gap-5 text-center max-md:text-left">
         <p ref={eyebrowRef} data-reveal="up" style={delay(150)} className="text-h6 font-medium text-text uppercase">
           {priceGuide.eyebrow}
         </p>
@@ -125,7 +125,7 @@ export function HomePriceGuide() {
         <div
           ref={footerRef}
           data-reveal="up"
-          className="mt-5 flex flex-col items-center gap-[30px] md:mt-10"
+          className="mt-5 flex flex-col items-center max-md:items-start gap-[30px] md:mt-10"
         >
           <p className="max-w-[700px] text-small text-text/70">{priceGuide.disclaimer}</p>
           <button

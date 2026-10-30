@@ -34,7 +34,7 @@ export function HomeResults() {
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0b0b0d00_0%,#0b0b0d_40%)] opacity-80" />
 
       {/* Row (2d68ba9): two equal columns on desktop, slider under the text below that. */}
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center gap-[100px] xl:flex-row xl:items-stretch xl:gap-5 min-[1601px]:gap-0">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col items-center max-md:items-start gap-[100px] xl:flex-row xl:items-stretch xl:gap-5 min-[1601px]:gap-0">
         {/* Text column (2fb7877) */}
         <div className="flex w-full flex-col items-start justify-center gap-[30px] xl:min-w-0 xl:flex-1 xl:pr-10 min-[1601px]:pr-[10%]">
           <p ref={eyebrowRef} data-reveal="up" className="text-h6 font-medium text-text uppercase">
@@ -81,7 +81,7 @@ export function HomeResults() {
             defaultOffset={results.slider.offset}
           />
           {results.slider.caption && (
-            <p className="mt-[15px] text-center text-small text-text/70">{results.slider.caption}</p>
+            <p className="mt-[15px] text-center max-md:text-left text-small text-text/70">{results.slider.caption}</p>
           )}
         </div>
       </div>

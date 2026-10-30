@@ -35,9 +35,9 @@ export function AboutServices() {
     <section
       id="our-services"
       aria-labelledby="our-services-heading"
-      className="flex flex-col items-center gap-[60px] px-5 py-20 md:gap-[70px] md:px-0 md:py-[100px] xl:py-[150px]"
+      className="flex flex-col items-center max-md:items-start gap-[60px] px-5 py-20 md:gap-[70px] md:px-0 md:py-[100px] xl:py-[150px]"
     >
-      <h2 id="our-services-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center md:px-[30px] xl:px-10`}>
+      <h2 id="our-services-heading" ref={titleRef} data-reveal="up" className={`${h2} text-center max-md:text-left md:px-[30px] xl:px-10`}>
         <Parts parts={services.h2} />
       </h2>
 

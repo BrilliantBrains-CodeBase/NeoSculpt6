@@ -1,0 +1,850 @@
+[
+  {
+    "slug": "dr-sandeep-mahapatra",
+    "path": "/about-dr-sandeep-mahapatra/",
+    "status": "published",
+    "name": "Dr. Sandeep Mahapatra",
+    "displayName": "Dr Sandeep Mahapatra",
+    "initials": "SM",
+    "role": "Senior Consultant Dermatologist, Cosmetic Expert & Hair Transplant Surgeon",
+    "shortRole": "Dermatologist · Hair Transplant Surgeon",
+    "schemaSpecialty": "Dermatology",
+    "seo": {
+      "title": "Dr. Sandeep Mahapatra | Dermatologist, Hair Transplant & Cosmetic Expert",
+      "description": "Meet Dr. Sandeep Mahapatra, Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon at NeoSculpt6 in Bangalore.",
+      "h1": "Dr. Sandeep Mahapatra",
+      "canonical": "https://neosculpt6.com/about-dr-sandeep-mahapatra/",
+      "robots": "index, follow",
+      "ogImage": "/og/about-dr-sandeep-mahapatra.jpeg"
+    },
+    "hero": {
+      "eyebrow": "Specialist Leadership · NeoSculpt6",
+      "intro": "Dr. Sandeep Mahapatra leads NeoSculpt6 with expertise across dermatology, hair restoration, cosmetic aesthetics and advanced skin procedures. His approach begins with clear diagnosis and honest recommendations, so every plan is based on the patient’s concern, suitability and long-term goals.",
+      "portrait": {
+        "src": "/og/about-dr-sandeep-mahapatra.jpeg",
+        "width": 1122,
+        "height": 1402,
+        "alt": "Dr Sandeep Mahapatra in a white clinical coat at NeoSculpt6",
+        "approval": "approved"
+      }
+    },
+    "cardPortrait": {
+      "src": "/images/home/doctors/dr-sandeep-mahapatra.webp",
+      "width": 620,
+      "height": 620,
+      "alt": "Dr Sandeep Mahapatra in a white coat, standing in a clinic room"
+    },
+    "philosophy": {
+      "eyebrow": "Clinical Philosophy",
+      "heading": "Care Planned Around the Individual",
+      "paragraphs": [
+        "Whether a patient comes for hair transplant planning, hair loss treatment, skin refinement, acne scars, pigmentation, anti-ageing care or aesthetic transformation, Dr. Sandeep focuses on medically considered care and natural-looking outcomes. Consultations are designed to make the available options, limitations, recovery and next steps clear before treatment is planned."
+      ]
+    },
+    "expertise": [
+      {
+        "title": "Hair transplant planning",
+        "description": null,
+        "href": "/hair-transplant-restoration/",
+        "image": null
+      },
+      {
+        "title": "Hair loss treatment",
+        "description": null,
+        "href": "/hair-transplant-restoration/",
+        "image": null
+      },
+      {
+        "title": "Skin refinement",
+        "description": null,
+        "href": "/laser-skin-aesthetic/",
+        "image": null
+      },
+      {
+        "title": "Acne scars",
+        "description": null,
+        "href": "/laser-skin-aesthetic/acne-scar-treatment-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Pigmentation",
+        "description": null,
+        "href": "/laser-skin-aesthetic/pigmentation-treatment-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Anti-ageing care",
+        "description": null,
+        "href": "/anti-aging-injectables/",
+        "image": null
+      },
+      {
+        "title": "Aesthetic transformation",
+        "description": null,
+        "href": null,
+        "image": null
+      }
+    ],
+    "qualifications": [
+      {
+        "title": "MBBS",
+        "institution": null,
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "MD Dermatology",
+        "institution": null,
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "MBBS (honours, gold medals in two subjects)",
+        "institution": "MGM Medical College, Jamshedpur",
+        "type": "education",
+        "approval": "pending"
+      },
+      {
+        "title": "MD Dermatology, Venereology & Leprosy (Gold Medalist)",
+        "institution": "RIMS, Ranchi",
+        "type": "education",
+        "approval": "pending"
+      },
+      {
+        "title": "Certified DHI Specialist",
+        "institution": "DHI Global, Greece",
+        "type": "certification",
+        "approval": "pending"
+      },
+      {
+        "title": "Basic and advanced Botox and dermal filler certification",
+        "institution": "Allergan",
+        "type": "certification",
+        "approval": "pending"
+      }
+    ],
+    "recognition": [
+      {
+        "title": "Member",
+        "organisation": "Indian Association of Dermatologists, Venereologists and Leprologists (IADVL)",
+        "logo": {
+          "src": "/images/home/credentials/iadvl.webp",
+          "width": 206,
+          "height": 200,
+          "alt": "IADVL logo"
+        },
+        "approval": "approved"
+      },
+      {
+        "title": "Member",
+        "organisation": "Association of Cutaneous Surgeons of India (ACSI)",
+        "logo": {
+          "src": "/images/home/credentials/acsi.webp",
+          "width": 300,
+          "height": 120,
+          "alt": "ACSI logo"
+        },
+        "approval": "approved"
+      },
+      {
+        "title": "Member",
+        "organisation": "International Society of Dermatology",
+        "logo": {
+          "src": "/images/home/credentials/isd.webp",
+          "width": 498,
+          "height": 120,
+          "alt": "International Society of Dermatology logo"
+        },
+        "approval": "approved"
+      },
+      {
+        "title": "Gold Member",
+        "organisation": "International Society of Hair Restoration Surgery (ISHRS)",
+        "logo": {
+          "src": "/images/home/credentials/ishrs.webp",
+          "width": 280,
+          "height": 160,
+          "alt": "ISHRS logo"
+        },
+        "approval": "pending"
+      },
+      {
+        "title": "Member",
+        "organisation": "Association of Hair Restoration Surgeons, India (AHRS)",
+        "logo": {
+          "src": "/images/home/credentials/ahrs.webp",
+          "width": 280,
+          "height": 160,
+          "alt": "AHRS logo"
+        },
+        "approval": "pending"
+      },
+      {
+        "title": "Member",
+        "organisation": "DHI Global, Greece",
+        "logo": {
+          "src": "/images/home/credentials/dhi-global.webp",
+          "width": 326,
+          "height": 100,
+          "alt": "DHI Global logo"
+        },
+        "approval": "pending"
+      }
+    ],
+    "metrics": [
+      {
+        "value": "20+",
+        "label": "Years Experience",
+        "approval": "pending"
+      },
+      {
+        "value": "10k+",
+        "label": "Hair Transplants",
+        "approval": "pending"
+      },
+      {
+        "value": "6M+",
+        "label": "Follicles Restored",
+        "approval": "pending"
+      },
+      {
+        "value": "500+",
+        "label": "Global Patients",
+        "approval": "pending"
+      },
+      {
+        "value": "100k+",
+        "label": "PRP Sessions",
+        "approval": "pending"
+      },
+      {
+        "value": "50k+",
+        "label": "Laser Procedures",
+        "approval": "pending"
+      },
+      {
+        "value": "3,000+",
+        "label": "Vitiligo Cases",
+        "approval": "pending"
+      },
+      {
+        "value": "4,000+",
+        "label": "Botox Injections",
+        "approval": "pending"
+      },
+      {
+        "value": "2,000+",
+        "label": "Dermal Filler Treatments",
+        "approval": "pending"
+      },
+      {
+        "value": "40k+",
+        "label": "Chemical Peels",
+        "approval": "pending"
+      },
+      {
+        "value": "18+",
+        "label": "Surgeons Trained",
+        "approval": "pending"
+      },
+      {
+        "value": "55+",
+        "label": "Specialists Formed",
+        "approval": "pending"
+      }
+    ],
+    "process": {
+      "eyebrow": "Personalised Assessment",
+      "heading": "Begin With a Clear Consultation",
+      "intro": "A consultation with Dr. Sandeep helps identify the concern, understand the relevant clinical factors and discuss a treatment path that is appropriate for the individual. The focus remains on informed decisions, safe planning and realistic expectations.",
+      "steps": [
+        {
+          "title": "Begin With Your Concern",
+          "description": "Tell the doctor what you would like to change and what you have already tried. Your history and goals shape everything that follows."
+        },
+        {
+          "title": "Assess Suitability",
+          "description": "The doctor examines the area and reviews your health and history to see which options may suit you, and which may not."
+        },
+        {
+          "title": "Discuss the Right Options",
+          "description": "You hear what each option involves, including alternatives, limitations, recovery and cost, before anything is planned."
+        },
+        {
+          "title": "Move Forward With Clarity",
+          "description": "If you decide to go ahead, your plan, preparation and aftercare are explained so you know what to expect at each step."
+        }
+      ]
+    },
+    "quote": {
+      "text": "The right plan sometimes means a transplant, sometimes a treatment, and sometimes waiting. My job is to tell you which — honestly.",
+      "approval": "pending"
+    },
+    "socialLinks": [
+      {
+        "network": "instagram",
+        "href": null,
+        "approval": "pending"
+      },
+      {
+        "network": "youtube",
+        "href": null,
+        "approval": "pending"
+      }
+    ],
+    "ctas": {
+      "profileLabel": "Book a Consultation",
+      "contactLabel": "Contact NeoSculpt6",
+      "contactHref": "/contact-us/",
+      "bookingEyebrow": "Book a Consultation",
+      "bookingHeading": "Request a Consultation With Dr Sandeep"
+    },
+    "contentReview": {
+      "medicalReviewStatus": "pending",
+      "lastReviewed": null,
+      "reviewedBy": null
+    }
+  },
+  {
+    "slug": "dr-saranya-t",
+    "path": "/dr-saranya-t/",
+    "status": "published",
+    "name": "Dr Saranya T",
+    "displayName": "Dr Saranya T",
+    "initials": "ST",
+    "role": "Consultant Plastic & Reconstructive Surgeon",
+    "shortRole": "M.Ch Plastic & Reconstructive Surgeon",
+    "schemaSpecialty": "PlasticSurgery",
+    "seo": {
+      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
+      "h1": "Dr Saranya T",
+      "canonical": "https://neosculpt6.com/dr-saranya-t/",
+      "robots": "index, follow",
+      "ogImage": "/og/default.png"
+    },
+    "hero": {
+      "eyebrow": "Plastic & Reconstructive Surgery · NeoSculpt6",
+      "intro": "Dr Saranya leads NeoSculpt6's surgical care — face, breast and body. Her training spans aesthetic and reconstructive surgery, liposuction, abdominoplasty, gynaecomastia, rhinoplasty and breast surgery, so every surgical plan starts with anatomy, safety and a realistic picture of recovery.",
+      "portrait": {
+        "src": "/images/home/doctors/dr-saranya-t.webp",
+        "width": 760,
+        "height": 760,
+        "alt": "Dr Saranya T in a white coat against a plain white background",
+        "approval": "approved"
+      }
+    },
+    "cardPortrait": null,
+    "philosophy": null,
+    "expertise": [
+      {
+        "title": "Rhinoplasty",
+        "description": null,
+        "href": "/cosmetic-surgery/rhinoplasty-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Facelift & eyelid surgery",
+        "description": null,
+        "href": "/cosmetic-surgery/facelift-surgery-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Liposuction",
+        "description": null,
+        "href": "/cosmetic-surgery/liposuction-surgery-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Tummy tuck",
+        "description": null,
+        "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Gynaecomastia",
+        "description": null,
+        "href": "/cosmetic-surgery/gynecomastia-surgery-in-bangalore/",
+        "image": null
+      },
+      {
+        "title": "Breast surgery",
+        "description": null,
+        "href": "/cosmetic-surgery/",
+        "image": null
+      },
+      {
+        "title": "Post-pregnancy body",
+        "description": null,
+        "href": "/cosmetic-surgery/mommy-makeover-surgery-in-bangalore/",
+        "image": null
+      }
+    ],
+    "qualifications": [
+      {
+        "title": "MBBS",
+        "institution": "Madras Medical College",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "DNB General Surgery",
+        "institution": "Sundaram Medical Foundation",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "M.Ch Plastic & Reconstructive Surgery",
+        "institution": "Kilpauk Government Medical College, Chennai",
+        "type": "education",
+        "approval": "approved"
+      }
+    ],
+    "recognition": [],
+    "metrics": [],
+    "process": {
+      "eyebrow": "Personalised Assessment",
+      "heading": "Begin With a Clear Consultation",
+      "intro": null,
+      "steps": [
+        {
+          "title": "Begin With Your Concern",
+          "description": "Tell the doctor what you would like to change and what you have already tried. Your history and goals shape everything that follows."
+        },
+        {
+          "title": "Assess Suitability",
+          "description": "The doctor examines the area and reviews your health and history to see which options may suit you, and which may not."
+        },
+        {
+          "title": "Discuss the Right Options",
+          "description": "You hear what each option involves, including alternatives, limitations, recovery and cost, before anything is planned."
+        },
+        {
+          "title": "Move Forward With Clarity",
+          "description": "If you decide to go ahead, your plan, preparation and aftercare are explained so you know what to expect at each step."
+        }
+      ]
+    },
+    "quote": {
+      "text": null,
+      "approval": "pending"
+    },
+    "socialLinks": [
+      {
+        "network": "instagram",
+        "href": null,
+        "approval": "pending"
+      },
+      {
+        "network": "linkedin",
+        "href": null,
+        "approval": "pending"
+      }
+    ],
+    "ctas": {
+      "profileLabel": "Book a Consultation",
+      "contactLabel": "Contact NeoSculpt6",
+      "contactHref": "/contact-us/",
+      "bookingEyebrow": "Book a Consultation",
+      "bookingHeading": "Request a Consultation With Dr Saranya"
+    },
+    "contentReview": {
+      "medicalReviewStatus": "pending",
+      "lastReviewed": null,
+      "reviewedBy": null
+    }
+  },
+  {
+    "slug": "dr-thyagaraj",
+    "path": "/dr-thyagaraj/",
+    "status": "published",
+    "name": "Dr. Thyagaraj",
+    "displayName": "Dr Thyagaraj",
+    "initials": "T",
+    "role": "Senior Plastic Surgeon",
+    "shortRole": "MS, MCh · Plastic Surgeon",
+    "schemaSpecialty": "PlasticSurgery",
+    "seo": {
+      "title": "Dr Thyagaraj | Senior Plastic Surgeon (MS, MCh) | NeoSculpt6",
+      "description": "Meet Dr Thyagaraj, Senior Plastic Surgeon (MS, MCh) trained in breast reconstruction, body contouring and facial surgery, at NeoSculpt6, Whitefield, Bangalore.",
+      "h1": "Dr. Thyagaraj",
+      "canonical": "https://neosculpt6.com/dr-thyagaraj/",
+      "robots": "index, follow",
+      "ogImage": "/og/default.png"
+    },
+    "hero": {
+      "eyebrow": "Plastic Surgery · NeoSculpt6",
+      "intro": "Dr. Thyagaraj is a senior plastic surgeon trained in plastic and reconstructive surgery in India and Europe, including a Masters in Reconstructive Breast Surgery from Barcelona. His work covers breast, body and facial surgery, complex reconstruction and burn deformity correction.",
+      "portrait": {
+        "src": "/images/doctors/dr-thyagaraj.webp",
+        "width": 800,
+        "height": 1000,
+        "alt": "Dr. Thyagaraj, Senior Plastic Surgeon",
+        "approval": "pending"
+      }
+    },
+    "cardPortrait": null,
+    "philosophy": {
+      "eyebrow": "Patient-Centred Care",
+      "heading": "Care That Builds Confidence",
+      "paragraphs": [
+        "Dr. Thyagaraj believes in empowering his patients through clear communication, personalised care plans and a compassionate approach. His goal is to deliver results that not only enhance appearance but also improve overall well-being."
+      ]
+    },
+    "expertise": [
+      {
+        "title": "Breast procedures",
+        "description": "Augmentation, lift, reduction and reconstruction.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Body sculpting",
+        "description": "Liposuction, abdominoplasty and body contouring.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Facial enhancements",
+        "description": "Rhinoplasty, scar revision and facial contouring.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Genital rejuvenation",
+        "description": null,
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Complex reconstructions",
+        "description": "Microvascular surgery, nerve and muscle transfers, and congenital anomaly corrections.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Hair restoration",
+        "description": "FUT and FUE hair transplantation techniques.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Burn deformity correction",
+        "description": "Restoring appearance and function after burns.",
+        "href": null,
+        "image": null
+      }
+    ],
+    "qualifications": [
+      {
+        "title": "MBBS",
+        "institution": "Rajiv Gandhi University of Health Sciences (RGUHS), Bengaluru",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "MS General Surgery",
+        "institution": "Rajiv Gandhi University of Health Sciences (RGUHS), Bengaluru",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "MCh Plastic Surgery",
+        "institution": "Rajiv Gandhi University of Health Sciences (RGUHS), Bengaluru",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "Masters in Reconstructive Breast Surgery",
+        "institution": "Reconstructive Microsurgery European School, Universitat Autònoma de Barcelona",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "Oncoplastic breast reconstruction",
+        "institution": "Brussels University Hospital, Belgium",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Aesthetic breast surgery",
+        "institution": "Clinique Pyramids Zurich, Switzerland",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Implant-based breast reconstruction",
+        "institution": "Brussels University Hospital, Belgium",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Autologous breast reconstruction",
+        "institution": "Sant Pau Hospital, Barcelona, Spain",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Hair transplantation",
+        "institution": "Medispa Laser and Cosmetic Surgery Centre, Jaipur, India",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Microvascular surgery",
+        "institution": "Ganga Microsurgery Training Institute, Coimbatore, India",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Lymphatic surgery",
+        "institution": "Sant Pau Hospital, Barcelona, Spain",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "Diploma in Laparoscopy",
+        "institution": "Indian Institute of Laparoscopic Surgery, Coimbatore, India",
+        "type": "training",
+        "approval": "approved"
+      }
+    ],
+    "recognition": [],
+    "metrics": [
+      {
+        "value": "20+",
+        "label": "Years Experience",
+        "approval": "pending"
+      }
+    ],
+    "process": {
+      "eyebrow": "Personalised Assessment",
+      "heading": "Begin With a Clear Consultation",
+      "intro": null,
+      "steps": [
+        {
+          "title": "Begin With Your Concern",
+          "description": "Tell the doctor what you would like to change and what you have already tried. Your history and goals shape everything that follows."
+        },
+        {
+          "title": "Assess Suitability",
+          "description": "The doctor examines the area and reviews your health and history to see which options may suit you, and which may not."
+        },
+        {
+          "title": "Discuss the Right Options",
+          "description": "You hear what each option involves, including alternatives, limitations, recovery and cost, before anything is planned."
+        },
+        {
+          "title": "Move Forward With Clarity",
+          "description": "If you decide to go ahead, your plan, preparation and aftercare are explained so you know what to expect at each step."
+        }
+      ]
+    },
+    "quote": {
+      "text": null,
+      "approval": "pending"
+    },
+    "socialLinks": [],
+    "ctas": {
+      "profileLabel": "Book a Consultation",
+      "contactLabel": "Contact NeoSculpt6",
+      "contactHref": "/contact-us/",
+      "bookingEyebrow": "Book a Consultation",
+      "bookingHeading": "Request a Consultation With Dr Thyagaraj"
+    },
+    "contentReview": {
+      "medicalReviewStatus": "pending",
+      "lastReviewed": null,
+      "reviewedBy": null
+    }
+  },
+  {
+    "slug": "dr-payal-mahapatra",
+    "path": "/dr-payal-mahapatra/",
+    "status": "published",
+    "name": "Dr. Payal Mahapatra",
+    "displayName": "Dr Payal Mahapatra",
+    "initials": "PM",
+    "role": "Fertility Specialist & Gynecologist",
+    "shortRole": "Fertility Specialist · Gynecologist",
+    "schemaSpecialty": "Gynecologic",
+    "seo": {
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "h1": "Dr. Payal Mahapatra",
+      "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
+      "robots": "index, follow",
+      "ogImage": "/og/default.png"
+    },
+    "hero": {
+      "eyebrow": "Fertility & Gynecology · NeoSculpt6",
+      "intro": "Dr. Payal Mahapatra is a fertility specialist and gynecologist, and the founder of Neo Fertility Clinic, part of Neo Group. She trained in obstetrics and gynecology before completing a Fellowship in Reproductive Medicine, and is a member of ISAR and FOGSI.",
+      "portrait": {
+        "src": "/images/doctors/dr-payal-mahapatra.webp",
+        "width": 800,
+        "height": 1000,
+        "alt": "Dr. Payal Mahapatra, fertility specialist and gynecologist",
+        "approval": "pending"
+      }
+    },
+    "cardPortrait": null,
+    "philosophy": {
+      "eyebrow": "Background",
+      "heading": "From Gynecology Into Reproductive Medicine",
+      "paragraphs": [
+        "Dr. Payal Mahapatra qualified in medicine in 2005 and specialised in obstetrics and gynecology before moving into reproductive medicine. Her Fellowship in Reproductive Medicine, completed at IIRRH in 2017, is dedicated training in ovarian stimulation protocols, assisted reproduction, embryology liaison and the management of failed cycles.",
+        "She founded Neo Fertility Clinic to run fertility treatment and obstetric care as one continuous service, so the doctor who manages the treatment also manages the pregnancy, including high-risk pregnancies."
+      ]
+    },
+    "expertise": [
+      {
+        "title": "Assisted reproduction",
+        "description": "IVF, ICSI, IUI, ovulation induction, frozen embryo transfer, donor gamete programmes.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Fertility preservation",
+        "description": "Egg freezing before cancer treatment, before ovarian surgery, and for elective deferral of pregnancy.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Reproductive endocrinology",
+        "description": "PCOS and PMOS, PCOD, thyroid and prolactin disorders, insulin resistance, hyperandrogenism.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Reproductive surgery",
+        "description": "Hysteroscopy for polyps, submucous fibroids, adhesions and septum. Laparoscopy for endometriosis, adhesions, ovarian cysts and tubal disease.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "Recurrent pregnancy loss",
+        "description": "Investigation and management of repeated miscarriage and repeated implantation failure.",
+        "href": null,
+        "image": null
+      },
+      {
+        "title": "High-risk obstetrics",
+        "description": "Gestational diabetes, hypertensive disorders, IVF pregnancies, previous caesarean, twins.",
+        "href": null,
+        "image": null
+      }
+    ],
+    "qualifications": [
+      {
+        "title": "MBBS",
+        "institution": "MGM Medical College, Jamshedpur",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "DGO, Obstetrics and Gynecology",
+        "institution": "RIMS, Ranchi",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "DNB, Diplomate of National Board",
+        "institution": "Sagar Apollo, Bangalore",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "Fellowship in Reproductive Medicine",
+        "institution": "IIRRH, International Institute for Training and Research in Reproductive Health",
+        "type": "education",
+        "approval": "approved"
+      }
+    ],
+    "recognition": [
+      {
+        "title": "Member",
+        "organisation": "Indian Society for Assisted Reproduction (ISAR)",
+        "logo": null,
+        "approval": "approved"
+      },
+      {
+        "title": "Member",
+        "organisation": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+        "logo": null,
+        "approval": "approved"
+      }
+    ],
+    "metrics": [
+      {
+        "value": "18",
+        "label": "Years Experience",
+        "approval": "pending"
+      },
+      {
+        "value": "80k",
+        "label": "Patients Treated",
+        "approval": "pending"
+      },
+      {
+        "value": "6.7k",
+        "label": "IUI Procedures",
+        "approval": "pending"
+      },
+      {
+        "value": "3.7k",
+        "label": "Fertility Surgeries",
+        "approval": "pending"
+      },
+      {
+        "value": "2k",
+        "label": "IVF Cycles",
+        "approval": "pending"
+      },
+      {
+        "value": "1k",
+        "label": "Deliveries",
+        "approval": "pending"
+      }
+    ],
+    "process": {
+      "eyebrow": "Personalised Assessment",
+      "heading": "Begin With a Clear Consultation",
+      "intro": null,
+      "steps": [
+        {
+          "title": "Begin With Your Concern",
+          "description": "Tell the doctor what you would like to change and what you have already tried. Your history and goals shape everything that follows."
+        },
+        {
+          "title": "Assess Suitability",
+          "description": "The doctor examines the area and reviews your health and history to see which options may suit you, and which may not."
+        },
+        {
+          "title": "Discuss the Right Options",
+          "description": "You hear what each option involves, including alternatives, limitations, recovery and cost, before anything is planned."
+        },
+        {
+          "title": "Move Forward With Clarity",
+          "description": "If you decide to go ahead, your plan, preparation and aftercare are explained so you know what to expect at each step."
+        }
+      ]
+    },
+    "quote": {
+      "text": null,
+      "approval": "pending"
+    },
+    "socialLinks": [],
+    "ctas": {
+      "profileLabel": "Book a Consultation",
+      "contactLabel": "Contact NeoSculpt6",
+      "contactHref": "/contact-us/",
+      "bookingEyebrow": "Book a Consultation",
+      "bookingHeading": "Request a Consultation With Dr Payal"
+    },
+    "contentReview": {
+      "medicalReviewStatus": "pending",
+      "lastReviewed": null,
+      "reviewedBy": null
+    }
+  }
+]

@@ -36,10 +36,24 @@ function validate(get: (k: string) => string): Errors {
   return errors
 }
 
-function Select({ id, name, required, children, ariaLabel }: { id?: string; name: string; required?: boolean; children: ReactNode; ariaLabel?: string }) {
+function Select({
+  id,
+  name,
+  required,
+  children,
+  ariaLabel,
+  defaultValue = '',
+}: {
+  id?: string
+  name: string
+  required?: boolean
+  children: ReactNode
+  ariaLabel?: string
+  defaultValue?: string
+}) {
   return (
     <div className="relative">
-      <select id={id} name={name} required={required} aria-label={ariaLabel} defaultValue="" className={`${field} cursor-pointer appearance-none pr-12`}>
+      <select id={id} name={name} required={required} aria-label={ariaLabel} defaultValue={defaultValue} className={`${field} cursor-pointer appearance-none pr-12`}>
         {children}
       </select>
       <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-5 size-2.5 -translate-y-1/2 text-secondary" />
@@ -47,7 +61,16 @@ function Select({ id, name, required, children, ariaLabel }: { id?: string; name
   )
 }
 
-export function BookingForm({ className = '', autoFocus = false }: { className?: string; autoFocus?: boolean }) {
+// `defaultDoctor` pre-selects a doctor (a doctor's profile page); it must be one of `bookingDoctors`.
+export function BookingForm({
+  className = '',
+  autoFocus = false,
+  defaultDoctor,
+}: {
+  className?: string
+  autoFocus?: boolean
+  defaultDoctor?: string
+}) {
   const uid = useId()
   const id = (name: string) => `${uid}-${name}`
   const [errors, setErrors] = useState<Errors>({})
@@ -160,7 +183,7 @@ export function BookingForm({ className = '', autoFocus = false }: { className?:
         <label htmlFor={id('doctor')} className={label}>
           Doctor
         </label>
-        <Select id={id('doctor')} name="doctor">
+        <Select id={id('doctor')} name="doctor" defaultValue={defaultDoctor && bookingDoctors.includes(defaultDoctor) ? defaultDoctor : ''}>
           <option value="" disabled>
             Select Doctor
           </option>
@@ -232,7 +255,7 @@ export function BookingForm({ className = '', autoFocus = false }: { className?:
         >
           Request My Consultation
         </button>
-        <p className="mt-3 text-center text-meta text-text" role="status">
+        <p className="mt-3 text-center max-md:text-left text-meta text-text" role="status">
           {waUrl ? (
             <>
               We’ve opened WhatsApp with your details. Send the message there and we’ll confirm your time; nothing is

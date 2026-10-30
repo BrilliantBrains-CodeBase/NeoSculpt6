@@ -19,20 +19,20 @@ export function ServiceWhyChoose({ whyChoose }: { whyChoose: ServiceContent['why
     <section
       id="service-why-choose"
       aria-labelledby="service-why-choose-heading"
-      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
+      className="mx-auto mb-20 flex w-full max-w-[1400px] flex-col items-center max-md:items-start gap-5 px-5 md:mb-[100px] md:px-[30px] xl:mb-[150px] xl:px-10"
     >
-      <h2 id="service-why-choose-heading" ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center text-balance`}>
+      <h2 id="service-why-choose-heading" ref={titleRef} data-reveal="up" className={`${h2} max-w-[1080px] text-center max-md:text-left text-balance`}>
         {whyChoose.h2}
       </h2>
       {whyChoose.subline && (
-        <p ref={sublineRef} data-reveal="up" style={delay(150)} className={`${italicLine} max-w-[860px] text-center text-secondary`}>
+        <p ref={sublineRef} data-reveal="up" style={delay(150)} className={`${italicLine} max-w-[860px] text-center max-md:text-left text-secondary`}>
           {whyChoose.subline}
         </p>
       )}
       <ul
         ref={listRef}
         data-reveal-stagger=""
-        className="mt-10 flex w-full flex-wrap justify-center gap-x-10 gap-y-[50px] md:mt-[60px] md:gap-x-[60px] md:gap-y-[60px]"
+        className="mt-10 flex w-full flex-wrap justify-center max-md:justify-start gap-x-10 gap-y-[50px] md:mt-[60px] md:gap-x-[60px] md:gap-y-[60px]"
       >
         {whyChoose.cards.map((card, i) => (
           <li
