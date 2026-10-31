@@ -8,7 +8,7 @@ import { Parts, button, delay, eyebrow, h2 } from '../shared'
 // "Meet our team", entry template 111). Uses the home DoctorCard and DoctorGrid, so the two pages share one card
 // (profile link over the whole card, social icons once their URLs are set, initials until the portraits are in) and
 // one layout: every published doctor, up to three centred at the theme's 3-column width, four or more in rows of four.
-// The theme's "Meet the team" button becomes "Book a Consultation" (opens the popup).
+// The theme's "Meet the team" button becomes "Book a Consultation" (scrolls to the page's booking form).
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 export function AboutTeam() {

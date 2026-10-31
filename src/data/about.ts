@@ -201,7 +201,7 @@ export const team = {
   eyebrow: 'Meet Our Doctors',
   h2: [{ text: 'Expertise Matched to the ' }, { text: 'Right Concern', gold: true }] as Part[],
   cards: doctors.cards,
-  cta: 'Book a Consultation', // opens the booking popup
+  cta: 'Book a Consultation', // scrolls to the page's booking form (useBooking)
 }
 
 // D. Clinic and technology. The ticker is the home ticker plus Excimer Phototherapy, in the doc's order.

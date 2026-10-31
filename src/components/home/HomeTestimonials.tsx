@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type KeyboardEvent } from 'react'
+import { useId, useState, type CSSProperties, type KeyboardEvent } from 'react'
 import { testimonials, type Testimonial } from '../../data/home'
 import { useReveal } from '../useReveal'
 import { useLoopCarousel } from '../useLoopCarousel'
@@ -42,7 +42,8 @@ interface SectionProps {
   eyebrow?: string
   h2: { text: string; gold?: boolean }[]
   reviews: Testimonial[]
-  rating: { value: string | null; count: number | null }
+  /** `source` names the Google listing the figures come from, when it is not NeoSculpt6's own. */
+  rating: { value: string | null; count: number | null; source?: string }
   /** Added after the Google line; service pages leave it out (their doc's sub-line is the Google line only). */
   practo?: string
 }
@@ -115,6 +116,7 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
       >
         Rated <Pending value={rating.value} placeholder="x.x" /> on Google from{' '}
         <Pending value={rating.count?.toLocaleString('en-IN') ?? null} placeholder="nn" /> reviews
+        {rating.source && <> of {rating.source}</>}
         {practo && <> · {practo}</>}
       </p>
 
@@ -178,10 +180,17 @@ export function TestimonialsSection({ id, eyebrow, h2, reviews, rating, practo }
   )
 }
 
-// One slide: five stars, the quote, then the author and treatment (theme layout "bottom", rating in content).
-// Until a review is approved (quote, author and consent all set) it shows a pending notice instead of any text.
+// Reviews longer than this many words are clamped on the card (the theme's quotes are ~30-35 words) with a button that
+// shows the whole review. The text itself is never cut: the clamp is CSS only.
+const LONG_REVIEW_WORDS = 45
+
+// One slide: five stars, the quote, then the author, treatment and Google listing (theme layout "bottom", rating in
+// content). Until a review is approved (quote, author and consent all set) it shows a pending notice instead of text.
 function TestimonialCard({ review }: { review: Testimonial }) {
   const approved = isApproved(review)
+  const [expanded, setExpanded] = useState(false)
+  const long = Boolean(review.quote && review.quote.split(/\s+/).length > LONG_REVIEW_WORDS)
+  const quoteId = useId()
   return (
     <figure className="flex flex-col items-center max-md:items-start gap-[30px] text-center max-md:text-left">
       {approved ? (
@@ -199,9 +208,25 @@ function TestimonialCard({ review }: { review: Testimonial }) {
       )}
 
       {approved ? (
-        <blockquote className="type-text text-secondary">
-          <p>“{review.quote}”</p>
-        </blockquote>
+        <div className="flex flex-col items-center gap-[10px] max-md:items-start">
+          <blockquote className="type-text text-secondary">
+            {/* pre-line keeps the reviewer's own line breaks. */}
+            <p id={quoteId} className={`whitespace-pre-line ${long && !expanded ? 'line-clamp-6' : ''}`}>
+              “{review.quote}”
+            </p>
+          </blockquote>
+          {long && (
+            <button
+              type="button"
+              aria-expanded={expanded}
+              aria-controls={quoteId}
+              onClick={() => setExpanded((e) => !e)}
+              className={`text-button font-semibold text-tertiary uppercase underline-offset-4 hover:underline ${carouselControl}`}
+            >
+              {expanded ? 'Show less' : 'Read full review'}
+            </button>
+          )}
+        </div>
       ) : (
         <div className="w-full rounded-[7px] border border-dashed border-tertiary/50 px-5 py-4 text-small text-text">
           <p className="mb-1 text-button font-semibold text-tertiary uppercase">Review pending sign-off</p>
@@ -221,6 +246,7 @@ function TestimonialCard({ review }: { review: Testimonial }) {
         </span>
         {/* The About page's reviews get their treatment label once the review is chosen. */}
         <span className={`text-small ${review.treatment ? 'text-text' : 'text-text/60'}`}>{review.treatment || 'Treatment pending'}</span>
+        {approved && review.listing && <span className="text-small text-text/70">Google review · {review.listing}</span>}
       </figcaption>
     </figure>
   )

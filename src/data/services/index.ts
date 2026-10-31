@@ -16,12 +16,20 @@
 import parsedJson from './parsed.json' with { type: 'json' }
 import photosJson from './photos.json' with { type: 'json' }
 import newPhotosJson from './new-photos.json' with { type: 'json' }
+import videosJson from './videos.json' with { type: 'json' }
 import { doctors } from '../home.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
-import type { Cta, ServiceContent, ServiceDoctor, ServiceImage } from './types.ts'
+import type { Cta, ServiceContent, ServiceDoctor, ServiceImage, ServiceVideo } from './types.ts'
 
 type Parsed = (typeof parsedJson)[number]
+// The client's video sheet (scripts/import-videos.mjs); a page shows its video only once it is approved,
+// consent-confirmed and published (the rule scripts/validate-videos.mjs reports on).
+const videos = videosJson as Record<string, ServiceVideo | null>
+const shownVideo = (path: string): ServiceVideo | null => {
+  const v = videos[path]
+  return v && v.approval === 'approved' && v.consentConfirmed && v.published ? v : null
+}
 type Kind = 'c' | 'p' | 'a' | 'o' | null
 type OldPhoto = { src: string; page: string; kind: Kind; alt: string | null; same: number; unusable?: string }
 type NewPhoto = { src: string; page: string; kind: Kind; alt: string | null; width: number; height: number; n: number; same?: string; unusable?: string }
@@ -151,7 +159,6 @@ function pendingFor(p: Parsed, cards: ServiceDoctor[]): string[] {
   if (prices.length) out.push(`prices shown in the cost section: "${prices[0].text.replace(/^.*?·\s*/, '')}" (and the asterisk's note)`)
   else if (p.cost.factors.some((f) => /\d/.test(f.text))) out.push('figures in the cost section (graft/session ranges)')
   if (p.seo.note) out.push(`SEO note from the doc: ${p.seo.note}`)
-  if (p.consultation.video) out.push(`video link: "${p.consultation.video.title}" (${p.consultation.video.url})`)
   return out
 }
 
@@ -186,7 +193,7 @@ function build(p: Parsed): ServiceContent {
       paragraphs: p.consultation.paragraphs,
       ctas: p.consultation.buttons.map(cta),
       image: pics.consultation,
-      video: p.consultation.video?.url ? { title: p.consultation.video.title, url: p.consultation.video.url } : null,
+      video: shownVideo(p.path),
     },
     whyChoose: p.whyChoose,
     process: { ...p.process, image: pics.process },

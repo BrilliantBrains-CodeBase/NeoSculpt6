@@ -622,7 +622,6 @@
     },
     "todo": [
       "doctor: profile copy awaiting medical review (doctors.json contentReview)",
-      "doctor: portrait not approved, initials shown",
       "og:image: default (no approved og image in doctors.json)"
     ],
     "category": "Doctors",
@@ -675,7 +674,6 @@
     },
     "todo": [
       "doctor: profile copy awaiting medical review (doctors.json contentReview)",
-      "doctor: portrait not approved, initials shown",
       "og:image: default (no approved og image in doctors.json)"
     ],
     "category": "Doctors",

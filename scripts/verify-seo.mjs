@@ -164,9 +164,10 @@ for (const card of doctors.cards) {
     if (s.href && !s.href.startsWith('https://')) fail('home doctors', `${card.name} ${s.network} link is not https: ${s.href}`)
   }
 }
-// Home section 10 (Testimonials): the five treatment labels from homepage.md, a quote only with consent, no ages,
-// no AggregateRating until the rating is signed off. Anything still pending is listed as a warning, not a failure.
-const testimonialLabels = ['Hair Transplant', 'Body Contouring', 'Acne Scar Laser', 'Botox & Fillers', 'Cosmetic Surgery']
+// Home section 10 (Testimonials): the five treatment labels (homepage.md's, adapted to the reviews the client chose;
+// see src/data/home.ts), a quote only with consent, no ages, the borrowed Google rating named on the page, and no
+// AggregateRating schema. Anything still pending is listed as a warning, not a failure.
+const testimonialLabels = ['Hair Transplant', 'Laser Hair Reduction', 'Acne & Scar Treatment', 'Botox & PDRN', 'CO2 Laser']
 const testimonialsPending = []
 const homeHtml = fs.existsSync(fileFor('/')) ? decode(fs.readFileSync(fileFor('/'), 'utf8')) : ''
 if (!homeHtml.includes('id="testimonials"')) fail('home testimonials', 'section not on the built home page')
@@ -191,8 +192,12 @@ for (const r of testimonials.reviews) {
 if (!testimonials.rating.value) testimonialsPending.push('Google rating [x.x]')
 if (!testimonials.rating.count) testimonialsPending.push('Google review count [nn]')
 testimonialsPending.push('Practo: 2,054 recommendations for Dr Sandeep (†)')
-if (/AggregateRating/.test(homeHtml) && !testimonials.rating.value) {
-  fail('home testimonials', 'AggregateRating schema on the home page before the rating is signed off')
+// React's prerender puts <!-- --> between adjacent text pieces.
+if (testimonials.rating.value && testimonials.rating.source && !homeHtml.replace(/<!-- -->/g, '').includes(`reviews of ${testimonials.rating.source}`)) {
+  fail('home testimonials', `the Google rating line does not name its listing (${testimonials.rating.source})`)
+}
+if (/AggregateRating/.test(homeHtml)) {
+  fail('home testimonials', 'AggregateRating schema on the home page: the rating shown is another listing\'s')
 }
 // Home technology banner (section 13's replacement): both crops exist and are on the page, with size and alt; its
 // words are live text under the H2; it sits directly above Real Results. Every card link (the technology pages use

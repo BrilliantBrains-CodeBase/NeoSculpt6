@@ -6,7 +6,7 @@ import { FollowSheet } from './FollowSheet'
 import { CalendarCheckIcon, PhoneIcon, ShareIcon, SparkleIcon, WhatsAppLogo } from './icons'
 
 // Sticky mobile bar, phones only (<=767px): Follow · Call · Book · WhatsApp · AI Analysis, laid out from the user's
-// reference screenshot. Book is a raised gold (tertiary) circle that opens the same booking popup as the header button.
+// reference screenshot. Book is a raised gold (tertiary) circle that books like the header button: it scrolls to the page's lead form, or opens the popup on pages without one.
 // The bar and the bump behind the circle are drawn as one cream shape with one drop-shadow, so the bump reads as part
 // of the bar and frames the circle like a ring. SiteLayout pads the page bottom by the bar's height so it never covers
 // the footer.

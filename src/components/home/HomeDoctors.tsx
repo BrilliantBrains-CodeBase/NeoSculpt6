@@ -12,14 +12,15 @@ import { FacebookIcon, InstagramIcon, LinkedInIcon, YoutubeIcon } from '../icons
 // card is the theme's entry template 111 (container 4928523b; elementor/css/post-111.css).
 // Changes from the theme:
 // - One card per published doctor (src/data/doctors.json). Up to three sit centred at the theme's 3-column width, so
-//   there is no empty column; four or more fill rows of four (DoctorGrid).
-// - The theme's hover swaps in a background photo; ours keeps only its shadow change, plus a small lift.
+//   there is no empty column; four or more fill rows of four (DoctorGrid). Tablet: two per row.
+// - Instead of the theme's round portrait, the doctor's photo fills the whole card (3:4), with a soft gradient from
+//   the bottom so the name, specialty and footer stay readable. Hover: the photo zooms slightly and the card lifts.
 // - One link per card ("Open Profile") stretched over the whole card, so the card is a single tab stop. Social icons
 //   sit above it and only show once their URL is set in src/data/home.ts.
-// - Portraits fall back to an initials circle until the clinic shoot is in.
+// - Portraits fall back to the doctor's initials until the portrait is approved.
 // id="our-doctors" is the target of the About button and the footer "Our Doctors" link.
 // As in the theme, the section has no top padding: the space above is the bottom margin of section 8.
-// Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180, card laid out as a row), xl = desktop.
+// Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 // On phones the cards are a carousel (DoctorCarousel) instead of a stack.
 
 const delay = (ms: number) => ({ '--reveal-delay': `${ms}ms` }) as CSSProperties
@@ -95,15 +96,14 @@ export function HomeDoctors() {
 
 type Card = (typeof doctors.cards)[number]
 
-// Doctors grid (1e73df0), tablet up; also the About team's. Tablet: one card per row. Desktop: up to three cards at the
-// theme's 3-column width (40px gap), centred, so two doctors leave no empty column; four or more wrap in rows of
-// four. Cards in a row share row heights (subgrid), so a name that wraps doesn't push one portrait lower.
+// Doctors grid (1e73df0), tablet up; also the About team's. Tablet: two cards per row. Desktop: up to three cards at the
+// theme's 3-column width (40px gap), centred, so two doctors leave no empty column; four or more wrap in rows of four.
 export function DoctorGrid({ cards }: { cards: Card[] }) {
   const columnWidth = cards.length > 3 ? 'calc((100% - 120px) / 4)' : 'calc((100% - 80px) / 3)'
   return (
     <ul
       style={{ '--doctor-col': columnWidth } as CSSProperties}
-      className="mb-10 flex w-full flex-col max-md:hidden gap-5 text-left md:mb-[60px] md:gap-[30px] xl:grid xl:grid-cols-[repeat(auto-fit,var(--doctor-col))] xl:justify-center xl:gap-x-10 xl:gap-y-10"
+      className="mb-10 hidden w-full text-left md:mb-[60px] md:grid md:grid-cols-2 md:gap-[30px] xl:grid-cols-[repeat(auto-fit,var(--doctor-col))] xl:justify-center xl:gap-10"
     >
       {cards.map((card, i) => (
         <DoctorCard key={card.href} card={card} index={i % 4} />
@@ -188,7 +188,7 @@ export function DoctorCard({ card, index }: { card: Card; index: number }) {
   const ref = useReveal<HTMLLIElement>()
 
   return (
-    <li ref={ref} data-reveal="up" style={delay(index * 150)} className="xl:row-span-3 xl:grid xl:grid-rows-subgrid xl:gap-y-0">
+    <li ref={ref} data-reveal="up" style={delay(index * 150)}>
       <DoctorCardBody card={card} />
     </li>
   )
@@ -200,40 +200,42 @@ function DoctorCardBody({ card, eager = false }: { card: Card; eager?: boolean }
   const social = card.social.filter((s) => s.href)
 
   return (
-      // Card (4928523b). Below md and from xl: name, portrait, footer stacked. On tablet: portrait left, name right,
-      // footer underneath.
-      <article className="group relative grid h-full grid-cols-1 rounded-[20px] bg-alternate p-[30px] shadow-[0_5px_20px_0_#0000001a] transition duration-300 hover:shadow-[0_5px_20px_0_#00000026] motion-safe:hover:-translate-y-1 md:grid-cols-[260px_1fr] md:gap-x-[70px] md:p-10 xl:row-span-3 xl:grid-cols-1 xl:grid-rows-subgrid xl:gap-x-0 xl:gap-y-0">
-        <div className="flex flex-col gap-[3px] md:col-start-2 md:row-start-1 md:self-center xl:col-start-auto xl:row-start-auto">
-          <h3 className="font-heading text-h4 text-secondary uppercase transition-colors duration-300 group-hover:text-primary">
+    // Card (4928523b): the photo fills the card (3:4, 2:3 on desktop); name, specialty and footer sit at the bottom on
+    // their own dark fade, so they stay readable on light photos too.
+    <article className="group relative isolate flex aspect-[3/4] h-full flex-col justify-end rounded-[20px] bg-alternate shadow-[0_5px_20px_0_#0000001a] transition duration-300 hover:shadow-[0_5px_20px_0_#00000026] motion-safe:hover:-translate-y-1 xl:aspect-[2/3]">
+      {/* Photo and overlay, clipped to the card's corners. The card itself isn't clipped, so the profile link's focus
+          ring (its ::after) can sit outside it. */}
+      <div aria-hidden={card.portrait ? undefined : true} className="absolute inset-0 -z-10 overflow-hidden rounded-[20px]">
+        {card.portrait ? (
+          <img
+            src={card.portrait.src}
+            width={card.portrait.width}
+            height={card.portrait.height}
+            alt={card.portrait.alt}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+            className="size-full object-cover object-[50%_15%] transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="grid size-full place-items-center bg-border pb-[35%] font-heading text-h1 text-tertiary uppercase">
+            {card.initials}
+          </div>
+        )}
+        {/* Light tint over the whole photo, so white studio backgrounds don't glare against the dark page. */}
+        <div className="absolute inset-0 bg-alternate/15" />
+      </div>
+
+      {/* Text block: its own fade starts above the name and is near-solid behind the text, whatever the photo. */}
+      <div className="rounded-b-[20px] bg-[linear-gradient(to_top,#0b0b0df2_0%,#0b0b0deb_50%,#0b0b0d99_75%,#0b0b0d00_100%)] px-[30px] pt-[110px] pb-[30px] xl:px-[25px] xl:pb-[25px] min-[1400px]:px-[30px] min-[1400px]:pb-[30px]">
+        <div className="flex flex-col gap-[3px]">
+          <h3 className="font-heading text-h4 text-secondary uppercase transition-colors duration-300 group-hover:text-primary xl:text-[22px] min-[1400px]:text-h4">
             {card.name}
           </h3>
-          <p className="text-primary">{card.specialty}</p>
-        </div>
-
-        {/* Portrait (6f1b6f75 / 47d0636b): a circle, full width on mobile, 260px on tablet. */}
-        <div className="mt-[27px] mb-[30px] md:col-start-1 md:row-start-1 md:my-0 xl:col-start-auto xl:row-start-auto xl:mt-[47px] xl:mb-[50px] xl:px-[30px]">
-          {card.portrait ? (
-            <img
-              src={card.portrait.src}
-              width={card.portrait.width}
-              height={card.portrait.height}
-              alt={card.portrait.alt}
-              loading={eager ? 'eager' : 'lazy'}
-              decoding="async"
-              className="aspect-square w-full rounded-full object-cover object-top"
-            />
-          ) : (
-            <div
-              aria-hidden="true"
-              className="grid aspect-square w-full place-items-center rounded-full bg-border font-heading text-h2 text-tertiary uppercase"
-            >
-              {card.initials}
-            </div>
-          )}
+          <p className="text-primary xl:text-small">{card.specialty}</p>
         </div>
 
         {/* Footer row (5a20e069): profile link left, social icons right. */}
-        <div className="flex min-h-[60px] items-center justify-between gap-5 border-t border-border pt-[15px] md:col-span-2 md:mt-[50px] xl:col-span-1 xl:mt-0">
+        <div className="mt-5 flex min-h-[60px] items-center justify-between gap-5 border-t border-secondary/20 pt-[15px]">
           <SmartLink
             href={card.href}
             className="text-button font-semibold text-secondary uppercase outline-hidden transition-colors duration-300 group-hover:text-primary after:absolute after:inset-0 after:rounded-[20px] after:content-[''] hover:text-primary focus-visible:text-primary focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-primary"
@@ -248,7 +250,7 @@ function DoctorCardBody({ card, eager = false }: { card: Card; eager?: boolean }
                   <SmartLink
                     href={s.href}
                     aria-label={`${card.name} on ${networks[s.network].label} (opens in a new tab)`}
-                    className="grid size-[45px] place-items-center rounded-full bg-border text-secondary transition-colors duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background"
+                    className="grid size-[45px] place-items-center rounded-full bg-alternate/60 text-secondary backdrop-blur-sm transition-colors duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background"
                   >
                     {networks[s.network].icon}
                   </SmartLink>
@@ -257,6 +259,7 @@ function DoctorCardBody({ card, eager = false }: { card: Card; eager?: boolean }
             </ul>
           )}
         </div>
-      </article>
+      </div>
+    </article>
   )
 }

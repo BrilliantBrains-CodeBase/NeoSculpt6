@@ -14,7 +14,7 @@ import { DoctorAvatar } from './DoctorAvatar'
 // with the doctor's portrait in the photo panel; on tablet the two columns stay side by side, on phones they stack.
 // Breadcrumb Home › Our Doctors › name; the H1 is page.h1, which generate-pages.mjs takes from the record's seo.h1.
 // Under the role: the approved degrees on one line (as the Neo Fertility and Derma Solutions profiles show them).
-// Buttons: book (the booking popup) and contact. Social icons only once a profile URL is approved.
+// Buttons: book (scrolls to the profile's booking form) and contact. Social icons only once a profile URL is approved.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 const networks: Record<SocialNetwork, { label: string; icon: ReactNode }> = {

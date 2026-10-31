@@ -67,8 +67,8 @@ export interface ServiceContent {
     paragraphs: string[]
     ctas: Cta[]
     image: ServiceImage
-    /** A video the doc names in this section (one page), linked rather than embedded. */
-    video: { title: string; url: string } | null
+    /** The page's YouTube video (videos.json), shown under the text; null when it has none approved. */
+    video: ServiceVideo | null
   }
   /** 4. Why choose NeoSculpt6. */
   whyChoose: { h2: string; subline: string | null; cards: NumberedCard[] }
@@ -104,4 +104,22 @@ export interface ServiceContent {
   sidebar: { heading: string; links: NavLink[]; viewAll: NavLink; contactHeading: string; contactText: string; cta: Cta }
   /** Page-specific items that need sign-off before launch (prices, figures, notes); `npm run verify` lists them. */
   pending: string[]
+}
+
+/** A service page's YouTube video: a record in videos.json (scripts/import-videos.mjs, checked by
+ *  scripts/validate-videos.mjs). A page shows it only when it is approved, consent-confirmed and published. */
+export interface ServiceVideo {
+  provider: 'youtube'
+  videoId: string
+  /** https://www.youtube.com/watch?v=<videoId> */
+  url: string
+  title: string
+  description?: string
+  /** Local copy of the YouTube thumbnail, so nothing loads from YouTube before the visitor presses play. */
+  thumbnail?: { src: string; width: number; height: number; alt: string }
+  transcriptUrl?: string
+  attribution?: string
+  approval: 'approved' | 'pending' | 'rejected'
+  consentConfirmed: boolean
+  published: boolean
 }

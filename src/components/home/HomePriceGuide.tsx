@@ -16,7 +16,7 @@ import { TickIcon } from '../icons'
 // - Card titles are H3 (set at the theme's H4 size) so headings stay in order under the section H2.
 // - Rows link to their treatment pages; the card button goes to the speciality hub.
 // - Prices show only once approved (src/data/home.ts); until then each row shows the pending label.
-// - The theme's "Full price guide" button becomes Book a Consultation (opens the booking popup), with a disclaimer.
+// - The theme's "Full price guide" button becomes Book a Consultation (scrolls to the home lead form), with a disclaimer.
 // id="price-guide" is an in-page target.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 

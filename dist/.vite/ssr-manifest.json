@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-xHO58s1H.js"
+    "/assets/client-DV5eusHU.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-xHO58s1H.js"
+    "/assets/client-DV5eusHU.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-xHO58s1H.js"
+    "/assets/client-DV5eusHU.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -127,6 +127,7 @@
   "src/components/service/ServiceSidebar.tsx": [],
   "src/components/service/ServiceStrip.tsx": [],
   "src/components/service/ServiceTechnology.tsx": [],
+  "src/components/service/ServiceVideo.tsx": [],
   "src/components/service/ServiceWhyChoose.tsx": [],
   "src/components/shared.tsx": [],
   "src/components/technology/TechnologyBanner.tsx": [],
@@ -154,6 +155,7 @@
   "src/data/services/new-photos.json": [],
   "src/data/services/parsed.json": [],
   "src/data/services/photos.json": [],
+  "src/data/services/videos.json": [],
   "src/data/site.ts": [],
   "src/data/specialities/anti-aging-injectables.ts": [],
   "src/data/specialities/cosmetic-gynecology.ts": [],

@@ -37,8 +37,8 @@ export function HomeTemplate() {
       {/* Section 11 (HomePriceGuide) is hidden for now: no prices are approved yet. To show it again, import it
           from ../components/home/HomePriceGuide and render it here. */}
       {/* Then D (international) and E (FAQs). */}
-      {/* Section 12 (HomeBooking, the full appointment form) is left out: the phone-only Find My Treatment strip
-          below is the page's one lead form. The full form stays in the "Book a Consultation" popup. */}
+      {/* Section 12 (HomeBooking) is left out: the Find My Treatment band below holds the full appointment form and
+          is the page's one lead form. Every "Book a Consultation" button on this page scrolls to it. */}
       {/* Section 13 (Our Technology) is now the banner above Real Results. */}
       <HomeJournal />
       <HomeFindTreatment />

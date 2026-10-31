@@ -3,7 +3,7 @@ import { useBooking } from '../booking/BookingContext'
 import { SmartLink } from '../SmartLink'
 import { button, lightButton } from '../shared'
 
-// A service-page button from the data: `book` opens the booking popup (BookingDialog), an href is a link (a page,
+// A service-page button from the data: `book` books via useBooking (the booking popup on these pages, which have no lead form), an href is a link (a page,
 // "#cost" on the same page, or tel:). In a row the first button is the filled accent one and the rest use the light
 // fill, as in the home hero.
 

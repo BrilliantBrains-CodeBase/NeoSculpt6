@@ -1,6 +1,6 @@
 // Home page copy, one export per section. Source: content/home-page/homepage.md (section numbers match the doc).
 
-import { cardPortraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
+import { portraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
 
 // 1. Hero + credential ticker.
 export const hero = {
@@ -63,16 +63,16 @@ export const stats = {
 }
 
 // 2. About intro. `h2` is the centred section title (not in the theme or the doc; added to match the other
-// sections). `h3` is the doc's heading, set at H2 size like the theme's; it wraps naturally, like its inline
-// highlight title.
+// sections). `h3` is the column heading, set at H2 size like the theme's; it wraps naturally, like its inline
+// highlight title. It replaces the doc's "Six Specialities. One Doctor-Led Clinic." (client's wording, 2026-10-30).
 export const about = {
   h2: [{ text: 'About ' }, { text: 'NeoSculpt6', gold: true }],
   eyebrow: 'Led by Doctors, Not by Packages',
   h3: [
-    { text: 'Six ' },
-    { text: 'Specialities.', gold: true },
-    { text: ' One Doctor-Led ' },
-    { text: 'Clinic.', gold: true },
+    { text: 'Your ' },
+    { text: 'A–Z', gold: true },
+    { text: ' Destination for Cosmetic & ' },
+    { text: 'Aesthetic Care', gold: true },
   ],
   text: 'At NeoSculpt6 you are not handed to a counsellor or a technician. Your concern is assessed, your plan is designed and your procedure is led by a senior specialist and the same doctor follows your recovery. Dermatology and plastic surgery, under one roof.',
   cta: { label: 'Meet Our Specialists', href: '/#our-doctors' }, // section 9 takes id="our-doctors"
@@ -374,10 +374,12 @@ export const signature = {
 // centred at the theme's 3-column width; four or more fill rows of four (DoctorGrid). `specialty` is the record's
 // shortRole. The H2 is two lines, as the doc sets them.
 // Needs sign-off before launch (marked † in the doc): the sub-line's claim. The † is not shown.
-// Portraits: square head-and-shoulders crops (the record's cardPortrait, else its hero portrait), shown as circles; a
-// card shows an initials circle until the portrait is approved. Dr Sandeep's is cropped from his clinic portrait, Dr
-// Saranya's from the studio photo the clinic sent on 2026-10-26. TODO: the backgrounds differ (clinic room vs plain
-// white); reshoot in the clinic with the same lighting if the clinic wants them to match.
+// Portraits: each record's hero portrait (the same photo as its profile page), filling the card behind a gradient; a
+// card shows its initials until the portrait is approved. Square photos are cropped at the sides. Dr Sandeep's is his
+// clinic portrait, Dr Saranya's the studio photo the clinic sent on 2026-10-26, Dr Payal Mahapatra's her Neo Fertility
+// portrait and Dr Thyagaraj's his Derma Solutions portrait (both sent by the clinic on 2026-10-30). TODO: the
+// backgrounds differ (clinic room, white, grey wall); reshoot in the clinic with the same lighting if the clinic wants
+// them to match. Dr Thyagaraj's is only 400px, so it looks soft at large sizes; ask for a larger original.
 // Social icons show once a profile URL is approved in doctors.json.
 export type DoctorSocial = { network: 'instagram' | 'facebook' | 'youtube' | 'linkedin'; href: string }
 export type DoctorPortrait = { src: string; width: number; height: number; alt: string }
@@ -387,16 +389,16 @@ export const doctors = {
   h2: [[{ text: 'The Doctors' }], [{ text: 'Behind Every Plan', gold: true }]] as { text: string; gold?: boolean }[][],
   subline: 'The specialist who plans your treatment leads it and reviews your recovery.',
   profileLabel: 'Open Profile',
-  cta: 'Book a Consultation', // opens the booking popup
+  cta: 'Book a Consultation', // scrolls to the Find My Treatment form (useBooking)
   // One card per published doctor in src/data/doctors.json, in the file's order, so a new doctor appears here, on the
-  // About team and in the header menu without other edits. Portrait: the record's square crop once approved (initials
+  // About team and in the header menu without other edits. Portrait: the record's hero portrait once approved (initials
   // until then); social icons: approved profile URLs only.
   cards: publishedDoctors.map((d) => ({
     name: d.displayName,
     specialty: d.shortRole,
     href: d.path,
     initials: d.initials,
-    portrait: cardPortraitFor(d) as DoctorPortrait | null,
+    portrait: portraitFor(d) as DoctorPortrait | null,
     social: publicSocialLinks(d).map(({ network, href }) => ({ network, href })) as DoctorSocial[],
   })),
 }
@@ -409,7 +411,7 @@ export const doctors = {
 // `npm run verify` lists it. The experience line stays hidden until `approved` is set.
 export const doctorSpotlight = {
   id: 'doctor-spotlight',
-  bookingLabel: 'Book a Consultation', // opens the booking popup
+  bookingLabel: 'Book a Consultation', // scrolls to the Find My Treatment form (useBooking)
   experience: { text: '20+ years of clinical experience in skin, hair and aesthetic care', approved: false },
   pending: [
     'More than two decades in practice (†)',
@@ -439,21 +441,33 @@ export const booking = {
   },
 }
 
-// 10. Testimonials / Patient Stories. Copy real Google reviews word for word, with the patient's written permission;
-// never write, edit, shorten or combine them, and never add an age. A card shows its quote only when `quote`,
-// `author` and `consent` are all set; until then it shows as pending. `author` is first name + initial ("Priya S.");
-// `source` is the review's Google link, kept for the record (not shown). `lookFor` is the doc's brief for each card.
-// Needs sign-off before launch: the Google rating and review count (null = pending, shown as [x.x] / [nn]) and
-// 2,054 Practo recommendations (marked † in the doc; the † is not shown). No AggregateRating schema until the rating
-// is shown on the page and verified. `npm run verify` lists whatever is still pending.
+// 10. Testimonials / Patient Stories. Real Google reviews, copied word for word: never write, edit, shorten or
+// combine them, and never add an age. Line breaks are the reviewer's own (Google's <br>). A card shows its quote only
+// when `quote`, `author` and `consent` are all set; until then it shows as pending. `author` is first name + initial
+// from the Google display name ("Kunal M."); a single-word name stays as it is. `listing` is the Google profile the
+// review was posted on (shown on the card); `source` is that profile's Maps link, kept for the record.
+// Source (2026-10-30, client's instruction): the Neo Follicle Hair Transplant and Derma Solutions Skin and Hair
+// Clinic - Marathahalli profiles, both Dr Sandeep Mahapatra's clinics. The client approved publishing these public
+// reviews, so `consent` is true on that basis rather than a separate written permission from each patient.
+// The doc's cards (Hair Transplant, Body Contouring, Acne Scar Laser, Botox & Fillers, Cosmetic Surgery) are adapted:
+// neither profile has a body contouring or cosmetic surgery review, so the client chose two other treatments, and the
+// labels name the treatment each reviewer actually had. Swap in a closer match if one is posted.
+// Rating: Neo Follicle's public Google figure (4.8 from 1,042 reviews, read from Maps 2026-10-30), named in the line
+// because it is not NeoSculpt6's own listing; update it when NeoSculpt6 has its own profile. Still needs sign-off:
+// 2,054 Practo recommendations (marked † in the doc; the † is not shown). No AggregateRating or Review schema: the
+// rating belongs to another listing. `npm run verify` lists whatever is still pending.
 export type Testimonial = {
   treatment: string
   lookFor: string
   quote: string | null
   author: string | null
   consent: boolean
+  listing?: string
   source: string | null
 }
+
+const NEO_FOLLICLE = { listing: 'Neo Follicle', source: 'https://maps.google.com/maps?cid=1368765349301541274' }
+const DERMA_SOLUTIONS = { listing: 'Derma Solutions', source: 'https://maps.google.com/maps?cid=12976301854266238109' }
 
 export const testimonials = {
   eyebrow: 'Patient Stories',
@@ -461,48 +475,53 @@ export const testimonials = {
     text: string
     gold?: boolean
   }[],
-  rating: { value: null as string | null, count: null as number | null },
+  rating: { value: '4.8' as string | null, count: 1042 as number | null, source: 'Neo Follicle' as string | undefined },
   practo: '2,054 Practo recommendations for Dr Sandeep',
   reviews: [
     {
       treatment: 'Hair Transplant',
       lookFor: 'Dr Sandeep and a natural hairline',
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
+      quote:
+        'I am extremely satisfied with my hair transplant experience with Dr. Sandeep. From the initial consultation to the procedure and follow-up, everything was handled professionally and with great care.\n\nDr. Sandeep was very patient, explained the entire process clearly, and made me feel comfortable throughout the procedure. The results have been really impressive, and I’m genuinely happy with the overall improvement in my hairline and appearance.\n\nA big thank you to Dr. Sandeep and the entire team for their professionalism, support, and excellent work. I would definitely recommend Dr. Sandeep to anyone considering a hair transplant.',
+      author: 'Kunal M.',
+      consent: true,
+      ...NEO_FOLLICLE,
     },
     {
-      treatment: 'Body Contouring',
-      lookFor: 'the plan or the recovery',
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
+      treatment: 'Laser Hair Reduction',
+      lookFor: 'the results after a few sessions',
+      quote:
+        'Hey there! I am happy to share my best experience with Dr. Sandeep sir\'s clinic where I have taken Laser Hair Reduction full body of 4 sessions. Awesome improvement. I never believed that in such few sessions can see good reduction of hairs and longer months it took for  the upcoming growth to see. I was worried about this procedure as I took many sessions in other clinics and salons where ended up with unsatisfaction and waste of money.\nDr. Sandeep introduced me with his advanced device Reveal Laser USFDA approved and so, I agreed for the same for not to get into any complications. I am happy with the results and have suggested for all of my friends. Worth of spending here ! Thanks for Derma solutions clinic. for a note, Iam already taken treatments with Neo fertility as well .',
+      author: 'Chandana S.',
+      consent: true,
+      ...DERMA_SOLUTIONS,
     },
     {
-      treatment: 'Acne Scar Laser',
-      lookFor: 'honest advice on the number of sessions',
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
+      treatment: 'Acne & Scar Treatment',
+      lookFor: 'honest advice',
+      quote:
+        '⭐️⭐️⭐️⭐️⭐️\nI\'ve been seeing Dr. Sandeep Mahapatra at derma solutions clinic for a while now, and I genuinely couldn’t be happier with the care I’ve received. From the very first appointment, they made me feel completely at ease — not rushed, not talked over, just really listened to. That alone sets them apart.\n\nI originally went in for acne  and scarring and the difference in my skin is night and day. Later I decided to go for a Botox and fillers ,and the result is really magic for me😍Dr.Mahapatra explained every step of the treatment plan and didn’t push unnecessary products or procedures. What I appreciated most was how practical and honest the advice was — no overpromises, just results.\n\nThe clinic itself is clean, professional, and runs on time (a rare find these days). The staff are friendly and responsive, and I’ve never had trouble getting a follow-up or asking questions between visit.\n\nIf you are looking for a dermatologist who is not only highly skilled but  also genuinely cares, I can\'t recommend Dr Mahapatra enough .',
+      author: 'Rakshu M.',
+      consent: true,
+      ...DERMA_SOLUTIONS,
     },
     {
-      treatment: 'Botox & Fillers',
+      treatment: 'Botox & PDRN',
       lookFor: 'still looking like themselves',
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
+      quote:
+        'I had an amazing experience with Dr. Sandeep Mahapatra for both Botox and PDRN treatments. He is incredibly knowledgeable, patient, and thorough in explaining the procedure and expected results. The clinic was clean, well-organized, and made me feel at ease from the moment I walked in.\n\nThe Botox results were very natural-looking, and I started noticing the effect within a few days. The PDRN treatment left my skin feeling much more hydrated, firmer, and glowing. I truly appreciate the care and precision Dr. Sandeep brings to his work. He has a very aesthetic eye and prioritizes what suits the face best.\n\nHighly recommend him if you’re looking for safe, effective, and subtle aesthetic enhancements!',
+      author: 'Rajashekar',
+      consent: true,
+      ...DERMA_SOLUTIONS,
     },
     {
-      treatment: 'Cosmetic Surgery',
-      lookFor: 'Dr Saranya, safety or recovery',
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
+      treatment: 'CO2 Laser',
+      lookFor: 'results from the first session',
+      quote:
+        'Got Co2 laser done under the guidance of Dr. Sandeep and Dr. Yogita. Saw difference in skin quality from 1st session itself. Highly recommend for co2 and other skin concerns.',
+      author: 'Rima R.',
+      consent: true,
+      ...DERMA_SOLUTIONS,
     },
   ] as Testimonial[],
 }

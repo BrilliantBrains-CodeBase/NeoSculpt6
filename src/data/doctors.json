@@ -477,10 +477,10 @@
       "intro": "Dr. Thyagaraj is a senior plastic surgeon trained in plastic and reconstructive surgery in India and Europe, including a Masters in Reconstructive Breast Surgery from Barcelona. His work covers breast, body and facial surgery, complex reconstruction and burn deformity correction.",
       "portrait": {
         "src": "/images/doctors/dr-thyagaraj.webp",
-        "width": 800,
-        "height": 1000,
-        "alt": "Dr. Thyagaraj, Senior Plastic Surgeon",
-        "approval": "pending"
+        "width": 400,
+        "height": 400,
+        "alt": "Dr. Thyagaraj in a navy blazer and light blue shirt against a plain wall",
+        "approval": "approved"
       }
     },
     "cardPortrait": null,
@@ -681,13 +681,18 @@
       "intro": "Dr. Payal Mahapatra is a fertility specialist and gynecologist, and the founder of Neo Fertility Clinic, part of Neo Group. She trained in obstetrics and gynecology before completing a Fellowship in Reproductive Medicine, and is a member of ISAR and FOGSI.",
       "portrait": {
         "src": "/images/doctors/dr-payal-mahapatra.webp",
-        "width": 800,
-        "height": 1000,
-        "alt": "Dr. Payal Mahapatra, fertility specialist and gynecologist",
-        "approval": "pending"
+        "width": 650,
+        "height": 900,
+        "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope, arms folded, against a plain white background",
+        "approval": "approved"
       }
     },
-    "cardPortrait": null,
+    "cardPortrait": {
+      "src": "/images/home/doctors/dr-payal-mahapatra.webp",
+      "width": 500,
+      "height": 500,
+      "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope against a plain white background"
+    },
     "philosophy": {
       "eyebrow": "Background",
       "heading": "From Gynecology Into Reproductive Medicine",

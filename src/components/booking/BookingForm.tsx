@@ -118,7 +118,8 @@ export function BookingForm({
   }
 
   return (
-    <form onSubmit={onSubmit} onInput={onInput} noValidate className={`grid grid-cols-1 gap-x-3 gap-y-5 md:grid-cols-2 ${className}`}>
+    // data-lead-form: the target BookingProvider's open() scrolls to when a page has its own form.
+    <form data-lead-form onSubmit={onSubmit} onInput={onInput} noValidate className={`grid grid-cols-1 gap-x-3 gap-y-5 md:grid-cols-2 ${className}`}>
       <div className="min-w-0">
         <label htmlFor={id('name')} className={label}>
           Your Name <span aria-hidden="true">*</span>
