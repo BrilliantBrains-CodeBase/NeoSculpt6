@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-DV5eusHU.js"
+    "/assets/client-DxlKsrNg.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-DV5eusHU.js"
+    "/assets/client-DxlKsrNg.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-DV5eusHU.js"
+    "/assets/client-DxlKsrNg.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -55,6 +55,7 @@
   "src/components/BeforeAfter.tsx": [],
   "src/components/Breadcrumbs.tsx": [],
   "src/components/CarouselControls.tsx": [],
+  "src/components/FloatingWhatsApp.tsx": [],
   "src/components/FollowSheet.tsx": [],
   "src/components/InstagramStrip.tsx": [],
   "src/components/Logo.tsx": [],
@@ -80,6 +81,7 @@
   "src/components/booking/BookingContext.tsx": [],
   "src/components/booking/BookingDialog.tsx": [],
   "src/components/booking/BookingForm.tsx": [],
+  "src/components/booking/whatsapp.ts": [],
   "src/components/contact/ClinicFacts.tsx": [],
   "src/components/contact/ContactBanner.tsx": [],
   "src/components/contact/ContactBooking.tsx": [],
@@ -114,6 +116,10 @@
   "src/components/hub/HubConcerns.tsx": [],
   "src/components/hub/HubTreatments.tsx": [],
   "src/components/icons.tsx": [],
+  "src/components/journal/EditorialCard.tsx": [],
+  "src/components/journal/JournalBanner.tsx": [],
+  "src/components/journal/JournalListing.tsx": [],
+  "src/components/results/ResultsComingSoon.tsx": [],
   "src/components/service/CtaButton.tsx": [],
   "src/components/service/ServiceCandidates.tsx": [],
   "src/components/service/ServiceConsultation.tsx": [],
@@ -146,10 +152,17 @@
   "src/data/contact.ts": [],
   "src/data/doctors.json": [],
   "src/data/doctors.ts": [],
+  "src/data/editorial-bodies.json": [],
+  "src/data/editorial.json": [],
+  "src/data/editorial.ts": [],
   "src/data/entries.ts": [],
   "src/data/home.ts": [],
+  "src/data/legal.ts": [],
   "src/data/nav.ts": [],
-  "src/data/posts.ts": [],
+  "src/data/privacy.ts": [],
+  "src/data/results.ts": [],
+  "src/data/reviews.json": [],
+  "src/data/reviews.ts": [],
   "src/data/routes.json": [],
   "src/data/services/index.ts": [],
   "src/data/services/new-photos.json": [],
@@ -167,7 +180,10 @@
   "src/data/specialities/slimming-body-contouring.ts": [],
   "src/data/technology/index.ts": [],
   "src/data/technology/parsed.json": [],
+  "src/data/terms.ts": [],
   "src/layouts/SiteLayout.tsx": [],
+  "src/lib/attribution.ts": [],
+  "src/lib/lead.ts": [],
   "src/main.tsx": [],
   "src/routes.tsx": [],
   "src/styles/index.css": [],
@@ -176,8 +192,12 @@
   "src/templates/DoctorTemplate.tsx": [],
   "src/templates/HomeTemplate.tsx": [],
   "src/templates/HubTemplate.tsx": [],
+  "src/templates/JournalArticleTemplate.tsx": [],
+  "src/templates/JournalTemplate.tsx": [],
   "src/templates/LegacyTemplate.tsx": [],
+  "src/templates/LegalTemplate.tsx": [],
   "src/templates/PagePlaceholder.tsx": [],
   "src/templates/ServiceTemplate.tsx": [],
-  "src/templates/TechnologyTemplate.tsx": []
+  "src/templates/TechnologyTemplate.tsx": [],
+  "src/templates/ThankYouTemplate.tsx": []
 }

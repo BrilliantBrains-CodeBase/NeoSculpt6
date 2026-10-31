@@ -1,4 +1,4 @@
-// What every speciality hub file shares: the buttons, photo lookup, doctor cards, pending reviews and section order.
+// What every speciality hub file shares: the buttons, photo lookup, doctor cards and section order (reviews come from src/data/reviews.ts).
 // Keep this folder to erasable TypeScript only (verify-seo.mjs imports it with Node's type stripping).
 
 import newPhotosJson from '../services/new-photos.json' with { type: 'json' }
@@ -6,7 +6,7 @@ import { clinic, instagram } from '../site.ts'
 import { physicians, saranya } from '../about.ts'
 import { doctorFor } from '../services/index.ts'
 import type { Cta, ServiceDoctor, ServiceImage } from '../services/types.ts'
-import { pillars, type Testimonial } from '../home.ts'
+import { pillars } from '../home.ts'
 
 export const book: Cta = { label: 'Book a Consultation', action: 'book' }
 export const call: Cta = { label: 'Call the Clinic', href: clinic.phoneHref }
@@ -26,7 +26,7 @@ export function hubOrder({ technology = true } = {}) {
     'success-stories',
     'service-faqs',
     'service-cta',
-    'instagram',
+    ...(instagram.enabled ? ['instagram'] : []),
   ]
 }
 
@@ -90,16 +90,10 @@ export function saranyaCard(paragraphs: string[], blockEyebrow = 'Meet Dr Sarany
   }
 }
 
-/** 3–6 real Google reviews per hub, word for word with consent; none collected yet, so these show as pending. */
-export function pendingReviews(treatment: string, lookFor: string[]): Testimonial[] {
-  return lookFor.map((l) => ({ treatment, lookFor: l, quote: null, author: null, consent: false, source: null }))
-}
-
 /** Sign-off items every hub shares. */
 export const sharedPending = [
   'hub copy: every heading, intro, group line, concern card, process step, cost line and the closing band are drafts (no hub doc)',
   'FAQs: the drafted questions are shown; FAQPage schema stays off until they are approved (faqsApproved)',
   'photos: banner, group and process photos need approval for this page',
-  'reviews: 3 real Google reviews (quote, first name + initial, consent)',
   'SEO: title, description and H1 are drafts (src/data/hubs.ts)',
 ]

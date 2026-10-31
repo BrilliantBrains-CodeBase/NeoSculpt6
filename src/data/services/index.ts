@@ -18,6 +18,7 @@ import photosJson from './photos.json' with { type: 'json' }
 import newPhotosJson from './new-photos.json' with { type: 'json' }
 import videosJson from './videos.json' with { type: 'json' }
 import { doctors } from '../home.ts'
+import { reviewsForPath } from '../reviews.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
 import type { Cta, ServiceContent, ServiceDoctor, ServiceImage, ServiceVideo } from './types.ts'
@@ -178,10 +179,8 @@ function build(p: Parsed): ServiceContent {
       paragraphs: d.paragraphs,
     }
   })
-  const doctor = doctorCards[0].name
   const heroCtas = p.hero.buttons.map(cta)
   const primary = heroCtas.find((c) => 'action' in c) ?? { label: 'Book a Consultation', action: 'book' as const }
-  const treatment = p.name.replace(/\s+in Bangalore$/i, '')
   return {
     path: p.path,
     source: p.source,
@@ -203,18 +202,9 @@ function build(p: Parsed): ServiceContent {
     cost: { h2: p.cost.h2, intro: p.cost.intro, factors: p.cost.factors, ctas: p.cost.buttons.map(cta) },
     // A strip without its own button in the doc offers the page's primary action.
     strips: p.strips.map((s) => ({ heading: s.heading, text: s.text, cta: s.button ? cta(s.button) : primary })),
-    // 3–6 real Google reviews that mention the treatment or the doctor, word for word with consent. None collected yet.
-    reviews: {
-      h2: p.reviews.h2,
-      items: [treatment, treatment, doctor].map((lookFor) => ({
-        treatment,
-        lookFor: lookFor === doctor ? `${doctor} by name` : lookFor,
-        quote: null,
-        author: null,
-        consent: false,
-        source: null,
-      })),
-    },
+    // Real Google reviews word for word from the shared pool (src/data/reviews.ts): ones about this treatment first,
+    // then reviews about the doctor's care in general.
+    reviews: { h2: p.reviews.h2, items: reviewsForPath(p.path) },
     faqs: { eyebrow: p.faqs.eyebrow, h2: p.faqs.h2, items: p.faqs.items, cta: cta(p.faqs.button) },
     closing: { kicker: p.closing.kicker, h2: p.closing.h2, paragraph: p.closing.paragraph, chips: p.closing.chips, ctas: p.closing.buttons.map(cta), image: reception },
     sidebar: {

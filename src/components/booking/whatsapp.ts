@@ -1,6 +1,6 @@
 import { clinic } from '../../data/site'
 
-// The site has no form backend: lead forms open a WhatsApp chat with the clinic, message filled in.
+// A WhatsApp chat with the clinic, message filled in. BookingForm offers it when sending to the backend fails.
 export function whatsappMessageHref(lines: string[]) {
   return `${clinic.whatsappHref}?text=${encodeURIComponent(lines.join('\n'))}`
 }

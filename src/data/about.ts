@@ -13,6 +13,7 @@
 // Imports carry .ts: scripts/verify-seo.mjs loads this file in Node.
 
 import { credentials, doctors, pillars, signature, testimonials, type DoctorPortrait, type Testimonial } from './home.ts'
+import { reviewsById } from './reviews.ts'
 import { clinic } from './site.ts'
 
 type Part = { text: string; gold?: boolean }
@@ -235,20 +236,16 @@ export const services = {
   ].map((card) => ({ ...card, image: pillarFor(card.href).image, alt: pillarFor(card.href).imageAlt })),
 }
 
-// 5. What Our Patients Say. Same rules as the home testimonials (src/data/home.ts): real Google reviews word for word,
-// with written permission, never edited or combined, no ages; a card shows its quote only once `quote`, `author` and
-// `consent` are set. Pick reviews that differ from the home page's. `treatment` is filled in with the chosen review.
-// The rating, review count and Practo line are the home page's (pending sign-off); no rating schema until verified.
+// 5. What Our Patients Say. Real Google reviews word for word from the shared pool (src/data/reviews.ts: rules,
+// sources and consent), chosen by hand to match the doc's brief and to differ from the home page's:
+// the time given in the consultation (parth-g) · honest advice, no unnecessary procedures (pravat-k) ·
+// being put at ease (aakarshan-s) · Dr Sandeep by name (neha-c). No review mentions Dr Saranya yet.
+// The rating, review count and Practo line are the home page's; no rating schema (the rating is another listing's).
 export const reviews = {
   h2: [{ text: 'What Our ' }, { text: 'Patients', gold: true }, { text: ' Say' }] as Part[],
   rating: testimonials.rating,
   practo: testimonials.practo,
-  items: [
-    { treatment: '', lookFor: 'the time given in the consultation', quote: null, author: null, consent: false, source: null },
-    { treatment: '', lookFor: 'honest advice, including being told a procedure wasn’t needed', quote: null, author: null, consent: false, source: null },
-    { treatment: '', lookFor: 'privacy and being put at ease', quote: null, author: null, consent: false, source: null },
-    { treatment: '', lookFor: 'Dr Sandeep or Dr Saranya by name', quote: null, author: null, consent: false, source: null },
-  ] as Testimonial[],
+  items: reviewsById(['parth-g', 'pravat-k', 'aakarshan-s', 'neha-c']) as Testimonial[],
 }
 
 // E. Memberships, teaching and Neo Group. The logos are the home strip's; About shows only the memberships in

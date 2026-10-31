@@ -486,7 +486,7 @@
     "title": "Before & After Results | NeoSculpt6",
     "description": "Consented before-and-after cases from NeoSculpt6, Whitefield, Bangalore: hair restoration, body contouring, skin, anti-ageing and cosmetic surgery.",
     "h1": "Before & After Results",
-    "robots": "index, follow",
+    "robots": "noindex, follow",
     "canonical": "https://neosculpt6.com/results/",
     "og": {
       "type": "article",
@@ -518,9 +518,202 @@
       "description": "draft"
     },
     "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
+      "new page: title, description and h1 are drafts (src/data/hubs.ts)",
+      "coming soon: noindex until the page is built"
     ],
     "category": "Results",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/privacy-policy/",
+    "type": "legal",
+    "name": "Privacy Policy",
+    "section": null,
+    "title": "Privacy Policy | NeoSculpt6",
+    "description": "How NeoSculpt6 in Whitefield, Bangalore collects, uses and protects your personal and medical information, and how to reach our Grievance Officer.",
+    "h1": "Privacy Policy",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/privacy-policy/",
+    "og": {
+      "type": "article",
+      "title": "Privacy Policy | NeoSculpt6",
+      "description": "How NeoSculpt6 in Whitefield, Bangalore collects, uses and protects your personal and medical information, and how to reach our Grievance Officer.",
+      "url": "https://neosculpt6.com/privacy-policy/",
+      "image": "/og/default.png",
+      "imageAlt": "Privacy Policy | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Privacy Policy | NeoSculpt6",
+      "description": "How NeoSculpt6 in Whitefield, Bangalore collects, uses and protects your personal and medical information, and how to reach our Grievance Officer.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Privacy Policy",
+        "path": "/privacy-policy/"
+      }
+    ],
+    "sources": {
+      "title": "draft",
+      "description": "draft"
+    },
+    "todo": [
+      "new page: draft copy, pending legal review (src/data/privacy.ts)",
+      "client to confirm NEOFOLLICLE AND NEOFERTILITY CLINIC LLP runs NeoSculpt6",
+      "set the effective date at launch"
+    ],
+    "category": "Legal",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/terms-of-use/",
+    "type": "legal",
+    "name": "Terms of Use",
+    "section": null,
+    "title": "Terms of Use | NeoSculpt6",
+    "description": "The terms for using the NeoSculpt6 website in Whitefield, Bangalore: medical information, booking requests, results, prices and your rights.",
+    "h1": "Terms of Use",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/terms-of-use/",
+    "og": {
+      "type": "article",
+      "title": "Terms of Use | NeoSculpt6",
+      "description": "The terms for using the NeoSculpt6 website in Whitefield, Bangalore: medical information, booking requests, results, prices and your rights.",
+      "url": "https://neosculpt6.com/terms-of-use/",
+      "image": "/og/default.png",
+      "imageAlt": "Terms of Use | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Terms of Use | NeoSculpt6",
+      "description": "The terms for using the NeoSculpt6 website in Whitefield, Bangalore: medical information, booking requests, results, prices and your rights.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Terms of Use",
+        "path": "/terms-of-use/"
+      }
+    ],
+    "sources": {
+      "title": "draft",
+      "description": "draft"
+    },
+    "todo": [
+      "new page: draft copy, pending legal review (src/data/terms.ts)",
+      "client to confirm NEOFOLLICLE AND NEOFERTILITY CLINIC LLP runs NeoSculpt6",
+      "client to confirm no fees or deposits are taken online",
+      "set the effective date at launch"
+    ],
+    "category": "Legal",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/thank-you/",
+    "type": "thank-you",
+    "name": "Thank You",
+    "section": null,
+    "title": "Thank You | NeoSculpt6",
+    "description": "Your consultation request has reached NeoSculpt6 in Whitefield, Bangalore. We will call you to confirm your time.",
+    "h1": "Thank You",
+    "robots": "noindex, nofollow",
+    "canonical": "https://neosculpt6.com/thank-you/",
+    "og": {
+      "type": "article",
+      "title": "Thank You | NeoSculpt6",
+      "description": "Your consultation request has reached NeoSculpt6 in Whitefield, Bangalore. We will call you to confirm your time.",
+      "url": "https://neosculpt6.com/thank-you/",
+      "image": "/og/default.png",
+      "imageAlt": "Thank You | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Thank You | NeoSculpt6",
+      "description": "Your consultation request has reached NeoSculpt6 in Whitefield, Bangalore. We will call you to confirm your time.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Thank You",
+        "path": "/thank-you/"
+      }
+    ],
+    "sources": {
+      "title": "draft",
+      "description": "draft"
+    },
+    "todo": [],
+    "category": "Booking",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/journal/",
+    "type": "journal",
+    "name": "Journal",
+    "section": null,
+    "title": "Journal, Blogs & Media Coverage | NeoSculpt6",
+    "description": "Doctor-led insights, patient education, clinic blogs and verified media coverage from NeoSculpt6 in Whitefield, Bangalore.",
+    "h1": "Insights From NeoSculpt6",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/journal/",
+    "og": {
+      "type": "article",
+      "title": "Journal, Blogs & Media Coverage | NeoSculpt6",
+      "description": "Doctor-led insights, patient education, clinic blogs and verified media coverage from NeoSculpt6 in Whitefield, Bangalore.",
+      "url": "https://neosculpt6.com/journal/",
+      "image": "/og/default.png",
+      "imageAlt": "Journal, Blogs & Media Coverage | NeoSculpt6",
+      "siteName": "NeoSculpt6"
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Journal, Blogs & Media Coverage | NeoSculpt6",
+      "description": "Doctor-led insights, patient education, clinic blogs and verified media coverage from NeoSculpt6 in Whitefield, Bangalore.",
+      "image": "/og/default.png"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Journal",
+        "path": "/journal/"
+      }
+    ],
+    "sources": {
+      "title": "doc",
+      "description": "doc"
+    },
+    "todo": [
+      "new page: og image is the default (no page photo yet)",
+      "consultation band copy is a draft (editorial.ts journalHub.closing)"
+    ],
+    "category": "Journal",
     "video": null,
     "lastmod": null,
     "oldSite": null

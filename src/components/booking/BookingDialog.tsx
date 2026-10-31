@@ -52,7 +52,7 @@ export function BookingDialog() {
               </span>
             ))}
           </h2>
-          <BookingForm autoFocus />
+          <BookingForm source="popup" autoFocus />
         </div>
         <button
           type="button"

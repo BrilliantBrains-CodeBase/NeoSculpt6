@@ -14,7 +14,8 @@
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, pendingReviews, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/cosmetic-surgery/'
 const child = (slug: string) => `${HUB}${slug}-in-bangalore/`
@@ -217,7 +218,7 @@ export const cosmeticSurgery: HubSource = {
     ctas: [book, call, whatsapp],
   },
 
-  reviews: { h2: 'Success Stories', items: pendingReviews('Cosmetic Surgery', ['Cosmetic Surgery', 'Reconstructive Surgery', 'Dr Saranya T by name']) },
+  reviews: { h2: 'Success Stories', items: reviewsForPath('/cosmetic-surgery/') },
 
   faqs: {
     eyebrow: 'Quick Answers',

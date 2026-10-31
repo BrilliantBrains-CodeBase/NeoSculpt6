@@ -1,6 +1,6 @@
 // Shape of one record in pages.json (written by scripts/generate-pages.mjs — do not edit pages.json by hand).
 
-export type PageType = 'home' | 'about' | 'service' | 'technology' | 'hub' | 'doctor' | 'contact' | 'legacy-demo'
+export type PageType = 'home' | 'about' | 'service' | 'technology' | 'hub' | 'doctor' | 'contact' | 'journal' | 'article' | 'legal' | 'thank-you' | 'legacy-demo'
 
 export interface Crumb {
   name: string

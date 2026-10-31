@@ -4,14 +4,18 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { primaryNav, findMyTreatment } from '../src/data/nav.ts'
-import { footerNav, legalNav } from '../src/data/site.ts'
+import { footerNav, legalNav, instagram } from '../src/data/site.ts'
+// The Instagram strip has a site-wide switch (instagram.enabled); while it is off, no section list expects it.
+const withInstagram = (ids) => (instagram.enabled ? ids : ids.filter((id) => id !== 'instagram'))
 import { pillars, results, signature, doctors, doctorSpotlight, testimonials, technology, journal } from '../src/data/home.ts'
-import { posts, postHref, specialities } from '../src/data/posts.ts'
+import { hubs } from '../src/data/hubs.ts'
+import { editorial, publicRecords, pageRecords, latest, pendingEditorial, isPublic, cardHref } from '../src/data/editorial.ts'
 import * as about from '../src/data/about.ts'
 import * as contact from '../src/data/contact.ts'
 import { services } from '../src/data/services/index.ts'
 import { LIVE as TECH_LIVE, SOURCE_EXCEPTIONS, technologyPages } from '../src/data/technology/index.ts'
 import { specialityHubs } from '../src/data/specialities/index.ts'
+import { REVIEWS as REVIEW_POOL, topicsForPath } from '../src/data/reviews.ts'
 import {
   DOCTOR_SECTIONS,
   approved,
@@ -26,6 +30,8 @@ import {
 } from '../src/data/doctors.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
+// New pages held out of search on purpose (a `robots` noindex in src/data/hubs.ts, e.g. a coming-soon page).
+const noindexOnPurpose = new Set(hubs.filter((h) => h.robots?.startsWith('noindex')).map((h) => h.path))
 const DIST = path.join(ROOT, 'dist')
 const SITE_URL = 'https://neosculpt6.com'
 
@@ -98,7 +104,9 @@ for (const page of pages) {
   one(page.path, 'h1', head.h1, page.h1)
 
   if (!page.canonical.startsWith(SITE_URL + '/')) fail(page.path, `off-site canonical ${page.canonical}`)
-  if (page.type !== 'legacy-demo' && /noindex/i.test(head.robots[0] ?? '')) fail(page.path, 'indexable page is noindex')
+  // The thank-you page (booking form's landing page) is noindex by design.
+  if (page.type !== 'legacy-demo' && page.type !== 'thank-you' && !noindexOnPurpose.has(page.path) && /noindex/i.test(head.robots[0] ?? ''))
+    fail(page.path, 'indexable page is noindex')
   const img = head.ogImage[0]
   if (img?.startsWith(SITE_URL) && !fs.existsSync(path.join(DIST, img.slice(SITE_URL.length)))) fail(page.path, `og:image file missing: ${img}`)
 
@@ -127,11 +135,12 @@ const indexable = pages.filter((p) => p.type !== 'redirect' && p.robots.startsWi
 if (locs.length !== indexable.length) fail('sitemap.xml', `${locs.length} URLs, expected ${indexable.length}`)
 for (const loc of locs) if (!fs.existsSync(fileFor(new URL(loc).pathname))) fail('sitemap.xml', `no file for ${loc}`)
 // Header and footer menus: every internal link is a built page, and every menu image exists.
-// Home anchors (/#…) are skipped; /privacy-policy/ and /terms/ are known gaps until those pages exist.
+// Home anchors (/#…) are skipped.
 const navLinks = [
   ...primaryNav.flatMap((i) => [i, ...(i.children ?? []), ...(i.mega ?? []).flatMap((c) => [c, ...c.items])]),
   findMyTreatment,
   ...footerNav,
+  ...legalNav,
 ]
 for (const { href } of navLinks) {
   if (href.startsWith('/') && !href.includes('#') && !fs.existsSync(fileFor(href))) fail('nav', `no page for ${href}`)
@@ -167,7 +176,7 @@ for (const card of doctors.cards) {
 // Home section 10 (Testimonials): the five treatment labels (homepage.md's, adapted to the reviews the client chose;
 // see src/data/home.ts), a quote only with consent, no ages, the borrowed Google rating named on the page, and no
 // AggregateRating schema. Anything still pending is listed as a warning, not a failure.
-const testimonialLabels = ['Hair Transplant', 'Laser Hair Reduction', 'Acne & Scar Treatment', 'Botox & PDRN', 'CO2 Laser']
+const testimonialLabels = ['Hair Transplant', 'Laser Hair Reduction', 'Acne & Scar Treatment', 'Botox & Fillers', 'CO2 Laser']
 const testimonialsPending = []
 const homeHtml = fs.existsSync(fileFor('/')) ? decode(fs.readFileSync(fileFor('/'), 'utf8')) : ''
 if (!homeHtml.includes('id="testimonials"')) fail('home testimonials', 'section not on the built home page')
@@ -199,6 +208,31 @@ if (testimonials.rating.value && testimonials.rating.source && !homeHtml.replace
 if (/AggregateRating/.test(homeHtml)) {
   fail('home testimonials', 'AggregateRating schema on the home page: the rating shown is another listing\'s')
 }
+
+// Review pool (src/data/reviews.json), used by every testimonials section: unique ids, no ages, each review keeps to
+// the content rules as posted (a review that breaks one is left out, never edited), and no built page still shows a
+// pending placeholder card. Coverage: how many pages get a review about their own treatment.
+const POOL_RULES = /\b(best|No\. ?1|guaranteed|permanent|painless|no side effects|scarless|no downtime|zero downtime|frozen|effortless|guarantee[sd]?)\b|₹|\bRs\.? ?\d|\bINR\b|\d[\d,]*\+? ?grafts\b/i
+const poolIds = new Set()
+for (const r of REVIEW_POOL) {
+  if (poolIds.has(r.id)) fail('reviews.json', `duplicate id ${r.id}`)
+  poolIds.add(r.id)
+  if (!r.quote?.trim()) fail('reviews.json', `${r.id}: empty quote`)
+  if (/\d/.test(r.author)) fail('reviews.json', `${r.id}: author "${r.author}" has a digit`)
+  const hit = r.quote.match(POOL_RULES)
+  if (hit) fail('reviews.json', `${r.id}: "${hit[0]}" breaks the content rules`)
+}
+const reviewPages = { matched: 0, general: [] }
+for (const file of fs.readdirSync(DIST, { recursive: true }).filter((f) => f.endsWith('index.html'))) {
+  const html = fs.readFileSync(path.join(DIST, file), 'utf8')
+  const pagePath = '/' + path.dirname(file).replace(/^\.$/, '').split(path.sep).filter(Boolean).join('/') + (path.dirname(file) === '.' ? '' : '/')
+  if (!/id="(success-stories|patient-reviews|testimonials)"/.test(html)) continue
+  if (html.includes('Review pending sign-off')) fail(pagePath, 'testimonials still show a pending placeholder card')
+  if (pagePath === '/' || pagePath === '/about-us/') continue
+  const topics = topicsForPath(pagePath)
+  if (REVIEW_POOL.some((r) => r.topics.some((t) => topics.includes(t)))) reviewPages.matched++
+  else reviewPages.general.push(pagePath)
+}
 // Home technology banner (section 13's replacement): both crops exist and are on the page, with size and alt; its
 // words are live text under the H2; it sits directly above Real Results. Every card link (the technology pages use
 // the cards) is a built page, and every card image exists.
@@ -224,33 +258,62 @@ for (const { href } of technologyLinks) {
 for (const { image } of technology.cards) {
   if (!fs.existsSync(path.join(DIST, image))) fail('home technology', `image missing: ${image}`)
 }
-// Home section 14 (Journal): every published post has a built page, a review record and an image with real alt
-// text; the home page shows at most 3 cards; planned topics are reported as editorial dependencies.
-const publishedPosts = posts.filter((p) => p.status === 'published')
-for (const post of publishedPosts) {
-  const href = postHref(post.slug)
-  if (!fs.existsSync(fileFor(href))) fail('home journal', `published post has no page: ${href}`)
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) fail('home journal', `${href}: date must be YYYY-MM-DD`)
-  if (!post.medicalReview?.by || !post.medicalReview?.date) fail('home journal', `${href}: no medical review record`)
-  if (!fs.existsSync(path.join(DIST, post.image.src))) fail('home journal', `${href}: image missing: ${post.image.src}`)
-  const alt = post.image.alt.trim()
-  if (!alt || alt.toLowerCase() === post.title.trim().toLowerCase()) fail('home journal', `${href}: alt text must describe the image`)
+// Journal (home section 14 and /journal/): one registry (src/data/editorial.json) drives the hub, the article pages
+// and the home row. The hub is built with one H1 and CollectionPage schema; every article page is built with one H1
+// and Article schema (and no other page has Article); the home row shows the newest 3 public items; nothing that is
+// not public appears in any built page; every media card opens in a new tab with noopener.
+const H1S = (html) => [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)].map((m) => decode(m[1].replace(/<[^>]+>/g, '')).trim())
+const journalHub = pages.find((p) => p.path === '/journal/')
+const hubHtml = fs.existsSync(fileFor('/journal/')) ? decode(fs.readFileSync(fileFor('/journal/'), 'utf8')) : ''
+if (!journalHub || !hubHtml) fail('/journal/', 'hub page missing')
+else {
+  const h1s = H1S(hubHtml)
+  if (h1s.length !== 1 || h1s[0].toLowerCase() !== journalHub.h1.toLowerCase()) fail('/journal/', `expected one H1 "${journalHub.h1}", found ${JSON.stringify(h1s)}`)
+  if (!/"CollectionPage"/.test(hubHtml)) fail('/journal/', 'no CollectionPage schema')
+  for (const r of publicRecords) if (!hubHtml.includes(r.title)) fail('/journal/', `public item missing from the hub HTML: ${r.title}`)
 }
-for (const post of posts) {
-  if (!specialities[post.speciality]) fail('home journal', `unknown speciality "${post.speciality}" on "${post.title}"`)
-  if (post.status !== 'published' && post.image && !fs.existsSync(path.join(DIST, post.image.src))) {
-    fail('home journal', `image missing: ${post.image.src}`)
+for (const r of pageRecords) {
+  const file = fileFor(r.path)
+  if (!fs.existsSync(file)) {
+    fail(r.path, 'article page not built')
+    continue
+  }
+  const html = decode(fs.readFileSync(file, 'utf8'))
+  const h1s = H1S(html)
+  if (h1s.length !== 1 || h1s[0] !== r.title) fail(r.path, `expected one H1 "${r.title}", found ${JSON.stringify(h1s)}`)
+  if (r.status !== 'archived' && !/"@type":"Article"/.test(html)) fail(r.path, 'no Article schema')
+}
+const articlePaths = new Set(pageRecords.map((r) => r.path))
+const journalHtml = homeHtml.match(/<section[^>]*id="journal"[\s\S]*?<\/section>/)?.[0] ?? ''
+if (publicRecords.length && !journalHtml) fail('home journal', 'section id="journal" missing from the home page')
+const journalCardCount = (journalHtml.match(/<article\b/g) ?? []).length
+const expectedHome = latest(3)
+if (journalCardCount !== expectedHome.length) fail('home journal', `${journalCardCount} cards, expected ${expectedHome.length}`)
+for (const r of expectedHome) if (!journalHtml.includes(r.title)) fail('home journal', `missing the latest item: ${r.title}`)
+if (journal.cta && !fs.existsSync(fileFor(journal.cta.href))) fail('home journal', `no page for ${journal.cta.href}`)
+const hidden = editorial.filter((r) => !isPublic(r) && r.status !== 'archived').map((r) => r.title)
+const mediaHrefs = publicRecords.filter((r) => r.type === 'media').map(cardHref)
+for (const p of pages.filter((x) => x.type !== 'redirect')) {
+  const file = fileFor(p.path)
+  if (!fs.existsSync(file)) continue
+  const html = decode(fs.readFileSync(file, 'utf8'))
+  for (const t of hidden) if (html.includes(t)) fail(p.path, `unpublished journal item appears in the page: ${t}`)
+  if (/"@type":"Article"/.test(html) && !articlePaths.has(p.path)) fail(p.path, 'Article schema on a page that is not a journal article')
+  for (const href of mediaHrefs) {
+    for (const m of html.matchAll(/<a\b[^>]*>/g)) {
+      const a = attrs(m[0])
+      if (a.href !== href) continue
+      if (a.target !== '_blank' || !/\bnoopener\b/.test(a.rel ?? '')) fail(p.path, `media link must open in a new tab with rel=noopener: ${href}`)
+    }
   }
 }
-for (const { href } of Object.values(specialities)) {
-  if (!fs.existsSync(fileFor(href))) fail('home journal', `no page for speciality ${href}`)
+for (const r of publicRecords) {
+  const clip = r.media?.clipping
+  if (clip && r.media.permissionConfirmed) {
+    for (const src of [clip.thumb, clip.full]) if (!fs.existsSync(path.join(DIST, src))) fail('journal', `clipping missing: ${src}`)
+  }
 }
-if (journal.cta && !fs.existsSync(fileFor(journal.cta.href))) fail('home journal', `no page for ${journal.cta.href}`)
-const journalHtml = homeHtml.match(/<section[^>]*id="journal"[\s\S]*?<\/section>/)?.[0] ?? ''
-if (!journalHtml) fail('home journal', 'section id="journal" missing from the home page')
-const journalCardCount = (journalHtml.match(/<article\b/g) ?? []).length
-if (journalCardCount > 3) fail('home journal', `${journalCardCount} cards, expected at most 3`)
-const plannedTopics = posts.filter((p) => p.status === 'planned').map((p) => `${specialities[p.speciality]?.label}: ${p.title}`)
+const editorialPending = pendingEditorial()
 // About page (/about-us/, content/about-us/about-us.md): sections in the doc's order, every link a built page, every
 // image present with alt text, schema that matches the visible FAQ, and no rating markup. Items
 // still waiting for Dr Sandeep's sign-off (marked † in the doc) are listed as warnings, not failures.
@@ -268,7 +331,7 @@ const aboutOrder = [
   'memberships',
   'clinic-faqs',
   'book-consultation',
-  'instagram',
+  ...(instagram.enabled ? ['instagram'] : []),
 ]
 const aboutPositions = aboutOrder.map((id) => aboutHtml.indexOf(`id="${id}"`))
 aboutOrder.forEach((id, i) => aboutPositions[i] < 0 && fail('about', `section id="${id}" missing`))
@@ -307,7 +370,7 @@ const aboutImages = [
   about.founder.inset,
   about.clinicTech.image,
   ...about.services.cards.map((c) => ({ src: c.image, alt: c.alt })),
-  ...about.instagram.tiles,
+  ...(instagram.enabled ? about.instagram.tiles : []),
 ]
 for (const { src, alt } of aboutImages) {
   if (!fs.existsSync(path.join(DIST, src))) fail('about', `image missing: ${src}`)
@@ -353,7 +416,7 @@ const aboutPending = [
 const contactFile = fileFor('/contact-us/')
 const contactRaw = fs.existsSync(contactFile) ? fs.readFileSync(contactFile, 'utf8') : ''
 const contactHtml = decode(contactRaw)
-const contactOrder = ['contact-banner', 'book-consultation', 'visit-us', 'instagram']
+const contactOrder = withInstagram(['contact-banner', 'book-consultation', 'visit-us', 'instagram'])
 const contactPositions = contactOrder.map((id) => contactHtml.indexOf(`id="${id}"`))
 contactOrder.forEach((id, i) => contactPositions[i] < 0 && fail('contact', `section id="${id}" missing`))
 if (contactPositions.every((p) => p >= 0) && contactPositions.some((p, i) => i > 0 && p < contactPositions[i - 1])) {
@@ -429,7 +492,7 @@ for (const s of services) {
     'service-faqs',
     'service-explore',
     'service-cta',
-    'instagram',
+    ...(instagram.enabled ? ['instagram'] : []),
   ]
   const positions = order.map((id) => html.indexOf(`id="${id}"`))
   order.forEach((id, i) => positions[i] < 0 && fail(p, `section id="${id}" missing`))
@@ -605,7 +668,7 @@ for (const t of technologyPages) {
   const html = decode(raw)
   const text = bodyText(raw)
 
-  const order = TECH_ORDER[t.kind]
+  const order = withInstagram(TECH_ORDER[t.kind])
   const positions = order.map((id) => html.indexOf(`id="${id}"`))
   order.forEach((id, i) => positions[i] < 0 && fail(p, `section id="${id}" missing`))
   if (positions.every((x) => x >= 0) && positions.some((x, i) => i > 0 && x < positions[i - 1])) fail(p, 'sections are not in the doc order')
@@ -869,7 +932,7 @@ for (const d of publishedDoctors) {
     if (!html.includes(`href="${href}"`)) fail(p, `link to ${href} missing from the built page`)
     if (href.startsWith('/') && !href.includes('#') && !fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
   }
-  for (const href of ['tel:+919964060483', 'https://wa.me/919964060483']) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
+  for (const href of ['tel:+919964060483', 'https://wa.me/919187401600']) if (!html.includes(`href="${href}"`)) fail(p, `${href} missing`)
   if (!raw.includes('Request My Consultation')) fail(p, 'booking form missing')
 
   // Images: the approved portrait (or the initials), and width/height/alt on every image in the content.
@@ -906,6 +969,14 @@ for (const d of publishedDoctors) {
   for (const item of pendingItems(d)) doctorPending.push(`${p}: ${item}`)
 }
 
+// While the Instagram switch is off, no built page may show the strip.
+if (!instagram.enabled) {
+  for (const { path: p } of pages) {
+    const f = fileFor(p)
+    if (fs.existsSync(f) && fs.readFileSync(f, 'utf8').includes('id="instagram"')) fail(p, 'Instagram strip shown while instagram.enabled is false')
+  }
+}
+
 if (!fs.existsSync(path.join(DIST, 'robots.txt'))) fail('robots.txt', 'missing')
 if (!fs.existsSync(path.join(DIST, '404.html'))) fail('404.html', 'missing')
 
@@ -924,16 +995,17 @@ console.log(`home doctor profiles: ${doctors.cards.length} checked`)
 console.log('home doctor spotlight: pending sign-off:')
 for (const item of [...doctorSpotlight.pending, ...(doctorSpotlight.experience.approved ? [] : [`Experience line "${doctorSpotlight.experience.text}" (hidden)`])]) console.log(`  - ${item}`)
 console.log(`home technology links: ${technologyLinks.length} checked`)
+console.log(`reviews: ${REVIEW_POOL.length} in the pool; ${reviewPages.matched} pages show a review about their own treatment, ${reviewPages.general.length} show general reviews only`)
 console.log(`home testimonials: ${testimonials.reviews.length} cards checked; pending sign-off:`)
 for (const item of testimonialsPending) console.log(`  - ${item}`)
-console.log(`home journal: ${journalCardCount} cards (${publishedPosts.length} published); not yet written or medically reviewed:`)
-for (const item of plannedTopics) console.log(`  - ${item}`)
+console.log(`journal: ${publicRecords.length} public items, ${pageRecords.length} article page(s), home row ${journalCardCount} cards; not public yet:`)
+for (const item of editorialPending) console.log(`  - ${item}`)
 console.log(`about: ${aboutOrder.length} sections in order, ${aboutLinks.length} links and ${aboutImages.length} images checked; pending sign-off:`)
 for (const item of aboutPending) console.log(`  - ${item}`)
 console.log(`contact: ${contactOrder.length} sections in order, map embed and contact links checked; pending sign-off:`)
 for (const item of contactPending) console.log(`  - ${item}`)
 console.log(`services: ${services.length} of ${serviceRoutes} service pages built from service-page.md; pending sign-off:`)
-console.log(`  - every service page: 3 Google reviews each (quote, name, consent), the Google rating and count, and the`)
+console.log(`  - every service page: the`)
 console.log(`    "Board-Certified Team" heading; ${serviceImages.size} old-site placeholder photos, the reception image and Dr Sandeep's portrait`)
 const byKind = Map.groupBy(servicePending, ([kind]) => kind)
 for (const [kind, items] of byKind) {

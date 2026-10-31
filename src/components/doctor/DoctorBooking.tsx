@@ -7,7 +7,7 @@ import { MapPinIcon, PhoneIcon, WhatsAppIcon } from '../icons'
 import { delay, eyebrow } from '../shared'
 
 // Doctor profile section 7: booking and contact. The shared BookingForm (same fields, validation, local dates and
-// WhatsApp hand-off as everywhere; its status line says nothing is booked until the clinic confirms), with this
+// sending as everywhere; its status line says nothing is booked until the clinic confirms), with this
 // doctor pre-selected when they are in the form's list, beside the clinic's phone, WhatsApp and address (site.ts).
 // The form asks for contact details and a preferred time only, no medical history or photos.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop (two columns).
@@ -54,7 +54,7 @@ export function DoctorBooking({ doctor }: { doctor: Doctor }) {
           <p className="text-small text-text/80">{clinic.hours.label}</p>
         </div>
         <div ref={formRef} data-reveal="up" style={delay(150)} className="min-w-0">
-          <BookingForm defaultDoctor={bookingDoctors.includes(doctor.displayName) ? doctor.displayName : undefined} />
+          <BookingForm source={`doctor:${doctor.slug}`} defaultDoctor={bookingDoctors.includes(doctor.displayName) ? doctor.displayName : undefined} />
         </div>
       </div>
     </section>

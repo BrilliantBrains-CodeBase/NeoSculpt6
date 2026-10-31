@@ -14,7 +14,8 @@
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, pendingReviews, photo as hubPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/cosmetic-gynecology/'
 const child = (slug: string) => `${HUB}${slug}-in-bangalore/`
@@ -177,7 +178,7 @@ export const gynaecology: HubSource = {
     ctas: [book, call, whatsapp],
   },
 
-  reviews: { h2: 'Success Stories', items: pendingReviews('Cosmetic Gynaecology', ['Private consultation', 'Intimate wellness care', 'Dr Sandeep Mahapatra by name']) },
+  reviews: { h2: 'Success Stories', items: reviewsForPath('/cosmetic-gynecology/') },
 
   faqs: {
     eyebrow: 'Quick Answers',

@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet && node scripts/validate-doctors.mjs --quiet && node scripts/validate-videos.mjs --quiet",
+    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/validate-editorial.mjs --quiet && node scripts/build-editorial.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet && node scripts/validate-doctors.mjs --quiet && node scripts/validate-videos.mjs --quiet",
     "validate:doctors": "node scripts/validate-doctors.mjs",
+    "validate:editorial": "node scripts/validate-editorial.mjs",
     "validate:videos": "node scripts/validate-videos.mjs",
     "gen:og": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
     "dev": "vite-react-ssg dev",

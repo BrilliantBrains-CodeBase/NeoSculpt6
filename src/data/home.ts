@@ -1,6 +1,7 @@
 // Home page copy, one export per section. Source: content/home-page/homepage.md (section numbers match the doc).
 
 import { portraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
+import { reviewsById } from './reviews.ts'
 
 // 1. Hero + credential ticker.
 export const hero = {
@@ -441,17 +442,13 @@ export const booking = {
   },
 }
 
-// 10. Testimonials / Patient Stories. Real Google reviews, copied word for word: never write, edit, shorten or
-// combine them, and never add an age. Line breaks are the reviewer's own (Google's <br>). A card shows its quote only
-// when `quote`, `author` and `consent` are all set; until then it shows as pending. `author` is first name + initial
-// from the Google display name ("Kunal M."); a single-word name stays as it is. `listing` is the Google profile the
-// review was posted on (shown on the card); `source` is that profile's Maps link, kept for the record.
-// Source (2026-10-30, client's instruction): the Neo Follicle Hair Transplant and Derma Solutions Skin and Hair
-// Clinic - Marathahalli profiles, both Dr Sandeep Mahapatra's clinics. The client approved publishing these public
-// reviews, so `consent` is true on that basis rather than a separate written permission from each patient.
+// 10. Testimonials / Patient Stories. Real Google reviews, word for word, from the shared pool in src/data/reviews.ts
+// (rules, sources and consent are explained there). A card shows its quote only when `quote`, `author` and `consent`
+// are all set; until then it shows as pending. Never add an age.
 // The doc's cards (Hair Transplant, Body Contouring, Acne Scar Laser, Botox & Fillers, Cosmetic Surgery) are adapted:
-// neither profile has a body contouring or cosmetic surgery review, so the client chose two other treatments, and the
-// labels name the treatment each reviewer actually had. Swap in a closer match if one is posted.
+// neither Google profile has a body contouring or cosmetic surgery review, so the client chose other treatments, and
+// the labels name what each reviewer actually had. The first Laser Hair Reduction and Botox picks were swapped
+// (2026-10-31) because their text used words the content rules keep out ("best").
 // Rating: Neo Follicle's public Google figure (4.8 from 1,042 reviews, read from Maps 2026-10-30), named in the line
 // because it is not NeoSculpt6's own listing; update it when NeoSculpt6 has its own profile. Still needs sign-off:
 // 2,054 Practo recommendations (marked † in the doc; the † is not shown). No AggregateRating or Review schema: the
@@ -466,9 +463,6 @@ export type Testimonial = {
   source: string | null
 }
 
-const NEO_FOLLICLE = { listing: 'Neo Follicle', source: 'https://maps.google.com/maps?cid=1368765349301541274' }
-const DERMA_SOLUTIONS = { listing: 'Derma Solutions', source: 'https://maps.google.com/maps?cid=12976301854266238109' }
-
 export const testimonials = {
   eyebrow: 'Patient Stories',
   h2: [{ text: 'Trusted by ' }, { text: 'Thousands', gold: true }, { text: ' of Patients' }] as {
@@ -477,53 +471,9 @@ export const testimonials = {
   }[],
   rating: { value: '4.8' as string | null, count: 1042 as number | null, source: 'Neo Follicle' as string | undefined },
   practo: '2,054 Practo recommendations for Dr Sandeep',
-  reviews: [
-    {
-      treatment: 'Hair Transplant',
-      lookFor: 'Dr Sandeep and a natural hairline',
-      quote:
-        'I am extremely satisfied with my hair transplant experience with Dr. Sandeep. From the initial consultation to the procedure and follow-up, everything was handled professionally and with great care.\n\nDr. Sandeep was very patient, explained the entire process clearly, and made me feel comfortable throughout the procedure. The results have been really impressive, and I’m genuinely happy with the overall improvement in my hairline and appearance.\n\nA big thank you to Dr. Sandeep and the entire team for their professionalism, support, and excellent work. I would definitely recommend Dr. Sandeep to anyone considering a hair transplant.',
-      author: 'Kunal M.',
-      consent: true,
-      ...NEO_FOLLICLE,
-    },
-    {
-      treatment: 'Laser Hair Reduction',
-      lookFor: 'the results after a few sessions',
-      quote:
-        'Hey there! I am happy to share my best experience with Dr. Sandeep sir\'s clinic where I have taken Laser Hair Reduction full body of 4 sessions. Awesome improvement. I never believed that in such few sessions can see good reduction of hairs and longer months it took for  the upcoming growth to see. I was worried about this procedure as I took many sessions in other clinics and salons where ended up with unsatisfaction and waste of money.\nDr. Sandeep introduced me with his advanced device Reveal Laser USFDA approved and so, I agreed for the same for not to get into any complications. I am happy with the results and have suggested for all of my friends. Worth of spending here ! Thanks for Derma solutions clinic. for a note, Iam already taken treatments with Neo fertility as well .',
-      author: 'Chandana S.',
-      consent: true,
-      ...DERMA_SOLUTIONS,
-    },
-    {
-      treatment: 'Acne & Scar Treatment',
-      lookFor: 'honest advice',
-      quote:
-        '⭐️⭐️⭐️⭐️⭐️\nI\'ve been seeing Dr. Sandeep Mahapatra at derma solutions clinic for a while now, and I genuinely couldn’t be happier with the care I’ve received. From the very first appointment, they made me feel completely at ease — not rushed, not talked over, just really listened to. That alone sets them apart.\n\nI originally went in for acne  and scarring and the difference in my skin is night and day. Later I decided to go for a Botox and fillers ,and the result is really magic for me😍Dr.Mahapatra explained every step of the treatment plan and didn’t push unnecessary products or procedures. What I appreciated most was how practical and honest the advice was — no overpromises, just results.\n\nThe clinic itself is clean, professional, and runs on time (a rare find these days). The staff are friendly and responsive, and I’ve never had trouble getting a follow-up or asking questions between visit.\n\nIf you are looking for a dermatologist who is not only highly skilled but  also genuinely cares, I can\'t recommend Dr Mahapatra enough .',
-      author: 'Rakshu M.',
-      consent: true,
-      ...DERMA_SOLUTIONS,
-    },
-    {
-      treatment: 'Botox & PDRN',
-      lookFor: 'still looking like themselves',
-      quote:
-        'I had an amazing experience with Dr. Sandeep Mahapatra for both Botox and PDRN treatments. He is incredibly knowledgeable, patient, and thorough in explaining the procedure and expected results. The clinic was clean, well-organized, and made me feel at ease from the moment I walked in.\n\nThe Botox results were very natural-looking, and I started noticing the effect within a few days. The PDRN treatment left my skin feeling much more hydrated, firmer, and glowing. I truly appreciate the care and precision Dr. Sandeep brings to his work. He has a very aesthetic eye and prioritizes what suits the face best.\n\nHighly recommend him if you’re looking for safe, effective, and subtle aesthetic enhancements!',
-      author: 'Rajashekar',
-      consent: true,
-      ...DERMA_SOLUTIONS,
-    },
-    {
-      treatment: 'CO2 Laser',
-      lookFor: 'results from the first session',
-      quote:
-        'Got Co2 laser done under the guidance of Dr. Sandeep and Dr. Yogita. Saw difference in skin quality from 1st session itself. Highly recommend for co2 and other skin concerns.',
-      author: 'Rima R.',
-      consent: true,
-      ...DERMA_SOLUTIONS,
-    },
-  ] as Testimonial[],
+  // Hair Transplant (Dr Sandeep, hairline) · Laser Hair Reduction · Acne & Scar Treatment (honest advice) ·
+  // Botox & Fillers (looks natural) · CO2 Laser.
+  reviews: reviewsById(['kunal-m', 'sridevi-s', 'rakshu-m', 'arya-r', 'rima-r']),
 }
 
 // 11. Price guide. homepage.md lists the section but gives no copy, and its sign-off list still has "Starting prices
@@ -663,18 +613,17 @@ export const technology = {
   ] as { title: string; text: string; href: string; image: string; width: number; height: number; position?: string; bannerPosition?: string; alt: string }[],
 }
 
-// 14. Journal. The cards come from src/data/posts.ts (latest 3 published posts, topped up with "Coming soon"
-// topics); this block is only the section copy. `h2` is two lines, as the doc sets them.
-// TODO: the theme's "Read More Articles" button links to the blog index. Set `cta` to
-// { label: 'Read More Articles', href: '/journal/' } once that page exists; the button is hidden while it is null.
+// 14. Journal. The cards come from src/data/editorial.ts (the newest 3 public items, the same source as the /journal/
+// hub); this block is only the section copy. `h2` is two lines, as the doc sets them. The theme's button ("Read More
+// Articles") goes to the hub; the label says "Journal" because the items are not all articles.
 export const journal = {
   eyebrow: 'Our Journal',
   h2: [[{ text: 'Insights', gold: true }], [{ text: 'From Our Doctors' }]] as { text: string; gold?: boolean }[][],
-  cta: null as { label: string; href: string } | null,
+  cta: { label: 'Explore the Journal', href: '/journal/' } as { label: string; href: string } | null,
 }
 
 // 15. Find My Treatment section (replaces the theme's newsletter band). Holds the full appointment form; submitting
-// opens a WhatsApp chat with the clinic (no form backend). `id="find-my-treatment"` is the target of the hero's secondary CTA and the
+// sends it to the Apps Script backend and opens /thank-you/. `id="find-my-treatment"` is the target of the hero's secondary CTA and the
 // menus' "Find My Treatment" links. No offer or discount: the theme's 10% newsletter line is not used.
 // TODO: theme stock image (the newsletter band's 84-home-1-11.webp). Replace with NeoSculpt6 photography before launch.
 export const findTreatment = {

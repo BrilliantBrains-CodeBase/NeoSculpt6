@@ -33,6 +33,7 @@ import type {
   TechnologyPage,
   TechnologyReviews,
 } from './types.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 // parsed.json, as scripts/parse-technology-pages.mjs writes it (one shape per page kind; checked there).
 type DocLink = { label: string; href: string | null }
@@ -223,21 +224,10 @@ function doctors(p: DocBase['doctors']) {
   }
 }
 
-// 3–6 real Google reviews that mention the technology or the doctor, word for word with consent. None collected yet.
-// `topic` is what the review should mention, where that is not the page's own name.
-function reviews(r: { eyebrow: string; h2: string }, treatment: string, doctor: string | undefined, topic = treatment): TechnologyReviews {
-  return {
-    eyebrow: r.eyebrow,
-    h2: r.h2,
-    items: [topic, topic, doctor ?? topic].map((lookFor) => ({
-      treatment,
-      lookFor: lookFor === doctor ? `${doctor} by name` : lookFor,
-      quote: null,
-      author: null,
-      consent: false,
-      source: null,
-    })),
-  }
+// Real Google reviews word for word from the shared pool (src/data/reviews.ts): ones about this page's technology
+// first, then reviews about the doctor's care in general.
+function reviews(r: { eyebrow: string; h2: string }, path: string): TechnologyReviews {
+  return { eyebrow: r.eyebrow, h2: r.h2, items: reviewsForPath(path) }
 }
 
 const banner = (h: DocBase['hero'], image: ServiceImage): TechnologyBanner => ({
@@ -264,7 +254,6 @@ function pendingFor(p: Parsed, extra: string[]): string[] {
     if (n.kind === 'note') out.push(`doc note (${n.section}): ${n.text}`)
     else if (/approve/i.test(n.text)) out.push(`added section to approve (${n.section}): ${n.text}`)
   }
-  if ('reviews' in p) out.push('reviews: 3 real Google reviews (quote, first name + initial, consent)')
   return [...out, ...extra]
 }
 
@@ -306,7 +295,7 @@ function buildDetail(p: DocDetail): TechnologyDetail | ArtasDetail {
     expectations: { h2: p.expectations.h2, paragraphs: p.expectations.paragraphs },
     doctors: docs,
     cost: { h2: p.cost.h2, intro: p.cost.paragraphs, factors: [], ctas: p.cost.buttons.map(cta) },
-    reviews: reviews(p.reviews, p.name, docs.cards[0]?.name),
+    reviews: reviews(p.reviews, p.path),
     faqs: { eyebrow: p.faqs.eyebrow, h2: p.faqs.h2, items: p.faqs.items, cta: p.faqs.button ? cta(p.faqs.button) : null },
     closing: closing(p.closing, reception),
     explore: {
@@ -386,7 +375,7 @@ function buildInternational(p: DocInternational): InternationalPatients {
     travel: { h2: p.travel.h2, introLine: null, paragraphs: p.travel.paragraphs, ctas: [], image: need(pics.first ?? undefined, `${p.path} travel photo`), video: null },
     doctors: doctors(p.doctors),
     estimates: { h2: p.estimates.h2, intro: p.estimates.paragraphs, factors: [], ctas: [] },
-    reviews: reviews(p.reviews, 'International Patients', undefined, 'an international patient’s planning or visit'),
+    reviews: reviews(p.reviews, p.path),
     faqs: { eyebrow: p.faqs.eyebrow, h2: p.faqs.h2, items: p.faqs.items, cta: p.faqs.button ? cta(p.faqs.button) : null },
     // The reception would repeat the clinic photo; the band is plain until an approved photo is supplied.
     closing: closing(p.closing, null),

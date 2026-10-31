@@ -8,6 +8,12 @@ import { LIVE, technologyByPath } from '../data/technology'
 import { specialityByPath } from '../data/specialities'
 import { approved, doctorByPath, portraitFor, publicSocialLinks } from '../data/doctors'
 import type { Faq } from '../data/services/types'
+import { cardHref, doctorFor, publicRecords, recordByPath } from '../data/editorial'
+import { publishedDoctors } from '../data/doctors'
+
+// A reviewer is recorded by name; match it to a published doctor (either name form) for the schema link.
+const doctorByName = (name: string | null) =>
+  publishedDoctors.find((d) => name && (d.displayName === name || d.name === name)) ?? null
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
 
@@ -214,6 +220,41 @@ function jsonLd(page: RoutePage, canonical: string) {
       ...(memberships.length ? { memberOf: memberships.map((r) => ({ '@type': 'Organization', name: r.organisation })) } : {}),
       ...(social.length ? { sameAs: social.map((s) => s.href) } : {}),
     })
+  }
+  if (page.type === 'journal') {
+    // Journal hub: a CollectionPage listing every public item, newest first, as on the page. Media items point at
+    // the publication (or the hosted scan); they are not marked up as NeoSculpt6 articles.
+    webpage['@type'] = ['WebPage', 'CollectionPage']
+    webpage.mainEntity = {
+      '@type': 'ItemList',
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      numberOfItems: publicRecords.length,
+      itemListElement: publicRecords.map((r, i) => ({ '@type': 'ListItem', position: i + 1, name: r.title, url: abs(cardHref(r)) })),
+    }
+  }
+  const article = page.type === 'article' ? recordByPath.get(page.path) : undefined
+  if (article && article.status !== 'archived') {
+    // Journal and blog articles: Article, from the record the page renders. Author and reviewer link to the doctor
+    // profiles' Physician nodes; the reviewer appears only when the review is approved (and shown on the page).
+    const author = doctorFor(article.author)
+    const review = article.medicalReview?.status === 'approved' ? doctorByName(article.medicalReview.by) : null
+    graph.push({
+      '@type': 'Article',
+      '@id': `${canonical}#article`,
+      headline: article.title,
+      description: page.description,
+      mainEntityOfPage: { '@id': `${canonical}#webpage` },
+      datePublished: article.date,
+      ...(article.updatedDate ? { dateModified: article.updatedDate } : {}),
+      ...(article.featuredImage ? { image: abs(article.featuredImage.src) } : {}),
+      ...(author ? { author: { '@type': 'Physician', '@id': `${SITE_URL}${author.path}#physician`, name: author.displayName, url: abs(author.path) } } : {}),
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'en-US',
+    })
+    if (review) {
+      webpage.reviewedBy = { '@type': 'Physician', '@id': `${SITE_URL}${review.path}#physician`, name: review.displayName, url: abs(review.path) }
+      webpage.lastReviewed = article.medicalReview?.date
+    }
   }
   // Escape "<" so the JSON can never close the <script> tag early.
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')

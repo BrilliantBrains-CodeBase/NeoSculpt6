@@ -5,7 +5,7 @@ import { Parts, delay, eyebrow } from '../shared'
 
 // About section 6: Rejuvita "Schedule your visit online" (rejuvita-scrape/pages/about-us: a centred `alternate` card
 // with eyebrow, title and the appointment form; no photo, unlike the home booking block). The form is the shared
-// BookingForm, so the fields, validation, WhatsApp hand-off and its honest status line are the same as everywhere
+// BookingForm, so the fields, validation, sending (Apps Script backend, then /thank-you/) and its honest status line are the same as everywhere
 // else (nothing is booked until the clinic confirms). Copy: about-us.md §6, in data/about.ts.
 // id="book-consultation" is an in-page target for booking links, as on the home page.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
@@ -35,7 +35,7 @@ export function AboutBooking() {
           ))}
         </h2>
         <div ref={formRef} data-reveal="up" style={delay(300)} className="w-full">
-          <BookingForm />
+          <BookingForm source="about" />
         </div>
       </div>
     </section>

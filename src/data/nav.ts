@@ -128,14 +128,15 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: 'About NeoSculpt6', href: '/about-us/' },
       { label: 'International Patients', href: '/international-patients/' },
+      { label: 'Journal & Media', href: '/journal/' },
     ],
   },
   { label: 'Contact', href: '/contact-us/' },
 ]
 
-// Booking form options (homepage.md section 12). The form's answers become a pre-filled WhatsApp message, so the
-// intimate-care option uses a neutral label ("Private consultation", not the doc's "Intimate Wellness"): the chat
-// never names an intimate concern (speciality-cosmetic-gynecology.md, privacy).
+// Booking form options (homepage.md section 12). The answers go into the leads Sheet and both emails (and the WhatsApp
+// fallback), so the intimate-care option uses a neutral label ("Private consultation", not the doc's "Intimate
+// Wellness"): no message or inbox ever names an intimate concern (speciality-cosmetic-gynecology.md, privacy).
 export const bookingServices = ['Hair', 'Face & Anti-Ageing', 'Skin & Laser', 'Body & Weight', 'Cosmetic Surgery', 'Private consultation', 'Not sure']
 // Doctors: every published profile, then "not sure". Only doctors with a published profile are offered (user, 2026-10-30:
 // Dr Lavanyaa M is not in the form until her profile is signed off).

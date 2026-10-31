@@ -10,7 +10,12 @@ import { Pending } from './home/HomeTestimonials'
 // handle is a pending chip and the tiles are not links until the profile URL is confirmed.
 // Breakpoints are the theme's: base = mobile (<=767, 2 per row), md = tablet (3), xl = desktop (6).
 
+// Renders nothing while the site-wide switch (instagram.enabled in data/site.ts) is off.
 export function InstagramStrip() {
+  return instagram.enabled ? <InstagramStripContent /> : null
+}
+
+function InstagramStripContent() {
   const labelRef = useReveal<HTMLHeadingElement>()
   const gridRef = useReveal<HTMLUListElement>()
 

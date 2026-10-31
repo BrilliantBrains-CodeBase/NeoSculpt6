@@ -1,12 +1,19 @@
-import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { clinic } from '../../data/site'
 import { bookingDoctors, bookingServices } from '../../data/nav'
 import { CalendarIcon, ChevronDownIcon } from '../icons'
+import { useBooking } from './BookingContext'
+import { whatsappMessageHref } from './whatsapp'
+import { getAttribution } from '../../lib/attribution'
+import { saveThankYou, submitLead, type LeadSource } from '../../lib/lead'
 
 // The theme's Forminator appointment form (popup 135 / home "Make an appointment"), with the NeoSculpt6
-// fields from homepage.md section 12. Shared by BookingDialog and the home page booking section (HomeBooking).
-// No form backend yet: submitting opens WhatsApp with the details filled in. Nothing is stored or logged here;
-// the details only go into the WhatsApp link.
+// fields from homepage.md section 12. Shared by the popup (BookingDialog) and every page's own booking section.
+// Submitting posts the request to the Apps Script backend (src/lib/lead.ts, apps-script/): it is saved to the leads
+// Sheet and the clinic is emailed (a visitor confirmation email exists but is switched off in the script). Then
+// /thank-you/ opens.
+// If sending fails, the status line offers the clinic's phone and a WhatsApp chat with the details filled in.
 
 const label = 'mb-2 block type-accent font-medium text-secondary uppercase'
 const field =
@@ -15,8 +22,9 @@ const errorText = 'mt-2 text-meta text-primary'
 const hours = ['07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
 const minutes = ['00', '15', '30', '45']
 
-type Errors = Partial<Record<'name' | 'phone' | 'date', string>>
-const order = ['name', 'phone', 'date'] as const
+type Errors = Partial<Record<'name' | 'phone' | 'email' | 'date', string>>
+const order = ['name', 'phone', 'email', 'date'] as const
+type Status = { state: 'idle' } | { state: 'sending' } | { state: 'error'; message: string; waUrl: string }
 
 // Local (not UTC) date as YYYY-MM-DD, the format of <input type="date">.
 function localToday() {
@@ -32,6 +40,7 @@ function validate(get: (k: string) => string): Errors {
   if (!phone) errors.phone = 'Please enter your phone or WhatsApp number.'
   else if (/[^\d+()\-\s]/.test(phone) || digits < 10 || digits > 15)
     errors.phone = 'Please enter a valid number with 10 to 15 digits, for example +91 98765 43210.'
+  if (get('email') && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(get('email'))) errors.email = 'Please enter a valid email, for example name@example.com.'
   if (get('date') && get('date') < localToday()) errors.date = 'Please choose today or a later date.'
   return errors
 }
@@ -61,29 +70,46 @@ function Select({
   )
 }
 
-// `defaultDoctor` pre-selects a doctor (a doctor's profile page); it must be one of `bookingDoctors`.
+// Status line text for a failed send, by the backend's error code (apps-script/Code.gs).
+function failureMessage(error: string) {
+  if (error === 'rate_limited') return 'We already have a request from this number and will be in touch soon.'
+  return 'We couldn’t send your request just now. Please try again in a moment, or reach us directly.'
+}
+
+// `source` says which form this is (sent with the request). `defaultDoctor` pre-selects a doctor (a doctor's profile
+// page); it must be one of `bookingDoctors`.
 export function BookingForm({
+  source,
   className = '',
   autoFocus = false,
   defaultDoctor,
 }: {
+  source: LeadSource
   className?: string
   autoFocus?: boolean
   defaultDoctor?: string
 }) {
   const uid = useId()
   const id = (name: string) => `${uid}-${name}`
+  const navigate = useNavigate()
+  const { isOpen, close } = useBooking()
   const [errors, setErrors] = useState<Errors>({})
-  // The WhatsApp link from the last valid submit. Kept so the visitor can reopen it if a popup blocker stopped it.
-  const [waUrl, setWaUrl] = useState<string | null>(null)
+  const [status, setStatus] = useState<Status>({ state: 'idle' })
   // Set after mount: the home page is prerendered, so a render-time date would be the build date.
   const [minDate, setMinDate] = useState<string>()
-  useEffect(() => setMinDate(localToday()), [])
+  // When the form appeared, so the backend can tell a person (a few seconds at least) from a script.
+  const mountedAt = useRef(0)
+  useEffect(() => {
+    setMinDate(localToday())
+    mountedAt.current = Date.now()
+  }, [])
+  const sending = status.state === 'sending'
 
   const describedBy = (name: keyof Errors) => (errors[name] ? id(`${name}-error`) : undefined)
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (sending) return
     const form = e.currentTarget
     const data = new FormData(form)
     const get = (k: string) => String(data.get(k) ?? '').trim()
@@ -91,24 +117,47 @@ export function BookingForm({
     setErrors(found)
     const firstInvalid = order.find((k) => found[k])
     if (firstInvalid) {
-      setWaUrl(null)
+      setStatus({ state: 'idle' })
       form.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus()
       return
     }
     const time = get('hour') ? `${get('hour')}:${get('minute') || '00'}` : ''
-    const lines = [
-      'Hello NeoSculpt6, I would like to request a consultation.',
-      `Name: ${get('name')}`,
-      `Phone: ${get('phone')}`,
-      get('service') && `Service: ${get('service')}`,
-      get('doctor') && `Doctor: ${get('doctor')}`,
-      get('date') && `Preferred date: ${get('date')}`,
-      time && `Preferred time: ${time}`,
-      `Consultation: ${get('type')}`,
-    ].filter(Boolean)
-    const url = `${clinic.whatsappHref}?text=${encodeURIComponent(lines.join('\n'))}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-    setWaUrl(url)
+    setStatus({ state: 'sending' })
+    const result = await submitLead({
+      name: get('name'),
+      phone: get('phone'),
+      email: get('email'),
+      service: get('service'),
+      doctor: get('doctor'),
+      date: get('date'),
+      time,
+      type: get('type'),
+      source,
+      ...getAttribution(),
+      elapsedMs: Date.now() - mountedAt.current,
+      hp: get('ns6_hp'),
+    })
+    if (result.ok) {
+      saveThankYou({ firstName: get('name').split(/\s+/)[0], emailed: result.emailed })
+      if (isOpen) close()
+      navigate('/thank-you/')
+      return
+    }
+    // Fallback: the same details as a WhatsApp message, so the request can still reach the clinic.
+    const waUrl = whatsappMessageHref(
+      [
+        'Hello NeoSculpt6, I would like to request a consultation.',
+        `Name: ${get('name')}`,
+        `Phone: ${get('phone')}`,
+        get('email') && `Email: ${get('email')}`,
+        get('service') && `Service: ${get('service')}`,
+        get('doctor') && `Doctor: ${get('doctor')}`,
+        get('date') && `Preferred date: ${get('date')}`,
+        time && `Preferred time: ${time}`,
+        `Consultation: ${get('type')}`,
+      ].filter(Boolean) as string[],
+    )
+    setStatus({ state: 'error', message: failureMessage(result.error), waUrl })
   }
 
   // Clear a field's error as soon as the visitor edits it.
@@ -119,7 +168,7 @@ export function BookingForm({
 
   return (
     // data-lead-form: the target BookingProvider's open() scrolls to when a page has its own form.
-    <form data-lead-form onSubmit={onSubmit} onInput={onInput} noValidate className={`grid grid-cols-1 gap-x-3 gap-y-5 md:grid-cols-2 ${className}`}>
+    <form data-lead-form onSubmit={onSubmit} onInput={onInput} noValidate className={`relative grid grid-cols-1 gap-x-3 gap-y-5 md:grid-cols-2 ${className}`}>
       <div className="min-w-0">
         <label htmlFor={id('name')} className={label}>
           Your Name <span aria-hidden="true">*</span>
@@ -164,6 +213,29 @@ export function BookingForm({
         {errors.phone && (
           <p id={id('phone-error')} className={errorText}>
             {errors.phone}
+          </p>
+        )}
+      </div>
+      <div className="min-w-0 md:col-span-2">
+        <label htmlFor={id('email')} className={label}>
+          Your Email (optional)
+        </label>
+        <input
+          id={id('email')}
+          name="email"
+          type="email"
+          aria-invalid={errors.email ? true : undefined}
+          aria-describedby={describedBy('email')}
+          autoComplete="email"
+          inputMode="email"
+          autoCapitalize="off"
+          spellCheck={false}
+          enterKeyHint="next"
+          className={field}
+        />
+        {errors.email && (
+          <p id={id('email-error')} className={errorText}>
+            {errors.email}
           </p>
         )}
       </div>
@@ -249,29 +321,47 @@ export function BookingForm({
           ))}
         </div>
       </fieldset>
+      {/* Honeypot: hidden from people and screen readers, filled only by bots. A deliberately odd name so browser
+          autofill (which would fill a "company" field) never touches it. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label>
+          Leave this empty
+          <input name="ns6_hp" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </label>
+      </div>
       <div className="min-w-0 md:col-span-2">
         <button
           type="submit"
-          className="w-full rounded-[7px] bg-accent px-[35px] py-[14px] text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-2 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background focus-visible:outline-2 focus-visible:outline-primary"
+          disabled={sending}
+          aria-busy={sending || undefined}
+          className="w-full rounded-[7px] bg-accent px-[35px] py-[14px] text-button font-semibold text-secondary uppercase transition-colors duration-300 outline-offset-2 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background focus-visible:outline-2 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-70 disabled:hover:bg-accent disabled:hover:text-secondary"
         >
-          Request My Consultation
+          {sending ? 'Sending…' : 'Request My Consultation'}
         </button>
         <p className="mt-3 text-center max-md:text-left text-meta text-text" role="status">
-          {waUrl ? (
+          {status.state === 'sending' ? (
+            'Sending your request…'
+          ) : status.state === 'error' ? (
             <>
-              We’ve opened WhatsApp with your details. Send the message there and we’ll confirm your time; nothing is
-              booked until we do. WhatsApp didn’t open?{' '}
-              <a href={waUrl} target="_blank" rel="noopener noreferrer" className="text-secondary underline underline-offset-2 hover:text-primary focus-visible:text-primary">
-                Open WhatsApp<span className="sr-only"> (opens in a new tab)</span>
-              </a>{' '}
-              or call{' '}
+              {status.message} Call{' '}
               <a href={clinic.phoneHref} className="whitespace-nowrap text-secondary underline underline-offset-2 hover:text-primary focus-visible:text-primary">
                 {clinic.phone}
+              </a>{' '}
+              or{' '}
+              <a href={status.waUrl} target="_blank" rel="noopener noreferrer" className="text-secondary underline underline-offset-2 hover:text-primary focus-visible:text-primary">
+                send your details on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
               </a>
               .
             </>
           ) : (
-            'We’ll call or WhatsApp you within working hours. Your details stay private.'
+            <>
+              We’ll call or WhatsApp you within working hours. Your details stay private: see our{' '}
+              {/* New tab, so a half-filled form (or the booking popup) isn't lost. */}
+              <a href="/privacy-policy/" target="_blank" rel="noopener" className="text-secondary underline underline-offset-2 hover:text-primary focus-visible:text-primary">
+                privacy policy<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              .
+            </>
           )}
         </p>
       </div>

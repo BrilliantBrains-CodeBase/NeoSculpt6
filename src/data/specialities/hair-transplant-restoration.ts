@@ -16,7 +16,8 @@
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, pillarPhoto, pendingReviews, photo as hubPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, pillarPhoto, photo as hubPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/hair-transplant-restoration/'
 const child = (slug: string) => `${HUB}${slug}-in-bangalore/`
@@ -217,10 +218,10 @@ export const hair: HubSource = {
     ctas: [book, call, whatsapp],
   },
 
-  // 3–6 real Google reviews that mention hair restoration or the doctor, word for word with consent. None collected yet.
+  // Real Google reviews word for word, from the shared pool (src/data/reviews.ts), chosen for this hub's treatments.
   reviews: {
     h2: 'Success Stories',
-    items: pendingReviews('Hair Transplant & Restoration', ['Hair Transplant', 'Hair Restoration', 'Dr Sandeep Mahapatra by name']),
+    items: reviewsForPath('/hair-transplant-restoration/'),
   },
 
   faqs: {

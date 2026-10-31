@@ -17,6 +17,7 @@ import path from 'node:path'
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../src/data/site.ts'
 import { hubs } from '../src/data/hubs.ts'
 import { publishedDoctors, doctorByPath, portraitFor } from '../src/data/doctors.ts'
+import { pageRecords, buildDate } from '../src/data/editorial.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const SCRAPED = path.resolve(ROOT, '../scraped')
@@ -73,6 +74,48 @@ const CONTACT = {
   description:
     'Contact NeoSculpt6 in Whitefield, Bangalore to book a doctor-led consultation for hair, skin, laser, anti-ageing, body contouring and cosmetic surgery care.',
   todo: ['title and description: brief fallback, pending content-owner approval (contact-us-page.md)'],
+}
+
+// Journal hub SEO is fixed by content/journal/prompts/journal-blogs-media-coverage-page.md ("SEO and schema").
+const JOURNAL = {
+  path: '/journal/',
+  name: 'Journal',
+  title: 'Journal, Blogs & Media Coverage | NeoSculpt6',
+  description:
+    'Doctor-led insights, patient education, clinic blogs and verified media coverage from NeoSculpt6 in Whitefield, Bangalore.',
+  h1: 'Insights From NeoSculpt6',
+}
+
+// Privacy Policy: a new page (no old-site source, no SEO CSV row). Copy lives in src/data/privacy.ts.
+const PRIVACY = {
+  path: '/privacy-policy/',
+  name: 'Privacy Policy',
+  title: 'Privacy Policy | NeoSculpt6',
+  description:
+    'How NeoSculpt6 in Whitefield, Bangalore collects, uses and protects your personal and medical information, and how to reach our Grievance Officer.',
+  h1: 'Privacy Policy',
+}
+
+// Thank-you page: where the booking form lands after a request is sent (src/templates/ThankYouTemplate.tsx). Not for
+// search: noindex and left out of the sitemap. A fixed URL, so ad and analytics tools can count it as a conversion.
+const THANK_YOU = {
+  path: '/thank-you/',
+  name: 'Thank You',
+  title: 'Thank You | NeoSculpt6',
+  description: 'Your consultation request has reached NeoSculpt6 in Whitefield, Bangalore. We will call you to confirm your time.',
+  h1: 'Thank You',
+}
+
+// Terms of Use: a new page, same pattern. Copy lives in src/data/terms.ts. The slug matches the sister sites; the
+// footer's old /terms/ link and the old site's "Terms and Conditions" label redirect to it.
+const TERMS = {
+  path: '/terms-of-use/',
+  name: 'Terms of Use',
+  title: 'Terms of Use | NeoSculpt6',
+  description:
+    'The terms for using the NeoSculpt6 website in Whitefield, Bangalore: medical information, booking requests, results, prices and your rights.',
+  h1: 'Terms of Use',
+  redirectFrom: ['/terms/', '/terms-and-conditions/'],
 }
 
 // Technology pages and the two pages that go with them (/technology/, /international-patients/): SEO fixed by
@@ -172,6 +215,8 @@ function record({ p, type, title, description, h1, robots = 'index, follow', ogI
   if (hub) breadcrumbs.push({ name: hub.name, path: hub.path })
   // Doctor profiles: Home › Our Doctors (the home page's doctors section) › doctor.
   if (type === 'doctor') breadcrumbs.push({ name: 'Our Doctors', path: '/#our-doctors' })
+  // Journal articles: Home › Journal › article.
+  if (type === 'article') breadcrumbs.push({ name: JOURNAL.name, path: JOURNAL.path })
   if (p !== '/') breadcrumbs.push({ name, path: p })
   return {
     path: p,
@@ -368,11 +413,15 @@ async function main() {
         title: hub.title,
         description: hub.description,
         h1: hub.h1,
+        robots: hub.robots,
         ogImage: DEFAULT_OG_IMAGE,
         sources: fromDoc ? { title: 'doc', description: 'doc' } : { title: 'draft', description: 'draft' },
         todo: fromDoc
           ? ['new page: og image is the default (no page photo yet)', ...(TECH_SEO.get(hub.path)?.note ? [`title: ${TECH_SEO.get(hub.path).note}`] : [])]
-          : ['new page: title, description and h1 are drafts (src/data/hubs.ts)'],
+          : [
+              'new page: title, description and h1 are drafts (src/data/hubs.ts)',
+              ...(hub.robots?.startsWith('noindex') ? ['coming soon: noindex until the page is built'] : []),
+            ],
         extra: {
           name: hub.name,
           category: hub.type === 'service' ? (hubFor(hub.path)?.name ?? hub.name) : hub.name,
@@ -383,6 +432,93 @@ async function main() {
       }),
     )
   }
+
+  pages.push(
+    record({
+      p: PRIVACY.path,
+      type: 'legal',
+      title: PRIVACY.title,
+      description: PRIVACY.description,
+      h1: PRIVACY.h1,
+      ogImage: DEFAULT_OG_IMAGE,
+      sources: { title: 'draft', description: 'draft' },
+      todo: [
+        'new page: draft copy, pending legal review (src/data/privacy.ts)',
+        'client to confirm NEOFOLLICLE AND NEOFERTILITY CLINIC LLP runs NeoSculpt6',
+        'set the effective date at launch',
+      ],
+      extra: { name: PRIVACY.name, category: 'Legal', video: null, lastmod: null, oldSite: null },
+    }),
+  )
+
+  pages.push(
+    record({
+      p: TERMS.path,
+      type: 'legal',
+      title: TERMS.title,
+      description: TERMS.description,
+      h1: TERMS.h1,
+      ogImage: DEFAULT_OG_IMAGE,
+      sources: { title: 'draft', description: 'draft' },
+      todo: [
+        'new page: draft copy, pending legal review (src/data/terms.ts)',
+        'client to confirm NEOFOLLICLE AND NEOFERTILITY CLINIC LLP runs NeoSculpt6',
+        'client to confirm no fees or deposits are taken online',
+        'set the effective date at launch',
+      ],
+      extra: { name: TERMS.name, category: 'Legal', video: null, lastmod: null, oldSite: null },
+    }),
+  )
+  for (const from of TERMS.redirectFrom) redirects.push({ from, to: TERMS.path, status: 301 })
+
+  pages.push(
+    record({
+      p: THANK_YOU.path,
+      type: 'thank-you',
+      title: THANK_YOU.title,
+      description: THANK_YOU.description,
+      h1: THANK_YOU.h1,
+      robots: 'noindex, nofollow',
+      ogImage: DEFAULT_OG_IMAGE,
+      sources: { title: 'draft', description: 'draft' },
+      todo: [],
+      extra: { name: THANK_YOU.name, category: 'Booking', video: null, lastmod: null, oldSite: null },
+    }),
+  )
+
+  // Journal hub, and one page per public (or archived) journal or blog article in src/data/editorial.json.
+  pages.push(
+    record({
+      p: JOURNAL.path,
+      type: 'journal',
+      title: JOURNAL.title,
+      description: JOURNAL.description,
+      h1: JOURNAL.h1,
+      ogImage: DEFAULT_OG_IMAGE,
+      sources: { title: 'doc', description: 'doc' },
+      todo: ['new page: og image is the default (no page photo yet)', 'consultation band copy is a draft (editorial.ts journalHub.closing)'],
+      extra: { name: JOURNAL.name, category: 'Journal', video: null, lastmod: null, oldSite: null },
+    }),
+  )
+  for (const article of pageRecords) {
+    const archived = article.status === 'archived'
+    pages.push(
+      record({
+        p: article.path,
+        type: 'article',
+        title: article.seo.title,
+        description: article.seo.description,
+        h1: article.title,
+        robots: archived ? 'noindex, follow' : article.seo.robots,
+        ogImage: article.featuredImage.src,
+        ogImageAlt: article.featuredImage.alt,
+        sources: { title: 'editorial-json', description: 'editorial-json' },
+        todo: archived ? ['archived article: kept with noindex'] : [],
+        extra: { name: article.title, category: 'Journal', video: null, lastmod: article.updatedDate ?? article.date, oldSite: null },
+      }),
+    )
+  }
+  console.log(`journal: hub + ${pageRecords.length} article page(s) (build date ${buildDate()})`)
 
   // Doctor profiles the old site never had (every published record in doctors.json without a captured page).
   const captured = new Set(pages.map((r) => r.path))

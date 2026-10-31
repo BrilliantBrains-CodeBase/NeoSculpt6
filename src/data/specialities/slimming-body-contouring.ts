@@ -14,7 +14,8 @@
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, pendingReviews, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/slimming-body-contouring/'
 const child = (slug: string) => `${HUB}${slug}-in-bangalore/`
@@ -226,7 +227,7 @@ export const slimming: HubSource = {
     ctas: [book, call, whatsapp],
   },
 
-  reviews: { h2: 'Success Stories', items: pendingReviews('Slimming & Body Contouring', ['Weight Management', 'Body Contouring', 'Dr Sandeep Mahapatra by name']) },
+  reviews: { h2: 'Success Stories', items: reviewsForPath('/slimming-body-contouring/') },
 
   faqs: {
     eyebrow: 'Quick Answers',

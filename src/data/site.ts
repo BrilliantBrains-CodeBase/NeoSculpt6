@@ -8,10 +8,12 @@ export const DEFAULT_OG_IMAGE = '/og/default.png'
 
 export const clinic = {
   name: 'NeoSculpt6',
+  // Legal entity behind NeoSculpt6 and the sister clinics (their shared privacy policy). TODO: client to confirm.
+  legalEntity: 'NEOFOLLICLE AND NEOFERTILITY CLINIC LLP',
   tagline: 'Doctor-Led Aesthetic Clinic · Part of Neo Group',
   phone: '+91 99640 60483',
   phoneHref: 'tel:+919964060483',
-  whatsappHref: 'https://wa.me/919964060483',
+  whatsappHref: 'https://wa.me/919187401600',
   // TODO: external AI analysis tool URL. Until it's filled in, the mobile bar's "AI Analysis" opens Find My Treatment.
   aiAnalysisHref: '',
   email: 'Support@neosculpt6.com',
@@ -47,20 +49,19 @@ export const clinic = {
 // schema.org sameAs: every filled-in profile URL.
 export const sameAs: string[] = [...Object.values(clinic.social), ...clinic.otherProfiles].filter(Boolean)
 
-// Footer links. The home anchors resolve once those home sections are built with these ids;
-// /privacy-policy/ and /terms/ 404 until those pages are added.
+// Footer links. The home anchors resolve once those home sections are built with these ids.
 export const footerNav = [
   { label: 'About', href: '/about-dr-sandeep-mahapatra/' },
   { label: 'Specialities', href: '/#specialities' },
   { label: 'Our Doctors', href: '/#our-doctors' },
   { label: 'Results', href: '/#results' },
-  { label: 'Journal', href: '/#journal' },
+  { label: 'Journal', href: '/journal/' },
   { label: 'Contact', href: '/contact-us/' },
 ]
 
 export const legalNav = [
   { label: 'Privacy Policy', href: '/privacy-policy/' },
-  { label: 'Terms', href: '/terms/' },
+  { label: 'Terms of Use', href: '/terms-of-use/' },
 ]
 
 export const medicalReviewLine =
@@ -71,6 +72,8 @@ export const medicalReviewLine =
 // profile URL; tiles link to `href` (or their own post) only once one is set. Never use the theme's model tiles. Each `subject` is the photo the slot is for; the alt text describes
 // what the current photo actually shows.
 export const instagram = {
+  // Site-wide switch: false hides the strip on every page (turned off for now, 2026-10-31). Set back to true to restore it.
+  enabled: false as boolean,
   handle: null as string | null,
   href: null as string | null,
   // Tiles are NeoSculpt6 photos that are not a service page's hero and not on the About page, so no page shows one twice

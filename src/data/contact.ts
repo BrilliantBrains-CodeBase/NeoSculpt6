@@ -28,7 +28,7 @@ export const actions = {
 }
 
 // 2. Consultation form, the page's main block. Heading and subline: `booking` in home.ts. The privacy line sits under
-// the form (the brief's privacy note; not a privacy policy, so no /privacy-policy/ link until that page exists).
+// the form (the brief's privacy note), followed by a link to /privacy-policy/ (ContactBooking).
 export const bookingEyebrow = 'Schedule Your Visit Online'
 export const sidebarHeading = 'Contact the Clinic'
 export const privacyNote =

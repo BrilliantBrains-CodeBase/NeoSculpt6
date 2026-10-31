@@ -172,6 +172,16 @@ export function ArrowRightIcon({ className = 'size-4 shrink-0' }: IconProps) {
   return glyph('M723.289 452.838l-483.805 483.805 23.357 23.357 507.162-507.162-507.162-507.162-23.357 23.357 483.805 483.805z', className)
 }
 
+// External link (opens a new tab): arrow out to the top right. Journal media cards.
+export function ExternalIcon({ className = 'size-3 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} {...stroke} strokeWidth={2}>
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
+    </svg>
+  )
+}
+
 // The before/after handle's double chevron (cmsmasters-before-after, home b74fcc6).
 export function CompareArrowsIcon({ className = 'size-[25px] shrink-0' }: IconProps) {
   return (

@@ -11,7 +11,8 @@
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, pendingReviews, photo as hubPhoto, pillarPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, sharedPending, whatsapp } from './shared.ts'
+import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/anti-aging-injectables/'
 const child = (slug: string) => `${HUB}${slug}-in-bangalore/`
@@ -224,7 +225,7 @@ export const antiAgeing: HubSource = {
     ctas: [book, call, whatsapp],
   },
 
-  reviews: { h2: 'Success Stories', items: pendingReviews('Anti-Ageing & Injectables', ['Anti-Ageing Treatment', 'Injectables', 'Dr Sandeep Mahapatra by name']) },
+  reviews: { h2: 'Success Stories', items: reviewsForPath('/anti-aging-injectables/') },
 
   faqs: {
     eyebrow: 'Quick Answers',

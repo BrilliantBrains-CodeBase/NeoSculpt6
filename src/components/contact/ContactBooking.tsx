@@ -12,7 +12,7 @@ import { Parts, delay, eyebrow, italicLine } from '../shared'
 // Contact section 2, the page's main block: "Schedule your visit online". On desktop the form card (the About booking
 // card: `alternate`, eyebrow, the home booking heading and subline from data/home.ts) takes the wide column and a slim
 // contact card sits beside it (address, hours, phone, email from site.ts, then Call and WhatsApp). Below xl they stack,
-// form first. The form is the shared BookingForm: same fields, validation, WhatsApp hand-off and honest status line as
+// form first. The form is the shared BookingForm: same fields, validation, sending (Apps Script backend, then /thank-you/) and honest status line as
 // everywhere else (nothing is booked until the clinic confirms; no file uploads). The brief's privacy note is one line
 // under the form. id="book-consultation" is the target of the banner's "Request a Consultation" button.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
@@ -77,8 +77,14 @@ export function ContactBooking() {
           {booking.subline}
         </p>
         <div ref={formRef} data-reveal="up" style={delay(450)} className="w-full">
-          <BookingForm />
-          <p className="mt-5 border-t border-border pt-5 text-center text-meta text-text/80 max-md:text-left">{privacyNote}</p>
+          <BookingForm source="contact" />
+          <p className="mt-5 border-t border-border pt-5 text-center text-meta text-text/80 max-md:text-left">
+            {privacyNote}{' '}
+            <a href="/privacy-policy/" target="_blank" rel="noopener" className="text-secondary underline underline-offset-2 hover:text-primary focus-visible:text-primary">
+              Read our privacy policy<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            .
+          </p>
         </div>
       </div>
 

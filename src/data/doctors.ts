@@ -5,7 +5,7 @@
 // record, add its approved images, run `npm run gen`. Keep this file to erasable TypeScript only (Node imports it).
 
 import raw from './doctors.json' with { type: 'json' }
-import { SITE_URL } from './site.ts'
+import { SITE_URL, instagram } from './site.ts'
 
 export const STATUSES = ['published', 'draft'] as const
 export const APPROVALS = ['approved', 'pending'] as const
@@ -248,7 +248,7 @@ export function doctorSections(d: Doctor): DoctorSectionId[] {
     'doctor-metrics': approved(d.metrics).length > 0,
     'doctor-process': true,
     'doctor-booking': true,
-    instagram: true,
+    instagram: instagram.enabled,
   }
   return DOCTOR_SECTIONS.filter((id) => shown[id])
 }

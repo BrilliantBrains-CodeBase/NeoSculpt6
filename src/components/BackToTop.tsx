@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // Rejuvita's fixed scroll-to-top button (footer widget 735188bf in elementor/css/post-161.css):
-// accent square, bottom 80px / right 30px, rises 20px into place once the page has scrolled a screen.
+// accent square, bottom 80px (106px from md up, above FloatingWhatsApp) / right 30px, rises 20px into place once the page has scrolled a screen.
 export function BackToTop() {
   const [visible, setVisible] = useState(false)
 
@@ -22,7 +22,7 @@ export function BackToTop() {
       type="button"
       onClick={toTop}
       aria-label="Back to top"
-      className={`fixed right-[30px] bottom-20 z-[9998] rounded-[5px] bg-accent p-[17px] text-secondary transition-all duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background ${
+      className={`fixed right-[30px] bottom-20 z-[9998] md:bottom-[106px] rounded-[5px] bg-accent p-[17px] text-secondary transition-all duration-300 hover:bg-primary hover:text-background focus-visible:bg-primary focus-visible:text-background ${
         visible ? 'visible translate-y-0 opacity-100' : 'invisible translate-y-5 opacity-0'
       }`}
     >

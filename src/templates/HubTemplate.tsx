@@ -21,11 +21,13 @@ import { TestimonialsSection } from '../components/home/HomeTestimonials'
 import { InstagramStrip } from '../components/InstagramStrip'
 import { HubTreatments } from '../components/hub/HubTreatments'
 import { HubConcerns } from '../components/hub/HubConcerns'
+import { ResultsComingSoon } from '../components/results/ResultsComingSoon'
 
 // Speciality hubs, /technology/, /international-patients/ and /results/ (the before/after gallery). New pages;
 // meta in src/data/hubs.ts. /technology/ and /international-patients/ are built from
 // content/technology/technology-international-patient.md (src/data/technology/); speciality hubs from
-// src/data/specialities/ (the six speciality hubs); any other hub keeps the placeholder.
+// src/data/specialities/ (the six speciality hubs); /results/ shows "coming soon" until the gallery is built;
+// any other hub keeps the placeholder.
 // `npm run verify` checks each page's section order against these ids.
 export function HubTemplate({ page }: TemplateProps) {
   const content = LIVE.has(page.path) ? technologyByPath.get(page.path) : undefined
@@ -33,6 +35,7 @@ export function HubTemplate({ page }: TemplateProps) {
   if (content?.kind === 'international-patients') return <InternationalPage page={page} content={content} />
   const hub = specialityByPath.get(page.path)
   if (hub) return <SpecialityHubPage page={page} hub={hub} />
+  if (page.path === '/results/') return <ResultsComingSoon page={page} />
   return <PagePlaceholder page={page} template="hub" />
 }
 
