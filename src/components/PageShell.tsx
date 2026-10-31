@@ -10,9 +10,9 @@ import { DoctorTemplate } from '../templates/DoctorTemplate'
 import { ContactTemplate } from '../templates/ContactTemplate'
 import { JournalTemplate } from '../templates/JournalTemplate'
 import { JournalArticleTemplate } from '../templates/JournalArticleTemplate'
-import { LegacyTemplate } from '../templates/LegacyTemplate'
 import { LegalTemplate } from '../templates/LegalTemplate'
 import { ThankYouTemplate } from '../templates/ThankYouTemplate'
+import { AssessmentTemplate } from '../templates/AssessmentTemplate'
 
 export interface TemplateProps {
   page: RoutePage
@@ -30,7 +30,7 @@ const templates: Record<PageType, ComponentType<TemplateProps>> = {
   article: JournalArticleTemplate,
   legal: LegalTemplate,
   'thank-you': ThankYouTemplate,
-  'legacy-demo': LegacyTemplate,
+  assessment: AssessmentTemplate,
 }
 
 export function PageShell({ page }: TemplateProps) {

@@ -4,11 +4,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { primaryNav, findMyTreatment } from '../src/data/nav.ts'
-import { footerNav, legalNav, instagram } from '../src/data/site.ts'
+import { footerNav, legalNav, instagram, robotsContent, OG_SIZE, ogTypeFor, sameAs as clinicSameAs } from '../src/data/site.ts'
+import { imageSize } from './image-size.mjs'
 // The Instagram strip has a site-wide switch (instagram.enabled); while it is off, no section list expects it.
 const withInstagram = (ids) => (instagram.enabled ? ids : ids.filter((id) => id !== 'instagram'))
 import { pillars, results, signature, doctors, doctorSpotlight, testimonials, technology, journal } from '../src/data/home.ts'
 import { hubs } from '../src/data/hubs.ts'
+import { resultCases } from '../src/data/results.ts'
 import { editorial, publicRecords, pageRecords, latest, pendingEditorial, isPublic, cardHref } from '../src/data/editorial.ts'
 import * as about from '../src/data/about.ts'
 import * as contact from '../src/data/contact.ts'
@@ -37,7 +39,21 @@ const SITE_URL = 'https://neosculpt6.com'
 
 const pages = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/pages.json'), 'utf8'))
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, '../scraped/manifest.json'), 'utf8'))
-const redirectsFile = fs.readFileSync(path.join(DIST, '_redirects'), 'utf8')
+const htaccess = fs.readFileSync(path.join(DIST, '.htaccess'), 'utf8')
+// The .htaccess rewrite rules, as [regex, target, flags], to check what the server answers for a path.
+const rewriteRules = [...htaccess.matchAll(/^\s*RewriteRule\s+(\S+)\s+(\S+)\s+\[([^\]]+)\]/gm)].map(([, re, to, flags]) => ({ re: new RegExp(re), to, flags }))
+// What the server answers for a path with no condition attached: a 301 target, 410, or null (the page itself).
+function serverAnswer(p) {
+  const rel = p.replace(/^\//, '')
+  for (const r of rewriteRules) {
+    if (r.to === '^' || r.re.source === '^' || r.re.source.startsWith('^(.*/)?index') || r.re.source === '^(.*[^/])$') continue
+    if (!r.re.test(rel)) continue
+    if (r.flags.includes('G')) return 410
+    if (r.flags.includes('R=301')) return r.to
+  }
+  return null
+}
+const movedOrGone = new Set(pages.filter((p) => p.type === 'redirect' || p.type === 'gone').map((p) => p.path))
 
 const failures = []
 const fail = (p, msg) => failures.push(`${p}: ${msg}`)
@@ -65,6 +81,9 @@ function parseHead(html) {
     ogUrl: metaBy('property', 'og:url'),
     ogTitle: metaBy('property', 'og:title'),
     ogImage: metaBy('property', 'og:image'),
+    ogImageWidth: metaBy('property', 'og:image:width'),
+    ogImageHeight: metaBy('property', 'og:image:height'),
+    ogType: metaBy('property', 'og:type'),
     refresh: metaBy('http-equiv', 'refresh'),
     canonical: links.filter((l) => l.rel === 'canonical').map((l) => l.href),
     h1: [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)].map((m) => decode(m[1].replace(/<[^>]+>/g, ''))),
@@ -80,6 +99,12 @@ const one = (p, label, list, expected) => {
 const fileFor = (p) => path.join(DIST, p, 'index.html')
 
 for (const page of pages) {
+  // Theme-demo leftovers are not built: the server must answer 410 Gone.
+  if (page.type === 'gone') {
+    if (serverAnswer(page.path) !== 410) fail(page.path, '.htaccess does not answer 410 Gone')
+    if (fs.existsSync(fileFor(page.path))) fail(page.path, 'gone URL is still built')
+    continue
+  }
   const file = fileFor(page.path)
   if (!fs.existsSync(file)) {
     fail(page.path, `missing ${path.relative(ROOT, file)}`)
@@ -88,7 +113,7 @@ for (const page of pages) {
   const head = parseHead(fs.readFileSync(file, 'utf8'))
 
   if (page.type === 'redirect') {
-    if (!redirectsFile.includes(`${page.path} ${page.redirectTo} 301`)) fail(page.path, 'not in _redirects')
+    if (serverAnswer(page.path) !== page.redirectTo) fail(page.path, `.htaccess does not 301 to ${page.redirectTo}`)
     one(page.path, 'meta refresh', head.refresh, `0; url=${page.redirectTo}`)
     one(page.path, 'canonical', head.canonical, page.canonical)
     continue
@@ -96,7 +121,10 @@ for (const page of pages) {
 
   one(page.path, 'title', head.titles, page.title)
   one(page.path, 'description', head.description, page.description)
-  one(page.path, 'robots', head.robots, page.robots)
+  one(page.path, 'robots', head.robots, robotsContent(page.robots))
+  one(page.path, 'og:type', head.ogType, ogTypeFor(page.type))
+  one(page.path, 'og:image:width', head.ogImageWidth, String(OG_SIZE.width))
+  one(page.path, 'og:image:height', head.ogImageHeight, String(OG_SIZE.height))
   one(page.path, 'canonical', head.canonical, page.canonical)
   one(page.path, 'og:url', head.ogUrl, page.og.url)
   one(page.path, 'og:title', head.ogTitle, page.title)
@@ -105,19 +133,60 @@ for (const page of pages) {
 
   if (!page.canonical.startsWith(SITE_URL + '/')) fail(page.path, `off-site canonical ${page.canonical}`)
   // The thank-you page (booking form's landing page) is noindex by design.
-  if (page.type !== 'legacy-demo' && page.type !== 'thank-you' && !noindexOnPurpose.has(page.path) && /noindex/i.test(head.robots[0] ?? ''))
+  if (page.type !== 'thank-you' && !noindexOnPurpose.has(page.path) && /noindex/i.test(head.robots[0] ?? ''))
     fail(page.path, 'indexable page is noindex')
-  const img = head.ogImage[0]
-  if (img?.startsWith(SITE_URL) && !fs.existsSync(path.join(DIST, img.slice(SITE_URL.length)))) fail(page.path, `og:image file missing: ${img}`)
+  // Share image: the page's own 1200 × 630 card, under 300 KB.
+  const img = head.ogImage[0] ?? ''
+  const imgFile = path.join(DIST, img.slice(SITE_URL.length))
+  if (img !== SITE_URL + page.og.image) fail(page.path, `og:image ${img} is not the page's card ${page.og.image}`)
+  else if (!fs.existsSync(imgFile)) fail(page.path, `og:image file missing: ${img}`)
+  else {
+    const size = imageSize(imgFile)
+    if (size?.width !== OG_SIZE.width || size?.height !== OG_SIZE.height) fail(page.path, `og:image is ${size?.width}×${size?.height}, not 1200×630`)
+    if (fs.statSync(imgFile).size > 300_000) fail(page.path, `og:image is ${Math.round(fs.statSync(imgFile).size / 1000)} KB (over 300 KB)`)
+  }
+  if (page.og.photo && !fs.existsSync(path.join(DIST, page.og.photo))) fail(page.path, `page photo missing: ${page.og.photo}`)
 
-  if (page.type !== 'legacy-demo') {
-    if (head.ld.length !== 1) fail(page.path, `JSON-LD: expected 1 block, found ${head.ld.length}`)
-    else
-      try {
-        JSON.parse(head.ld[0])
-      } catch (e) {
-        fail(page.path, `JSON-LD does not parse: ${e.message}`)
+  if (head.ld.length !== 1) fail(page.path, `JSON-LD: expected 1 block, found ${head.ld.length}`)
+  else {
+    let graph = null
+    try {
+      graph = JSON.parse(head.ld[0])['@graph']
+    } catch (e) {
+      fail(page.path, `JSON-LD does not parse: ${e.message}`)
+    }
+    if (graph) {
+      const types = new Set(graph.flatMap((n) => [].concat(n['@type'])))
+      // Reviews on this site come from the sister clinics: never marked up as NeoSculpt6's.
+      if (/"(aggregateRating|review)"\s*:/.test(head.ld[0])) fail(page.path, 'rating or review markup in JSON-LD')
+      for (const t of ['Organization', 'WebSite', 'BreadcrumbList']) if (!types.has(t)) fail(page.path, `JSON-LD: no ${t}`)
+      const local =
+        page.robots.startsWith('index') &&
+        (['home', 'about', 'contact', 'service', 'hub', 'doctor'].includes(page.type) || (page.type === 'technology' && TECH_LIVE.has(page.path)))
+      if (local && !types.has('MedicalClinic')) fail(page.path, 'JSON-LD: no MedicalClinic')
+      const clinicNode = graph.find((n) => n['@type'] === 'MedicalClinic')
+      if (clinicNode) {
+        if (!clinicNode.address?.streetAddress || !clinicNode.telephone?.startsWith('+91')) fail(page.path, 'MedicalClinic: address or E.164 telephone missing')
+        if (JSON.stringify(clinicNode.sameAs ?? []) !== JSON.stringify(clinicSameAs)) fail(page.path, 'MedicalClinic sameAs is not the filled-in profiles in site.ts')
       }
+      if (page.type === 'service') {
+        if (!types.has('MedicalProcedure')) fail(page.path, 'JSON-LD: no MedicalProcedure')
+        const video = services.find((x) => x.path === page.path)?.consultation.video
+        const videoNode = graph.find((n) => n['@type'] === 'VideoObject')
+        if (Boolean(video?.uploadDate) !== Boolean(videoNode)) fail(page.path, 'VideoObject must appear exactly when the page shows a video with an upload date')
+        if (videoNode && (!videoNode.name || !videoNode.thumbnailUrl || !videoNode.uploadDate)) fail(page.path, 'VideoObject: name, thumbnailUrl and uploadDate are required')
+      } else if (types.has('VideoObject')) fail(page.path, 'VideoObject on a page that is not a service page')
+    }
+  }
+}
+
+// Internal links never point at a URL the server redirects or answers 410 for.
+for (const page of pages.filter((x) => x.type !== 'redirect' && x.type !== 'gone')) {
+  const file = fileFor(page.path)
+  if (!fs.existsSync(file)) continue
+  for (const m of fs.readFileSync(file, 'utf8').matchAll(/<a\b[^>]*\bhref="([^"#?]+)/g)) {
+    const href = decode(m[1]).replace(SITE_URL, '')
+    if (href.startsWith('/') && movedOrGone.has(href.endsWith('/') ? href : `${href}/`)) fail(page.path, `links to ${href}, which redirects or is gone`)
   }
 }
 
@@ -131,9 +200,37 @@ for (const row of manifest) {
 // sitemap: indexable pages only, each one built
 const sitemap = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8')
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
-const indexable = pages.filter((p) => p.type !== 'redirect' && p.robots.startsWith('index'))
+const indexable = pages.filter((p) => p.type !== 'redirect' && p.type !== 'gone' && p.robots.startsWith('index'))
 if (locs.length !== indexable.length) fail('sitemap.xml', `${locs.length} URLs, expected ${indexable.length}`)
-for (const loc of locs) if (!fs.existsSync(fileFor(new URL(loc).pathname))) fail('sitemap.xml', `no file for ${loc}`)
+for (const loc of locs) {
+  const p = new URL(loc).pathname
+  if (!fs.existsSync(fileFor(p))) fail('sitemap.xml', `no file for ${loc}`)
+  if (movedOrGone.has(p) || serverAnswer(p) !== null) fail('sitemap.xml', `${loc} redirects or is gone`)
+}
+const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1])
+if (lastmods.length !== locs.length || lastmods.some((d) => !/^\d{4}-\d{2}-\d{2}$/.test(d))) fail('sitemap.xml', 'every URL needs a YYYY-MM-DD lastmod')
+for (const img of [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]))
+  if (!fs.existsSync(path.join(DIST, new URL(img).pathname))) fail('sitemap.xml', `image missing: ${img}`)
+
+// llms.txt / llms-full.txt: every page link is an indexable page in the sitemap.
+const sitemapSet = new Set(locs)
+for (const name of ['llms.txt', 'llms-full.txt']) {
+  const file = path.join(DIST, name)
+  if (!fs.existsSync(file)) {
+    fail(name, 'missing')
+    continue
+  }
+  for (const [, url] of fs.readFileSync(file, 'utf8').matchAll(/\]\((https:\/\/neosculpt6\.com[^)]*)\)/g)) if (!sitemapSet.has(url)) fail(name, `links to ${url}, which is not in the sitemap`)
+}
+
+// Server and app files.
+for (const f of ['.htaccess', 'site.webmanifest', 'favicon-48.png', 'favicon-96.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'logo-512.png'])
+  if (!fs.existsSync(path.join(DIST, f))) fail(f, 'missing')
+for (const [file, w] of [['favicon-48.png', 48], ['favicon-96.png', 96], ['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512], ['logo-512.png', 512]]) {
+  const size = fs.existsSync(path.join(DIST, file)) ? imageSize(path.join(DIST, file)) : null
+  if (size && (size.width !== w || size.height !== w)) fail(file, `${size.width}×${size.height}, expected ${w}×${w}`)
+}
+if (!/^RewriteCond %\{HTTPS\} off/m.test(htaccess.replace(/^\s+/gm, ''))) fail('.htaccess', 'no HTTPS redirect')
 // Header and footer menus: every internal link is a built page, and every menu image exists.
 // Home anchors (/#…) are skipped.
 const navLinks = [
@@ -156,11 +253,16 @@ for (const { href } of pillarLinks) {
 for (const { image } of pillars.tabs) {
   if (!fs.existsSync(path.join(DIST, image))) fail('home pillars', `image missing: ${image}`)
 }
-// Home section 6 (Philosophy / results slider): the gallery button is a built page, and both slider images exist.
-if (!fs.existsSync(fileFor(results.cta.href))) fail('home results', `no page for ${results.cta.href}`)
-for (const { src } of [results.slider.before, results.slider.after]) {
-  if (!fs.existsSync(path.join(DIST, src))) fail('home results', `image missing: ${src}`)
+// /results/ gallery: every shown case's images are built (validate-results.mjs checks the records themselves).
+for (const c of resultCases) {
+  for (const src of [c.before.src, c.before.thumbnail, c.after.src, c.after.thumbnail])
+    if (!fs.existsSync(path.join(DIST, src))) fail('results gallery', `${c.id}: image missing: ${src}`)
 }
+// Home section 6 (Philosophy / results slider): the gallery button is a built page, and the slider's case is a
+// published /results/ case (its images are checked with the gallery's above).
+if (!fs.existsSync(fileFor(results.cta.href))) fail('home results', `no page for ${results.cta.href}`)
+if (!resultCases.some((c) => c.id === results.slider.caseId))
+  fail('home results', `slider case ${results.slider.caseId} is not a published /results/ case`)
 // Home section 8 (Signature hair expertise): the assessment button is a built page, and the hotspot image exists.
 if (!fs.existsSync(fileFor(signature.cta.href))) fail('home signature', `no page for ${signature.cta.href}`)
 if (!fs.existsSync(path.join(DIST, signature.image.src))) fail('home signature', `image missing: ${signature.image.src}`)
@@ -293,7 +395,7 @@ for (const r of expectedHome) if (!journalHtml.includes(r.title)) fail('home jou
 if (journal.cta && !fs.existsSync(fileFor(journal.cta.href))) fail('home journal', `no page for ${journal.cta.href}`)
 const hidden = editorial.filter((r) => !isPublic(r) && r.status !== 'archived').map((r) => r.title)
 const mediaHrefs = publicRecords.filter((r) => r.type === 'media').map(cardHref)
-for (const p of pages.filter((x) => x.type !== 'redirect')) {
+for (const p of pages.filter((x) => x.type !== 'redirect' && x.type !== 'gone')) {
   const file = fileFor(p.path)
   if (!fs.existsSync(file)) continue
   const html = decode(fs.readFileSync(file, 'utf8'))
@@ -408,6 +510,25 @@ const aboutPending = [
   ...about.reviews.items.filter((r) => !(r.quote && r.author && r.consent)).map((r) => `About review about ${r.lookFor} (quote, name, treatment, consent)`),
   'Placeholder photos (old-site images): banner, story ×3, founder portrait + inset, clinic image, Instagram ×6; Dr Saranya portrait',
 ]
+
+// Free AI hair assessment (/hair-assessment/, src/templates/AssessmentTemplate.tsx): prerendered with one H1 matching
+// pages.json, the intro card with its Start button, in the sitemap's indexable set, and the mobile bar's "AI Analysis"
+// links to it on every page.
+{
+  const p = '/hair-assessment/'
+  const file = fileFor(p)
+  const raw = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : ''
+  const record = pages.find((r) => r.path === p)
+  if (!raw) fail(p, 'page not built')
+  else if (record?.type !== 'assessment' || !record.robots.startsWith('index')) fail(p, 'expected an indexable assessment page in pages.json')
+  else {
+    const h1s = H1S(raw)
+    if (h1s.length !== 1 || h1s[0] !== record.h1) fail(p, `expected one H1 "${record.h1}", found ${JSON.stringify(h1s)}`)
+    if (!raw.includes('id="hair-assessment"')) fail(p, 'assessment section missing')
+    if (!decode(raw).includes('Start Free Hair Assessment')) fail(p, 'Start button missing')
+    if (!/href="\/hair-assessment\/"[^>]*>(?:(?!<\/a>)[\s\S])*AI Analysis/.test(fs.readFileSync(fileFor('/'), 'utf8'))) fail(p, 'mobile bar "AI Analysis" does not link here')
+  }
+}
 
 // Contact page (/contact-us/, content/contact/prompts/contact-us-page.md, trimmed to banner / form / map at the user's
 // request): sections in order, one H1 that matches the data, the banner photo present with alt text and a size, the
@@ -852,7 +973,7 @@ for (const h of specialityHubs) {
 }
 
 // A character the prerender split mid-way (U+FFFD in the HTML).
-for (const r of pages.filter((x) => x.type !== 'redirect')) {
+for (const r of pages.filter((x) => x.type !== 'redirect' && x.type !== 'gone')) {
   if (fs.existsSync(fileFor(r.path)) && fs.readFileSync(fileFor(r.path), 'utf8').includes('�')) fail(r.path, 'broken character (U+FFFD) in the built HTML')
 }
 
@@ -874,7 +995,9 @@ for (const d of publishedDoctors) {
   for (const [key, value] of [['title', d.seo.title], ['description', d.seo.description], ['h1', d.seo.h1], ['robots', d.seo.robots], ['name', d.displayName]]) {
     if (record[key] !== value) fail(p, `pages.json ${key} "${record[key]}" is not the doctors.json record's "${value}"`)
   }
-  if (record.og.image !== d.seo.ogImage) fail(p, `og image ${record.og.image} is not the record's ${d.seo.ogImage}`)
+  // The share card is drawn from the record's og image, when it is a photo (not the old default logo).
+  const recordPhoto = ['/og/default.png', '/og/cards/default.jpg'].includes(d.seo.ogImage) ? null : d.seo.ogImage
+  if (record.og.photo !== recordPhoto) fail(p, `share card photo ${record.og.photo} is not the record's ${d.seo.ogImage}`)
   if (JSON.stringify(record.breadcrumbs.map((c) => c.path)) !== JSON.stringify(['/', '/#our-doctors', p])) fail(p, 'breadcrumb is not Home › Our Doctors › doctor')
 
   const raw = fs.existsSync(fileFor(p)) ? fs.readFileSync(fileFor(p), 'utf8') : ''
@@ -989,7 +1112,7 @@ const dups = (key) => {
 const byType = pages.reduce((m, p) => ((m[p.type] = (m[p.type] ?? 0) + 1), m), {})
 console.log(`checked ${pages.length} routes`, byType)
 console.log(`old URLs: ${manifest.length}, all routed: ${!failures.some((f) => f.endsWith('old URL has no route'))}`)
-console.log(`sitemap: ${locs.length} URLs`)
+console.log(`sitemap: ${locs.length} URLs; gone (410): ${pages.filter((p) => p.type === 'gone').length}; redirects: ${pages.filter((p) => p.type === 'redirect').length}`)
 console.log(`home pillar links: ${pillarLinks.length} checked`)
 console.log(`home doctor profiles: ${doctors.cards.length} checked`)
 console.log('home doctor spotlight: pending sign-off:')

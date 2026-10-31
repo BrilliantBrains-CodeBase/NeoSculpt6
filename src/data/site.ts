@@ -3,19 +3,69 @@
 
 export const SITE_URL = 'https://neosculpt6.com'
 export const SITE_NAME = 'NeoSculpt6'
-export const OG_LOCALE = 'en_US'
-export const DEFAULT_OG_IMAGE = '/og/default.png'
+// The clinic serves patients in India: Indian English for og:locale and schema.org inLanguage.
+export const OG_LOCALE = 'en_IN'
+export const LANGUAGE = 'en-IN'
+// Share cards are made by scripts/build-og-cards.mjs (1200 × 630). The default card is for pages without a photo.
+export const DEFAULT_OG_IMAGE = '/og/cards/default.jpg'
+export const OG_SIZE = { width: 1200, height: 630 }
+// Square logo for schema.org Organization.logo (made by scripts/build-og-cards.mjs from logo-stacked.webp).
+export const LOGO_IMAGE = { src: '/logo-512.png', width: 512, height: 512 }
+
+// og:type by page type: profile for doctors, article for journal articles, website for everything else.
+export const ogTypeFor = (type: string) => (type === 'doctor' ? 'profile' : type === 'article' ? 'article' : 'website')
+
+// Extra robots directives on every indexable page: allow large image previews and full snippets in search results.
+export const robotsContent = (robots: string) =>
+  robots.startsWith('index') ? `${robots}, max-image-preview:large, max-snippet:-1, max-video-preview:-1` : robots
+
+// Local-search facts. Nothing here is published until it is filled in: every consumer checks for a value first, so
+// a blank stays out of the page, the schema and llms.txt. TODO (client): all of these come from the clinic's Google
+// Business Profile (create or claim it first), Search Console and Bing Webmaster Tools.
+export const local = {
+  // The Business Profile's map pin. Copy it from the profile (right-click the pin in Google Maps); never geocode the
+  // address, the pin is what Google matches against.
+  geo: null as { lat: number; lng: number } | null,
+  google: {
+    // The profile's public link, e.g. https://maps.app.goo.gl/… or https://g.page/…
+    profileUrl: null as string | null,
+    // Place ID (ChIJ…), from Google's Place ID Finder.
+    placeId: null as string | null,
+    // The numeric CID, from the profile's "?cid=" link.
+    cid: null as string | null,
+    // The profile's "Ask for reviews" link (https://g.page/r/…/review).
+    reviewUrl: null as string | null,
+    // The profile's "Share → Embed a map" iframe src (https://www.google.com/maps/embed?pb=…).
+    mapEmbedSrc: null as string | null,
+  },
+  // Site verification meta tokens (the content="" value only).
+  verification: { google: null as string | null, bing: null as string | null },
+}
+
+const ADDRESS_QUERY = 'NeoSculpt6, Sadaramangala, Whitefield Main Road, Bangalore 560066'
+const q = encodeURIComponent(ADDRESS_QUERY)
+
+// The clinic's map link for schema.org hasMap: the Business Profile, else its CID or place ID. Null until one is set.
+export const googleMapUrl: string | null =
+  local.google.profileUrl ??
+  (local.google.cid ? `https://www.google.com/maps?cid=${local.google.cid}` : null) ??
+  (local.google.placeId ? `https://www.google.com/maps/search/?api=1&query=${q}&query_place_id=${local.google.placeId}` : null)
 
 export const clinic = {
   name: 'NeoSculpt6',
   // Legal entity behind NeoSculpt6 and the sister clinics (their shared privacy policy). TODO: client to confirm.
   legalEntity: 'NEOFOLLICLE AND NEOFERTILITY CLINIC LLP',
+  // Set to true once the client confirms the LLP above runs NeoSculpt6; until then schema.org legalName is left out.
+  legalEntityConfirmed: false as boolean,
+  // The phone in E.164 form, for schema.org.
+  phoneE164: '+919964060483',
   tagline: 'Doctor-Led Aesthetic Clinic · Part of Neo Group',
   phone: '+91 99640 60483',
   phoneHref: 'tel:+919964060483',
   whatsappHref: 'https://wa.me/919187401600',
-  // TODO: external AI analysis tool URL. Until it's filled in, the mobile bar's "AI Analysis" opens Find My Treatment.
-  aiAnalysisHref: '',
+  // The mobile bar's "AI Analysis": the free AI hair assessment page (src/templates/AssessmentTemplate.tsx). An
+  // https:// URL here would open in a new tab instead; blank falls back to Find My Treatment.
+  aiAnalysisHref: '/hair-assessment/',
   email: 'Support@neosculpt6.com',
   address: {
     streetAddress: '2nd floor, above Honda Big Wings, Sadaramangala Village, Whitefield Main Road',
@@ -26,17 +76,20 @@ export const clinic = {
     landmark: 'Beside BMW Deutsche Motoren',
   },
   hours: { label: 'Mon–Sat: 7am–7pm', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '07:00', closes: '19:00' },
-  // TODO: swap for the Google Business Profile link once we have it.
-  mapsHref: 'https://www.google.com/maps/search/?api=1&query=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066',
-  // Contact page map (homepage.md section F). Google's keyless embed for the address search, shown by default and
-  // lazy-loaded. TODO: swap for the Business Profile's own embed once it is approved.
-  mapEmbedSrc:
-    'https://www.google.com/maps?q=NeoSculpt6%2C+Sadaramangala%2C+Whitefield+Main+Road%2C+Bangalore+560066&output=embed',
+  // "Directions" links (footer, menu, contact, doctor pages): the Business Profile once `local` has it, otherwise an
+  // address search.
+  mapsHref: googleMapUrl ?? `https://www.google.com/maps/search/?api=1&query=${q}`,
+  // Contact page map (homepage.md section F), shown by default and lazy-loaded: the Business Profile's own embed once
+  // `local` has it, otherwise Google's keyless embed for the address search.
+  mapEmbedSrc: local.google.mapEmbedSrc ?? `https://www.google.com/maps?q=${q}&output=embed`,
   // homepage.md section F, "Nearby areas line".
   nearbyAreas: 'Convenient for patients from Whitefield, ITPL, Mahadevapura, Brookefield, KR Puram, Marathahalli and Hoskote.',
-  // TODO: add the real profile URLs. The footer shows an icon only once its URL is filled in.
-  social: { facebook: '', instagram: '', youtube: '' },
-  // TODO: add Google Business Profile and Practo URLs (schema only, no footer icon).
+  // The same areas, for schema.org areaServed.
+  areasServed: ['Whitefield', 'ITPL', 'Mahadevapura', 'Brookefield', 'KR Puram', 'Marathahalli', 'Hoskote'],
+  // TODO (client): the real profile URLs. The footer and the mobile Follow sheet show an icon only once its URL is
+  // filled in, and only filled-in URLs reach schema.org sameAs and llms.txt.
+  social: { facebook: '', instagram: '', youtube: '', linkedin: '', x: '' },
+  // TODO (client): directory listings such as Practo and Justdial (schema.org sameAs only, no footer icon).
   otherProfiles: [] as string[],
   // Footer row.
   sisterClinics: [
@@ -46,8 +99,13 @@ export const clinic = {
   ],
 }
 
-// schema.org sameAs: every filled-in profile URL.
-export const sameAs: string[] = [...Object.values(clinic.social), ...clinic.otherProfiles].filter(Boolean)
+// schema.org sameAs: every filled-in profile URL, the Business Profile included.
+export const sameAs: string[] = [...Object.values(clinic.social), local.google.profileUrl, ...clinic.otherProfiles].filter(
+  (u): u is string => Boolean(u),
+)
+
+// The X handle for twitter:site, read from the X profile URL once it is set.
+export const xHandle: string | null = clinic.social.x ? `@${clinic.social.x.replace(/\/+$/, '').split('/').pop()}` : null
 
 // Footer links. The home anchors resolve once those home sections are built with these ids.
 export const footerNav = [

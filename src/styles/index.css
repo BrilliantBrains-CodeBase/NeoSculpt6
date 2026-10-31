@@ -145,6 +145,13 @@
   animation: none;
 }
 
+/* Hair assessment "Analysing your photos" bar: a short bar sliding across, as the AI step has no real progress to
+   show. Reduced motion gets a still, full-width bar (motion-reduce: classes). src/components/assessment/ */
+@keyframes ns6-progress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(300%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .before-after-handle,

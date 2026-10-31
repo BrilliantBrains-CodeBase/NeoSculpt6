@@ -147,6 +147,14 @@ export function LinkedInIcon({ className = 'size-4' }: IconProps) {
   )
 }
 
+export function XIcon({ className = 'size-4' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M17.8 2.5h3.1l-6.8 7.8 8 10.7h-6.3l-4.9-6.4-5.6 6.4H2.2l7.3-8.3L1.8 2.5h6.4l4.4 5.9 5.2-5.9zm-1.1 16.6h1.7L7.4 4.3H5.5l11.2 14.8z" />
+    </svg>
+  )
+}
+
 // Theme glyphs from the captured Local-Icons font (rejuvita-scrape/assets/…/cmsmasters-local-icons/Local-Icons/fonts/
 // Local-Icons.svg). Font glyphs are y-up on a 1024 em with a 960 ascent, so the group flips them into the viewBox.
 const glyph = (d: string, className: string) => (

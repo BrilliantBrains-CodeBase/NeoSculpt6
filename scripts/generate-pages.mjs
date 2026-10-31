@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// Builds src/data/pages.json (one SEO record per route) from the old-site capture in ../scraped/,
-// plus public/sitemap.xml, public/robots.txt, public/_redirects and src/data/seo-report.csv.
+// Builds src/data/pages.json (one SEO record per route) from the old-site capture in ../scraped/, plus
+// src/data/routes.json (the app's copy), src/data/redirects.json (301s and 410s) and src/data/seo-report.csv.
+// sitemap.xml, robots.txt, llms.txt and .htaccess are written into dist/ after the build (scripts/postbuild.mjs);
+// the share cards each record points at are drawn by scripts/build-og-cards.mjs.
 //
 //   node scripts/generate-pages.mjs                 # offline; uses og images already in public/og/
 //   node scripts/generate-pages.mjs --download-og   # also fetches missing og images from the live site
@@ -10,12 +12,14 @@
 // doctor's record in src/data/doctors.json (the same record the page renders); an SEO CSV row that disagrees is
 // flagged as a todo.
 // Robots are index,follow and canonicals are self-referencing; the live site's noindex/YouTube canonicals
-// are not carried over. Theme-demo leftovers keep their live title but are noindex and kept out of the sitemap.
+// are not carried over. Theme-demo leftovers are not rebuilt: a few with a clear new home get a 301, the rest 410 Gone.
 
 import fs from 'node:fs'
 import path from 'node:path'
-import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '../src/data/site.ts'
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, ogTypeFor } from '../src/data/site.ts'
 import { hubs } from '../src/data/hubs.ts'
+import { specialityByPath } from '../src/data/specialities/index.ts'
+import { hero as homeHero } from '../src/data/home.ts'
 import { publishedDoctors, doctorByPath, portraitFor } from '../src/data/doctors.ts'
 import { pageRecords, buildDate } from '../src/data/editorial.ts'
 
@@ -106,6 +110,18 @@ const THANK_YOU = {
   h1: 'Thank You',
 }
 
+// Free AI Hair Assessment: a new page (src/templates/AssessmentTemplate.tsx), rebuilt from the sister site's
+// neofollicletransplant.com/hair-assessment/ (same slug and copy, NeoSculpt6's own form and AI backend). No SEO CSV row,
+// so the title and description are drafts. The mobile bar's "AI Analysis" opens it (clinic.aiAnalysisHref).
+const HAIR_ASSESSMENT = {
+  path: '/hair-assessment/',
+  name: 'Hair Assessment',
+  title: 'Free AI Hair Assessment | NeoSculpt6',
+  description:
+    'Answer a few questions and upload photos of your scalp for a free AI hair loss assessment, reviewed by the doctor-led NeoSculpt6 team in Whitefield, Bangalore.',
+  h1: 'Free AI Hair Assessment',
+}
+
 // Terms of Use: a new page, same pattern. Copy lives in src/data/terms.ts. The slug matches the sister sites; the
 // footer's old /terms/ link and the old site's "Terms and Conditions" label redirect to it.
 const TERMS = {
@@ -125,7 +141,18 @@ const TERMS = {
 const TECH_JSON = path.join(DATA_DIR, 'technology/parsed.json')
 const TECH_SEO = new Map(fs.existsSync(TECH_JSON) ? JSON.parse(fs.readFileSync(TECH_JSON, 'utf8')).map((r) => [r.path, r.seo]) : [])
 
-const REDIRECTS = { '/service/': '/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/' }
+const REDIRECTS = {
+  '/service/': '/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/',
+  // Theme-demo leftovers with a clear new home. Every other theme-demo URL answers 410 Gone (see redirects.json).
+  '/make-appointment/': '/contact-us/',
+  '/blog-standard/': '/journal/',
+  '/blog-full-width/': '/journal/',
+}
+
+// The photo a page's share card shows, for pages the old site gave no og:image. Speciality hubs use their hero photo.
+const HOME_PHOTO = { src: homeHero.image, alt: 'A NeoSculpt6 doctor treating a patient in the clinic' }
+const LEGACY_DEFAULT = '/og/default.png' // the old square logo: a page "with" it has no photo of its own
+
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -162,8 +189,16 @@ function shortName(title) {
     .trim()
 }
 
-const serviceDescription = (name) =>
-  `NeoSculpt6 offers ${name} in Bangalore with doctor-led planning. Book a consultation to discuss your plan, cost & recovery.`
+// Descriptions for service pages without an SEO sheet row, in the sheet's own pattern; the shorter form keeps long
+// treatment names within 160 characters.
+const serviceDescription = (name) => {
+  const long = `NeoSculpt6 offers ${name} in Bangalore with doctor-led planning. Book a consultation to discuss your plan, cost & recovery.`
+  return long.length <= 160 ? long : `NeoSculpt6 offers ${name} in Bangalore. Book a consultation to discuss your plan, cost & recovery.`
+}
+// Titles for service pages without an SEO sheet row, in the sheet's pattern ("<Treatment> in Bangalore | NeoSculpt6"),
+// shortened the way the sheet shortens long names, so they stay within 60 characters.
+const serviceTitle = (name) =>
+  [`${name} in Bangalore | NeoSculpt6`, `${name} Bangalore | NeoSculpt6`, `${name} | NeoSculpt6`].find((t) => t.length <= 60) ?? `${name} | NeoSculpt6`
 const technologyDescription = (name) =>
   `${name} at NeoSculpt6, Whitefield, Bangalore, supporting doctor-led assessment and treatment planning. Book a consultation.`
 
@@ -208,7 +243,11 @@ async function localOgImage(p, remote, todo) {
 
 // records --------------------------------------------------------------------------------------------------
 
+// Every page shares its own 1200 × 630 card (scripts/build-og-cards.mjs); `ogImage` is the photo the card is drawn
+// from (and the page's primary image in schema.org), or a default when the page has no photo.
 function record({ p, type, title, description, h1, robots = 'index, follow', ogImage, ogImageAlt, sources, todo, extra = {} }) {
+  const card = `/og/cards/${fileSlug(p)}.jpg`
+  const photo = ogImage === LEGACY_DEFAULT || ogImage === DEFAULT_OG_IMAGE ? null : ogImage
   const hub = hubFor(p)
   const name = extra.name ?? shortName(title)
   const breadcrumbs = [{ name: 'Home', path: '/' }]
@@ -229,15 +268,16 @@ function record({ p, type, title, description, h1, robots = 'index, follow', ogI
     robots,
     canonical: SITE_URL + p,
     og: {
-      type: type === 'home' ? 'website' : 'article',
+      type: ogTypeFor(type),
       title,
       description,
       url: SITE_URL + p,
-      image: ogImage,
-      imageAlt: ogImageAlt || title,
+      image: card,
+      imageAlt: photo && ogImageAlt ? ogImageAlt : title,
       siteName: SITE_NAME,
+      photo,
     },
-    twitter: { card: 'summary_large_image', title, description, image: ogImage },
+    twitter: { card: 'summary_large_image', title, description, image: card },
     breadcrumbs,
     sources,
     todo,
@@ -260,7 +300,7 @@ function oldSiteOf(row, data) {
 function doctorRecord(doctor, todo, { lastmod, oldSite }) {
   if (doctor.contentReview.medicalReviewStatus !== 'approved') todo.push('doctor: profile copy awaiting medical review (doctors.json contentReview)')
   if (!portraitFor(doctor)) todo.push('doctor: portrait not approved, initials shown')
-  if (doctor.seo.ogImage === DEFAULT_OG_IMAGE) todo.push('og:image: default (no approved og image in doctors.json)')
+  if ([DEFAULT_OG_IMAGE, LEGACY_DEFAULT].includes(doctor.seo.ogImage)) todo.push('og:image: share card has no photo (no approved og image in doctors.json)')
   return record({
     p: doctor.path,
     type: 'doctor',
@@ -286,7 +326,7 @@ async function main() {
 
   fs.mkdirSync(OG_DIR, { recursive: true })
   if (DOWNLOAD) {
-    for (const [url, dest] of [[LOGO_URL, path.join(PUBLIC, DEFAULT_OG_IMAGE)], [FAVICON_URL, path.join(PUBLIC, 'favicon.png')]]) {
+    for (const [url, dest] of [[LOGO_URL, path.join(PUBLIC, LEGACY_DEFAULT)], [FAVICON_URL, path.join(PUBLIC, 'favicon.png')]]) {
       if (!fs.existsSync(dest)) await download(url, dest).catch((e) => console.warn(`  ${e.message}`))
     }
   }
@@ -308,6 +348,11 @@ async function main() {
     const todo = []
     const sources = {}
     const techSeo = TECH_SEO.get(p)
+
+    if (type === 'legacy-demo' && !REDIRECTS[p]) {
+      pages.push({ path: p, type: 'gone', title: decode(meta.title), status: 410 })
+      continue
+    }
 
     if (REDIRECTS[p]) {
       redirects.push({ from: p, to: REDIRECTS[p], status: 301 })
@@ -340,8 +385,10 @@ async function main() {
     else if (techSeo) [title, sources.title] = [techSeo.title, 'technology-doc']
     else if (row.planned_meta_title) [title, sources.title] = [decode(row.planned_meta_title), 'seo-csv']
     else if (live404) [title, sources.title] = [`${row.service} in Bangalore | NeoSculpt6`, 'draft']
+    else if (type === 'service') [title, sources.title] = [serviceTitle(shortName(decode(meta.title))), 'draft']
     else [title, sources.title] = [decode(meta.title), 'live']
-    if (sources.title === 'draft') todo.push('title: draft (page is 404 on the old site)')
+    if (sources.title === 'draft')
+      todo.push(live404 ? 'title: draft (page is 404 on the old site)' : "title: draft in the SEO sheet's pattern (no sheet row), pending sign-off")
 
     // description
     const liveDesc = decode(meta.description)
@@ -351,7 +398,6 @@ async function main() {
     else if (type === 'contact') [description, sources.description] = [CONTACT.description, 'contact-us-page.md']
     else if (techSeo) [description, sources.description] = [techSeo.description, 'technology-doc']
     else if (row.planned_meta_description) [description, sources.description] = [decode(row.planned_meta_description), 'seo-csv']
-    else if (type === 'legacy-demo') [description, sources.description] = [liveDesc, 'live']
     else if (isRealDescription(liveDesc)) [description, sources.description] = [liveDesc, 'live']
     else if (type === 'technology') [description, sources.description] = [technologyDescription(row.service), 'generated']
     else [description, sources.description] = [serviceDescription(shortName(title)), 'generated']
@@ -370,8 +416,8 @@ async function main() {
     const ogFrom = type === 'service' ? p : type === 'technology' ? TECH_OG_FROM[p] : null
     const supplied = ogFrom && SUPPLIED_OG.has(ogFrom) && fs.existsSync(path.join(OG_DIR, 'new', `${fileSlug(ogFrom)}.jpg`)) ? ogFrom : null
     const ogImage =
-      type === 'legacy-demo'
-        ? DEFAULT_OG_IMAGE
+      type === 'home'
+        ? HOME_PHOTO.src
         : type === 'about'
           ? ABOUT.ogImage
           : supplied
@@ -385,9 +431,9 @@ async function main() {
         title,
         description,
         h1,
-        robots: type === 'legacy-demo' ? 'noindex, follow' : 'index, follow',
         ogImage,
-        ogImageAlt: type === 'about' ? ABOUT.ogImageAlt : supplied ? SUPPLIED_OG.get(supplied) : decode(og['og:image:alt']),
+        ogImageAlt:
+          type === 'home' ? HOME_PHOTO.alt : type === 'about' ? ABOUT.ogImageAlt : supplied ? SUPPLIED_OG.get(supplied) : decode(og['og:image:alt']),
         sources,
         todo,
         extra: {
@@ -398,7 +444,6 @@ async function main() {
           video: row.video_planned || null,
           lastmod: og['og:updated_time'] || sitemapLastmod[p] || null,
           oldSite: oldSiteOf(row, data),
-          ...(type === 'legacy-demo' ? { legacy: 'theme-demo' } : {}),
         },
       }),
     )
@@ -406,6 +451,7 @@ async function main() {
 
   for (const hub of hubs) {
     const fromDoc = Boolean(hub.source)
+    const heroPhoto = specialityByPath.get(hub.path)?.hero.image
     pages.push(
       record({
         p: hub.path,
@@ -414,10 +460,14 @@ async function main() {
         description: hub.description,
         h1: hub.h1,
         robots: hub.robots,
-        ogImage: DEFAULT_OG_IMAGE,
+        ogImage: heroPhoto?.src ?? DEFAULT_OG_IMAGE,
+        ogImageAlt: heroPhoto?.alt,
         sources: fromDoc ? { title: 'doc', description: 'doc' } : { title: 'draft', description: 'draft' },
         todo: fromDoc
-          ? ['new page: og image is the default (no page photo yet)', ...(TECH_SEO.get(hub.path)?.note ? [`title: ${TECH_SEO.get(hub.path).note}`] : [])]
+          ? [
+              ...(heroPhoto ? [] : ['new page: share card has no photo (no page photo yet)']),
+              ...(TECH_SEO.get(hub.path)?.note ? [`title: ${TECH_SEO.get(hub.path).note}`] : []),
+            ]
           : [
               'new page: title, description and h1 are drafts (src/data/hubs.ts)',
               ...(hub.robots?.startsWith('noindex') ? ['coming soon: noindex until the page is built'] : []),
@@ -486,6 +536,24 @@ async function main() {
     }),
   )
 
+  pages.push(
+    record({
+      p: HAIR_ASSESSMENT.path,
+      type: 'assessment',
+      title: HAIR_ASSESSMENT.title,
+      description: HAIR_ASSESSMENT.description,
+      h1: HAIR_ASSESSMENT.h1,
+      ogImage: DEFAULT_OG_IMAGE,
+      sources: { title: 'draft', description: 'draft' },
+      todo: [
+        'new page: title and description are drafts (no SEO CSV row)',
+        'questions on hair-loss duration and past treatment are drafts (src/data/assessment.ts)',
+        'privacy policy lines for the assessment pending legal review',
+      ],
+      extra: { name: HAIR_ASSESSMENT.name, category: 'Hair', video: null, lastmod: null, oldSite: null },
+    }),
+  )
+
   // Journal hub, and one page per public (or archived) journal or blog article in src/data/editorial.json.
   pages.push(
     record({
@@ -496,7 +564,7 @@ async function main() {
       h1: JOURNAL.h1,
       ogImage: DEFAULT_OG_IMAGE,
       sources: { title: 'doc', description: 'doc' },
-      todo: ['new page: og image is the default (no page photo yet)', 'consultation band copy is a draft (editorial.ts journalHub.closing)'],
+      todo: ['new page: share card has no photo (no page photo yet)', 'consultation band copy is a draft (editorial.ts journalHub.closing)'],
       extra: { name: JOURNAL.name, category: 'Journal', video: null, lastmod: null, oldSite: null },
     }),
   )
@@ -526,8 +594,8 @@ async function main() {
     if (!captured.has(doctor.path)) pages.push(doctorRecord(doctor, [], { lastmod: null, oldSite: null }))
   }
 
-  // order: home, hubs, old pages in capture order, legacy demo last
-  const rank = (r) => (r.type === 'home' ? 0 : r.oldSite === null ? 1 : r.type === 'legacy-demo' ? 3 : r.type === 'redirect' ? 4 : 2)
+  // order: home, hubs, old pages in capture order, then redirects and gone URLs
+  const rank = (r) => (r.type === 'home' ? 0 : r.type === 'gone' ? 4 : r.type === 'redirect' ? 3 : r.oldSite === null ? 1 : 2)
   pages.sort((a, b) => rank(a) - rank(b))
 
   const paths = new Set()
@@ -544,12 +612,16 @@ async function main() {
   for (const r of indexable) {
     if (titleCounts.get(r.title) > 1) r.todo.push('title: duplicate')
     if (descCounts.get(r.description) > 1) r.todo.push('description: duplicate')
+    // Search results cut titles at about 60 characters and descriptions at about 160.
+    if (r.title.length > 60) r.todo.push(`title: ${r.title.length} characters (over 60, may be cut in search results)`)
+    if (r.description.length > 160) r.todo.push(`description: ${r.description.length} characters (over 160, may be cut in search results)`)
+    if (r.description.length < 70) r.todo.push(`description: ${r.description.length} characters (under 70, thin)`)
   }
 
   fs.writeFileSync(path.join(DATA_DIR, 'pages.json'), JSON.stringify(pages, null, 2) + '\n')
 
-  // slim runtime copy bundled by the app (see RoutePage in src/data/types.ts)
-  const slim = pages.map((r) =>
+  // slim runtime copy bundled by the app (see RoutePage in src/data/types.ts). Gone URLs are not built.
+  const slim = pages.filter((r) => r.type !== 'gone').map((r) =>
     r.type === 'redirect'
       ? { path: r.path, type: r.type, title: r.title, redirectTo: r.redirectTo }
       : {
@@ -562,35 +634,22 @@ async function main() {
           robots: r.robots,
           ogImage: r.og.image,
           ...(r.og.imageAlt !== r.title ? { ogImageAlt: r.og.imageAlt } : {}),
+          ...(r.og.photo ? { photo: r.og.photo } : {}),
           crumbs: r.breadcrumbs.map((c) => c.path),
           ...(r.lastmod ? { lastmod: r.lastmod } : {}),
         },
   )
   fs.writeFileSync(path.join(DATA_DIR, 'routes.json'), JSON.stringify(slim) + '\n')
 
-  // sitemap / robots / redirects
-  const xmlEsc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
-  const sitemap = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...indexable.map(
-      (r) => `  <url><loc>${xmlEsc(r.canonical)}</loc>${r.lastmod ? `<lastmod>${r.lastmod.slice(0, 10)}</lastmod>` : ''}</url>`,
-    ),
-    '</urlset>',
-    '',
-  ].join('\n')
-  fs.writeFileSync(path.join(PUBLIC, 'sitemap.xml'), sitemap)
-  fs.writeFileSync(path.join(PUBLIC, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
-  fs.writeFileSync(
-    path.join(PUBLIC, '_redirects'),
-    redirects.flatMap((r) => [`${r.from} ${r.to} ${r.status}`, `${r.from.replace(/\/$/, '')} ${r.to} ${r.status}`]).join('\n') + '\n',
-  )
+  // 301s and 410s, for .htaccess (written by scripts/postbuild.mjs). The meta-refresh pages stay as a fallback.
+  const gone = pages.filter((r) => r.type === 'gone').map((r) => r.path)
+  fs.writeFileSync(path.join(DATA_DIR, 'redirects.json'), JSON.stringify({ redirects, gone }, null, 2) + '\n')
 
   // review sheet for SEO sign-off
   const csvCell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`
   const header = ['path', 'type', 'robots', 'title', 'title_source', 'title_len', 'description', 'description_source', 'description_len', 'h1', 'old_status', 'todo']
   const rows = pages
-    .filter((r) => r.type !== 'redirect')
+    .filter((r) => r.type !== 'redirect' && r.type !== 'gone')
     .map((r) => [r.path, r.type, r.robots, r.title, r.sources.title, r.title.length, r.description, r.sources.description, r.description.length, r.h1, r.oldSite?.status ?? 'new', r.todo.join('; ')])
   fs.writeFileSync(path.join(DATA_DIR, 'seo-report.csv'), [header, ...rows].map((r) => r.map(csvCell).join(',')).join('\n') + '\n')
 
@@ -599,7 +658,7 @@ async function main() {
   console.log(`pages.json: ${pages.length} records`, by((r) => r.type))
   console.log('title sources', by((r) => r.sources?.title ?? '-'))
   console.log('description sources', by((r) => r.sources?.description ?? '-'))
-  console.log(`sitemap: ${indexable.length} URLs · redirects: ${redirects.length} · pages with todo: ${pages.filter((r) => r.todo?.length).length}`)
+  console.log(`indexable: ${indexable.length} · redirects: ${redirects.length} · gone (410): ${gone.length} · pages with todo: ${pages.filter((r) => r.todo?.length).length}`)
   const ogMissing = pages.filter((r) => r.todo?.some((t) => t.includes('run gen:og'))).length
   if (ogMissing) console.log(`og:image not downloaded for ${ogMissing} pages: run npm run gen:og`)
 }

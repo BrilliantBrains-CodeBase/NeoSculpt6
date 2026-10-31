@@ -107,7 +107,7 @@ function live(urlPath) {
 }
 
 // Site routes (pages.json, from generate-pages.mjs), to turn the sidebar's link labels into URLs.
-const routes = JSON.parse(fs.readFileSync(PAGES, 'utf8')).filter((r) => r.type !== 'redirect')
+const routes = JSON.parse(fs.readFileSync(PAGES, 'utf8')).filter((r) => r.type !== 'redirect' && r.type !== 'gone')
 const norm = (s) => s.toLowerCase().replace(/&amp;/g, '&').replace(/[^a-z0-9&]+/g, ' ').trim()
 // The page in the same hub first, then any service page (a doc's list can cross hubs: "Chin Fillers" on a surgery page).
 function hrefFor(label, hub) {

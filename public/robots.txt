@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://neosculpt6.com/sitemap.xml

@@ -1,11 +1,26 @@
 import { Head } from 'vite-react-ssg'
 import type { RoutePage } from '../data/types'
-import { crumbName } from '../data/entries'
-import { SITE_URL, SITE_NAME, OG_LOCALE, DEFAULT_OG_IMAGE, clinic, sameAs } from '../data/site'
+import { crumbName, pageByPath } from '../data/entries'
+import {
+  SITE_URL,
+  SITE_NAME,
+  OG_LOCALE,
+  OG_SIZE,
+  LANGUAGE,
+  LOGO_IMAGE,
+  clinic,
+  local,
+  googleMapUrl,
+  ogTypeFor,
+  robotsContent,
+  sameAs,
+  xHandle,
+} from '../data/site'
 import { faqs, physicians } from '../data/about'
+import { hero as homeHero } from '../data/home'
 import { servicesByPath } from '../data/services'
 import { LIVE, technologyByPath } from '../data/technology'
-import { specialityByPath } from '../data/specialities'
+import { specialityByPath, specialityHubs } from '../data/specialities'
 import { approved, doctorByPath, portraitFor, publicSocialLinks } from '../data/doctors'
 import type { Faq } from '../data/services/types'
 import { cardHref, doctorFor, publicRecords, recordByPath } from '../data/editorial'
@@ -17,32 +32,80 @@ const doctorByName = (name: string | null) =>
 
 const abs = (p: string) => (p.startsWith('http') ? p : SITE_URL + p)
 
-// The clinic, shared by the home, about, contact, service and technology pages.
+const LOGO_ID = `${SITE_URL}/#logo`
+const ORG_ID = `${SITE_URL}/#organization`
+const CLINIC_ID = `${SITE_URL}/#clinic`
+
+// The founder, linked to his profile page's Physician node.
+const founderDoc = physicians.find((d) => d.href === '/about-dr-sandeep-mahapatra/')
+const founder = founderDoc ? { '@type': 'Physician', '@id': `${abs(founderDoc.href)}#physician`, name: founderDoc.name, url: abs(founderDoc.href) } : null
+
+const contactPoint = {
+  '@type': 'ContactPoint',
+  telephone: clinic.phoneE164,
+  email: clinic.email,
+  contactType: 'customer service',
+  areaServed: 'IN',
+  availableLanguage: ['English'],
+}
+
+// The brand. legalName appears once the client confirms the legal entity (site.ts legalEntityConfirmed).
+function organization() {
+  return {
+    '@type': 'Organization',
+    '@id': ORG_ID,
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
+    logo: { '@type': 'ImageObject', '@id': LOGO_ID, url: abs(LOGO_IMAGE.src), width: LOGO_IMAGE.width, height: LOGO_IMAGE.height, caption: SITE_NAME },
+    image: { '@id': LOGO_ID },
+    ...(clinic.legalEntityConfirmed ? { legalName: clinic.legalEntity } : {}),
+    email: clinic.email,
+    telephone: clinic.phoneE164,
+    contactPoint,
+    ...(founder ? { founder } : {}),
+    ...(sameAs.length ? { sameAs } : {}),
+  }
+}
+
+// The clinic (a LocalBusiness), shared by the home, about, contact, service, technology, hub and doctor pages. Map pin,
+// map link and profiles come from site.ts `local` and appear only once they are filled in; no rating or review markup.
 function medicalClinic() {
+  const { address } = clinic
   return {
     '@type': 'MedicalClinic',
-    '@id': `${SITE_URL}/#clinic`,
+    '@id': CLINIC_ID,
     name: clinic.name,
     url: `${SITE_URL}/`,
-    image: abs(DEFAULT_OG_IMAGE),
-    telephone: clinic.phone,
+    logo: { '@id': LOGO_ID },
+    image: [abs(homeHero.image), abs(LOGO_IMAGE.src)],
+    telephone: clinic.phoneE164,
     email: clinic.email,
-    parentOrganization: { '@id': `${SITE_URL}/#organization` },
+    parentOrganization: { '@id': ORG_ID },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: clinic.address.streetAddress,
-      addressLocality: clinic.address.addressLocality,
-      addressRegion: clinic.address.addressRegion,
-      postalCode: clinic.address.postalCode,
-      addressCountry: clinic.address.addressCountry,
+      streetAddress: address.streetAddress,
+      addressLocality: address.addressLocality,
+      addressRegion: address.addressRegion,
+      postalCode: address.postalCode,
+      addressCountry: address.addressCountry,
     },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: clinic.hours.days,
-      opens: clinic.hours.opens,
-      closes: clinic.hours.closes,
-    },
-    // TODO: geo coordinates, Physician × 2 and FAQPage on the home page once the home content is built (homepage.md → Schema).
+    ...(local.geo ? { geo: { '@type': 'GeoCoordinates', latitude: local.geo.lat, longitude: local.geo.lng } } : {}),
+    ...(googleMapUrl ? { hasMap: googleMapUrl } : {}),
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: clinic.hours.days,
+        opens: clinic.hours.opens,
+        closes: clinic.hours.closes,
+      },
+    ],
+    areaServed: [{ '@type': 'City', name: 'Bangalore' }, ...clinic.areasServed.map((name) => ({ '@type': 'Place', name }))],
+    medicalSpecialty: ['Dermatology', 'PlasticSurgery', 'Gynecologic'].map((s) => `https://schema.org/${s}`),
+    // The six specialities, each linked to its hub page.
+    availableService: specialityHubs.map((h) => ({ '@type': 'MedicalProcedure', name: pageByPath.get(h.path)?.name ?? h.path, url: abs(h.path) })),
+    isAcceptingNewPatients: true,
+    contactPoint,
+    ...(founder ? { founder } : {}),
     ...(sameAs.length ? { sameAs } : {}),
   }
 }
@@ -57,7 +120,7 @@ function physicianNode(doc: (typeof physicians)[number], { credentials = true } 
     url: abs(doc.href),
     jobTitle: doc.jobTitle,
     medicalSpecialty: `https://schema.org/${doc.specialty}`,
-    worksFor: { '@id': `${SITE_URL}/#clinic` },
+    worksFor: { '@id': CLINIC_ID },
     ...(credentials && doc.credentials.length
       ? { hasCredential: doc.credentials.map((name) => ({ '@type': 'EducationalOccupationalCredential', name })) }
       : {}),
@@ -79,21 +142,14 @@ function faqPage(canonical: string, items: Faq[]) {
 }
 
 function jsonLd(page: RoutePage, canonical: string) {
-  const org = {
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
-    name: SITE_NAME,
-    url: `${SITE_URL}/`,
-    logo: abs(DEFAULT_OG_IMAGE),
-    ...(sameAs.length ? { sameAs } : {}),
-  }
+  const org = organization()
   const website = {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: SITE_NAME,
-    publisher: { '@id': `${SITE_URL}/#organization` },
-    inLanguage: 'en-US',
+    publisher: { '@id': ORG_ID },
+    inLanguage: LANGUAGE,
   }
   const breadcrumb = {
     '@type': 'BreadcrumbList',
@@ -107,14 +163,29 @@ function jsonLd(page: RoutePage, canonical: string) {
     name: page.title,
     description: page.description,
     isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: { '@id': `${SITE_URL}/#organization` },
+    about: { '@id': ORG_ID },
     breadcrumb: { '@id': `${canonical}#breadcrumb` },
-    primaryImageOfPage: { '@type': 'ImageObject', url: abs(page.ogImage) },
-    inLanguage: 'en-US',
+    primaryImageOfPage: { '@type': 'ImageObject', url: abs(page.photo ?? page.ogImage) },
+    inLanguage: LANGUAGE,
     ...(page.lastmod ? { dateModified: page.lastmod } : {}),
   }
   const graph: object[] = [org, website, webpage, breadcrumb]
-  if (page.type === 'home') graph.push(medicalClinic())
+  if (page.type === 'home') {
+    // homepage.md "Schema": MedicalClinic and the doctors the page shows (name, role and profile link only; credentials
+    // live on the profile pages, where they are shown). No rating markup.
+    graph.push(
+      medicalClinic(),
+      ...publishedDoctors.map((d) => ({
+        '@type': 'Physician',
+        '@id': `${abs(d.path)}#physician`,
+        name: d.displayName,
+        url: abs(d.path),
+        jobTitle: d.role,
+        medicalSpecialty: `https://schema.org/${d.schemaSpecialty}`,
+        worksFor: { '@id': CLINIC_ID },
+      })),
+    )
+  }
   if (page.type === 'about') {
     // about-us.md "Page SEO": AboutPage · MedicalClinic · Physician × 2 · FAQPage. The FAQ text is the same strings the
     // page shows (src/data/about.ts). No rating markup until the Google rating is verified.
@@ -134,7 +205,35 @@ function jsonLd(page: RoutePage, canonical: string) {
     // subtype. No rating or review markup until the reviews are verified. A doctor not in `physicians` (Dr Lavanyaa M,
     // who has no profile page) gets name, the page's speciality line and the clinic only.
     webpage['@type'] = 'MedicalWebPage'
+    // The treatment itself, which the page is about.
+    const procedure = {
+      '@type': 'MedicalProcedure',
+      '@id': `${canonical}#procedure`,
+      name: page.name,
+      description: page.description,
+      url: canonical,
+      ...(page.photo ? { image: abs(page.photo) } : {}),
+    }
+    webpage.about = { '@id': procedure['@id'] }
+    webpage.mainEntity = { '@id': procedure['@id'] }
+    // The page's YouTube video, once it has the upload date Google requires (scripts/fetch-video-meta.mjs).
+    const video = service.consultation.video
+    if (video?.uploadDate) {
+      graph.push({
+        '@type': 'VideoObject',
+        '@id': `${canonical}#video`,
+        name: video.title,
+        description: video.description ?? video.title,
+        thumbnailUrl: video.thumbnail ? abs(video.thumbnail.src) : `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`,
+        uploadDate: video.uploadDate,
+        ...(video.duration ? { duration: video.duration } : {}),
+        embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
+        url: video.url,
+        inLanguage: LANGUAGE,
+      })
+    }
     graph.push(
+      procedure,
       medicalClinic(),
       ...service.doctors.cards.map((card) => {
         const known = physicians.find((d) => d.name === card.name)
@@ -145,7 +244,7 @@ function jsonLd(page: RoutePage, canonical: string) {
           name: card.name,
           ...(card.href ? { url: abs(card.href) } : {}),
           jobTitle: card.specialty,
-          worksFor: { '@id': `${SITE_URL}/#clinic` },
+          worksFor: { '@id': CLINIC_ID },
         }
       }),
       faqPage(canonical, service.faqs.items),
@@ -188,6 +287,12 @@ function jsonLd(page: RoutePage, canonical: string) {
       ...(hub.faqsApproved ? [faqPage(canonical, hub.faqs.items)] : []),
     )
   }
+  if (page.path === '/results/') {
+    // Results gallery (src/data/results.ts): an ImageGallery page and the clinic. The patient photos get no
+    // ImageObject markup of their own.
+    webpage['@type'] = 'ImageGallery'
+    graph.push(medicalClinic())
+  }
   const doctor = page.type === 'doctor' ? doctorByPath.get(page.path) : undefined
   if (doctor) {
     // Doctor profiles (doctor-page-boilerplate.md): ProfilePage whose main entity is the Physician, plus the clinic.
@@ -206,7 +311,7 @@ function jsonLd(page: RoutePage, canonical: string) {
       url: canonical,
       jobTitle: doctor.role,
       medicalSpecialty: `https://schema.org/${doctor.schemaSpecialty}`,
-      worksFor: { '@id': `${SITE_URL}/#clinic` },
+      worksFor: { '@id': CLINIC_ID },
       ...(portrait ? { image: abs(portrait.src) } : {}),
       ...(credentials.length
         ? {
@@ -248,8 +353,8 @@ function jsonLd(page: RoutePage, canonical: string) {
       ...(article.updatedDate ? { dateModified: article.updatedDate } : {}),
       ...(article.featuredImage ? { image: abs(article.featuredImage.src) } : {}),
       ...(author ? { author: { '@type': 'Physician', '@id': `${SITE_URL}${author.path}#physician`, name: author.displayName, url: abs(author.path) } } : {}),
-      publisher: { '@id': `${SITE_URL}/#organization` },
-      inLanguage: 'en-US',
+      publisher: { '@id': ORG_ID },
+      inLanguage: LANGUAGE,
     })
     if (review) {
       webpage.reviewedBy = { '@type': 'Physician', '@id': `${SITE_URL}${review.path}#physician`, name: review.displayName, url: abs(review.path) }
@@ -263,29 +368,45 @@ function jsonLd(page: RoutePage, canonical: string) {
 export function Seo({ page }: { page: RoutePage }) {
   const canonical = SITE_URL + page.path
   const image = abs(page.ogImage)
+  const imageAlt = page.ogImageAlt ?? page.title
   return (
     <Head>
-      <html lang="en" />
+      <html lang="en-IN" />
       <title>{page.title}</title>
       <meta name="description" content={page.description} />
-      <meta name="robots" content={page.robots} />
+      <meta name="robots" content={robotsContent(page.robots)} />
       <link rel="canonical" href={canonical} />
 
       <meta property="og:locale" content={OG_LOCALE} />
-      <meta property="og:type" content={page.type === 'home' ? 'website' : 'article'} />
+      <meta property="og:type" content={ogTypeFor(page.type)} />
       <meta property="og:title" content={page.title} />
       <meta property="og:description" content={page.description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:image" content={image} />
-      <meta property="og:image:alt" content={page.ogImageAlt ?? page.title} />
+      <meta property="og:image:secure_url" content={image} />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content={String(OG_SIZE.width)} />
+      <meta property="og:image:height" content={String(OG_SIZE.height)} />
+      <meta property="og:image:alt" content={imageAlt} />
 
       <meta name="twitter:card" content="summary_large_image" />
+      {xHandle && <meta name="twitter:site" content={xHandle} />}
       <meta name="twitter:title" content={page.title} />
       <meta name="twitter:description" content={page.description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content={imageAlt} />
 
-      {page.type !== 'legacy-demo' && <script type="application/ld+json">{jsonLd(page, canonical)}</script>}
+      {/* Location: region and city always; the map pin once site.ts `local.geo` is set. */}
+      <meta name="geo.region" content="IN-KA" />
+      <meta name="geo.placename" content={`${clinic.address.addressLocality}, ${clinic.address.addressRegion}`} />
+      {local.geo && <meta name="geo.position" content={`${local.geo.lat};${local.geo.lng}`} />}
+      {local.geo && <meta name="ICBM" content={`${local.geo.lat}, ${local.geo.lng}`} />}
+
+      {local.verification.google && <meta name="google-site-verification" content={local.verification.google} />}
+      {local.verification.bing && <meta name="msvalidate.01" content={local.verification.bing} />}
+
+      <script type="application/ld+json">{jsonLd(page, canonical)}</script>
     </Head>
   )
 }

@@ -45,7 +45,7 @@ function checkImage(where, img) {
 // themselves and the rest from the committed routes.json.
 const routes = new Set([
   ...JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/routes.json'), 'utf8'))
-    .filter((r) => r.type !== 'redirect' && r.type !== 'doctor')
+    .filter((r) => r.type !== 'redirect' && r.type !== 'gone' && r.type !== 'doctor')
     .map((r) => r.path),
   ...publishedDoctors.map((d) => d.path),
 ])

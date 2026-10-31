@@ -16,6 +16,8 @@ const listTitle = 'font-heading text-h5 text-secondary uppercase'
 export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
   const qualRef = useReveal<HTMLDivElement>()
   const recRef = useReveal<HTMLDivElement>()
+  // The list fades its items in one by one; it needs its own reveal ref, or the items stay hidden.
+  const qualListRef = useReveal<HTMLUListElement>()
   const qualifications = approved(doctor.qualifications)
   const recognition = approved(doctor.recognition)
   if (!qualifications.length && !recognition.length) return null
@@ -34,7 +36,7 @@ export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
               <h3 id="doctor-qualifications" className={listTitle}>
                 Qualifications
               </h3>
-              <ul aria-labelledby="doctor-qualifications" data-reveal-stagger="" className="flex flex-col gap-5">
+              <ul ref={qualListRef} aria-labelledby="doctor-qualifications" data-reveal-stagger="" className="flex flex-col gap-5">
                 {qualifications.map((q, i) => (
                   <li key={q.title} style={{ '--i': i } as CSSProperties} className="flex gap-[15px]">
                     <TickIcon className="mt-1 size-4 shrink-0 text-tertiary" />

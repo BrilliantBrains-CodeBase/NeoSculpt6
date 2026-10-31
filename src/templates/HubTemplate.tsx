@@ -21,12 +21,15 @@ import { TestimonialsSection } from '../components/home/HomeTestimonials'
 import { InstagramStrip } from '../components/InstagramStrip'
 import { HubTreatments } from '../components/hub/HubTreatments'
 import { HubConcerns } from '../components/hub/HubConcerns'
-import { ResultsComingSoon } from '../components/results/ResultsComingSoon'
+import { ResultsBanner } from '../components/results/ResultsBanner'
+import { ResultsIntro } from '../components/results/ResultsIntro'
+import { ResultsGallery } from '../components/results/ResultsGallery'
+import { resultsPage } from '../data/results'
 
 // Speciality hubs, /technology/, /international-patients/ and /results/ (the before/after gallery). New pages;
 // meta in src/data/hubs.ts. /technology/ and /international-patients/ are built from
 // content/technology/technology-international-patient.md (src/data/technology/); speciality hubs from
-// src/data/specialities/ (the six speciality hubs); /results/ shows "coming soon" until the gallery is built;
+// src/data/specialities/ (the six speciality hubs); /results/ from src/data/results.ts;
 // any other hub keeps the placeholder.
 // `npm run verify` checks each page's section order against these ids.
 export function HubTemplate({ page }: TemplateProps) {
@@ -35,7 +38,7 @@ export function HubTemplate({ page }: TemplateProps) {
   if (content?.kind === 'international-patients') return <InternationalPage page={page} content={content} />
   const hub = specialityByPath.get(page.path)
   if (hub) return <SpecialityHubPage page={page} hub={hub} />
-  if (page.path === '/results/') return <ResultsComingSoon page={page} />
+  if (page.path === '/results/') return <ResultsPage page={page} />
   return <PagePlaceholder page={page} template="hub" />
 }
 
@@ -98,6 +101,20 @@ function SpecialityHubPage({ page, hub }: { page: RoutePage; hub: SpecialityHub 
       <TestimonialsSection id="success-stories" h2={[{ text: hub.reviews.h2 }]} reviews={hub.reviews.items} rating={testimonials.rating} />
       <ServiceFaq faqs={hub.faqs} />
       <ServiceCta closing={hub.closing} />
+      <InstagramStrip />
+    </>
+  )
+}
+
+// Results (content/results/prompts/results-page.md): banner, philosophy, filters + gallery + notes, the closing band,
+// the Instagram row.
+function ResultsPage({ page }: { page: RoutePage }) {
+  return (
+    <>
+      <ResultsBanner page={page} />
+      <ResultsIntro />
+      <ResultsGallery />
+      <ServiceCta closing={resultsPage.closing} />
       <InstagramStrip />
     </>
   )

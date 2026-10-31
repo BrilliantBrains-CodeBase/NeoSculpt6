@@ -1,6 +1,6 @@
 // Shape of one record in pages.json (written by scripts/generate-pages.mjs — do not edit pages.json by hand).
 
-export type PageType = 'home' | 'about' | 'service' | 'technology' | 'hub' | 'doctor' | 'contact' | 'journal' | 'article' | 'legal' | 'thank-you' | 'legacy-demo'
+export type PageType = 'home' | 'about' | 'service' | 'technology' | 'hub' | 'doctor' | 'contact' | 'journal' | 'article' | 'legal' | 'thank-you' | 'assessment'
 
 export interface Crumb {
   name: string
@@ -19,7 +19,8 @@ export interface PageRecord {
   h1: string
   robots: string
   canonical: string
-  og: { type: string; title: string; description: string; url: string; image: string; imageAlt: string; siteName: string }
+  /** `image` is the page's 1200 × 630 share card; `photo` the page photo the card is drawn from (null: none). */
+  og: { type: string; title: string; description: string; url: string; image: string; imageAlt: string; siteName: string; photo: string | null }
   twitter: { card: string; title: string; description: string; image: string }
   breadcrumbs: Crumb[]
   sources: { title: string; description: string }
@@ -28,7 +29,6 @@ export interface PageRecord {
   lastmod: string | null
   /** Where this page's old content lives, for building the real templates later. Null for new pages. */
   oldSite: { url: string; status: number; title: string; description: string; dataJson: string; contentMd: string | null } | null
-  legacy?: 'theme-demo'
 }
 
 export interface RedirectRecord {
@@ -40,7 +40,15 @@ export interface RedirectRecord {
   canonical: string
 }
 
-export type PagesFileEntry = PageRecord | RedirectRecord
+// An old-site theme-demo URL that is not rebuilt: .htaccess answers 410 Gone.
+export interface GoneRecord {
+  path: string
+  type: 'gone'
+  title: string
+  status: 410
+}
+
+export type PagesFileEntry = PageRecord | RedirectRecord | GoneRecord
 
 // routes.json: the slim runtime copy the app bundles. Canonical, og:* and twitter:* are derived in Seo.tsx
 // (they mirror title/description), and breadcrumbs are stored as paths and resolved to names.
@@ -54,6 +62,8 @@ export interface RoutePage {
   robots: string
   ogImage: string
   ogImageAlt?: string
+  /** The page photo its share card is drawn from, for schema.org primaryImageOfPage. */
+  photo?: string
   crumbs: string[]
   lastmod?: string
 }

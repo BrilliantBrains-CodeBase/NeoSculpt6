@@ -273,9 +273,13 @@ export const popular = {
 
 // 6. Philosophy / results slider. In the theme, the stats counters are this section's bottom row; ours stay under
 // the hero (agreed with the client). `h2` is three lines, as the doc sets them.
-// TODO: theme stock images (a face, not hair). Replace with one consented hair transplant case before launch, and
-// set `caption`, e.g. "8 months after FUE, 2,800 grafts · Dr Sandeep Mahapatra". The months and graft count need
-// sign-off (marked † in the doc). The caption is not shown while it is null. The alt text describes the real case.
+// The slider shows one case from the /results/ registry (src/data/results.json), by id, so it passes the same consent
+// and approval gate; if the case stops being published, the slider is left out. skin-001 was chosen with the client
+// (31 Oct 2026) as the best-matched pair: same pose and framing before and after (eye bars within a few pixels), so
+// only the skin changes as the divider moves. The doc asks for a hair case; none of the hair pairs are framed alike.
+// Its images are 432×800; `aspect` shows them 3:5, centred, so the slider keeps the theme's height without upscaling.
+// The divider starts at 50% (the theme's 65% hid most of the after photo). Caption, alt text and any approved
+// details come from the case record.
 export const results = {
   eyebrow: 'Real Results',
   h2: [[{ text: 'Results That' }], [{ text: 'Look Like', gold: true }], [{ text: 'You.' }]] as { text: string; gold?: boolean }[][],
@@ -284,20 +288,9 @@ export const results = {
   disclaimer:
     'Individual results vary. Before-and-after images are shared for patient education and are not a promise of a specific outcome.',
   slider: {
-    before: {
-      src: '/images/home/results-before.webp',
-      width: 600,
-      height: 720,
-      alt: 'Patient’s hairline before a hair transplant at NeoSculpt6, Whitefield, Bangalore',
-    },
-    after: {
-      src: '/images/home/results-after.webp',
-      width: 602,
-      height: 720,
-      alt: 'The same patient’s hairline after a hair transplant with Dr Sandeep Mahapatra',
-    },
-    offset: 65, // % from the left, the theme's default_offset
-    caption: null as string | null,
+    caseId: 'skin-001',
+    offset: 50, // % from the left
+    aspect: 3 / 5,
   },
 }
 

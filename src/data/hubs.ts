@@ -114,7 +114,6 @@ export const hubs: HubDraft[] = [
     title: 'Before & After Results | NeoSculpt6',
     description:
       'Consented before-and-after cases from NeoSculpt6, Whitefield, Bangalore: hair restoration, body contouring, skin, anti-ageing and cosmetic surgery.',
-    // "Coming soon" page (src/data/results.ts): kept out of search until the gallery is built. Switch back to index then.
-    robots: 'noindex, follow',
+    source: 'content/results/prompts/results-page.md',
   },
 ]

@@ -1,0 +1,84 @@
+{
+  "redirects": [
+    {
+      "from": "/blog-standard/",
+      "to": "/journal/",
+      "status": 301
+    },
+    {
+      "from": "/make-appointment/",
+      "to": "/contact-us/",
+      "status": 301
+    },
+    {
+      "from": "/blog-full-width/",
+      "to": "/journal/",
+      "status": 301
+    },
+    {
+      "from": "/service/",
+      "to": "/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/",
+      "status": 301
+    },
+    {
+      "from": "/terms/",
+      "to": "/terms-of-use/",
+      "status": 301
+    },
+    {
+      "from": "/terms-and-conditions/",
+      "to": "/terms-of-use/",
+      "status": 301
+    }
+  ],
+  "gone": [
+    "/the-vital-role-of-early-detection-in-heart-and-kidney-diseases/",
+    "/pxl-template/header-main/",
+    "/pxl-template/mobile-neo/",
+    "/pxl-template/widget-author/",
+    "/pxl-template/footer-home-1/",
+    "/pxl-template/page-title-blog/",
+    "/pxl-template/page-title-product-detail/",
+    "/pxl-template/page-title-blog-single/",
+    "/pxl-template/mega-menu/",
+    "/pxl-template/hidden-sidebar/",
+    "/pxl-template/tab-post-3/",
+    "/pxl-template/tab-post-2/",
+    "/pxl-template/tab-post-1/",
+    "/pxl-template/tab-ophthalmology/",
+    "/pxl-template/tab-mission/",
+    "/pxl-template/tab-vr2/",
+    "/pxl-template/tab-vr3/",
+    "/pxl-template/tab-vr1/",
+    "/pxl-template/page-title-shop/",
+    "/portfolio/",
+    "/portfolio/elevating-media-with-dynamic-features/",
+    "/portfolio/eye-medial-next-gen-features/",
+    "/portfolio/eye-medial-feature-innovation/",
+    "/portfolio/innovating-media-through-smart-features/",
+    "/portfolio/neurosurgery-surgeon/",
+    "/portfolio/state-of-the-art-dentistry/",
+    "/portfolio/limb-movement-assistance/",
+    "/portfolio/uncovering-a-hidden-threat/",
+    "/portfolio/brain-damage-studies/",
+    "/portfolio/a-rocky-resurgence/",
+    "/portfolio/pediatrics-care/",
+    "/product/visomat/",
+    "/product/easy-flow-5/",
+    "/product/microscope/",
+    "/product/nuderm-exfoderm-forte/",
+    "/product/laser-lightwalker/",
+    "/product/clever-choice/",
+    "/product/hamilton-humidifier/",
+    "/product/ecg-machine/",
+    "/product/blood-pressure/",
+    "/product/oxygen-generator/",
+    "/product/injection-machine/",
+    "/events/dr-pablo-owens/",
+    "/events/dr-margery-nixon/",
+    "/events/dr-olivia-addison/",
+    "/events/dr-tom-kenneth/",
+    "/events/dr-julia-stuard/",
+    "/category/cardiomyopathy/"
+  ]
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { clinic, footerNav, legalNav, medicalReviewLine } from '../data/site'
 import { useReveal } from './useReveal'
 import { SmartLink } from './SmartLink'
-import { FacebookIcon, InstagramIcon, MailIcon, PhoneIcon, YoutubeIcon } from './icons'
+import { FacebookIcon, InstagramIcon, LinkedInIcon, MailIcon, PhoneIcon, XIcon, YoutubeIcon } from './icons'
 
 // Rejuvita footer (rejuvita-scrape/pages/home/rendered.html, styles from elementor/css/post-161.css)
 // with the NeoSculpt6 copy from content/home-page/homepage.md section 16.
@@ -16,6 +16,8 @@ const socialLinks = [
   { key: 'facebook', label: 'Facebook', href: clinic.social.facebook, icon: <FacebookIcon /> },
   { key: 'instagram', label: 'Instagram', href: clinic.social.instagram, icon: <InstagramIcon /> },
   { key: 'youtube', label: 'YouTube', href: clinic.social.youtube, icon: <YoutubeIcon /> },
+  { key: 'linkedin', label: 'LinkedIn', href: clinic.social.linkedin, icon: <LinkedInIcon /> },
+  { key: 'x', label: 'X', href: clinic.social.x, icon: <XIcon /> },
 ].filter((s) => s.href)
 
 export function SiteFooter() {

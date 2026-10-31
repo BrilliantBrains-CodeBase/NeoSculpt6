@@ -15,10 +15,12 @@ const item =
 const plain = `${item} text-background hover:text-accent focus-visible:text-accent`
 const icon = 'size-[21px]'
 
-// Falls back to the Find My Treatment form until the external tool's URL is filled in (clinic.aiAnalysisHref).
-const aiAnalysis = clinic.aiAnalysisHref
-  ? { href: clinic.aiAnalysisHref, target: '_blank', rel: 'noopener noreferrer', external: true }
-  : { href: findMyTreatment.href, external: false }
+// The AI hair assessment (clinic.aiAnalysisHref, /hair-assessment/). An outside URL opens in a new tab; blank falls back
+// to the Find My Treatment form.
+const aiHref = clinic.aiAnalysisHref as string
+const aiAnalysis = /^https?:/.test(aiHref)
+  ? { href: aiHref, target: '_blank', rel: 'noopener noreferrer', external: true }
+  : { href: aiHref || findMyTreatment.href, external: false }
 
 export function MobileActionBar() {
   const { open: openBooking } = useBooking()

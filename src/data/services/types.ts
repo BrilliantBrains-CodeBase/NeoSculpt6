@@ -119,6 +119,10 @@ export interface ServiceVideo {
   thumbnail?: { src: string; width: number; height: number; alt: string }
   transcriptUrl?: string
   attribution?: string
+  /** From YouTube (scripts/fetch-video-meta.mjs): needed for the schema.org VideoObject. ISO 8601. */
+  uploadDate?: string
+  /** ISO 8601 duration, e.g. PT3M34S. */
+  duration?: string
   approval: 'approved' | 'pending' | 'rejected'
   consentConfirmed: boolean
   published: boolean

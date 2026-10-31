@@ -4,10 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/validate-editorial.mjs --quiet && node scripts/build-editorial.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet && node scripts/validate-doctors.mjs --quiet && node scripts/validate-videos.mjs --quiet",
+    "gen": "node scripts/parse-technology-pages.mjs --quiet && node scripts/validate-editorial.mjs --quiet && node scripts/build-editorial.mjs --quiet && node scripts/generate-pages.mjs && node scripts/parse-service-pages.mjs --quiet && node scripts/validate-doctors.mjs --quiet && node scripts/validate-videos.mjs --quiet && node scripts/validate-results.mjs --quiet && node scripts/build-og-cards.mjs --quiet",
     "validate:doctors": "node scripts/validate-doctors.mjs",
     "validate:editorial": "node scripts/validate-editorial.mjs",
     "validate:videos": "node scripts/validate-videos.mjs",
+    "validate:results": "node scripts/validate-results.mjs",
+    "gen:cards": "node scripts/build-og-cards.mjs --force",
+    "gen:video-meta": "node scripts/fetch-video-meta.mjs",
     "gen:og": "node scripts/parse-technology-pages.mjs --quiet && node scripts/generate-pages.mjs --download-og && node scripts/parse-service-pages.mjs --quiet",
     "dev": "vite-react-ssg dev",
     "build": "node scripts/patch-react-dom-server.mjs && npm run gen && vite-react-ssg build && node scripts/postbuild.mjs",
@@ -23,11 +26,14 @@
     "vite-react-ssg": "^0.9.2"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.5",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^5.2.0",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^7.3.7"

@@ -1,0 +1,626 @@
+[
+  {
+    "id": "hair-001",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-001-before.webp",
+      "thumbnail": "/images/results/hair-001-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: a man with an advanced receding hairline and a bare frontal scalp"
+    },
+    "after": {
+      "src": "/images/results/hair-001-after.webp",
+      "thumbnail": "/images/results/hair-001-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same man with a full frontal hairline"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/10.png"
+  },
+  {
+    "id": "hair-002",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-002-before.webp",
+      "thumbnail": "/images/results/hair-002-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: a man with sparse, thin hair over the front of the scalp"
+    },
+    "after": {
+      "src": "/images/results/hair-002-after.webp",
+      "thumbnail": "/images/results/hair-002-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same man with dense curly hair over the front of the scalp"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/11.png"
+  },
+  {
+    "id": "hair-003",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-003-before.webp",
+      "thumbnail": "/images/results/hair-003-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: a man with thinning over the front and top of the scalp, seen from above"
+    },
+    "after": {
+      "src": "/images/results/hair-003-after.webp",
+      "thumbnail": "/images/results/hair-003-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same man with full coverage over the front of the scalp"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/12.png"
+  },
+  {
+    "id": "hair-004",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-004-before.webp",
+      "thumbnail": "/images/results/hair-004-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: a man with a bare frontal scalp and a few fine hairs"
+    },
+    "after": {
+      "src": "/images/results/hair-004-after.webp",
+      "thumbnail": "/images/results/hair-004-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same man with a full frontal hairline"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/13.png"
+  },
+  {
+    "id": "hair-005",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-005-before.webp",
+      "thumbnail": "/images/results/hair-005-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: top-down view of thinning over the front and crown of the scalp"
+    },
+    "after": {
+      "src": "/images/results/hair-005-after.webp",
+      "thumbnail": "/images/results/hair-005-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same top-down view with dense coverage over the front and crown"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/14.png"
+  },
+  {
+    "id": "hair-006",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-006-before.webp",
+      "thumbnail": "/images/results/hair-006-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: side view of a man with the planned hairline marked on his forehead"
+    },
+    "after": {
+      "src": "/images/results/hair-006-after.webp",
+      "thumbnail": "/images/results/hair-006-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: side view of the same man's restored hairline"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/15.png"
+  },
+  {
+    "id": "hair-007",
+    "status": "published",
+    "category": "hair",
+    "speciality": "hair",
+    "treatmentLabel": "Hair Restoration",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/hair-007-before.webp",
+      "thumbnail": "/images/results/hair-007-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before hair restoration: a man with receding temples"
+    },
+    "after": {
+      "src": "/images/results/hair-007-after.webp",
+      "thumbnail": "/images/results/hair-007-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After hair restoration: the same man with a fuller frontal hairline"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/16.png"
+  },
+  {
+    "id": "skin-001",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-001-before.webp",
+      "thumbnail": "/images/results/skin-001-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with freckles and uneven pigmentation"
+    },
+    "after": {
+      "src": "/images/results/skin-001-after.webp",
+      "thumbnail": "/images/results/skin-001-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with clearer, more even skin"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/1.png"
+  },
+  {
+    "id": "skin-002",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-002-before.webp",
+      "thumbnail": "/images/results/skin-002-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with dull, uneven skin"
+    },
+    "after": {
+      "src": "/images/results/skin-002-after.webp",
+      "thumbnail": "/images/results/skin-002-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with smoother, brighter skin"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/2.png"
+  },
+  {
+    "id": "skin-003",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-003-before.webp",
+      "thumbnail": "/images/results/skin-003-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with uneven skin tone and texture"
+    },
+    "after": {
+      "src": "/images/results/skin-003-after.webp",
+      "thumbnail": "/images/results/skin-003-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with a more even, brighter complexion"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/3.png"
+  },
+  {
+    "id": "skin-004",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-004-before.webp",
+      "thumbnail": "/images/results/skin-004-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a man with uneven skin texture and open pores"
+    },
+    "after": {
+      "src": "/images/results/skin-004-after.webp",
+      "thumbnail": "/images/results/skin-004-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same man with smoother skin"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/4.png"
+  },
+  {
+    "id": "skin-005",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-005-before.webp",
+      "thumbnail": "/images/results/skin-005-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with uneven skin tone"
+    },
+    "after": {
+      "src": "/images/results/skin-005-after.webp",
+      "thumbnail": "/images/results/skin-005-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with a more even complexion"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/5.png"
+  },
+  {
+    "id": "skin-006",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-006-before.webp",
+      "thumbnail": "/images/results/skin-006-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with bumps and acne on the forehead and cheeks"
+    },
+    "after": {
+      "src": "/images/results/skin-006-after.webp",
+      "thumbnail": "/images/results/skin-006-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with clearer skin"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/6.png"
+  },
+  {
+    "id": "skin-007",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-007-before.webp",
+      "thumbnail": "/images/results/skin-007-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial aesthetic treatment: a man with deep forehead lines"
+    },
+    "after": {
+      "src": "/images/results/skin-007-after.webp",
+      "thumbnail": "/images/results/skin-007-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial aesthetic treatment: the same man with a smoother forehead"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/7.png"
+  },
+  {
+    "id": "skin-008",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-008-before.webp",
+      "thumbnail": "/images/results/skin-008-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial aesthetic treatment: a woman's lips and jawline"
+    },
+    "after": {
+      "src": "/images/results/skin-008-after.webp",
+      "thumbnail": "/images/results/skin-008-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial aesthetic treatment: the same woman with fuller lips and a more defined jawline"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/8.png"
+  },
+  {
+    "id": "skin-009",
+    "status": "published",
+    "category": "skin",
+    "speciality": "skin",
+    "treatmentLabel": "Skin & Face",
+    "treatmentName": null,
+    "doctor": null,
+    "location": "NeoSculpt6, Whitefield, Bangalore",
+    "timeline": null,
+    "before": {
+      "src": "/images/results/skin-009-before.webp",
+      "thumbnail": "/images/results/skin-009-before-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "Before facial skin treatment: a woman with acne marks and uneven skin tone"
+    },
+    "after": {
+      "src": "/images/results/skin-009-after.webp",
+      "thumbnail": "/images/results/skin-009-after-thumb.webp",
+      "width": 432,
+      "height": 800,
+      "alt": "After facial skin treatment: the same woman with clearer, more even skin"
+    },
+    "caption": null,
+    "consent": {
+      "written": true,
+      "scope": "website-results-gallery",
+      "expiresAt": null,
+      "patientIdentifiable": false,
+      "eyesCovered": true
+    },
+    "approval": {
+      "medical": "approved",
+      "image": "approved",
+      "published": true
+    },
+    "source": "31-10-2026/9.png"
+  }
+]

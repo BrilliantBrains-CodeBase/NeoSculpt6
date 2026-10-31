@@ -3,16 +3,20 @@ import { results } from '../../data/home'
 import { useReveal } from '../useReveal'
 import { SmartLink } from '../SmartLink'
 import { BeforeAfter } from '../BeforeAfter'
+import { resultCases } from '../../data/results'
 
 // Home section 6: Rejuvita "Our Philosophy" (rejuvita-scrape/pages/home, container eba6704 > row 2d68ba9: text column
 // 2fb7877 and before/after slider b74fcc6; styles from elementor/css/post-39758.css). In the theme the stats
 // counters (8dcdccf) are this section's bottom row; ours are HomeStats, under the hero, by choice.
-// Not in the theme: the disclaimer under the button and the optional caption under the slider (homepage.md §6).
+// Not in the theme: the disclaimer under the button, the optional caption under the slider (homepage.md §6) and the
+// slider's Before / After tags. The slider shows one published /results/ case (results.slider.caseId in home.ts), at
+// most 470px wide so its 3:5 photos keep about the theme's height; with no published case it is left out.
 // id="results" is the target of the header and footer "Results" links.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop, plus min-[1601px] for
 // the theme's widescreen rules.
 
 const delay = (ms: number) => ({ '--reveal-delay': `${ms}ms` }) as CSSProperties
+const sliderCase = resultCases.find((c) => c.id === results.slider.caseId)
 
 export function HomeResults() {
   const eyebrowRef = useReveal<HTMLParagraphElement>()
@@ -73,17 +77,23 @@ export function HomeResults() {
           </p>
         </div>
 
-        {/* Before/after slider (b74fcc6): 600px wide below desktop, centred on tablet. */}
-        <div ref={sliderRef} data-reveal="up" className="w-full max-w-[600px] xl:min-w-0 xl:max-w-none xl:flex-1">
-          <BeforeAfter
-            before={results.slider.before}
-            after={results.slider.after}
-            defaultOffset={results.slider.offset}
-          />
-          {results.slider.caption && (
-            <p className="mt-[15px] text-center max-md:text-left text-small text-text/70">{results.slider.caption}</p>
-          )}
-        </div>
+        {/* Before/after slider (b74fcc6): centred in its column. */}
+        {sliderCase && (
+          <div ref={sliderRef} data-reveal="up" className="w-full max-w-[600px] xl:min-w-0 xl:max-w-none xl:flex-1">
+            <BeforeAfter
+              before={sliderCase.before}
+              after={sliderCase.after}
+              defaultOffset={results.slider.offset}
+              aspect={results.slider.aspect}
+              labels
+              label={`Before and after: ${sliderCase.treatmentLabel}`}
+              className="mx-auto w-full max-w-[470px]"
+            />
+            {sliderCase.caption && (
+              <p className="mt-[15px] text-center max-md:text-left text-small text-text/70">{sliderCase.caption}</p>
+            )}
+          </div>
+        )}
       </div>
     </section>
   )

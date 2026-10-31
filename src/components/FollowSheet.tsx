@@ -2,7 +2,7 @@ import { useId } from 'react'
 import { clinic } from '../data/site'
 import { useModal } from './useModal'
 import { usePresence } from './usePresence'
-import { CloseIcon, FacebookIcon, InstagramIcon, YoutubeIcon } from './icons'
+import { CloseIcon, FacebookIcon, InstagramIcon, LinkedInIcon, XIcon, YoutubeIcon } from './icons'
 
 // Bottom sheet opened by the mobile bar's "Follow" item (phones only). Lists the clinic's social profiles; a row
 // shows only once its URL is filled in (clinic.social), the same rule as the footer icons. Sits above the bar
@@ -11,6 +11,8 @@ const profiles = [
   { label: 'Instagram', href: clinic.social.instagram, icon: <InstagramIcon className="size-[22px]" /> },
   { label: 'Facebook', href: clinic.social.facebook, icon: <FacebookIcon className="size-[22px]" /> },
   { label: 'YouTube', href: clinic.social.youtube, icon: <YoutubeIcon className="size-[22px]" /> },
+  { label: 'LinkedIn', href: clinic.social.linkedin, icon: <LinkedInIcon className="size-[22px]" /> },
+  { label: 'X', href: clinic.social.x, icon: <XIcon className="size-[22px]" /> },
 ].filter((p) => p.href)
 
 export function FollowSheet({ open, onClose }: { open: boolean; onClose: () => void }) {

@@ -26,6 +26,7 @@ export const privacy: LegalDoc = {
   summary: [
     'We collect only what we need to book your visit, treat you and keep your medical record.',
     'When you send the booking form, your details go to our clinic team’s private Google Sheet and email inbox, and nowhere else.',
+    'If you use the free AI hair assessment, your scalp photos are stored in our private Google Drive and analysed by an AI service (Anthropic’s Claude) to prepare your report.',
     'Your photographs and medical records are never shared or published without your written consent.',
     'We do not sell your personal data.',
     `To see, correct or delete your data, email ${clinic.email}.`,
@@ -61,7 +62,8 @@ export const privacy: LegalDoc = {
       blocks: [
         ul(
           'Booking form: your name, phone number, email address (if you give one), the treatment you are interested in, preferred doctor, preferred date and time, and whether you want an in-clinic or video consultation.',
-          'With a booking request, the website also sends the page you sent it from, the first page of your visit, the website that linked you to us, and any advertising tags in that first link (such as utm_source or gclid). This tells us which page or advert helped you find us.',
+          'Free AI hair assessment: your name, phone number, email address, age, gender, your answers about your hair loss, and two or three photos of your scalp.',
+          'With a booking request or hair assessment, the website also sends the page you sent it from, the first page of your visit, the website that linked you to us, and any advertising tags in that first link (such as utm_source or gclid). This tells us which page or advert helped you find us.',
           'Messages, photos and documents you send us by WhatsApp, phone or email.',
           'At the clinic: your medical history, consultation notes, prescriptions, test reports, consent forms and clinical photographs. The law treats these as sensitive personal data, and we handle them with extra care.',
           'Basic technical data (such as your IP address and browser type) that the third-party services listed below receive when their content loads.',
@@ -80,6 +82,24 @@ export const privacy: LegalDoc = {
           'Google stores the Sheet and the emails for us, under ',
           { text: 'Google’s privacy policy', href: google },
           '. If sending fails, the form offers to open WhatsApp with your details filled in instead. Nothing goes through WhatsApp unless you choose to send that message.',
+        ),
+      ],
+    },
+    {
+      // Draft (2026-10-31), with the AI hair assessment; part of the legal review. The 12-month photo limit needs the
+      // clinic's agreement.
+      id: 'hair-assessment',
+      heading: 'How the AI Hair Assessment Works',
+      blocks: [
+        p(
+          'The free AI hair assessment is for adults (18 and over) and runs only when you tick the consent box and press “Get My Report”. Your photos are made smaller in your browser first, which also removes hidden photo data such as location. Then:',
+        ),
+        ul(
+          'Your answers go to a private Google Sheet and your photos to a private Google Drive folder, which only our clinic team can open. Our clinic inbox is sent an alert with your photos.',
+          'Your photos and answers (age, gender and your hair-loss answers, but not your name, phone or email) are sent to Anthropic’s Claude AI service, which prepares a preliminary grade and options to discuss. Anthropic processes them for us only; it does not use them to train its models and deletes them after a short period.',
+          'We email the report to the address you give, and our team may call or WhatsApp you about it. We do not add you to any mailing list.',
+          'The report is a screening aid, not a diagnosis. Our doctors review it, and only an in-person consultation can confirm the cause of hair loss and the right treatment.',
+          'If you do not become our patient, we delete your assessment photos within 12 months. Ask us at any time to delete them sooner.',
         ),
       ],
     },
@@ -133,7 +153,8 @@ export const privacy: LegalDoc = {
           type: 'table',
           head: ['Service', 'Where it is used', 'Privacy policy'],
           rows: [
-            ['Google Workspace (Sheets and Gmail)', 'Stores booking requests and sends our booking emails', [{ text: 'Google privacy policy', href: google }]],
+            ['Google Workspace (Sheets, Drive and Gmail)', 'Stores booking requests and hair assessments, and sends our booking and report emails', [{ text: 'Google privacy policy', href: google }]],
+            ['Anthropic (Claude)', 'Analyses the photos you send with the free AI hair assessment', [{ text: 'Anthropic privacy policy', href: 'https://www.anthropic.com/legal/privacy' }]],
             ['WhatsApp (Meta)', 'WhatsApp buttons, and the booking form’s fallback if sending fails', [{ text: 'WhatsApp privacy policy', href: 'https://www.whatsapp.com/legal/privacy-policy' }]],
             ['Google Maps', 'The map on our contact page', [{ text: 'Google privacy policy', href: google }]],
             ['YouTube', 'Treatment videos, in privacy-enhanced mode. A video loads only when you press play.', [{ text: 'Google privacy policy', href: google }]],
@@ -148,7 +169,7 @@ export const privacy: LegalDoc = {
       heading: 'Cookies',
       blocks: [
         p('Cookies are small files a website stores on your device. This website does not set its own cookies, and it does not use analytics or advertising trackers.'),
-        p('To credit the page or advert that brought you here, the website keeps your first page of the visit and its advertising tags in your browser’s session storage (not a cookie). It is deleted when you close the tab, and is sent to us only with a booking request.'),
+        p('To credit the page or advert that brought you here, the website keeps your first page of the visit and its advertising tags in your browser’s session storage (not a cookie). It is deleted when you close the tab, and is sent to us only with a booking request or hair assessment.'),
         p('The Google Maps and YouTube content described above may set cookies when it loads. You can block or delete cookies in your browser settings. Some embedded content may not work without them.'),
       ],
     },

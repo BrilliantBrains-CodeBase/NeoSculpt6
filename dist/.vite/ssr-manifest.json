@@ -4,10 +4,10 @@
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-DxlKsrNg.js"
+    "/assets/client-BUN0UFOU.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-DxlKsrNg.js"
+    "/assets/client-BUN0UFOU.js"
   ],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000/Users/d1/Desktop/neo-sculpt-website/site/node_modules/react-dom/index.js?commonjs-module": [],
@@ -32,7 +32,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-DxlKsrNg.js"
+    "/assets/client-BUN0UFOU.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -78,6 +78,9 @@
   "src/components/about/AboutServices.tsx": [],
   "src/components/about/AboutStory.tsx": [],
   "src/components/about/AboutTeam.tsx": [],
+  "src/components/assessment/AssessmentResultView.tsx": [],
+  "src/components/assessment/AssessmentWizard.tsx": [],
+  "src/components/assessment/PhotoGuide.tsx": [],
   "src/components/booking/BookingContext.tsx": [],
   "src/components/booking/BookingDialog.tsx": [],
   "src/components/booking/BookingForm.tsx": [],
@@ -119,7 +122,11 @@
   "src/components/journal/EditorialCard.tsx": [],
   "src/components/journal/JournalBanner.tsx": [],
   "src/components/journal/JournalListing.tsx": [],
-  "src/components/results/ResultsComingSoon.tsx": [],
+  "src/components/results/ResultCaseCard.tsx": [],
+  "src/components/results/ResultLightbox.tsx": [],
+  "src/components/results/ResultsBanner.tsx": [],
+  "src/components/results/ResultsGallery.tsx": [],
+  "src/components/results/ResultsIntro.tsx": [],
   "src/components/service/CtaButton.tsx": [],
   "src/components/service/ServiceCandidates.tsx": [],
   "src/components/service/ServiceConsultation.tsx": [],
@@ -149,6 +156,7 @@
   "src/components/usePresence.ts": [],
   "src/components/useReveal.ts": [],
   "src/data/about.ts": [],
+  "src/data/assessment.ts": [],
   "src/data/contact.ts": [],
   "src/data/doctors.json": [],
   "src/data/doctors.ts": [],
@@ -160,6 +168,7 @@
   "src/data/legal.ts": [],
   "src/data/nav.ts": [],
   "src/data/privacy.ts": [],
+  "src/data/results.json": [],
   "src/data/results.ts": [],
   "src/data/reviews.json": [],
   "src/data/reviews.ts": [],
@@ -184,17 +193,18 @@
   "src/layouts/SiteLayout.tsx": [],
   "src/lib/attribution.ts": [],
   "src/lib/lead.ts": [],
+  "src/lib/resizeImage.ts": [],
   "src/main.tsx": [],
   "src/routes.tsx": [],
   "src/styles/index.css": [],
   "src/templates/AboutTemplate.tsx": [],
+  "src/templates/AssessmentTemplate.tsx": [],
   "src/templates/ContactTemplate.tsx": [],
   "src/templates/DoctorTemplate.tsx": [],
   "src/templates/HomeTemplate.tsx": [],
   "src/templates/HubTemplate.tsx": [],
   "src/templates/JournalArticleTemplate.tsx": [],
   "src/templates/JournalTemplate.tsx": [],
-  "src/templates/LegacyTemplate.tsx": [],
   "src/templates/LegalTemplate.tsx": [],
   "src/templates/PagePlaceholder.tsx": [],
   "src/templates/ServiceTemplate.tsx": [],
