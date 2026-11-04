@@ -28,11 +28,13 @@ export function HomeHero() {
 
   return (
     <section
-      style={{ backgroundImage: `url(${hero.image})` }}
-      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-cover bg-[position:85%_top] bg-no-repeat md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
+      style={{ '--hero-mobile': `url(${hero.mobileImage})`, '--hero-desktop': `url(${hero.image})` } as CSSProperties}
+      className="relative isolate flex min-h-[680px] flex-col justify-end gap-10 overflow-hidden bg-[image:var(--hero-mobile)] bg-cover bg-[position:center_top] bg-no-repeat md:bg-[image:var(--hero-desktop)] md:bg-[position:85%_top] md:min-h-[1024px] xl:min-h-screen xl:justify-between xl:gap-5 xl:bg-center min-[1601px]:gap-0"
     >
       {/* Theme overlay: radial vignette to `alternate`, 80% opacity. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(at_center,#0000_0%,#0b0b0d_100%)] opacity-80" />
+      {/* Phones: the text sits over the photo's white coat, so fade to dark below the doctor's face to keep it readable. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#0b0b0d00_26%,#0b0b0dc7_44%,#0b0b0dc7_100%)] md:hidden" />
 
       <div className="flex w-full flex-col items-center max-md:items-start gap-[30px] px-5 pt-[200px] md:gap-10 md:px-0 md:pt-20 xl:items-start xl:pt-[235px] xl:pb-[50px] min-[1601px]:min-h-[calc(100vh-65px)] min-[1601px]:pt-[250px] min-[1601px]:pb-[130px]">
         {/* Title box (a57980f) */}

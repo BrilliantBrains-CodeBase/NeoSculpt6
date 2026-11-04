@@ -20,6 +20,8 @@ export const hero = {
   // NeoSculpt6 clinic photo (doctor treating a patient, subject on the right; 1672×941), supplied 2026-10-28.
   // Unused alternatives: /images/home/hero.webp (the Rejuvita theme image) and hero-supplied.webp (earlier photo).
   image: '/images/home/hero-clinic.webp',
+  // Phones only (below md): portrait clinic photo, 1170×2040, supplied 2026-11-04.
+  mobileImage: '/images/home/hero-mobile.webp',
   // Needs sign-off before launch (marked † in the doc): years in practice, transplant count, MD Gold Medalist,
   // DHI certification, ISHRS membership. The † marks are not shown on the page.
   ticker: [
