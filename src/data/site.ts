@@ -75,7 +75,7 @@ export const clinic = {
     addressCountry: 'IN',
     landmark: 'Beside BMW Deutsche Motoren',
   },
-  hours: { label: '10am–8pm, closed Tuesdays', days: ['Monday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '10:00', closes: '20:00' },
+  hours: { label: '10am–8pm, Tuesday Closed', days: ['Monday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '10:00', closes: '20:00' },
   // "Directions" links (footer, menu, contact, doctor pages): the Business Profile once `local` has it, otherwise an
   // address search.
   mapsHref: googleMapUrl ?? `https://www.google.com/maps/search/?api=1&query=${q}`,
