@@ -8,8 +8,8 @@ import { useReveal } from '../useReveal'
 // two share one background.
 // The theme's Swiper settings: infinite loop, 6 / 4 / 2 per view, 70 / 40 / 20px gap, autoplay with a 1000ms delay
 // after each move, speed 3500ms, pause on hover, stop for good once the user swipes (pause_on_interaction); no arrows
-// or dots. Slides are centred and the logos keep their natural size. Rebuilt here without Swiper, the same way as
-// HomePopular: three copies of the logos (the middle one is real; the clones are aria-hidden and inert), and an
+// or dots. Slides are centred. Where the theme tints its logos grey, ours are original-colour tiles (src/data/home.ts).
+// Rebuilt here without Swiper, the same way as HomePopular: three copies of the logos (the middle one is real; the clones are aria-hidden and inert), and an
 // unanimated jump back a copy when a move ends outside the middle.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 

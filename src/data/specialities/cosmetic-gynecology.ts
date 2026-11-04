@@ -229,6 +229,6 @@ export const gynaecology: HubSource = {
     'photos: the consultation photos show a female doctor, while the doctor card is Dr Sandeep; confirm the photos are suitable',
     'technology: the technology doc has no entry for this speciality, so the section is hidden',
     'banner: a consultation photo is used instead of the home pillar photo (a woman making a heart shape over her stomach), per the brief’s non-identifying imagery rule',
-    'doctor: portrait is the old-site placeholder (services/index.ts)',
+    'doctor: portrait is the old-site placeholder (doctors.json)',
   ],
 }

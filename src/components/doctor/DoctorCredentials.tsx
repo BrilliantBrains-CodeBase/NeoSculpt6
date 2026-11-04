@@ -58,8 +58,8 @@ export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
                 {recognition.map((r) => (
                   <li key={r.organisation} className="flex items-center gap-5">
                     {r.logo ? (
-                      // The logos are drawn for the dark theme (as in the home credentials strip): no plate behind them.
-                      <span className="flex h-[50px] w-[110px] shrink-0 items-center">
+                      // The credential logos are original-colour tiles (as in the home credentials strip).
+                      <span className="flex h-[72px] w-[110px] shrink-0 items-center">
                         <img
                           src={r.logo.src}
                           width={r.logo.width}

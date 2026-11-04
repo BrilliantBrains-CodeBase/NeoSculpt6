@@ -11,7 +11,7 @@ import { Parts, button, delay, eyebrow, h2 } from '../shared'
 // 9652eff > f250a0c, large photo with a drifting inset, text column), adds the education checklist and a teaching
 // ticker (the home Marquee), then a shorter mirrored block for Dr Saranya T.
 // The quote shows only once Dr Sandeep has approved it (`founder.quote.signedOff` in data/about.ts).
-// Dr Saranya's portrait is an initials circle until the clinic shoot is in, as on the home doctor cards.
+// Both doctors' details come from doctors.json (via data/about.ts); a doctor shows an initials circle until their portrait is approved.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 export function AboutFounder() {

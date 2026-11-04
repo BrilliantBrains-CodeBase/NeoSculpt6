@@ -1,6 +1,6 @@
 // Home page copy, one export per section. Source: content/home-page/homepage.md (section numbers match the doc).
 
-import { portraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
+import { founderDoctor, portraitFor, publicSocialLinks, publishedDoctors } from './doctors.ts'
 import { reviewsById } from './reviews.ts'
 
 // 1. Hero + credential ticker.
@@ -32,21 +32,18 @@ export const hero = {
   ],
 }
 
-// 3. Credentials logo strip. Logos are greyscale versions of each body's official logo, made by
-// scripts/make_credential_logos.py (sources: content/brand/credentials/sources.md); width and height are the 1x
-// display size the script prints. Needs sign-off before launch (marked † in the doc): ISHRS, AHRS, DHI Global; show a
-// logo only once the membership is confirmed. The doc says IAHRS; AHRS is used because it matches the old site's
-// badge and the doctor page, which the name must match exactly.
+// 3. Credentials logo strip. Each logo is the body's official artwork in its original colours (not the doc's
+// greyscale: client decision) on a tile made by scripts/make_credential_logos.py (sources:
+// content/brand/credentials/sources.md); all tiles display at 168x110. Needs sign-off before launch (marked † in the
+// doc): ISHRS, AHRS, DHI Global; show a logo only once the membership is confirmed. The doc says IAHRS; AHRS is used
+// because it matches the old site's badge and the doctor page, which the name must match exactly.
 export const credentials = {
   label: 'Credentials you can trust:',
-  logos: [
-    { name: 'International Society of Hair Restoration Surgery (ISHRS)', src: '/images/home/credentials/ishrs.webp', width: 140, height: 80 },
-    { name: 'Association of Hair Restoration Surgeons, India (AHRS)', src: '/images/home/credentials/ahrs.webp', width: 140, height: 80 },
-    { name: 'Indian Association of Dermatologists, Venereologists and Leprologists (IADVL)', src: '/images/home/credentials/iadvl.webp', width: 103, height: 100 },
-    { name: 'Association of Cutaneous Surgeons of India (ACSI)', src: '/images/home/credentials/acsi.webp', width: 150, height: 60 },
-    { name: 'International Society of Dermatology', src: '/images/home/credentials/isd.webp', width: 249, height: 60 },
-    { name: 'DHI Global, Greece', src: '/images/home/credentials/dhi-global.webp', width: 163, height: 50 },
-  ],
+  // Dr Sandeep's memberships in doctors.json, approved or not (About filters to the approved ones). The tile files are
+  // 2x, so they display at half their pixel size.
+  logos: founderDoctor.recognition.flatMap((r) =>
+    r.logo ? [{ name: r.organisation, src: r.logo.src, width: r.logo.width / 2, height: r.logo.height / 2 }] : [],
+  ),
 }
 
 // Stats counters, directly under the hero. The theme has 4; the doc's optional 5th (4,000+ Botox Treatments) needs
@@ -426,13 +423,9 @@ export const booking = {
   h2: [[{ text: 'Start With a Conversation,' }], [{ text: 'Not a Commitment', gold: true }]] as { text: string; gold?: boolean }[][],
   subline:
     "Tell us what you'd like to change. You'll meet the right specialist, understand every option and receive a clear written plan, then decide in your own time.",
-  // TODO: replace with a NeoSculpt6 clinic photo shot for this slot (same placeholder as the popup).
-  image: {
-    src: '/og/about-dr-sandeep-mahapatra.jpeg',
-    alt: 'Dr Sandeep Mahapatra in the NeoSculpt6 clinic, Whitefield',
-    width: 1122,
-    height: 1402,
-  },
+  // TODO: replace with a NeoSculpt6 clinic photo shot for this slot (same placeholder as the popup). Until then, the
+  // founder's portrait from doctors.json.
+  image: portraitFor(founderDoctor) ?? founderDoctor.hero.portrait,
 }
 
 // 10. Testimonials / Patient Stories. Real Google reviews, word for word, from the shared pool in src/data/reviews.ts

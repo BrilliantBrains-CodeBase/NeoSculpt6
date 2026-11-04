@@ -1,7 +1,7 @@
 import type { TemplateProps } from '../components/PageShell'
 import { recordByPath, relatedTo, formatDate, specialities, typeLabels, doctorFor } from '../data/editorial'
 import bodies from '../data/editorial-bodies.json'
-import { medicalReviewLine } from '../data/site'
+import { medicalReviewLine } from '../data/doctors'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SmartLink } from '../components/SmartLink'
 import { useReveal } from '../components/useReveal'

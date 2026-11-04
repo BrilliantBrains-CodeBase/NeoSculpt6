@@ -270,7 +270,7 @@ export const hair: HubSource = {
   pending: [
     ...sharedPending,
     'doctor: only "Hair Transplant Surgeon" and "Founder, NeoSculpt6" shown; years, transplant counts and degrees are † (about.ts)',
-    'doctor: portrait is the old-site placeholder (services/index.ts)',
+    'doctor: portrait is the old-site placeholder (doctors.json)',
     'ARTAS robotic is listed under "DHI, FUE, NFT & Robotic Options" and links to its technology page (no service page)',
   ],
 }

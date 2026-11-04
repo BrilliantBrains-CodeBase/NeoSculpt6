@@ -1,6 +1,6 @@
 // About page copy, one export per section. Source: content/about-us/about-us.md (template sections numbered 1–8,
-// extras lettered A–F, as in the doc). Shared facts are not copied here: the doctor cards and credential logos come from
-// home.ts, clinic details from site.ts and the booking dropdowns from nav.ts.
+// extras lettered A–F, as in the doc). Shared facts are not copied here: doctors come from doctors.json, the doctor cards
+// and credential logos from home.ts, clinic details from site.ts and the booking dropdowns from nav.ts.
 //
 // Sign-off (marked † in the doc): every † claim needs Dr Sandeep's confirmation before launch. As on the home page the
 // † is not shown and the claim is listed in comments here and by `npm run verify`. Three items the doc says must not be
@@ -13,6 +13,7 @@
 // Imports carry .ts: scripts/verify-seo.mjs loads this file in Node.
 
 import { credentials, doctors, pillars, signature, testimonials, type DoctorPortrait, type Testimonial } from './home.ts'
+import { approved, doctorBySlug, founderDoctor, portraitFor, qualificationLines, shortName } from './doctors.ts'
 import { reviewsById } from './reviews.ts'
 import { clinic } from './site.ts'
 
@@ -130,40 +131,33 @@ export const mission = {
   ],
 }
 
-// C. Founder spotlight. Needs sign-off (†): two decades, 10,000+ transplants, 18+ surgeons trained, 55+ specialists,
-// MBBS honours, MD Gold Medal, DHI Global and Allergan certifications, and the 7 published papers in the ticker.
-// The quote is shown only once Dr Sandeep approves it in his own words (`signedOff`).
+// C. Founder spotlight. Name, title, paragraph, qualifications, teaching, quote and portrait are his record in
+// doctors.json. Needs sign-off (†): two decades, 10,000+ transplants, 18+ surgeons trained, 55+ specialists, and the
+// entries below marked pending there. The checklist and ticker still show those pending entries, as they did before the
+// data moved; only the quote waits for its approval (`signedOff`).
+const founderRecord = founderDoctor
+const founderSummary = founderRecord.summary
+const founderPortrait = portraitFor(founderRecord)
+if (!founderSummary || !founderPortrait) throw new Error(`doctors.json: ${founderRecord.slug} needs a summary and an approved portrait for the About and home blocks`)
+const nameParts = (name: string): Part[] => {
+  const words = name.split(' ')
+  return [{ text: `${words.slice(0, -1).join(' ')} ` }, { text: words.at(-1)!, gold: true }]
+}
 export const founder = {
-  eyebrow: 'Founder & Lead Doctor',
-  h2: [{ text: 'Dr Sandeep ' }, { text: 'Mahapatra', gold: true }] as Part[],
-  title: 'Founder · Senior Consultant Dermatologist · Cosmetic Expert · Hair Transplant Surgeon',
-  text: 'For more than two decades Dr Sandeep has treated hair loss, skin and ageing concerns as medical problems first and cosmetic ones second. He developed the Neo Follicle Transplant (NFT) approach to graft handling and implantation, has performed 10,000+ hair transplants, and has trained 18+ surgeons — with 55+ specialists formed under his guidance.',
+  eyebrow: founderSummary.eyebrow ?? '',
+  h2: nameParts(founderRecord.displayName),
+  title: founderSummary.title,
+  text: founderSummary.text,
   quote: {
-    text: 'The right plan sometimes means a transplant, sometimes a treatment, and sometimes waiting. My job is to tell you which — honestly.',
-    signedOff: false,
+    text: founderRecord.quote.text ?? '',
+    signedOff: founderRecord.quote.approval === 'approved',
   },
-  cta: { label: "Read Dr Sandeep's Full Profile", href: '/about-dr-sandeep-mahapatra/' },
-  checklist: [
-    { title: 'MBBS (honours, gold medals in two subjects)', place: 'MGM Medical College, Jamshedpur' },
-    { title: 'MD Dermatology, Venereology & Leprosy (Gold Medalist)', place: 'RIMS, Ranchi' },
-    { title: 'Certified DHI Specialist', place: 'DHI Global, Greece' },
-    { title: 'Basic and advanced Botox and dermal filler certification', place: 'Allergan' },
-  ],
-  ticker: [
-    'Invited faculty: ISHRS World Congress, Denver 2024',
-    'EADV Congress, Geneva 2017 & Milan 2019',
-    'HAIRCON 2019 & 2025',
-    'DERMACON 2016–2025',
-    'World Congress of Cosmetic Dermatology',
-    '7 published papers on hair transplantation, FUE and PRF',
-  ],
+  cta: { label: `Read ${shortName(founderRecord)}'s Full Profile`, href: founderRecord.path },
+  // The entries that name where they were earned.
+  checklist: founderRecord.qualifications.filter((q) => q.institution).map((q) => ({ title: q.title, place: q.institution as string })),
+  ticker: founderRecord.teaching.map((t) => t.title),
   // Slot: Dr Sandeep's portrait (large) and a procedure room (inset).
-  portrait: {
-    src: '/og/about-dr-sandeep-mahapatra.jpeg',
-    width: 1122,
-    height: 1402,
-    alt: 'Dr Sandeep Mahapatra in a white coat, standing in a clinic room',
-  } as Image,
+  portrait: founderPortrait as Image,
   inset: {
     src: '/images/services/hair-transplant-restoration/dhi-hair-transplant-in-bangalore-4.webp',
     width: 900,
@@ -172,29 +166,18 @@ export const founder = {
   } as Image,
 }
 
-// C (continued). Dr Saranya T, the shorter mirrored block. Her portrait shows initials until the clinic shoot is in
-// (same rule as the home doctor cards).
+// C (continued). Dr Saranya T, the shorter mirrored block, from her record in doctors.json.
+const saranyaRecord = doctorBySlug('dr-saranya-t')
+if (!saranyaRecord.summary) throw new Error('doctors.json: dr-saranya-t needs a summary for the About block')
 export const saranya = {
-  name: 'Dr Saranya T',
-  title: 'Consultant Plastic & Reconstructive Surgeon',
-  qualifications: [
-    'MBBS (Madras Medical College)',
-    'DNB General Surgery (Sundaram Medical Foundation)',
-    'M.Ch Plastic & Reconstructive Surgery (Kilpauk Government Medical College, Chennai)',
-  ],
-  text: "Dr Saranya leads NeoSculpt6's surgical care — face, breast and body. Her training spans aesthetic and reconstructive surgery, liposuction, abdominoplasty, gynaecomastia, rhinoplasty and breast surgery, so every surgical plan starts with anatomy, safety and a realistic picture of recovery.",
-  chips: [
-    'Rhinoplasty',
-    'Facelift & eyelid surgery',
-    'Liposuction',
-    'Tummy tuck',
-    'Gynaecomastia',
-    'Breast surgery',
-    'Post-pregnancy body',
-  ],
-  cta: { label: 'Meet Dr Saranya', href: '/dr-saranya-t/' },
-  initials: 'ST',
-  portrait: null as DoctorPortrait | null,
+  name: saranyaRecord.displayName,
+  title: saranyaRecord.summary.title,
+  qualifications: qualificationLines(saranyaRecord),
+  text: saranyaRecord.summary.text,
+  chips: saranyaRecord.expertise.map((x) => x.title),
+  cta: { label: `Meet ${shortName(saranyaRecord)}`, href: saranyaRecord.path },
+  initials: saranyaRecord.initials,
+  portrait: portraitFor(saranyaRecord) as DoctorPortrait | null,
 }
 
 // 3. Our Professional Team. The cards are the home page's (`doctors.cards`: every published doctor), laid out by DoctorGrid.
@@ -248,24 +231,16 @@ export const reviews = {
   items: reviewsById(['parth-g', 'pravat-k', 'aakarshan-s', 'neha-c']) as Testimonial[],
 }
 
-// E. Memberships, teaching and Neo Group. The logos are the home strip's; About shows only the memberships in
-// `confirmed`. ISHRS, AHRS (the doc says "IAHRS / AHRS"; the old site and doctor page use AHRS, India) and DHI Global
-// are † and are added here once Dr Sandeep confirms them. The same list feeds the Physician `memberOf` schema.
+// E. Memberships, teaching and Neo Group. The memberships are Dr Sandeep's `recognition` in doctors.json: About shows the
+// approved ones. ISHRS, AHRS (the doc says "IAHRS / AHRS"; the old site and doctor page use AHRS, India) and DHI Global
+// are † and appear once they are approved there. The logos are the home strip's.
 // The Neo Follicle crossing date is † and is shown only once `signedOff`.
 const neoFollicle = clinic.sisterClinics.find((c) => c.name.startsWith('Neo Follicle'))!
 const neoFertility = clinic.sisterClinics.find((c) => c.name === 'Neo Fertility')!
 export const memberships = {
   label: 'Memberships & Recognition',
-  confirmed: [
-    'Indian Association of Dermatologists, Venereologists and Leprologists (IADVL)',
-    'Association of Cutaneous Surgeons of India (ACSI)',
-    'International Society of Dermatology',
-  ],
-  pending: [
-    'International Society of Hair Restoration Surgery (ISHRS)',
-    'Association of Hair Restoration Surgeons, India (AHRS)',
-    'DHI Global, Greece',
-  ],
+  confirmed: approved(founderRecord.recognition).map((r) => r.organisation),
+  pending: founderRecord.recognition.filter((r) => r.approval !== 'approved').map((r) => r.organisation),
   h3: [{ text: 'Part of ' }, { text: 'Neo Group', gold: true }] as Part[],
   group: [
     {
@@ -306,7 +281,7 @@ export const faqs = {
     },
     {
       q: 'Where is NeoSculpt6 and when is it open?',
-      a: '2nd floor, above Honda Big Wings, Sadaramangala, Whitefield Main Road, Bangalore 560066, beside BMW Deutsche Motoren. Open Monday to Saturday, 7am to 7pm.',
+      a: '2nd floor, above Honda Big Wings, Sadaramangala, Whitefield Main Road, Bangalore 560066, beside BMW Deutsche Motoren. Open 10am to 8pm every day except Tuesday.',
     },
   ],
 }
@@ -319,24 +294,3 @@ export const booking = {
 
 // 7. Instagram feed: the site-wide strip, shared with the service pages; data in site.ts.
 export { instagram } from './site.ts'
-
-// Schema (src/components/Seo.tsx). Credentials are listed only once verified; Dr Sandeep's degrees and certifications
-// are all † and stay out of the schema until signed off. Dr Saranya's are not marked † in the doc.
-export const physicians = [
-  {
-    name: 'Dr Sandeep Mahapatra',
-    href: '/about-dr-sandeep-mahapatra/',
-    specialty: 'Dermatology',
-    jobTitle: 'Senior Consultant Dermatologist and Hair Transplant Surgeon',
-    credentials: [] as string[],
-    memberOf: memberships.confirmed,
-  },
-  {
-    name: 'Dr Saranya T',
-    href: '/dr-saranya-t/',
-    specialty: 'PlasticSurgery',
-    jobTitle: 'Consultant Plastic & Reconstructive Surgeon',
-    credentials: saranya.qualifications,
-    memberOf: [] as string[],
-  },
-]

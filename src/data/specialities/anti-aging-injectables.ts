@@ -273,6 +273,6 @@ export const antiAgeing: HubSource = {
     ...sharedPending,
     'product names (Botox, Profhilo, Skin Vive, PDRN, Salmon DNA and others) and their indications need doctor and brand approval',
     'medical sign-off: body fillers and IV drips (breast and buttock fillers, glutathione, NAD) wording',
-    'doctor: portrait is the old-site placeholder (services/index.ts)',
+    'doctor: portrait is the old-site placeholder (doctors.json)',
   ],
 }

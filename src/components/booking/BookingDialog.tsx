@@ -32,10 +32,10 @@ export function BookingDialog() {
         <div className="hidden w-2/5 shrink-0 xl:block">
           {/* TODO: replace with a NeoSculpt6 clinic photo shot for this slot. */}
           <img
-            src="/og/about-dr-sandeep-mahapatra.jpeg"
-            alt="Dr Sandeep Mahapatra in the NeoSculpt6 clinic, Whitefield"
-            width={1122}
-            height={1402}
+            src={booking.image.src}
+            alt={booking.image.alt}
+            width={booking.image.width}
+            height={booking.image.height}
             className="size-full object-cover"
           />
         </div>

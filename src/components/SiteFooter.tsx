@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { clinic, footerNav, legalNav, medicalReviewLine } from '../data/site'
+import { clinic, footerNav, legalNav } from '../data/site'
+import { medicalReviewLine } from '../data/doctors'
 import { useReveal } from './useReveal'
 import { SmartLink } from './SmartLink'
 import { FacebookIcon, InstagramIcon, LinkedInIcon, MailIcon, PhoneIcon, XIcon, YoutubeIcon } from './icons'

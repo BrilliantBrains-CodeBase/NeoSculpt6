@@ -275,6 +275,6 @@ export const slimming: HubSource = {
     ...sharedPending,
     'medical sign-off: the GLP-1, Mounjaro and Ozempic wording (prescription medicines, suitability, monitoring) needs a doctor’s review',
     '"Liposuction & Surgical Contouring" links the Cosmetic Surgery pages (no slimming page covers surgery)',
-    'doctors: Dr Saranya T has no portrait; Dr Sandeep’s is the old-site placeholder',
+    'doctors: Dr Sandeep’s portrait is the old-site placeholder (doctors.json)',
   ],
 }

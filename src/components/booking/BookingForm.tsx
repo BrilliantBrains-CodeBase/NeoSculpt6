@@ -19,7 +19,7 @@ const label = 'mb-2 block type-accent font-medium text-secondary uppercase'
 const field =
   'block h-[52px] w-full rounded-[7px] border border-border bg-border px-5 text-small text-text placeholder:text-text/70 transition-colors duration-300 outline-none focus:border-primary focus-visible:border-primary aria-invalid:border-primary'
 const errorText = 'mt-2 text-meta text-primary'
-const hours = ['07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+const hours = ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19']
 const minutes = ['00', '15', '30', '45']
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'date', string>>

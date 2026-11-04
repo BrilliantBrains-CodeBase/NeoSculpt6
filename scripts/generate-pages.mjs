@@ -20,7 +20,7 @@ import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, ogTypeFor } from '../src/data/si
 import { hubs } from '../src/data/hubs.ts'
 import { specialityByPath } from '../src/data/specialities/index.ts'
 import { hero as homeHero } from '../src/data/home.ts'
-import { publishedDoctors, doctorByPath, portraitFor } from '../src/data/doctors.ts'
+import { publishedDoctors, doctorByPath, portraitFor, founderDoctor } from '../src/data/doctors.ts'
 import { pageRecords, buildDate } from '../src/data/editorial.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
@@ -66,8 +66,8 @@ const ABOUT = {
   description:
     'Hair restoration, skin and laser, anti-ageing, cosmetic surgery, body contouring and intimate care under one doctor-led clinic in Whitefield, Bangalore.',
   h1: 'Care Planned Around You',
-  ogImage: '/og/about-dr-sandeep-mahapatra.jpeg',
-  ogImageAlt: 'Dr Sandeep Mahapatra, founder of NeoSculpt6, in a clinic consultation room',
+  ogImage: founderDoctor.seo.ogImage,
+  ogImageAlt: founderDoctor.hero.portrait.alt,
 }
 
 // Contact page SEO: the fallback title and description in content/contact/prompts/contact-us-page.md ("SEO and

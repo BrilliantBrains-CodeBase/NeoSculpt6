@@ -273,6 +273,6 @@ export const laserSkin: HubSource = {
     ...sharedPending,
     'no vascular-laser page exists in service-page.md, so the hair group covers hair only; add one if the clinic offers it',
     'technology: CO2 and Q-Switch card photos are old-site placeholders (technology hub)',
-    'doctor: portrait is the old-site placeholder (services/index.ts)',
+    'doctor: portrait is the old-site placeholder (doctors.json)',
   ],
 }

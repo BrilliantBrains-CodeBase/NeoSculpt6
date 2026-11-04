@@ -15,10 +15,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { imageSize } from './image-size.mjs'
-import { doctors, publishedDoctors, pendingItems } from '../src/data/doctors.ts'
+import { doctors, publishedDoctors, pendingItems, portraitFor, profileHref } from '../src/data/doctors.ts'
 import { primaryNav } from '../src/data/nav.ts'
 import { doctors as homeDoctors } from '../src/data/home.ts'
-import { physicians } from '../src/data/about.ts'
+import { technologyPages } from '../src/data/technology/index.ts'
 import { servicesByPath } from '../src/data/services/index.ts'
 import { specialityByPath } from '../src/data/specialities/index.ts'
 
@@ -75,13 +75,35 @@ for (const d of doctors) {
   }
 }
 
+// Every doctor card on a service, technology or hub page shows the record's own facts, not a copy of them.
+const pageCards = [...servicesByPath.values(), ...technologyPages, ...specialityByPath.values()].flatMap((pg) => (pg.doctors?.cards ?? []).map((c) => [pg.path, c]))
+for (const [p, c] of pageCards) {
+  const d = doctors.find((x) => x.displayName === c.name)
+  if (!d) {
+    fail(p, `doctor card "${c.name}" has no record in doctors.json`)
+    continue
+  }
+  if (c.specialty !== d.role) fail(p, `${c.name}: card title "${c.specialty}" is not the record's role "${d.role}"`)
+  if (c.initials !== d.initials) fail(p, `${c.name}: card initials "${c.initials}" are not the record's "${d.initials}"`)
+  if (c.href !== profileHref(d)) fail(p, `${c.name}: card links to ${c.href}, the record says ${profileHref(d)}`)
+  if ((c.portrait?.src ?? null) !== (portraitFor(d)?.src ?? null)) fail(p, `${c.name}: card portrait ${c.portrait?.src} is not the record's ${portraitFor(d)?.src}`)
+}
+
+// No page data or component keeps its own copy of a doctor's portrait path: those come from doctors.json.
+const portraitPaths = doctors.flatMap((d) => [d.hero.portrait.src, d.cardPortrait?.src].filter(Boolean))
+const sourceFiles = (dir) =>
+  fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? sourceFiles(path.join(dir, e.name)) : /\.tsx?$/.test(e.name) ? [path.join(dir, e.name)] : []))
+for (const file of sourceFiles(path.join(ROOT, 'src'))) {
+  const text = fs.readFileSync(file, 'utf8')
+  for (const src of portraitPaths) if (text.includes(src)) fail(path.relative(ROOT, file), `hard-codes the doctor portrait ${src}; read it from doctors.ts`)
+}
+
 // The rest of the site's doctor links must resolve to a published record (no links to removed or draft profiles).
 const published = new Map(publishedDoctors.map((d) => [d.path, d]))
 const elsewhere = [
   ...primaryNav.flatMap((i) => i.children ?? []).filter((c) => published.has(c.href) || /\/dr-|doctor/.test(c.href)).map((c) => ['menu', c.label, c.href]),
   ...homeDoctors.cards.map((c) => ['home doctor card', c.name, c.href]),
-  ...physicians.map((c) => ['About schema', c.name, c.href]),
-  ...[...servicesByPath.values(), ...specialityByPath.values()].flatMap((pg) => (pg.doctors?.cards ?? []).filter((c) => c.href).map((c) => [`${pg.path} doctor card`, c.name, c.href])),
+  ...pageCards.filter(([, c]) => c.href).map(([p, c]) => [`${p} doctor card`, c.name, c.href]),
 ]
 const seen = new Set()
 for (const [where, name, href] of elsewhere) {

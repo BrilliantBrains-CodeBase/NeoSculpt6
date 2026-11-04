@@ -16,12 +16,12 @@ import {
   sameAs,
   xHandle,
 } from '../data/site'
-import { faqs, physicians } from '../data/about'
+import { faqs } from '../data/about'
 import { hero as homeHero } from '../data/home'
 import { servicesByPath } from '../data/services'
 import { LIVE, technologyByPath } from '../data/technology'
 import { specialityByPath, specialityHubs } from '../data/specialities'
-import { approved, doctorByPath, portraitFor, publicSocialLinks } from '../data/doctors'
+import { approved, doctorByPath, founderDoctor, portraitFor, publicSocialLinks, type Doctor } from '../data/doctors'
 import type { Faq } from '../data/services/types'
 import { cardHref, doctorFor, publicRecords, recordByPath } from '../data/editorial'
 import { publishedDoctors } from '../data/doctors'
@@ -37,8 +37,7 @@ const ORG_ID = `${SITE_URL}/#organization`
 const CLINIC_ID = `${SITE_URL}/#clinic`
 
 // The founder, linked to his profile page's Physician node.
-const founderDoc = physicians.find((d) => d.href === '/about-dr-sandeep-mahapatra/')
-const founder = founderDoc ? { '@type': 'Physician', '@id': `${abs(founderDoc.href)}#physician`, name: founderDoc.name, url: abs(founderDoc.href) } : null
+const founder = { '@type': 'Physician', '@id': `${abs(founderDoctor.path)}#physician`, name: founderDoctor.displayName, url: abs(founderDoctor.path) }
 
 const contactPoint = {
   '@type': 'ContactPoint',
@@ -62,7 +61,7 @@ function organization() {
     email: clinic.email,
     telephone: clinic.phoneE164,
     contactPoint,
-    ...(founder ? { founder } : {}),
+    founder,
     ...(sameAs.length ? { sameAs } : {}),
   }
 }
@@ -105,28 +104,48 @@ function medicalClinic() {
     availableService: specialityHubs.map((h) => ({ '@type': 'MedicalProcedure', name: pageByPath.get(h.path)?.name ?? h.path, url: abs(h.path) })),
     isAcceptingNewPatients: true,
     contactPoint,
-    ...(founder ? { founder } : {}),
+    founder,
     ...(sameAs.length ? { sameAs } : {}),
   }
 }
 
-// A doctor named on the page. Only signed-off credentials and memberships are listed (see `physicians` in
-// src/data/about.ts), and only on pages that show them (`credentials: false` leaves both out).
-function physicianNode(doc: (typeof physicians)[number], { credentials = true } = {}) {
+// A doctor named on the page, from their doctors.json record, so the node is the same wherever its @id appears.
+// `details` adds the portrait, approved credentials and memberships, and social profiles, for pages that show them.
+function physicianNode(doctor: Doctor, { details = false } = {}) {
+  const url = abs(doctor.path)
+  const portrait = portraitFor(doctor)
+  const credentials = approved(doctor.qualifications)
+  const memberships = approved(doctor.recognition)
+  const social = publicSocialLinks(doctor)
   return {
     '@type': 'Physician',
-    '@id': `${abs(doc.href)}#physician`,
-    name: doc.name,
-    url: abs(doc.href),
-    jobTitle: doc.jobTitle,
-    medicalSpecialty: `https://schema.org/${doc.specialty}`,
+    '@id': `${url}#physician`,
+    name: doctor.displayName,
+    url,
+    jobTitle: doctor.role,
+    medicalSpecialty: `https://schema.org/${doctor.schemaSpecialty}`,
     worksFor: { '@id': CLINIC_ID },
-    ...(credentials && doc.credentials.length
-      ? { hasCredential: doc.credentials.map((name) => ({ '@type': 'EducationalOccupationalCredential', name })) }
+    ...(details && portrait ? { image: abs(portrait.src) } : {}),
+    ...(details && credentials.length
+      ? {
+          hasCredential: credentials.map((q) => ({
+            '@type': 'EducationalOccupationalCredential',
+            name: q.title,
+            ...(q.institution ? { recognizedBy: { '@type': 'Organization', name: q.institution } } : {}),
+          })),
+        }
       : {}),
-    ...(credentials && doc.memberOf.length ? { memberOf: doc.memberOf.map((name) => ({ '@type': 'Organization', name })) } : {}),
+    ...(details && memberships.length ? { memberOf: memberships.map((r) => ({ '@type': 'Organization', name: r.organisation })) } : {}),
+    ...(details && social.length ? { sameAs: social.map((x) => x.href) } : {}),
   }
 }
+
+// The Physician nodes for a page's doctor cards, for doctors with a profile page.
+const cardPhysicians = (cards: { href: string | null }[]) =>
+  cards.flatMap((card) => {
+    const doctor = card.href ? doctorByPath.get(card.href) : undefined
+    return doctor ? [physicianNode(doctor)] : []
+  })
 
 // FAQPage from the same strings the page shows.
 function faqPage(canonical: string, items: Faq[]) {
@@ -175,22 +194,15 @@ function jsonLd(page: RoutePage, canonical: string) {
     // live on the profile pages, where they are shown). No rating markup.
     graph.push(
       medicalClinic(),
-      ...publishedDoctors.map((d) => ({
-        '@type': 'Physician',
-        '@id': `${abs(d.path)}#physician`,
-        name: d.displayName,
-        url: abs(d.path),
-        jobTitle: d.role,
-        medicalSpecialty: `https://schema.org/${d.schemaSpecialty}`,
-        worksFor: { '@id': CLINIC_ID },
-      })),
+      ...publishedDoctors.map((d) => physicianNode(d)),
     )
   }
   if (page.type === 'about') {
-    // about-us.md "Page SEO": AboutPage · MedicalClinic · Physician × 2 · FAQPage. The FAQ text is the same strings the
+    // about-us.md "Page SEO": AboutPage · MedicalClinic · a Physician for every doctor on the team · FAQPage. Doctors with
+    // an About block (a `summary`) show their facts here, so their nodes list them. The FAQ text is the same strings the
     // page shows (src/data/about.ts). No rating markup until the Google rating is verified.
     webpage['@type'] = ['WebPage', 'AboutPage']
-    graph.push(medicalClinic(), ...physicians.map((doc) => physicianNode(doc)), faqPage(canonical, faqs.items))
+    graph.push(medicalClinic(), ...publishedDoctors.map((d) => physicianNode(d, { details: d.summary !== null })), faqPage(canonical, faqs.items))
   }
   if (page.type === 'contact') {
     // contact-us-page.md: ContactPage · MedicalClinic (name, address, phone, email, hours from site.ts). No map or
@@ -202,7 +214,7 @@ function jsonLd(page: RoutePage, canonical: string) {
   if (service) {
     // service-page.md: FAQPage for the visible FAQs; a Physician for each doctor the page shows, without credentials
     // or memberships (the page's chips are pending sign-off and it shows no memberships). MedicalWebPage is a WebPage
-    // subtype. No rating or review markup until the reviews are verified. A doctor not in `physicians` (Dr Lavanyaa M,
+    // subtype. No rating or review markup until the reviews are verified. A doctor with no published profile (Dr Lavanyaa M,
     // who has no profile page) gets name, the page's speciality line and the clinic only.
     webpage['@type'] = 'MedicalWebPage'
     // The treatment itself, which the page is about.
@@ -236,13 +248,12 @@ function jsonLd(page: RoutePage, canonical: string) {
       procedure,
       medicalClinic(),
       ...service.doctors.cards.map((card) => {
-        const known = physicians.find((d) => d.name === card.name)
-        if (known) return physicianNode(known, { credentials: false })
+        const known = card.href ? doctorByPath.get(card.href) : undefined
+        if (known) return physicianNode(known)
         return {
           '@type': 'Physician',
-          '@id': card.href ? `${abs(card.href)}#physician` : `${canonical}#physician-${card.initials.toLowerCase()}`,
+          '@id': `${canonical}#physician-${card.initials.toLowerCase()}`,
           name: card.name,
-          ...(card.href ? { url: abs(card.href) } : {}),
           jobTitle: card.specialty,
           worksFor: { '@id': CLINIC_ID },
         }
@@ -259,10 +270,7 @@ function jsonLd(page: RoutePage, canonical: string) {
     if (tech.kind === 'technology-detail' || tech.kind === 'artas-detail') webpage['@type'] = 'MedicalWebPage'
     graph.push(
       medicalClinic(),
-      ...tech.doctors.cards.flatMap((card) => {
-        const known = physicians.find((d) => d.href === card.href)
-        return known ? [physicianNode(known, { credentials: false })] : []
-      }),
+      ...cardPhysicians(tech.doctors.cards),
       ...('faqs' in tech ? [faqPage(canonical, tech.faqs.items)] : []),
     )
   }
@@ -280,10 +288,7 @@ function jsonLd(page: RoutePage, canonical: string) {
     }
     graph.push(
       medicalClinic(),
-      ...hub.doctors.cards.flatMap((card) => {
-        const known = physicians.find((d) => d.href === card.href)
-        return known ? [physicianNode(known, { credentials: false })] : []
-      }),
+      ...cardPhysicians(hub.doctors.cards),
       ...(hub.faqsApproved ? [faqPage(canonical, hub.faqs.items)] : []),
     )
   }
@@ -300,31 +305,7 @@ function jsonLd(page: RoutePage, canonical: string) {
     // memberships, portrait and social profiles appear only once signed off. No rating, review or statistics markup.
     webpage['@type'] = ['WebPage', 'ProfilePage']
     webpage.mainEntity = { '@id': `${canonical}#physician` }
-    const portrait = portraitFor(doctor)
-    const credentials = approved(doctor.qualifications)
-    const memberships = approved(doctor.recognition)
-    const social = publicSocialLinks(doctor)
-    graph.push(medicalClinic(), {
-      '@type': 'Physician',
-      '@id': `${canonical}#physician`,
-      name: doctor.displayName,
-      url: canonical,
-      jobTitle: doctor.role,
-      medicalSpecialty: `https://schema.org/${doctor.schemaSpecialty}`,
-      worksFor: { '@id': CLINIC_ID },
-      ...(portrait ? { image: abs(portrait.src) } : {}),
-      ...(credentials.length
-        ? {
-            hasCredential: credentials.map((q) => ({
-              '@type': 'EducationalOccupationalCredential',
-              name: q.title,
-              ...(q.institution ? { recognizedBy: { '@type': 'Organization', name: q.institution } } : {}),
-            })),
-          }
-        : {}),
-      ...(memberships.length ? { memberOf: memberships.map((r) => ({ '@type': 'Organization', name: r.organisation })) } : {}),
-      ...(social.length ? { sameAs: social.map((s) => s.href) } : {}),
-    })
+    graph.push(medicalClinic(), physicianNode(doctor, { details: true }))
   }
   if (page.type === 'journal') {
     // Journal hub: a CollectionPage listing every public item, newest first, as on the page. Media items point at

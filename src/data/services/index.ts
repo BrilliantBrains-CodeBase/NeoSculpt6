@@ -17,7 +17,7 @@ import parsedJson from './parsed.json' with { type: 'json' }
 import photosJson from './photos.json' with { type: 'json' }
 import newPhotosJson from './new-photos.json' with { type: 'json' }
 import videosJson from './videos.json' with { type: 'json' }
-import { doctors } from '../home.ts'
+import { doctorNamed, portraitFor, profileHref } from '../doctors.ts'
 import { reviewsForPath } from '../reviews.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
@@ -57,14 +57,6 @@ export const reception: ServiceImage = {
   alt: 'The NeoSculpt6 reception: a marble front desk under the NeoSculpt 6 logo, with sofas and plants',
 }
 
-// TODO: placeholder (old-site photo, as on the About page); replace with the approved portrait.
-const sandeepPortrait: ServiceImage = {
-  src: '/og/about-dr-sandeep-mahapatra.jpeg',
-  width: 1122,
-  height: 1402,
-  alt: 'Dr Sandeep Mahapatra in a white coat, standing in a clinic room',
-}
-
 // The doc's buttons are labels only. "Call …" rings the clinic, a cost or estimate button goes to the page's cost
 // section, and every other one (book, assess, ask) opens the booking popup.
 function cta(label: string): Cta {
@@ -73,27 +65,12 @@ function cta(label: string): Cta {
   return { label, action: 'book' }
 }
 
-// The doctors the docs name ("Dr Sandeep Mahapatra" / "Dr. Sandeep", "Dr. Saranya", "Dr. Lavanyaa M"): name, profile
-// and portrait. Dr Sandeep and Dr Saranya are the home page's doctor cards; Dr Lavanyaa M is new in the 2026-10
-// Blepharoplasty and Chin Augmentation doc, with no profile page (removed until her profile is signed off) and no
-// portrait yet, so her card has no profile link.
-const homeCard = (name: string) => {
-  const card = doctors.cards.find((c) => c.name === name)
-  if (!card) throw new Error(`no home doctor card for ${name}`)
-  return card
-}
-const DOCTORS = [
-  { match: /sandeep/i, ...pick(homeCard('Dr Sandeep Mahapatra')), portrait: sandeepPortrait as ServiceImage | null },
-  { match: /saranya/i, ...pick(homeCard('Dr Saranya T')), portrait: null },
-  { match: /lavanyaa/i, name: 'Dr Lavanyaa M', href: null as string | null, initials: 'LM', portrait: null },
-]
-function pick({ name, href, initials }: { name: string; href: string; initials: string }) {
-  return { name, href, initials }
-}
+// The doctor a doc names ("Dr Sandeep Mahapatra", "Dr. Sandeep", "Dr. Saranya", "Dr. Lavanyaa M"), from doctors.json:
+// name, profile, initials, title and portrait. The doc only decides who is on the page and its own words about them.
+// A doctor with no published profile (Dr Lavanyaa M is a draft) gets a card with no profile link.
 export function doctorFor(docName: string) {
-  const d = DOCTORS.find((x) => x.match.test(docName))
-  if (!d) throw new Error(`a service doc names an unknown doctor: ${docName}`)
-  return d
+  const d = doctorNamed(docName)
+  return { name: d.displayName, href: profileHref(d), initials: d.initials, role: d.role, portrait: portraitFor(d) as ServiceImage | null }
 }
 
 // Links a later doc asks for on a page it does not otherwise change. Blepharoplasty-and-Chin-Augmentation.md: list
@@ -172,7 +149,7 @@ function build(p: Parsed): ServiceContent {
       href: who.href,
       initials: who.initials,
       portrait: who.portrait,
-      specialty: d.specialty,
+      specialty: who.role,
       chips: d.chips,
       profileLabel: d.button.split('→')[0].trim() || 'Know More',
       blockEyebrow: d.blockEyebrow,

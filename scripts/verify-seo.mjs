@@ -486,7 +486,7 @@ const aboutLd = parseHead(fs.existsSync(fileFor('/about-us/')) ? fs.readFileSync
 const aboutGraph = JSON.parse(aboutLd)['@graph'] ?? []
 const ldTypes = aboutGraph.flatMap((n) => [n['@type']].flat())
 for (const t of ['AboutPage', 'MedicalClinic', 'FAQPage']) if (!ldTypes.includes(t)) fail('about', `JSON-LD has no ${t}`)
-if (ldTypes.filter((t) => t === 'Physician').length !== 2) fail('about', 'JSON-LD: expected 2 Physician nodes')
+if (ldTypes.filter((t) => t === 'Physician').length !== publishedDoctors.length) fail('about', `JSON-LD: expected ${publishedDoctors.length} Physician nodes`)
 const faqLd = aboutGraph.find((n) => n['@type'] === 'FAQPage')?.mainEntity ?? []
 if (JSON.stringify(faqLd.map((e) => [e.name, e.acceptedAnswer.text])) !== JSON.stringify(about.faqs.items.map((f) => [f.q, f.a]))) {
   fail('about', 'FAQPage schema does not match the visible FAQ')
@@ -508,7 +508,7 @@ const aboutPending = [
   ...about.memberships.group.filter((g) => g.claim && !g.claim.signedOff).map((g) => `${g.name}: "${g.claim.text}" (hidden)`),
   ...(about.instagram.handle ? [] : ['NeoSculpt6 Instagram handle and profile URL']),
   ...about.reviews.items.filter((r) => !(r.quote && r.author && r.consent)).map((r) => `About review about ${r.lookFor} (quote, name, treatment, consent)`),
-  'Placeholder photos (old-site images): banner, story ×3, founder portrait + inset, clinic image, Instagram ×6; Dr Saranya portrait',
+  'Placeholder photos (old-site images): banner, story ×3, founder portrait + inset, clinic image, Instagram ×6',
 ]
 
 // Free AI hair assessment (/hair-assessment/, src/templates/AssessmentTemplate.tsx): prerendered with one H1 matching

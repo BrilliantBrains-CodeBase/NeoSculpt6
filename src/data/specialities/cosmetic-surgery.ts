@@ -265,7 +265,7 @@ export const cosmeticSurgery: HubSource = {
   pending: [
     ...sharedPending,
     'doctor: Dr Lavanyaa M (blepharoplasty, chin augmentation) is not shown until her credentials, portrait and profile page are signed off',
-    'doctors: Dr Saranya T has no portrait; Dr Sandeep’s is the old-site placeholder',
+    'doctors: Dr Sandeep’s portrait is the old-site placeholder (doctors.json)',
     'vitiligo pages (Dr Sandeep) are grouped here because service-page.md lists them under Cosmetic Surgery; confirm they belong on this hub',
   ],
 }

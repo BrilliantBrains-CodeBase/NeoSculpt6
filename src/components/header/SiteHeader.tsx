@@ -5,6 +5,7 @@ import { useBooking } from '../booking/BookingContext'
 import { useReveal } from '../useReveal'
 import { Logo } from '../Logo'
 import { BurgerIcon, PhoneIcon } from '../icons'
+import { AnnouncementBar } from './AnnouncementBar'
 import { DesktopNav } from './DesktopNav'
 import { MobileMenu } from './MobileMenu'
 
@@ -32,25 +33,7 @@ export function SiteHeader() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-[99]">
-      {/* Announcement bar (theme container 1cb50bcb): bg `text`, meta text in `alternate`, accent link. */}
-      <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-[5px] bg-text px-5 py-[9px] text-center md:px-[30px] xl:px-10">
-        <p className="text-meta font-medium text-alternate">
-          Whitefield, Bangalore
-          <span aria-hidden="true"> · </span>
-          {clinic.hours.label}
-          <span aria-hidden="true"> · </span>
-          <a href={clinic.phoneHref} className="whitespace-nowrap transition-colors duration-300 hover:text-accent focus-visible:text-accent">
-            {clinic.phone}
-          </a>
-        </p>
-        <button
-          type="button"
-          onClick={openBooking}
-          className="text-button font-semibold text-accent uppercase transition-colors duration-300 hover:text-primary focus-visible:text-primary"
-        >
-          Book Consultation
-        </button>
-      </div>
+      <AnnouncementBar />
 
       {/* Main row (theme container 2bdc658f). `relative` anchors the Specialities mega-menu. */}
       <div className="relative flex items-center px-5 py-5 md:min-h-[92px] md:px-[30px] md:py-[25px] xl:min-h-[94px] xl:px-10">

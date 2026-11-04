@@ -66,7 +66,7 @@ export const clinic = {
   // The mobile bar's "AI Analysis": the free AI hair assessment page (src/templates/AssessmentTemplate.tsx). An
   // https:// URL here would open in a new tab instead; blank falls back to Find My Treatment.
   aiAnalysisHref: '/hair-assessment/',
-  email: 'Support@neosculpt6.com',
+  email: 'info@neosculpt6.com',
   address: {
     streetAddress: '2nd floor, above Honda Big Wings, Sadaramangala Village, Whitefield Main Road',
     addressLocality: 'Bangalore',
@@ -75,7 +75,7 @@ export const clinic = {
     addressCountry: 'IN',
     landmark: 'Beside BMW Deutsche Motoren',
   },
-  hours: { label: 'Mon–Sat: 7am–7pm', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '07:00', closes: '19:00' },
+  hours: { label: '10am–8pm, closed Tuesdays', days: ['Monday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '10:00', closes: '20:00' },
   // "Directions" links (footer, menu, contact, doctor pages): the Business Profile once `local` has it, otherwise an
   // address search.
   mapsHref: googleMapUrl ?? `https://www.google.com/maps/search/?api=1&query=${q}`,
@@ -88,7 +88,7 @@ export const clinic = {
   areasServed: ['Whitefield', 'ITPL', 'Mahadevapura', 'Brookefield', 'KR Puram', 'Marathahalli', 'Hoskote'],
   // TODO (client): the real profile URLs. The footer and the mobile Follow sheet show an icon only once its URL is
   // filled in, and only filled-in URLs reach schema.org sameAs and llms.txt.
-  social: { facebook: '', instagram: '', youtube: '', linkedin: '', x: '' },
+  social: { facebook: 'https://www.facebook.com/profile.php?id=61596274587019', instagram: 'https://www.instagram.com/neosculpt6/', youtube: '', linkedin: '', x: '' },
   // TODO (client): directory listings such as Practo and Justdial (schema.org sameAs only, no footer icon).
   otherProfiles: [] as string[],
   // Footer row.
@@ -122,9 +122,6 @@ export const legalNav = [
   { label: 'Terms of Use', href: '/terms-of-use/' },
 ]
 
-export const medicalReviewLine =
-  'Content written and medically reviewed under the guidance of Dr Sandeep Mahapatra, MD Dermatology. For patient education; it does not replace an in-person consultation.'
-
 // Instagram strip above the footer (About section 7 and every service page). No live feed integration exists, so this
 // is a curated set. Needs sign-off: the NeoSculpt6 handle (shown as a pending chip while `handle` is null) and its
 // profile URL; tiles link to `href` (or their own post) only once one is set. Never use the theme's model tiles. Each `subject` is the photo the slot is for; the alt text describes
@@ -132,8 +129,8 @@ export const medicalReviewLine =
 export const instagram = {
   // Site-wide switch: false hides the strip on every page (turned off for now, 2026-10-31). Set back to true to restore it.
   enabled: false as boolean,
-  handle: null as string | null,
-  href: null as string | null,
+  handle: 'neosculpt6' as string | null,
+  href: 'https://www.instagram.com/neosculpt6/' as string | null,
   // Tiles are NeoSculpt6 photos that are not a service page's hero and not on the About page, so no page shows one twice
   // (service pages skip the three service photos here: src/data/services/index.ts).
   tiles: [

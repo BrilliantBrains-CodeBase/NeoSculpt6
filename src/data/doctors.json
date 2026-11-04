@@ -34,6 +34,11 @@
       "height": 620,
       "alt": "Dr Sandeep Mahapatra in a white coat, standing in a clinic room"
     },
+    "summary": {
+      "eyebrow": "Founder & Lead Doctor",
+      "title": "Founder · Senior Consultant Dermatologist · Cosmetic Expert · Hair Transplant Surgeon",
+      "text": "For more than two decades Dr Sandeep has treated hair loss, skin and ageing concerns as medical problems first and cosmetic ones second. He developed the Neo Follicle Transplant (NFT) approach to graft handling and implantation, has performed 10,000+ hair transplants, and has trained 18+ surgeons — with 55+ specialists formed under his guidance."
+    },
     "philosophy": {
       "eyebrow": "Clinical Philosophy",
       "heading": "Care Planned Around the Individual",
@@ -129,8 +134,8 @@
         "organisation": "Indian Association of Dermatologists, Venereologists and Leprologists (IADVL)",
         "logo": {
           "src": "/images/home/credentials/iadvl.webp",
-          "width": 206,
-          "height": 200,
+          "width": 336,
+          "height": 220,
           "alt": "IADVL logo"
         },
         "approval": "approved"
@@ -140,8 +145,8 @@
         "organisation": "Association of Cutaneous Surgeons of India (ACSI)",
         "logo": {
           "src": "/images/home/credentials/acsi.webp",
-          "width": 300,
-          "height": 120,
+          "width": 336,
+          "height": 220,
           "alt": "ACSI logo"
         },
         "approval": "approved"
@@ -151,8 +156,8 @@
         "organisation": "International Society of Dermatology",
         "logo": {
           "src": "/images/home/credentials/isd.webp",
-          "width": 498,
-          "height": 120,
+          "width": 336,
+          "height": 220,
           "alt": "International Society of Dermatology logo"
         },
         "approval": "approved"
@@ -162,8 +167,8 @@
         "organisation": "International Society of Hair Restoration Surgery (ISHRS)",
         "logo": {
           "src": "/images/home/credentials/ishrs.webp",
-          "width": 280,
-          "height": 160,
+          "width": 336,
+          "height": 220,
           "alt": "ISHRS logo"
         },
         "approval": "pending"
@@ -173,8 +178,8 @@
         "organisation": "Association of Hair Restoration Surgeons, India (AHRS)",
         "logo": {
           "src": "/images/home/credentials/ahrs.webp",
-          "width": 280,
-          "height": 160,
+          "width": 336,
+          "height": 220,
           "alt": "AHRS logo"
         },
         "approval": "pending"
@@ -184,10 +189,36 @@
         "organisation": "DHI Global, Greece",
         "logo": {
           "src": "/images/home/credentials/dhi-global.webp",
-          "width": 326,
-          "height": 100,
+          "width": 336,
+          "height": 220,
           "alt": "DHI Global logo"
         },
+        "approval": "pending"
+      }
+    ],
+    "teaching": [
+      {
+        "title": "Invited faculty: ISHRS World Congress, Denver 2024",
+        "approval": "pending"
+      },
+      {
+        "title": "EADV Congress, Geneva 2017 & Milan 2019",
+        "approval": "pending"
+      },
+      {
+        "title": "HAIRCON 2019 & 2025",
+        "approval": "pending"
+      },
+      {
+        "title": "DERMACON 2016–2025",
+        "approval": "pending"
+      },
+      {
+        "title": "World Congress of Cosmetic Dermatology",
+        "approval": "pending"
+      },
+      {
+        "title": "7 published papers on hair transplantation, FUE and PRF",
         "approval": "pending"
       }
     ],
@@ -335,6 +366,11 @@
       }
     },
     "cardPortrait": null,
+    "summary": {
+      "eyebrow": null,
+      "title": "Consultant Plastic & Reconstructive Surgeon",
+      "text": "Dr Saranya leads NeoSculpt6's surgical care — face, breast and body. Her training spans aesthetic and reconstructive surgery, liposuction, abdominoplasty, gynaecomastia, rhinoplasty and breast surgery, so every surgical plan starts with anatomy, safety and a realistic picture of recovery."
+    },
     "philosophy": null,
     "expertise": [
       {
@@ -401,6 +437,7 @@
       }
     ],
     "recognition": [],
+    "teaching": [],
     "metrics": [],
     "process": {
       "eyebrow": "Personalised Assessment",
@@ -484,6 +521,7 @@
       }
     },
     "cardPortrait": null,
+    "summary": null,
     "philosophy": {
       "eyebrow": "Patient-Centred Care",
       "heading": "Care That Builds Confidence",
@@ -610,6 +648,7 @@
       }
     ],
     "recognition": [],
+    "teaching": [],
     "metrics": [
       {
         "value": "20+",
@@ -693,6 +732,7 @@
       "height": 500,
       "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope against a plain white background"
     },
+    "summary": null,
     "philosophy": {
       "eyebrow": "Background",
       "heading": "From Gynecology Into Reproductive Medicine",
@@ -779,6 +819,7 @@
         "approval": "approved"
       }
     ],
+    "teaching": [],
     "metrics": [
       {
         "value": "18",
@@ -845,6 +886,97 @@
       "contactHref": "/contact-us/",
       "bookingEyebrow": "Book a Consultation",
       "bookingHeading": "Request a Consultation With Dr Payal"
+    },
+    "contentReview": {
+      "medicalReviewStatus": "pending",
+      "lastReviewed": null,
+      "reviewedBy": null
+    }
+  },
+  {
+    "slug": "dr-lavanyaa-m",
+    "path": "/dr-lavanyaa-m/",
+    "status": "draft",
+    "name": "Dr. Lavanyaa M",
+    "displayName": "Dr Lavanyaa M",
+    "initials": "LM",
+    "role": "Oral & Maxillofacial and Facial Aesthetic Surgeon",
+    "shortRole": "Oral & Maxillofacial Surgeon",
+    "schemaSpecialty": "PlasticSurgery",
+    "seo": {
+      "title": "Dr Lavanyaa M | Oral & Maxillofacial and Facial Aesthetic Surgeon | NeoSculpt6",
+      "description": "Meet Dr Lavanyaa M, Oral & Maxillofacial Surgeon (MDS) at NeoSculpt6 in Whitefield, Bangalore, for chin augmentation, eye-bag correction and facial surgery.",
+      "h1": "Dr Lavanyaa M",
+      "canonical": "https://neosculpt6.com/dr-lavanyaa-m/",
+      "robots": "noindex, follow",
+      "ogImage": "/og/default.png"
+    },
+    "hero": {
+      "eyebrow": "Oral & Maxillofacial Surgery · NeoSculpt6",
+      "intro": "Dr. Lavanyaa M is an Oral & Maxillofacial Surgeon (MDS).",
+      "portrait": {
+        "src": "/images/doctors/dr-lavanyaa-m.webp",
+        "width": 800,
+        "height": 1000,
+        "alt": "Dr Lavanyaa M, Oral & Maxillofacial Surgeon",
+        "approval": "pending"
+      }
+    },
+    "cardPortrait": null,
+    "summary": null,
+    "philosophy": null,
+    "expertise": [],
+    "qualifications": [
+      {
+        "title": "BDS",
+        "institution": null,
+        "type": "education",
+        "approval": "pending"
+      },
+      {
+        "title": "MDS (Oral & Maxillofacial Surgery)",
+        "institution": null,
+        "type": "education",
+        "approval": "pending"
+      }
+    ],
+    "recognition": [],
+    "teaching": [],
+    "metrics": [],
+    "process": {
+      "eyebrow": "Personalised Assessment",
+      "heading": "Begin With a Clear Consultation",
+      "intro": null,
+      "steps": [
+        {
+          "title": "Begin With Your Concern",
+          "description": "Tell the doctor what you would like to change and what you have already tried. Your history and goals shape everything that follows."
+        },
+        {
+          "title": "Assess Suitability",
+          "description": "The doctor examines the area and reviews your health and history to see which options may suit you, and which may not."
+        },
+        {
+          "title": "Discuss the Right Options",
+          "description": "You hear what each option involves, including alternatives, limitations, recovery and cost, before anything is planned."
+        },
+        {
+          "title": "Move Forward With Clarity",
+          "description": "If you decide to go ahead, your plan, preparation and aftercare are explained so you know what to expect at each step."
+        }
+      ]
+    },
+    "quote": {
+      "text": null,
+      "approval": "pending"
+    },
+    "socialLinks": [],
+    "ctas": {
+      "profileLabel": "Book a Consultation",
+      "contactLabel": "Contact NeoSculpt6",
+      "contactHref": "/contact-us/",
+      "bookingEyebrow": "Book a Consultation",
+      "bookingHeading": "Request a Consultation With Dr Lavanyaa"
     },
     "contentReview": {
       "medicalReviewStatus": "pending",

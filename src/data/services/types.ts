@@ -22,7 +22,7 @@ export interface ServiceImage {
   position?: string
 }
 
-/** A doctor on a service page: who they are (services/index.ts `DOCTORS`) and the page's own copy about them. */
+/** A doctor on a service page: who they are (doctors.json, via services/index.ts `doctorFor`) and the page's own copy about them. */
 export interface ServiceDoctor {
   name: string
   /** Profile page, or null for a doctor without one (Dr Lavanyaa M): the card then has no profile link. */

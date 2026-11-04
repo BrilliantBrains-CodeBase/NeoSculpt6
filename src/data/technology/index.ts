@@ -201,12 +201,12 @@ function doctors(p: DocBase['doctors']) {
     const who = doctorFor(d.name)
     if (d.button && d.button.href !== who.href) throw new Error(`${d.name}: doc profile link ${d.button.href} is not ${who.href}`)
     return {
-      // The doc's own spelling ("Dr. Sandeep Mahapatra"); profile and portrait from the shared doctor list.
-      name: d.name,
+      // Who they are comes from doctors.json; the doc gives the chips and its own words.
+      name: who.name,
       href: who.href,
       initials: who.initials,
       portrait: who.portrait,
-      specialty: d.specialty,
+      specialty: who.role,
       chips: d.chips ?? [],
       profileLabel: d.button?.label ?? 'Know More',
       blockEyebrow: null,
@@ -354,7 +354,6 @@ function buildHub(p: DocHub): TechnologyHub {
     pending: pendingFor(p, [
       'photos: the nine card photos are the home page placeholders (six borrow a treatment page photo); the banner is a texture',
       'cards: shown Hair → Body → Skin (the doc lists Reaction Viora RF, a Skin card, before Body Contouring, a Body card)',
-      'doctors: Dr Saranya T has no portrait yet (initials)',
     ]),
   }
 }
@@ -380,7 +379,7 @@ function buildInternational(p: DocInternational): InternationalPatients {
     // The reception would repeat the clinic photo; the band is plain until an approved photo is supplied.
     closing: closing(p.closing, null),
     pending: pendingFor(p, [
-      'photos: the banner texture and the journey and travel photos are placeholders; Dr Saranya T has no portrait yet',
+      'photos: the banner texture and the journey and travel photos are placeholders',
       'pathways: Fertility Care shows no treatment links until the Neo Fertility link is confirmed (or the tab removed)',
       ...sourceWords(p),
     ]),

@@ -1,4 +1,7 @@
-// Doctor profiles: one record per doctor in doctors.json, one renderer (src/components/doctor/DoctorProfilePage.tsx).
+// Every doctor on the site comes from doctors.json: one record per doctor. Profile pages, cards, menus, the booking
+// form, schema and every service, technology and hub page read it through this module (imported at build time, so the
+// doctors are in the prerendered HTML). Don't copy a doctor's name, title, portrait or credentials anywhere else.
+// Profiles have one renderer (src/components/doctor/DoctorProfilePage.tsx).
 // This module is the contract: the types, the validation that runs on load (a malformed record stops `npm run gen`,
 // the build and `npm run verify`), the route lookup, and the public view of a record (only approved items).
 // generate-pages.mjs reads `publishedDoctors` to build each doctor's route and SEO, so adding a doctor is: add a
@@ -44,12 +47,16 @@ export interface Doctor {
   /** Square crop for the round doctor cards (home, About, menus); null uses the hero portrait. Shown only once the
    *  hero portrait is approved. */
   cardPortrait: DoctorImage | null
+  /** The short introduction on the About and home doctor blocks; null for a doctor with no block there. */
+  summary: { eyebrow: string | null; title: string; text: string } | null
   /** null when there is no approved philosophy copy; the section is then left out. */
   philosophy: { eyebrow: string; heading: string; paragraphs: string[] } | null
   /** An item links only where the target page already shows this doctor (checked by validate-doctors.mjs). */
   expertise: { title: string; description: string | null; href: string | null; image: DoctorImage | null }[]
   qualifications: { title: string; institution: string | null; type: QualificationType; approval: Approval }[]
   recognition: { title: string; organisation: string; logo: DoctorImage | null; approval: Approval }[]
+  /** Congress faculty roles and publications. */
+  teaching: { title: string; approval: Approval }[]
   metrics: { value: string; label: string; approval: Approval }[]
   process: { eyebrow: string | null; heading: string; intro: string | null; steps: { title: string; description: string }[] }
   quote: { text: string | null; approval: Approval }
@@ -121,10 +128,12 @@ const doctorShape = shape({
     portrait: shape({ src: str, width: posInt, height: posInt, alt: str, approval: oneOf(APPROVALS) }),
   }),
   cardPortrait: nullable(image),
+  summary: nullable(shape({ eyebrow: nullable(str), title: str, text: str })),
   philosophy: nullable(shape({ eyebrow: str, heading: str, paragraphs: nonEmptyList(str) })),
   expertise: list(shape({ title: str, description: nullable(str), href: nullable(str), image: nullable(image) })),
   qualifications: list(shape({ title: str, institution: nullable(str), type: oneOf(QUALIFICATION_TYPES), approval: oneOf(APPROVALS) })),
   recognition: list(shape({ title: str, organisation: str, logo: nullable(image), approval: oneOf(APPROVALS) })),
+  teaching: list(shape({ title: str, approval: oneOf(APPROVALS) })),
   metrics: list(shape({ value: str, label: str, approval: oneOf(APPROVALS) })),
   process: shape({
     eyebrow: nullable(str),
@@ -199,6 +208,31 @@ export const doctors: Doctor[] = validateDoctors(raw)
 export const publishedDoctors = doctors.filter((d) => d.status === 'published')
 export const doctorByPath = new Map(publishedDoctors.map((d) => [d.path, d]))
 
+/** A doctor by slug, published or draft. A wrong slug stops the build. */
+export function doctorBySlug(slug: string): Doctor {
+  const d = doctors.find((x) => x.slug === slug)
+  if (!d) throw new Error(`no record in doctors.json with slug ${slug}`)
+  return d
+}
+
+/** The record a page's doc means by a name in any form ("Dr. Sandeep", "Dr Sandeep Mahapatra", "Dr. Saranya"). An
+ *  unknown or ambiguous name stops the build rather than showing the wrong doctor. */
+export function doctorNamed(name: string): Doctor {
+  const key = (s: string) => s.toLowerCase().replace(/^dr\.?\s+/, '').trim()
+  const found = doctors.filter((d) => key(d.displayName).startsWith(key(name)))
+  if (found.length !== 1) throw new Error(`"${name}" matches ${found.length} records in doctors.json`)
+  return found[0]
+}
+
+/** The clinic's founder: the About and home spotlight, the Organization schema and the medical review line. */
+export const founderDoctor = doctorBySlug('dr-sandeep-mahapatra')
+
+/** The profile page's path, or null for a doctor with no published page (the card then has no profile link). */
+export const profileHref = (d: Doctor) => (d.status === 'published' ? d.path : null)
+
+/** "Dr Sandeep" from "Dr Sandeep Mahapatra", for labels such as "Meet Dr Sandeep". */
+export const shortName = (d: Doctor) => d.displayName.split(' ').slice(0, 2).join(' ')
+
 // Public view: what a page, its schema and its checks may show. Pending items never leave this module unfiltered. --
 
 export const approved = <T extends { approval: Approval }>(items: T[]): T[] => items.filter((x) => x.approval === 'approved')
@@ -217,6 +251,15 @@ export const credentialLine = (d: Doctor) =>
     .filter((q) => q.type === 'education')
     .map((q) => q.title)
     .join(' · ')
+
+/** Approved qualifications with their institution in brackets ("MBBS (Madras Medical College)"), for chip lists. */
+export const qualificationLines = (d: Doctor) =>
+  approved(d.qualifications).map((q) => (q.institution ? `${q.title} (${q.institution})` : q.title))
+
+/** Footer and journal article line. The degree is the founder's highest approved one. */
+export const medicalReviewLine = `Content written and medically reviewed under the guidance of ${founderDoctor.displayName}, ${approved(founderDoctor.qualifications)
+  .filter((q) => q.type === 'education')
+  .at(-1)?.title}. For patient education; it does not replace an in-person consultation.`
 
 export const publicQuote = (d: Doctor) => (d.quote.approval === 'approved' && d.quote.text ? d.quote.text : null)
 
@@ -259,6 +302,7 @@ export function pendingItems(d: Doctor): string[] {
   if (d.hero.portrait.approval !== 'approved') out.push(`portrait (showing initials): ${d.hero.portrait.src}`)
   for (const q of d.qualifications) if (q.approval !== 'approved') out.push(`qualification: ${q.title}${q.institution ? ` (${q.institution})` : ''}`)
   for (const r of d.recognition) if (r.approval !== 'approved') out.push(`recognition: ${r.title}, ${r.organisation}`)
+  for (const t of d.teaching) if (t.approval !== 'approved') out.push(`teaching: ${t.title}`)
   for (const m of d.metrics) if (m.approval !== 'approved') out.push(`metric: ${m.value} ${m.label}`)
   if (d.quote.text && d.quote.approval !== 'approved') out.push(`quote: "${d.quote.text}"`)
   for (const s of d.socialLinks) if (s.approval !== 'approved' || !s.href) out.push(`social: ${s.network}${s.href ? '' : ' (no URL yet)'}`)
