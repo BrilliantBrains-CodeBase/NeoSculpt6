@@ -337,108 +337,160 @@
     }
   },
   {
-    "slug": "dr-saranya-t",
-    "path": "/dr-saranya-t/",
+    "slug": "dr-payal-mahapatra",
+    "path": "/dr-payal-mahapatra/",
     "status": "published",
-    "name": "Dr Saranya T",
-    "displayName": "Dr Saranya T",
-    "initials": "ST",
-    "role": "Consultant Plastic & Reconstructive Surgeon",
-    "shortRole": "M.Ch Plastic & Reconstructive Surgeon",
-    "schemaSpecialty": "PlasticSurgery",
+    "name": "Dr. Payal Mahapatra",
+    "displayName": "Dr Payal Mahapatra",
+    "initials": "PM",
+    "role": "Fertility Specialist & Gynecologist",
+    "shortRole": "Fertility Specialist · Gynecologist",
+    "schemaSpecialty": "Gynecologic",
     "seo": {
-      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-      "h1": "Dr Saranya T",
-      "canonical": "https://neosculpt6.com/dr-saranya-t/",
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "h1": "Dr. Payal Mahapatra",
+      "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
       "robots": "index, follow",
       "ogImage": "/og/default.png"
     },
     "hero": {
-      "eyebrow": "Plastic & Reconstructive Surgery · NeoSculpt6",
-      "intro": "Dr Saranya leads NeoSculpt6's surgical care — face, breast and body. Her training spans aesthetic and reconstructive surgery, liposuction, abdominoplasty, gynaecomastia, rhinoplasty and breast surgery, so every surgical plan starts with anatomy, safety and a realistic picture of recovery.",
+      "eyebrow": "Fertility & Gynecology · NeoSculpt6",
+      "intro": "Dr. Payal Mahapatra is a fertility specialist and gynecologist, and the founder of Neo Fertility Clinic, part of Neo Group. She trained in obstetrics and gynecology before completing a Fellowship in Reproductive Medicine, and is a member of ISAR and FOGSI.",
       "portrait": {
-        "src": "/images/home/doctors/dr-saranya-t.webp",
-        "width": 760,
-        "height": 760,
-        "alt": "Dr Saranya T in a white coat against a plain white background",
+        "src": "/images/doctors/dr-payal-mahapatra.webp",
+        "width": 650,
+        "height": 900,
+        "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope, arms folded, against a plain white background",
         "approval": "approved"
       }
     },
-    "cardPortrait": null,
-    "summary": {
-      "eyebrow": null,
-      "title": "Consultant Plastic & Reconstructive Surgeon",
-      "text": "Dr Saranya leads NeoSculpt6's surgical care — face, breast and body. Her training spans aesthetic and reconstructive surgery, liposuction, abdominoplasty, gynaecomastia, rhinoplasty and breast surgery, so every surgical plan starts with anatomy, safety and a realistic picture of recovery."
+    "cardPortrait": {
+      "src": "/images/home/doctors/dr-payal-mahapatra.webp",
+      "width": 500,
+      "height": 500,
+      "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope against a plain white background"
     },
-    "philosophy": null,
+    "summary": null,
+    "philosophy": {
+      "eyebrow": "Background",
+      "heading": "From Gynecology Into Reproductive Medicine",
+      "paragraphs": [
+        "Dr. Payal Mahapatra qualified in medicine in 2005 and specialised in obstetrics and gynecology before moving into reproductive medicine. Her Fellowship in Reproductive Medicine, completed at IIRRH in 2017, is dedicated training in ovarian stimulation protocols, assisted reproduction, embryology liaison and the management of failed cycles.",
+        "She founded Neo Fertility Clinic to run fertility treatment and obstetric care as one continuous service, so the doctor who manages the treatment also manages the pregnancy, including high-risk pregnancies."
+      ]
+    },
     "expertise": [
       {
-        "title": "Rhinoplasty",
-        "description": null,
-        "href": "/cosmetic-surgery/rhinoplasty-in-bangalore/",
+        "title": "Assisted reproduction",
+        "description": "IVF, ICSI, IUI, ovulation induction, frozen embryo transfer, donor gamete programmes.",
+        "href": null,
         "image": null
       },
       {
-        "title": "Facelift & eyelid surgery",
-        "description": null,
-        "href": "/cosmetic-surgery/facelift-surgery-in-bangalore/",
+        "title": "Fertility preservation",
+        "description": "Egg freezing before cancer treatment, before ovarian surgery, and for elective deferral of pregnancy.",
+        "href": null,
         "image": null
       },
       {
-        "title": "Liposuction",
-        "description": null,
-        "href": "/cosmetic-surgery/liposuction-surgery-in-bangalore/",
+        "title": "Reproductive endocrinology",
+        "description": "PCOS and PMOS, PCOD, thyroid and prolactin disorders, insulin resistance, hyperandrogenism.",
+        "href": null,
         "image": null
       },
       {
-        "title": "Tummy tuck",
-        "description": null,
-        "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/",
+        "title": "Reproductive surgery",
+        "description": "Hysteroscopy for polyps, submucous fibroids, adhesions and septum. Laparoscopy for endometriosis, adhesions, ovarian cysts and tubal disease.",
+        "href": null,
         "image": null
       },
       {
-        "title": "Gynaecomastia",
-        "description": null,
-        "href": "/cosmetic-surgery/gynecomastia-surgery-in-bangalore/",
+        "title": "Recurrent pregnancy loss",
+        "description": "Investigation and management of repeated miscarriage and repeated implantation failure.",
+        "href": null,
         "image": null
       },
       {
-        "title": "Breast surgery",
-        "description": null,
-        "href": "/cosmetic-surgery/",
-        "image": null
-      },
-      {
-        "title": "Post-pregnancy body",
-        "description": null,
-        "href": "/cosmetic-surgery/mommy-makeover-surgery-in-bangalore/",
+        "title": "High-risk obstetrics",
+        "description": "Gestational diabetes, hypertensive disorders, IVF pregnancies, previous caesarean, twins.",
+        "href": null,
         "image": null
       }
     ],
     "qualifications": [
       {
         "title": "MBBS",
-        "institution": "Madras Medical College",
+        "institution": "MGM Medical College, Jamshedpur",
         "type": "education",
         "approval": "approved"
       },
       {
-        "title": "DNB General Surgery",
-        "institution": "Sundaram Medical Foundation",
+        "title": "DGO, Obstetrics and Gynecology",
+        "institution": "RIMS, Ranchi",
         "type": "education",
         "approval": "approved"
       },
       {
-        "title": "M.Ch Plastic & Reconstructive Surgery",
-        "institution": "Kilpauk Government Medical College, Chennai",
+        "title": "DNB, Diplomate of National Board",
+        "institution": "Sagar Apollo, Bangalore",
+        "type": "education",
+        "approval": "approved"
+      },
+      {
+        "title": "Fellowship in Reproductive Medicine",
+        "institution": "IIRRH, International Institute for Training and Research in Reproductive Health",
         "type": "education",
         "approval": "approved"
       }
     ],
-    "recognition": [],
+    "recognition": [
+      {
+        "title": "Member",
+        "organisation": "Indian Society for Assisted Reproduction (ISAR)",
+        "logo": null,
+        "approval": "approved"
+      },
+      {
+        "title": "Member",
+        "organisation": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+        "logo": null,
+        "approval": "approved"
+      }
+    ],
     "teaching": [],
-    "metrics": [],
+    "metrics": [
+      {
+        "value": "18",
+        "label": "Years Experience",
+        "approval": "pending"
+      },
+      {
+        "value": "80k",
+        "label": "Patients Treated",
+        "approval": "pending"
+      },
+      {
+        "value": "6.7k",
+        "label": "IUI Procedures",
+        "approval": "pending"
+      },
+      {
+        "value": "3.7k",
+        "label": "Fertility Surgeries",
+        "approval": "pending"
+      },
+      {
+        "value": "2k",
+        "label": "IVF Cycles",
+        "approval": "pending"
+      },
+      {
+        "value": "1k",
+        "label": "Deliveries",
+        "approval": "pending"
+      }
+    ],
     "process": {
       "eyebrow": "Personalised Assessment",
       "heading": "Begin With a Clear Consultation",
@@ -466,24 +518,13 @@
       "text": null,
       "approval": "pending"
     },
-    "socialLinks": [
-      {
-        "network": "instagram",
-        "href": null,
-        "approval": "pending"
-      },
-      {
-        "network": "linkedin",
-        "href": null,
-        "approval": "pending"
-      }
-    ],
+    "socialLinks": [],
     "ctas": {
       "profileLabel": "Book a Consultation",
       "contactLabel": "Contact NeoSculpt6",
       "contactHref": "/contact-us/",
       "bookingEyebrow": "Book a Consultation",
-      "bookingHeading": "Request a Consultation With Dr Saranya"
+      "bookingHeading": "Request a Consultation With Dr Payal"
     },
     "contentReview": {
       "medicalReviewStatus": "pending",
@@ -698,160 +739,163 @@
     }
   },
   {
-    "slug": "dr-payal-mahapatra",
-    "path": "/dr-payal-mahapatra/",
+    "slug": "dr-sumedha-tirthani",
+    "path": "/dr-sumedha-tirthani/",
     "status": "published",
-    "name": "Dr. Payal Mahapatra",
-    "displayName": "Dr Payal Mahapatra",
-    "initials": "PM",
-    "role": "Fertility Specialist & Gynecologist",
-    "shortRole": "Fertility Specialist · Gynecologist",
-    "schemaSpecialty": "Gynecologic",
+    "name": "Dr. Sumedha Tirthani",
+    "displayName": "Dr Sumedha Tirthani",
+    "initials": "ST",
+    "role": "Consultant Dermatologist",
+    "shortRole": "MD Dermatology · Dermatologist",
+    "schemaSpecialty": "Dermatology",
     "seo": {
-      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
-      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
-      "h1": "Dr. Payal Mahapatra",
-      "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
+      "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
+      "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
+      "h1": "Dr. Sumedha Tirthani",
+      "canonical": "https://neosculpt6.com/dr-sumedha-tirthani/",
       "robots": "index, follow",
       "ogImage": "/og/default.png"
     },
     "hero": {
-      "eyebrow": "Fertility & Gynecology · NeoSculpt6",
-      "intro": "Dr. Payal Mahapatra is a fertility specialist and gynecologist, and the founder of Neo Fertility Clinic, part of Neo Group. She trained in obstetrics and gynecology before completing a Fellowship in Reproductive Medicine, and is a member of ISAR and FOGSI.",
+      "eyebrow": "Dermatology · NeoSculpt6",
+      "intro": "Dr. Sumedha Tirthani is a dermatologist and a gold medalist in MD Dermatology, with experience in clinical dermatology, laser procedures and aesthetic dermatology built through hands-on practice, research and national conference presentations. Her work covers acne, pigmentation, hair loss, vitiligo and other skin concerns.",
       "portrait": {
-        "src": "/images/doctors/dr-payal-mahapatra.webp",
-        "width": 650,
-        "height": 900,
-        "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope, arms folded, against a plain white background",
+        "src": "/images/doctors/dr-sumedha-tirthani.webp",
+        "width": 375,
+        "height": 375,
+        "alt": "Dr. Sumedha Tirthani in maroon scrubs, arms folded, standing on a lawn",
         "approval": "approved"
       }
     },
-    "cardPortrait": {
-      "src": "/images/home/doctors/dr-payal-mahapatra.webp",
-      "width": 500,
-      "height": 500,
-      "alt": "Dr. Payal Mahapatra in a white coat with a stethoscope against a plain white background"
-    },
+    "cardPortrait": null,
     "summary": null,
     "philosophy": {
-      "eyebrow": "Background",
-      "heading": "From Gynecology Into Reproductive Medicine",
+      "eyebrow": "Clinical Practice",
+      "heading": "Experience in Clinical Dermatology",
       "paragraphs": [
-        "Dr. Payal Mahapatra qualified in medicine in 2005 and specialised in obstetrics and gynecology before moving into reproductive medicine. Her Fellowship in Reproductive Medicine, completed at IIRRH in 2017, is dedicated training in ovarian stimulation protocols, assisted reproduction, embryology liaison and the management of failed cycles.",
-        "She founded Neo Fertility Clinic to run fertility treatment and obstetric care as one continuous service, so the doctor who manages the treatment also manages the pregnancy, including high-risk pregnancies."
+        "As a Senior Resident at Sri Devaraj Urs Medical College, Bengaluru, Dr. Sumedha treated complex inpatient and outpatient skin conditions and led chemical peel and laser sessions.",
+        "As a Resident Doctor at Dr. Luthra's Skin Clinic, Jabalpur, she assisted in dermatosurgical procedures such as electrocautery, radiofrequency ablation, chemical peels and nevi excision.",
+        "She actively engages in clinical research and continuing medical education to stay up to date with advances in dermatology."
       ]
     },
     "expertise": [
       {
-        "title": "Assisted reproduction",
-        "description": "IVF, ICSI, IUI, ovulation induction, frozen embryo transfer, donor gamete programmes.",
+        "title": "Clinical dermatology",
+        "description": "Acne, eczema, psoriasis, vitiligo, fungal infections, STDs, leprosy and pediatric dermatology.",
         "href": null,
         "image": null
       },
       {
-        "title": "Fertility preservation",
-        "description": "Egg freezing before cancer treatment, before ovarian surgery, and for elective deferral of pregnancy.",
+        "title": "Cosmetic dermatology",
+        "description": "Chemical peels, skin rejuvenation, pigmentation treatment and scar reduction.",
         "href": null,
         "image": null
       },
       {
-        "title": "Reproductive endocrinology",
-        "description": "PCOS and PMOS, PCOD, thyroid and prolactin disorders, insulin resistance, hyperandrogenism.",
+        "title": "Laser therapy",
+        "description": "Laser toning, laser hair removal, and treatment for PIH, melasma and more.",
         "href": null,
         "image": null
       },
       {
-        "title": "Reproductive surgery",
-        "description": "Hysteroscopy for polyps, submucous fibroids, adhesions and septum. Laparoscopy for endometriosis, adhesions, ovarian cysts and tubal disease.",
+        "title": "Dermoscopy & diagnosis",
+        "description": "Dermoscopic examination to support the diagnosis of skin conditions.",
         "href": null,
         "image": null
       },
       {
-        "title": "Recurrent pregnancy loss",
-        "description": "Investigation and management of repeated miscarriage and repeated implantation failure.",
-        "href": null,
-        "image": null
-      },
-      {
-        "title": "High-risk obstetrics",
-        "description": "Gestational diabetes, hypertensive disorders, IVF pregnancies, previous caesarean, twins.",
+        "title": "Vitiligo surgery & dermatosurgery",
+        "description": "Treatment methods including radiofrequency and punch grafting.",
         "href": null,
         "image": null
       }
     ],
     "qualifications": [
       {
-        "title": "MBBS",
-        "institution": "MGM Medical College, Jamshedpur",
+        "title": "MBBS (Gold Medalist)",
+        "institution": "Chirayu Medical College, Bhopal",
         "type": "education",
         "approval": "approved"
       },
       {
-        "title": "DGO, Obstetrics and Gynecology",
-        "institution": "RIMS, Ranchi",
+        "title": "MD Dermatology (Gold Medalist)",
+        "institution": "Sri Devaraj Urs Medical College, Bengaluru",
         "type": "education",
         "approval": "approved"
       },
       {
-        "title": "DNB, Diplomate of National Board",
-        "institution": "Sagar Apollo, Bangalore",
-        "type": "education",
+        "title": "Internship",
+        "institution": "Netaji Subhash Chandra Bose Medical College, Jabalpur",
+        "type": "training",
         "approval": "approved"
       },
       {
-        "title": "Fellowship in Reproductive Medicine",
-        "institution": "IIRRH, International Institute for Training and Research in Reproductive Health",
-        "type": "education",
+        "title": "Training in tertiary care management of leprosy",
+        "institution": "CLTRI, Chengalpattu, Tamil Nadu",
+        "type": "training",
+        "approval": "approved"
+      },
+      {
+        "title": "ACLS & BLS",
+        "institution": "American Heart Association",
+        "type": "certification",
+        "approval": "approved"
+      },
+      {
+        "title": "Basic Course in Biomedical Research",
+        "institution": null,
+        "type": "certification",
+        "approval": "approved"
+      },
+      {
+        "title": "Psychological First Aid",
+        "institution": "Johns Hopkins University",
+        "type": "certification",
+        "approval": "approved"
+      },
+      {
+        "title": "Covid-19 pandemic surveillance",
+        "institution": "NSCB, Jabalpur",
+        "type": "training",
         "approval": "approved"
       }
     ],
-    "recognition": [
+    "recognition": [],
+    "teaching": [
       {
-        "title": "Member",
-        "organisation": "Indian Society for Assisted Reproduction (ISAR)",
-        "logo": null,
+        "title": "Talk: Dermatological Therapeutics – Recalcitrant Alopecia, Resicuticon 2024",
         "approval": "approved"
       },
       {
-        "title": "Member",
-        "organisation": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
-        "logo": null,
+        "title": "Paper: “Is oral acitretin indispensable for the treatment of Darier's Disease? A case series of Darier's Disease treated with oral isotretinoin”, Cuticon KN 2023, KMC Manipal",
+        "approval": "approved"
+      },
+      {
+        "title": "Poster: “Generalised Dowling-Degos Disease: A Classic Clinical & Histopathological Presentation of a Very Rare Genodermatosis”, Cuticon KN 2023, KMC Manipal",
+        "approval": "approved"
+      },
+      {
+        "title": "Poster: “A sporadic case of a rare hereditary disease: Netherton Syndrome”, Dermacon International 2023, Mumbai",
+        "approval": "approved"
+      },
+      {
+        "title": "Publication: “Comparison of Q-Switched Nd:YAG LASER with 10% Azelaic Acid versus Fractional CO2 LASER with 10% Azelaic Acid in the treatment of Post Inflammatory Hyperpigmentation secondary to Acne”, South Eastern European Journal of Public Health",
+        "approval": "approved"
+      },
+      {
+        "title": "Publication: “A sporadic case of a rare hereditary disease: Netherton Syndrome”, Journal of Clinical and Biomedical Sciences",
+        "approval": "approved"
+      },
+      {
+        "title": "Publication: “Dermatology Photo Quiz 1”, Journal of Clinical and Biomedical Sciences",
+        "approval": "approved"
+      },
+      {
+        "title": "Finalist, Karnataka State Level Dermatology Quiz, Mysore Medical College, 2024",
         "approval": "approved"
       }
     ],
-    "teaching": [],
-    "metrics": [
-      {
-        "value": "18",
-        "label": "Years Experience",
-        "approval": "pending"
-      },
-      {
-        "value": "80k",
-        "label": "Patients Treated",
-        "approval": "pending"
-      },
-      {
-        "value": "6.7k",
-        "label": "IUI Procedures",
-        "approval": "pending"
-      },
-      {
-        "value": "3.7k",
-        "label": "Fertility Surgeries",
-        "approval": "pending"
-      },
-      {
-        "value": "2k",
-        "label": "IVF Cycles",
-        "approval": "pending"
-      },
-      {
-        "value": "1k",
-        "label": "Deliveries",
-        "approval": "pending"
-      }
-    ],
+    "metrics": [],
     "process": {
       "eyebrow": "Personalised Assessment",
       "heading": "Begin With a Clear Consultation",
@@ -885,7 +929,7 @@
       "contactLabel": "Contact NeoSculpt6",
       "contactHref": "/contact-us/",
       "bookingEyebrow": "Book a Consultation",
-      "bookingHeading": "Request a Consultation With Dr Payal"
+      "bookingHeading": "Request a Consultation With Dr Sumedha"
     },
     "contentReview": {
       "medicalReviewStatus": "pending",

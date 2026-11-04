@@ -96,14 +96,16 @@ export function HomeDoctors() {
 
 type Card = (typeof doctors.cards)[number]
 
-// Doctors grid (1e73df0), tablet up; also the About team's. Tablet: two cards per row. Desktop: up to three cards at the
-// theme's 3-column width (40px gap), centred, so two doctors leave no empty column; four or more wrap in rows of four.
+// Doctors grid (1e73df0), tablet up; also the About team's. Tablet: two cards per row. Desktop: cards at the theme's
+// 3-column width (40px gap), or four across when that fills rows evenly (exactly 4, or 7 or more), so 5 doctors sit
+// 3 + 2 and 6 sit 3 + 3. A short last row is centred rather than left with empty columns.
 export function DoctorGrid({ cards }: { cards: Card[] }) {
-  const columnWidth = cards.length > 3 ? 'calc((100% - 120px) / 4)' : 'calc((100% - 80px) / 3)'
+  const four = cards.length === 4 || cards.length >= 7
+  const columnWidth = four ? 'calc((100% - 120px) / 4)' : 'calc((100% - 80px) / 3)'
   return (
     <ul
       style={{ '--doctor-col': columnWidth } as CSSProperties}
-      className="mb-10 hidden w-full text-left md:mb-[60px] md:grid md:grid-cols-2 md:gap-[30px] xl:grid-cols-[repeat(auto-fit,var(--doctor-col))] xl:justify-center xl:gap-10"
+      className="mb-10 hidden w-full text-left md:mb-[60px] md:flex md:flex-wrap md:justify-center md:gap-[30px] md:*:w-[calc((100%-30px)/2)] xl:gap-10 xl:*:w-(--doctor-col)"
     >
       {cards.map((card, i) => (
         <DoctorCard key={card.href} card={card} index={i % 4} />

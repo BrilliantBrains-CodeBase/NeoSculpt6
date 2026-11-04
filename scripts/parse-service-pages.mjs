@@ -21,6 +21,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { replaceDoctor } from '../src/data/replaced-doctors.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DOC = path.resolve(ROOT, '../content/service/service-page.md')
@@ -695,6 +696,10 @@ for (const file of SUPPLEMENTS) {
     else out.push(record)
   })
 }
+
+// The one exception to "word for word": cards naming Dr Saranya T, who left the site, become Dr Thyagaraj's
+// (src/data/replaced-doctors.ts).
+for (const r of out) r.doctors.cards = r.doctors.cards.map((c) => replaceDoctor(r.path, c))
 
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n')
 console.log(`parse-services: ${out.length} pages → ${path.relative(ROOT, OUT)}; ${warnings.length} warnings`)

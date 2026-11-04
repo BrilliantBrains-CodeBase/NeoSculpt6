@@ -5,10 +5,11 @@ import { TickIcon } from '../icons'
 import { delay } from '../shared'
 import { DoctorSectionHeader } from './DoctorSectionHeader'
 
-// Doctor profile section 4: qualifications and recognition, approved items only (pending ones stay in doctors.json
-// and are listed by `npm run validate:doctors`). Two lists side by side from tablet: the qualifications checklist in
-// the home spotlight's style, and memberships with their logo where the record has one. A list with no approved
-// items is left out; the section is left out when both are empty.
+// Doctor profile section 4: qualifications, recognition and academic work (talks, papers, publications), approved
+// items only (pending ones stay in doctors.json and are listed by `npm run validate:doctors`). The lists sit side by
+// side from tablet (three across on desktop when a doctor has all three): the qualifications checklist in the home
+// spotlight's style, memberships with their logo where the record has one, and the academic work as a checklist. A
+// list with no approved items is left out; the section is left out when all are empty.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
 
 const listTitle = 'font-heading text-h5 text-secondary uppercase'
@@ -16,11 +17,14 @@ const listTitle = 'font-heading text-h5 text-secondary uppercase'
 export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
   const qualRef = useReveal<HTMLDivElement>()
   const recRef = useReveal<HTMLDivElement>()
+  const teachRef = useReveal<HTMLDivElement>()
   // The list fades its items in one by one; it needs its own reveal ref, or the items stay hidden.
   const qualListRef = useReveal<HTMLUListElement>()
   const qualifications = approved(doctor.qualifications)
   const recognition = approved(doctor.recognition)
-  if (!qualifications.length && !recognition.length) return null
+  const teaching = approved(doctor.teaching)
+  const lists = [qualifications, recognition, teaching].filter((l) => l.length).length
+  if (!lists) return null
 
   return (
     <section
@@ -30,7 +34,9 @@ export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
     >
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-10 md:gap-[60px]">
         <DoctorSectionHeader id="doctor-credentials-heading" label="Training & Affiliations" title="Qualifications & Recognition" />
-        <div className={`grid grid-cols-1 gap-[50px] ${qualifications.length && recognition.length ? 'md:grid-cols-2 md:gap-[60px] xl:gap-20' : 'mx-auto w-full max-w-[760px]'}`}>
+        <div
+          className={`grid grid-cols-1 gap-[50px] ${lists > 1 ? 'md:grid-cols-2 md:gap-[60px] xl:gap-20' : 'mx-auto w-full max-w-[760px]'} ${lists > 2 ? 'xl:grid-cols-3 xl:gap-[60px]' : ''}`}
+        >
           {qualifications.length > 0 && (
             <div ref={qualRef} data-reveal="up" className="flex flex-col gap-[25px] border-t border-border pt-[30px]">
               <h3 id="doctor-qualifications" className={listTitle}>
@@ -77,6 +83,21 @@ export function DoctorCredentials({ doctor }: { doctor: Doctor }) {
                       <span className="text-secondary">{r.organisation}</span>
                       <span className="block text-small text-text/80">{r.title}</span>
                     </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {teaching.length > 0 && (
+            <div ref={teachRef} data-reveal="up" style={delay(300)} className="flex flex-col gap-[25px] border-t border-border pt-[30px]">
+              <h3 id="doctor-teaching" className={listTitle}>
+                Academic Work
+              </h3>
+              <ul aria-labelledby="doctor-teaching" className="flex flex-col gap-5">
+                {teaching.map((t) => (
+                  <li key={t.title} className="flex gap-[15px]">
+                    <TickIcon className="mt-1 size-4 shrink-0 text-tertiary" />
+                    <span className="text-secondary">{t.title}</span>
                   </li>
                 ))}
               </ul>

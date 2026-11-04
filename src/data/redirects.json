@@ -29,6 +29,11 @@
       "from": "/terms-and-conditions/",
       "to": "/terms-of-use/",
       "status": 301
+    },
+    {
+      "from": "/dr-saranya-t/",
+      "to": "/dr-thyagaraj/",
+      "status": 301
     }
   ],
   "gone": [

@@ -21,6 +21,7 @@ import { clinic } from '../site.ts'
 import photosJson from '../services/photos.json' with { type: 'json' }
 import newPhotosJson from '../services/new-photos.json' with { type: 'json' }
 import { doctorFor, reception } from '../services/index.ts'
+import { inDoctorOrder } from '../doctors.ts'
 import type { NavLink } from '../nav.ts'
 import type { Cta, ServiceDoctor, ServiceImage } from '../services/types.ts'
 import type {
@@ -217,7 +218,7 @@ function doctors(p: DocBase['doctors']) {
   return {
     eyebrow: p.eyebrow ?? '',
     h2: p.h2,
-    cards,
+    cards: inDoctorOrder(cards),
     ...(p.paragraphs.length ? { intro: p.paragraphs } : {}),
     // The doc sets two cards side by side (hub, Body Contouring, International Patients).
     ...(cards.length > 1 ? { columns: true } : {}),

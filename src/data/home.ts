@@ -120,7 +120,7 @@ export const pillars = {
     {
       label: 'Cosmetic Surgery',
       title: 'Cosmetic Surgery',
-      text: 'Face, breast and body surgery planned around anatomy, safety and recovery, led by Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon.',
+      text: 'Face, breast and body surgery planned around anatomy, safety and recovery, led by Dr Thyagaraj, MS, MCh Plastic Surgeon.',
       items: [
         { label: 'Rhinoplasty', href: '/cosmetic-surgery/rhinoplasty-in-bangalore/' },
         { label: 'Facelift', href: '/cosmetic-surgery/facelift-surgery-in-bangalore/' },
@@ -369,7 +369,7 @@ export const signature = {
 // Needs sign-off before launch (marked † in the doc): the sub-line's claim. The † is not shown.
 // Portraits: each record's hero portrait (the same photo as its profile page), filling the card behind a gradient; a
 // card shows its initials until the portrait is approved. Square photos are cropped at the sides. Dr Sandeep's is his
-// clinic portrait, Dr Saranya's the studio photo the clinic sent on 2026-10-26, Dr Payal Mahapatra's her Neo Fertility
+// clinic portrait, Dr Payal Mahapatra's her Neo Fertility
 // portrait and Dr Thyagaraj's his Derma Solutions portrait (both sent by the clinic on 2026-10-30). TODO: the
 // backgrounds differ (clinic room, white, grey wall); reshoot in the clinic with the same lighting if the clinic wants
 // them to match. Dr Thyagaraj's is only 400px, so it looks soft at large sizes; ask for a larger original.

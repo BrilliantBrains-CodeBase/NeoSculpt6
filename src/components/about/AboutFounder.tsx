@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { founder, saranya } from '../../data/about'
+import { founder, surgeon } from '../../data/about'
 import { useReveal } from '../useReveal'
 import { useParallax } from '../useParallax'
 import { SmartLink } from '../SmartLink'
@@ -9,7 +9,7 @@ import { Parts, button, delay, eyebrow, h2 } from '../shared'
 
 // About extra C: founder spotlight (about-us.md §C). Reuses the home About intro layout (HomeAbout: Rejuvita
 // 9652eff > f250a0c, large photo with a drifting inset, text column), adds the education checklist and a teaching
-// ticker (the home Marquee), then a shorter mirrored block for Dr Saranya T.
+// ticker (the home Marquee), then a shorter mirrored block for Dr Thyagaraj.
 // The quote shows only once Dr Sandeep has approved it (`founder.quote.signedOff` in data/about.ts).
 // Both doctors' details come from doctors.json (via data/about.ts); a doctor shows an initials circle until their portrait is approved.
 // Breakpoints are the theme's: base = mobile (<=767), md = tablet (768-1180), xl = desktop.
@@ -102,25 +102,25 @@ export function AboutFounder() {
         />
       </div>
 
-      <SaranyaBlock />
+      <SurgeonBlock />
     </section>
   )
 }
 
-// Dr Saranya T: text left, portrait right on desktop (the founder row mirrored); portrait first below that.
-function SaranyaBlock() {
+// Dr Thyagaraj: text left, portrait right on desktop (the founder row mirrored); portrait first below that.
+function SurgeonBlock() {
   const portraitRef = useReveal<HTMLDivElement>()
   const textRef = useReveal<HTMLDivElement>()
 
   return (
     <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-5 py-20 md:gap-[60px] md:px-[30px] md:py-[100px] xl:flex-row-reverse xl:items-center xl:gap-[120px] xl:px-10 xl:py-[150px]">
       <div ref={portraitRef} data-reveal="pop" className="mx-auto w-full max-w-[320px] md:max-w-[380px] xl:mx-0 xl:w-[380px] xl:shrink-0">
-        {saranya.portrait ? (
+        {surgeon.portrait ? (
           <img
-            src={saranya.portrait.src}
-            width={saranya.portrait.width}
-            height={saranya.portrait.height}
-            alt={saranya.portrait.alt}
+            src={surgeon.portrait.src}
+            width={surgeon.portrait.width}
+            height={surgeon.portrait.height}
+            alt={surgeon.portrait.alt}
             loading="lazy"
             decoding="async"
             className="aspect-square w-full rounded-full object-cover object-top"
@@ -130,35 +130,35 @@ function SaranyaBlock() {
             aria-hidden="true"
             className="grid aspect-square w-full place-items-center rounded-full bg-border font-heading text-h1 text-tertiary uppercase"
           >
-            {saranya.initials}
+            {surgeon.initials}
           </div>
         )}
       </div>
 
       <div ref={textRef} data-reveal="up" className="flex flex-col items-start gap-5">
         <h3 className="font-heading text-h3 text-secondary uppercase">
-          {saranya.name}
-          <span className="mt-2 block font-body text-h6 font-medium tracking-[2px] text-primary">{saranya.title}</span>
+          {surgeon.name}
+          <span className="mt-2 block font-body text-h6 font-medium tracking-[2px] text-primary">{surgeon.title}</span>
         </h3>
         <ul aria-label="Qualifications" className="flex flex-col gap-1.5 text-small text-text/90">
-          {saranya.qualifications.map((q) => (
+          {surgeon.qualifications.map((q) => (
             <li key={q} className="flex gap-[15px]">
               <TickIcon className="mt-1 size-4 shrink-0 text-tertiary" />
               {q}
             </li>
           ))}
         </ul>
-        <p>{saranya.text}</p>
+        <p>{surgeon.text}</p>
         <ul aria-label="Areas of expertise" className="flex flex-wrap gap-2.5">
-          {saranya.chips.map((chip) => (
+          {surgeon.chips.map((chip) => (
             <li key={chip} className="rounded-full border border-border px-4 py-1.5 text-meta text-secondary">
               {chip}
             </li>
           ))}
         </ul>
         <div className="mt-2.5">
-          <SmartLink href={saranya.cta.href} className={button}>
-            {saranya.cta.label}
+          <SmartLink href={surgeon.cta.href} className={button}>
+            {surgeon.cta.label}
           </SmartLink>
         </div>
       </div>

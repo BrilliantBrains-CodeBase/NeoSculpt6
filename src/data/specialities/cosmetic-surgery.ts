@@ -8,13 +8,13 @@
 // Blepharoplasty-and-Chin-Augmentation.md). The vitiligo pages sit in this section of the source, so they form the
 // brief's "other specialist surgical pathway" group.
 //
-// Doctors: Dr Saranya T leads the surgical pages; Dr Sandeep is the vitiligo pages' doctor. Dr Lavanyaa M (named on
+// Doctors: Dr Thyagaraj leads the surgical pages (in place of Dr Saranya T, removed 2026-11-04); Dr Sandeep is the vitiligo pages' doctor. Dr Lavanyaa M (named on
 // the blepharoplasty and chin pages) is left off until her credentials and profile are signed off. Each card's
 // paragraph is the child pages' own wording about the doctor's approach, without figures.
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, thyagarajCard, sharedPending, whatsapp } from './shared.ts'
 import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/cosmetic-surgery/'
@@ -190,8 +190,8 @@ export const cosmeticSurgery: HubSource = {
     eyebrow: 'Your Doctors',
     h2: 'Led by Specialists',
     cards: [
-      saranyaCard([
-        'Her approach centres on careful examination, proportionate planning, safety, realistic expectations about scars and contour, and practical recovery guidance rather than a standard package.',
+      thyagarajCard([
+        'His approach centres on careful examination, proportionate planning, safety, realistic expectations about scars and contour, and practical recovery guidance rather than a standard package.',
       ]),
       sandeepCard([
         'For vitiligo, treatment is considered only after a consultation covering stability, the treatment area, previous management and expectations. Repigmentation develops gradually and varies by body site and person.',

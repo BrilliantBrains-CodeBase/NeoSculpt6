@@ -9,12 +9,12 @@
 // Groups: all 26 pages service-page.md lists under Slimming & Body Contouring. The source has no surgical page in
 // this section, so "Liposuction & Surgical Contouring" cross-links the Cosmetic Surgery pages that cover it.
 //
-// Doctors: Dr Sandeep for the weight-management and contouring pages; Dr Saranya T for the post-pregnancy and
+// Doctors: Dr Sandeep for the weight-management and contouring pages; Dr Thyagaraj for the post-pregnancy and
 // post-weight-loss pages (and the surgery the cross-links lead to). Paragraphs are the child pages' own wording.
 
 import { reception } from '../services/index.ts'
 import type { HubSource } from './types.ts'
-import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, saranyaCard, sharedPending, whatsapp } from './shared.ts'
+import { book, call, hubOrder, photo as hubPhoto, pillarPhoto, sandeepCard, thyagarajCard, sharedPending, whatsapp } from './shared.ts'
 import { reviewsForPath } from '../reviews.ts'
 
 const HUB = '/slimming-body-contouring/'
@@ -198,8 +198,8 @@ export const slimming: HubSource = {
       sandeepCard([
         'Consultations separate localised fat, skin laxity or texture concerns from broader weight-management needs before a treatment is discussed. Change is described as gradual and individual, with follow-up used to review response before any further treatment.',
       ]),
-      saranyaCard([
-        'Her consultation looks at weight stability, skin excess, contour concerns, previous procedures and recovery priorities before discussing whether non-surgical care, surgical evaluation or a staged plan is more appropriate.',
+      thyagarajCard([
+        'His consultation looks at weight stability, skin excess, contour concerns, previous procedures and recovery priorities before discussing whether non-surgical care, surgical evaluation or a staged plan is more appropriate.',
       ]),
     ],
   },

@@ -453,12 +453,12 @@ if (aboutCount(/aria-controls="[^"]*-track"/g) < 2) fail('about', 'carousel cont
 const aboutLinks = [
   ...about.numbers.items.filter((i) => i.href).map((i) => i.href),
   about.founder.cta.href,
-  about.saranya.cta.href,
+  about.surgeon.cta.href,
   ...about.team.cards.map((c) => c.href),
   about.clinicTech.cta.href,
   ...about.services.cards.map((c) => c.href),
 ]
-for (const href of ['/about-dr-sandeep-mahapatra/', '/dr-saranya-t/', '/technology/', '/international-patients/']) {
+for (const href of ['/about-dr-sandeep-mahapatra/', '/dr-thyagaraj/', '/technology/', '/international-patients/']) {
   if (!aboutLinks.includes(href)) fail('about', `no link to ${href}`)
 }
 for (const href of aboutLinks) {
@@ -1024,6 +1024,7 @@ for (const d of publishedDoctors) {
     ...d.expertise.flatMap((x) => [x.title, x.description]),
     ...approved(d.qualifications).flatMap((q) => [q.title, q.institution]),
     ...approved(d.recognition).flatMap((r) => [r.title, r.organisation]),
+    ...approved(d.teaching).map((t) => t.title),
     ...approved(d.metrics).map((m) => m.label),
     d.process.eyebrow,
     d.process.heading,
@@ -1041,6 +1042,7 @@ for (const d of publishedDoctors) {
   const hidden = [
     ...d.qualifications.filter((q) => q.approval !== 'approved').flatMap((q) => [q.title, q.institution]),
     ...d.recognition.filter((r) => r.approval !== 'approved').map((r) => r.organisation),
+    ...d.teaching.filter((t) => t.approval !== 'approved').map((t) => t.title),
     ...d.metrics.filter((m) => m.approval !== 'approved').map((m) => m.label),
     d.quote.approval !== 'approved' ? d.quote.text : null,
   ].filter(Boolean)

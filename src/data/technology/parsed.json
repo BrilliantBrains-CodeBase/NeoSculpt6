@@ -161,18 +161,19 @@
           }
         },
         {
-          "name": "Dr. Saranya T",
+          "name": "Dr Thyagaraj",
           "chips": [
             "MBBS",
-            "DNB General Surgery",
-            "MCh Plastic and Reconstructive Surgery"
+            "MS General Surgery",
+            "MCh Plastic Surgery",
+            "Masters in Reconstructive Breast Surgery"
           ],
           "qualifications": null,
           "specialty": "Consultant Plastic Surgeon.",
           "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
           "button": {
-            "label": "Meet Dr. Saranya T",
-            "href": "/dr-saranya-t/"
+            "label": "Meet Dr Thyagaraj",
+            "href": "/dr-thyagaraj/"
           }
         }
       ]
@@ -1190,18 +1191,19 @@
       "paragraphs": [],
       "cards": [
         {
-          "name": "Dr. Saranya T",
+          "name": "Dr Thyagaraj",
           "chips": [
             "MBBS",
-            "DNB General Surgery",
-            "MCh Plastic and Reconstructive Surgery"
+            "MS General Surgery",
+            "MCh Plastic Surgery",
+            "Masters in Reconstructive Breast Surgery"
           ],
           "qualifications": null,
           "specialty": "Consultant Plastic Surgeon.",
           "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
           "button": {
-            "label": "Meet Dr. Saranya T",
-            "href": "/dr-saranya-t/"
+            "label": "Meet Dr Thyagaraj",
+            "href": "/dr-thyagaraj/"
           }
         }
       ]
@@ -2571,18 +2573,19 @@
           }
         },
         {
-          "name": "Dr. Saranya T",
+          "name": "Dr Thyagaraj",
           "chips": [
             "MBBS",
-            "DNB General Surgery",
-            "MCh Plastic and Reconstructive Surgery"
+            "MS General Surgery",
+            "MCh Plastic Surgery",
+            "Masters in Reconstructive Breast Surgery"
           ],
           "qualifications": null,
           "specialty": "Consultant Plastic Surgeon.",
           "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
           "button": {
-            "label": "Meet Dr. Saranya T",
-            "href": "/dr-saranya-t/"
+            "label": "Meet Dr Thyagaraj",
+            "href": "/dr-thyagaraj/"
           }
         }
       ]
@@ -2991,14 +2994,14 @@
           }
         },
         {
-          "name": "Dr. Saranya T",
+          "name": "Dr Thyagaraj",
           "chips": null,
-          "qualifications": "MBBS, DNB General Surgery, MCh Plastic and Reconstructive Surgery.",
+          "qualifications": "MBBS, MS General Surgery, MCh Plastic Surgery, Masters in Reconstructive Breast Surgery.",
           "specialty": "Consultant Plastic Surgeon.",
           "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
           "button": {
-            "label": "Meet Dr. Saranya T",
-            "href": "/dr-saranya-t/"
+            "label": "Meet Dr Thyagaraj",
+            "href": "/dr-thyagaraj/"
           }
         }
       ]

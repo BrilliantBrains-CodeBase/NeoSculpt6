@@ -17,6 +17,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { replaceTechDoctor } from '../src/data/replaced-doctors.ts'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DOC_REL = 'content/technology/technology-international-patient.md'
@@ -330,6 +331,9 @@ for (const [n, start] of starts.entries()) {
   for (const key of record.order) walk(record[key], key)
   out.push(record)
 }
+
+// Cards naming Dr Saranya T, who left the site, become Dr Thyagaraj's (src/data/replaced-doctors.ts).
+for (const r of out) if (r.doctors) r.doctors.cards = r.doctors.cards.map(replaceTechDoctor)
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true })
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n')

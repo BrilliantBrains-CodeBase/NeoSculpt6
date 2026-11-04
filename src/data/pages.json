@@ -104,14 +104,14 @@
     "name": "Cosmetic Surgery",
     "section": null,
     "title": "Cosmetic Surgery in Bangalore | NeoSculpt6",
-    "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Saranya T, M.Ch Plastic Surgeon. Book a consultation.",
+    "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Thyagaraj, MS, MCh Plastic Surgeon. Book a consultation.",
     "h1": "Cosmetic Surgery in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/cosmetic-surgery/",
     "og": {
       "type": "website",
       "title": "Cosmetic Surgery in Bangalore | NeoSculpt6",
-      "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Saranya T, M.Ch Plastic Surgeon. Book a consultation.",
+      "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Thyagaraj, MS, MCh Plastic Surgeon. Book a consultation.",
       "url": "https://neosculpt6.com/cosmetic-surgery/",
       "image": "/og/cards/cosmetic-surgery.jpg",
       "imageAlt": "Gloved hands framing a woman’s face and jaw during a surgical assessment",
@@ -121,7 +121,7 @@
     "twitter": {
       "card": "summary_large_image",
       "title": "Cosmetic Surgery in Bangalore | NeoSculpt6",
-      "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Saranya T, M.Ch Plastic Surgeon. Book a consultation.",
+      "description": "Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Thyagaraj, MS, MCh Plastic Surgeon. Book a consultation.",
       "image": "/og/cards/cosmetic-surgery.jpg"
     },
     "breadcrumbs": [
@@ -139,7 +139,8 @@
       "description": "draft"
     },
     "todo": [
-      "new page: title, description and h1 are drafts (src/data/hubs.ts)"
+      "new page: title, description and h1 are drafts (src/data/hubs.ts)",
+      "description: 162 characters (over 160, may be cut in search results)"
     ],
     "category": "Cosmetic Surgery",
     "video": null,
@@ -784,30 +785,30 @@
     "oldSite": null
   },
   {
-    "path": "/dr-saranya-t/",
+    "path": "/dr-payal-mahapatra/",
     "type": "doctor",
-    "name": "Dr Saranya T",
+    "name": "Dr Payal Mahapatra",
     "section": null,
-    "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-    "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-    "h1": "Dr Saranya T",
+    "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+    "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+    "h1": "Dr. Payal Mahapatra",
     "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/dr-saranya-t/",
+    "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
     "og": {
       "type": "profile",
-      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-      "url": "https://neosculpt6.com/dr-saranya-t/",
-      "image": "/og/cards/dr-saranya-t.jpg",
-      "imageAlt": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "url": "https://neosculpt6.com/dr-payal-mahapatra/",
+      "image": "/og/cards/dr-payal-mahapatra.jpg",
+      "imageAlt": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
       "siteName": "NeoSculpt6",
       "photo": null
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Dr Saranya T | Plastic & Reconstructive Surgeon | NeoSculpt6",
-      "description": "Meet Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon at NeoSculpt6 in Whitefield, Bangalore, leading face, breast and body cosmetic surgery.",
-      "image": "/og/cards/dr-saranya-t.jpg"
+      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
+      "image": "/og/cards/dr-payal-mahapatra.jpg"
     },
     "breadcrumbs": [
       {
@@ -819,8 +820,8 @@
         "path": "/#our-doctors"
       },
       {
-        "name": "Dr Saranya T",
-        "path": "/dr-saranya-t/"
+        "name": "Dr Payal Mahapatra",
+        "path": "/dr-payal-mahapatra/"
       }
     ],
     "sources": {
@@ -829,7 +830,8 @@
     },
     "todo": [
       "doctor: profile copy awaiting medical review (doctors.json contentReview)",
-      "og:image: share card has no photo (no approved og image in doctors.json)"
+      "og:image: share card has no photo (no approved og image in doctors.json)",
+      "title: 69 characters (over 60, may be cut in search results)"
     ],
     "category": "Doctors",
     "video": null,
@@ -890,30 +892,30 @@
     "oldSite": null
   },
   {
-    "path": "/dr-payal-mahapatra/",
+    "path": "/dr-sumedha-tirthani/",
     "type": "doctor",
-    "name": "Dr Payal Mahapatra",
+    "name": "Dr Sumedha Tirthani",
     "section": null,
-    "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
-    "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
-    "h1": "Dr. Payal Mahapatra",
+    "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
+    "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
+    "h1": "Dr. Sumedha Tirthani",
     "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/dr-payal-mahapatra/",
+    "canonical": "https://neosculpt6.com/dr-sumedha-tirthani/",
     "og": {
       "type": "profile",
-      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
-      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
-      "url": "https://neosculpt6.com/dr-payal-mahapatra/",
-      "image": "/og/cards/dr-payal-mahapatra.jpg",
-      "imageAlt": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
+      "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
+      "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
+      "url": "https://neosculpt6.com/dr-sumedha-tirthani/",
+      "image": "/og/cards/dr-sumedha-tirthani.jpg",
+      "imageAlt": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
       "siteName": "NeoSculpt6",
       "photo": null
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "Dr Payal Mahapatra | Fertility Specialist & Gynecologist | NeoSculpt6",
-      "description": "Meet Dr Payal Mahapatra, fertility specialist and gynecologist (MBBS, DGO, DNB, Fellowship in Reproductive Medicine) at NeoSculpt6, Whitefield, Bangalore.",
-      "image": "/og/cards/dr-payal-mahapatra.jpg"
+      "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
+      "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
+      "image": "/og/cards/dr-sumedha-tirthani.jpg"
     },
     "breadcrumbs": [
       {
@@ -925,8 +927,8 @@
         "path": "/#our-doctors"
       },
       {
-        "name": "Dr Payal Mahapatra",
-        "path": "/dr-payal-mahapatra/"
+        "name": "Dr Sumedha Tirthani",
+        "path": "/dr-sumedha-tirthani/"
       }
     ],
     "sources": {
@@ -935,8 +937,7 @@
     },
     "todo": [
       "doctor: profile copy awaiting medical review (doctors.json contentReview)",
-      "og:image: share card has no photo (no approved og image in doctors.json)",
-      "title: 69 characters (over 60, may be cut in search results)"
+      "og:image: share card has no photo (no approved og image in doctors.json)"
     ],
     "category": "Doctors",
     "video": null,

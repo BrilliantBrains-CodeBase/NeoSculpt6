@@ -34,7 +34,7 @@ export const hubs: HubDraft[] = [
     h1: 'Cosmetic Surgery in Bangalore',
     title: 'Cosmetic Surgery in Bangalore | NeoSculpt6',
     description:
-      'Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Saranya T, M.Ch Plastic Surgeon. Book a consultation.',
+      'Face, breast and body surgery in Whitefield, Bangalore, planned around anatomy, safety and recovery by Dr Thyagaraj, MS, MCh Plastic Surgeon. Book a consultation.',
   },
   {
     path: '/slimming-body-contouring/',

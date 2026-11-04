@@ -11,6 +11,7 @@
 
 import parsedJson from '../services/parsed.json' with { type: 'json' }
 import { servicesByPath } from '../services/index.ts'
+import { inDoctorOrder } from '../doctors.ts'
 import { technologyByPath } from '../technology/index.ts'
 import type { TechnologyHub } from '../technology/types.ts'
 import type { HubSource, HubTreatment, SpecialityHub } from './types.ts'
@@ -64,7 +65,12 @@ function build(hub: HubSource): SpecialityHub {
     return card
   })
   if (hub.order.includes('hub-technology') !== cards.length > 0) throw new Error(`${hub.path}: hub-technology in order must match its cards`)
-  return { ...hub, treatments: { ...hub.treatments, groups }, technology: { ...technology, cards } }
+  return {
+    ...hub,
+    doctors: { ...hub.doctors, cards: inDoctorOrder(hub.doctors.cards) },
+    treatments: { ...hub.treatments, groups },
+    technology: { ...technology, cards },
+  }
 }
 
 export const specialityHubs: SpecialityHub[] = [hair, cosmeticSurgery, slimming, laserSkin, antiAgeing, gynaecology].map(build)

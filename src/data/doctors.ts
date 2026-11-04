@@ -208,6 +208,16 @@ export const doctors: Doctor[] = validateDoctors(raw)
 export const publishedDoctors = doctors.filter((d) => d.status === 'published')
 export const doctorByPath = new Map(publishedDoctors.map((d) => [d.path, d]))
 
+/** Doctor cards in the site's doctor order (the order of doctors.json), whatever order a page's doc lists them in. */
+export const inDoctorOrder = <T extends { name: string }>(cards: T[]): T[] => {
+  const rank = (name: string) => {
+    const i = doctors.findIndex((d) => d.displayName === name)
+    if (i < 0) throw new Error(`doctor card "${name}" has no record in doctors.json`)
+    return i
+  }
+  return [...cards].sort((a, b) => rank(a.name) - rank(b.name))
+}
+
 /** A doctor by slug, published or draft. A wrong slug stops the build. */
 export function doctorBySlug(slug: string): Doctor {
   const d = doctors.find((x) => x.slug === slug)
@@ -215,7 +225,7 @@ export function doctorBySlug(slug: string): Doctor {
   return d
 }
 
-/** The record a page's doc means by a name in any form ("Dr. Sandeep", "Dr Sandeep Mahapatra", "Dr. Saranya"). An
+/** The record a page's doc means by a name in any form ("Dr. Sandeep", "Dr Sandeep Mahapatra", "Dr Payal"). An
  *  unknown or ambiguous name stops the build rather than showing the wrong doctor. */
 export function doctorNamed(name: string): Doctor {
   const key = (s: string) => s.toLowerCase().replace(/^dr\.?\s+/, '').trim()
@@ -287,7 +297,7 @@ export function doctorSections(d: Doctor): DoctorSectionId[] {
     'doctor-hero': true,
     'doctor-philosophy': d.philosophy !== null,
     'doctor-expertise': d.expertise.length > 0,
-    'doctor-credentials': approved(d.qualifications).length + approved(d.recognition).length > 0,
+    'doctor-credentials': approved(d.qualifications).length + approved(d.recognition).length + approved(d.teaching).length > 0,
     'doctor-metrics': approved(d.metrics).length > 0,
     'doctor-process': true,
     'doctor-booking': true,

@@ -156,7 +156,7 @@ export const instagram = {
       alt: 'A smiling woman with glowing skin looking up in soft sunlight',
     },
     {
-      subject: 'Dr Saranya in consultation',
+      subject: 'A doctor in consultation',
       src: '/images/services/hair-transplant-restoration/fue-hair-transplant-in-bangalore-3.webp',
       width: 1200,
       height: 900,

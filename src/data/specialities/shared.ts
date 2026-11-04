@@ -3,8 +3,8 @@
 
 import newPhotosJson from '../services/new-photos.json' with { type: 'json' }
 import { clinic, instagram } from '../site.ts'
-import { doctorNamed, qualificationLines } from '../doctors.ts'
 import { doctorFor } from '../services/index.ts'
+import { thyagarajChips } from '../replaced-doctors.ts'
 import type { Cta, ServiceDoctor, ServiceImage } from '../services/types.ts'
 import { pillars } from '../home.ts'
 
@@ -53,7 +53,7 @@ export function pillarPhoto(hubPath: string): ServiceImage {
 }
 
 const sandeep = doctorFor('Dr Sandeep Mahapatra')
-const saranya = doctorFor('Dr Saranya T')
+const thyagaraj = doctorFor('Dr Thyagaraj')
 
 /** Dr Sandeep's card with signed-off facts only: his title from doctors.json, and chips that carry no † claim (years,
  *  case counts and degrees are pending there). `paragraphs` are a child page's own words about his approach. */
@@ -72,15 +72,15 @@ export function sandeepCard(paragraphs: string[], chips: string[] = [], blockEye
   }
 }
 
-/** Dr Saranya T's card: her title and approved qualifications from doctors.json. */
-export function saranyaCard(paragraphs: string[], blockEyebrow = 'Meet Dr Saranya'): ServiceDoctor {
+/** Dr Thyagaraj's card: his title from doctors.json and his approved degrees (his training list is too long for a card). */
+export function thyagarajCard(paragraphs: string[], blockEyebrow = 'Meet Dr Thyagaraj'): ServiceDoctor {
   return {
-    name: saranya.name,
-    href: saranya.href,
-    initials: saranya.initials,
-    portrait: saranya.portrait,
-    specialty: saranya.role,
-    chips: qualificationLines(doctorNamed(saranya.name)),
+    name: thyagaraj.name,
+    href: thyagaraj.href,
+    initials: thyagaraj.initials,
+    portrait: thyagaraj.portrait,
+    specialty: thyagaraj.role,
+    chips: thyagarajChips,
     profileLabel: 'Know More',
     blockEyebrow,
     paragraphs,

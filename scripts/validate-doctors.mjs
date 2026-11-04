@@ -89,6 +89,13 @@ for (const [p, c] of pageCards) {
   if ((c.portrait?.src ?? null) !== (portraitFor(d)?.src ?? null)) fail(p, `${c.name}: card portrait ${c.portrait?.src} is not the record's ${portraitFor(d)?.src}`)
 }
 
+// A page that shows several doctors lists them in the site's doctor order (the order of doctors.json).
+for (const pg of [...servicesByPath.values(), ...technologyPages, ...specialityByPath.values()]) {
+  const names = (pg.doctors?.cards ?? []).map((c) => c.name)
+  const ranks = names.map((n) => doctors.findIndex((d) => d.displayName === n))
+  if (ranks.some((r, i) => i > 0 && r < ranks[i - 1])) fail(pg.path, `doctor cards out of order: ${names.join(', ')}`)
+}
+
 // No page data or component keeps its own copy of a doctor's portrait path: those come from doctors.json.
 const portraitPaths = doctors.flatMap((d) => [d.hero.portrait.src, d.cardPortrait?.src].filter(Boolean))
 const sourceFiles = (dir) =>

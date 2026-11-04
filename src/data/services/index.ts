@@ -17,7 +17,7 @@ import parsedJson from './parsed.json' with { type: 'json' }
 import photosJson from './photos.json' with { type: 'json' }
 import newPhotosJson from './new-photos.json' with { type: 'json' }
 import videosJson from './videos.json' with { type: 'json' }
-import { doctorNamed, portraitFor, profileHref } from '../doctors.ts'
+import { doctorNamed, inDoctorOrder, portraitFor, profileHref } from '../doctors.ts'
 import { reviewsForPath } from '../reviews.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
@@ -65,7 +65,7 @@ function cta(label: string): Cta {
   return { label, action: 'book' }
 }
 
-// The doctor a doc names ("Dr Sandeep Mahapatra", "Dr. Sandeep", "Dr. Saranya", "Dr. Lavanyaa M"), from doctors.json:
+// The doctor a doc names ("Dr Sandeep Mahapatra", "Dr. Sandeep", "Dr. Lavanyaa M"), from doctors.json:
 // name, profile, initials, title and portrait. The doc only decides who is on the page and its own words about them.
 // A doctor with no published profile (Dr Lavanyaa M is a draft) gets a card with no profile link.
 export function doctorFor(docName: string) {
@@ -174,7 +174,7 @@ function build(p: Parsed): ServiceContent {
     whyChoose: p.whyChoose,
     process: { ...p.process, image: pics.process },
     candidates: { h2: p.candidates.h2, note: p.candidates.note || null, cards: p.candidates.cards, image: pics.candidates },
-    doctors: { eyebrow: p.doctors.eyebrow, h2: p.doctors.h2, cards: doctorCards },
+    doctors: { eyebrow: p.doctors.eyebrow, h2: p.doctors.h2, cards: inDoctorOrder(doctorCards) },
     technology: p.technology,
     cost: { h2: p.cost.h2, intro: p.cost.intro, factors: p.cost.factors, ctas: p.cost.buttons.map(cta) },
     // A strip without its own button in the doc offers the page's primary action.

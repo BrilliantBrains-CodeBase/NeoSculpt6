@@ -166,18 +166,19 @@ export const founder = {
   } as Image,
 }
 
-// C (continued). Dr Saranya T, the shorter mirrored block, from her record in doctors.json.
-const saranyaRecord = doctorBySlug('dr-saranya-t')
-if (!saranyaRecord.summary) throw new Error('doctors.json: dr-saranya-t needs a summary for the About block')
-export const saranya = {
-  name: saranyaRecord.displayName,
-  title: saranyaRecord.summary.title,
-  qualifications: qualificationLines(saranyaRecord),
-  text: saranyaRecord.summary.text,
-  chips: saranyaRecord.expertise.map((x) => x.title),
-  cta: { label: `Meet ${shortName(saranyaRecord)}`, href: saranyaRecord.path },
-  initials: saranyaRecord.initials,
-  portrait: portraitFor(saranyaRecord) as DoctorPortrait | null,
+// C (continued). Dr Thyagaraj, the shorter mirrored block, from his record in doctors.json (he took Dr Saranya T's
+// place on 2026-11-04). His record has no summary, so the title is his role and the text his profile intro; only his
+// degrees are listed, as his training list is too long for this block.
+const surgeonRecord = doctorBySlug('dr-thyagaraj')
+export const surgeon = {
+  name: surgeonRecord.displayName,
+  title: surgeonRecord.summary?.title ?? surgeonRecord.role,
+  qualifications: qualificationLines({ ...surgeonRecord, qualifications: surgeonRecord.qualifications.filter((q) => q.type === 'education') }),
+  text: surgeonRecord.summary?.text ?? surgeonRecord.hero.intro,
+  chips: surgeonRecord.expertise.map((x) => x.title),
+  cta: { label: `Meet ${shortName(surgeonRecord)}`, href: surgeonRecord.path },
+  initials: surgeonRecord.initials,
+  portrait: portraitFor(surgeonRecord) as DoctorPortrait | null,
 }
 
 // 3. Our Professional Team. The cards are the home page's (`doctors.cards`: every published doctor), laid out by DoctorGrid.
@@ -211,7 +212,7 @@ export const services = {
   h2: [{ text: 'Six Areas of ' }, { text: 'Specialist', gold: true }, { text: ' Care' }] as Part[],
   cards: [
     { label: 'Led by Dr Sandeep', title: 'Hair Transplant & Restoration', href: '/hair-transplant-restoration/' },
-    { label: 'Led by Dr Saranya', title: 'Cosmetic Surgery', href: '/cosmetic-surgery/' },
+    { label: 'Led by Dr Thyagaraj', title: 'Cosmetic Surgery', href: '/cosmetic-surgery/' },
     { label: 'Surgical & non-surgical', title: 'Slimming & Body Contouring', href: '/slimming-body-contouring/' },
     { label: 'Led by Dr Sandeep', title: 'Laser & Skin Aesthetics', href: '/laser-skin-aesthetic/' },
     { label: 'Led by Dr Sandeep', title: 'Anti-Ageing & Injectables', href: '/anti-aging-injectables/' },
@@ -222,7 +223,7 @@ export const services = {
 // 5. What Our Patients Say. Real Google reviews word for word from the shared pool (src/data/reviews.ts: rules,
 // sources and consent), chosen by hand to match the doc's brief and to differ from the home page's:
 // the time given in the consultation (parth-g) · honest advice, no unnecessary procedures (pravat-k) ·
-// being put at ease (aakarshan-s) · Dr Sandeep by name (neha-c). No review mentions Dr Saranya yet.
+// being put at ease (aakarshan-s) · Dr Sandeep by name (neha-c).
 // The rating, review count and Practo line are the home page's; no rating schema (the rating is another listing's).
 export const reviews = {
   h2: [{ text: 'What Our ' }, { text: 'Patients', gold: true }, { text: ' Say' }] as Part[],
@@ -265,7 +266,7 @@ export const faqs = {
     },
     {
       q: 'Who are the doctors at NeoSculpt6?',
-      a: 'Dr Sandeep Mahapatra leads hair, skin, laser and injectable care; Dr Saranya T, M.Ch Plastic & Reconstructive Surgeon, leads cosmetic surgery.',
+      a: 'Dr Sandeep Mahapatra leads hair, skin, laser and injectable care; Dr Thyagaraj, MS, MCh Plastic Surgeon, leads cosmetic surgery.',
     },
     {
       q: 'Will I meet the doctor or a counsellor?',

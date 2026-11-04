@@ -520,6 +520,8 @@ async function main() {
     }),
   )
   for (const from of TERMS.redirectFrom) redirects.push({ from, to: TERMS.path, status: 301 })
+  // Dr Saranya T's profile was removed on 2026-11-04; Dr Thyagaraj took her place on every page.
+  redirects.push({ from: '/dr-saranya-t/', to: '/dr-thyagaraj/', status: 301 })
 
   pages.push(
     record({
