@@ -1,0 +1,112 @@
+# Build the site and deploy dist/ to GoDaddy cPanel over SSH (rsync).
+#
+# Runs on every push to main, and by hand from the Actions tab
+# ("Run workflow"), where "dry_run" lists what would change without touching
+# the server. Nothing is uploaded unless the build and the SEO check pass.
+#
+# Repository secrets (Settings -> Secrets and variables -> Actions):
+#   SSH_HOST         the server IP
+#   SSH_USER         the cPanel username
+#   SSH_PORT         22
+#   SSH_PRIVATE_KEY  the private deploy key (the file without .pub)
+#
+# The server's public_html also holds other sites (neofertility.co.in at the
+# root, dermasolutions.co.in, neofollicletransplant.com and old backups).
+# DEPLOY_PATH is neosculpt6.com's own document root, so --delete can only ever
+# remove files inside it.
+
+name: Deploy to GoDaddy
+
+on:
+  push:
+    # Only main uploads. A push to ci/auto-deploy runs the whole thing as a
+    # dry run, to test the pipeline without touching the live site.
+    branches: [main, ci/auto-deploy]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: List the changes only, upload nothing
+        type: boolean
+        default: false
+
+# One deploy at a time; a newer push waits for the running one to finish.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  DEPLOY_PATH: /home/pvxu8uik8hqc/public_html/neosculpt6.com/
+  # Upload for real only from main, and only when "dry run" was not ticked.
+  DRY_RUN: ${{ (inputs.dry_run || github.ref != 'refs/heads/main') && '--dry-run' || '' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Titles, descriptions, canonicals, sitemap, JSON-LD and assets must all
+      # check out. A failure here stops the deploy.
+      - name: Verify SEO
+        run: npm run verify
+
+      - name: Set up SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      # -c compares by checksum, so only files whose content changed are sent
+      # (every build rewrites timestamps). --chmod gives the web server the
+      # usual 755/644. --delete removes files that left the build, except the
+      # excluded server-only paths below, which it never touches:
+      #   .well-known/acme-challenge, pki-validation  SSL certificate renewal
+      #   cgi-bin, .user.ini, error_log               cPanel / PHP housekeeping
+      #   neosculpt6v1.zip                            the last manual upload, kept as a backup
+      # .vite/ is the build's own manifest and is not needed on the server.
+      - name: Deploy
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          if [ -n "$DRY_RUN" ]; then echo "DRY RUN: listing changes only, nothing is uploaded or deleted"; fi
+          # --delay-updates swaps every new file in together at the end, and
+          # --delete-after removes old ones only after that, so a visitor never
+          # gets a page pointing at a file that is already gone.
+          rsync -rlptzc --delete --delete-after --delay-updates --itemize-changes $DRY_RUN \
+            --chmod=D755,F644 \
+            --exclude='.vite/' \
+            --exclude='.well-known/acme-challenge/' \
+            --exclude='.well-known/pki-validation/' \
+            --exclude='cgi-bin/' \
+            --exclude='.user.ini' \
+            --exclude='error_log' \
+            --exclude='/neosculpt6v1.zip' \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o BatchMode=yes" \
+            dist/ "$SSH_USER@$SSH_HOST:$DEPLOY_PATH"
+
+      - name: Smoke test
+        if: ${{ env.DRY_RUN == '' }}
+        run: |
+          for path in / /about-us/ /contact-us/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://neosculpt6.com$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || exit 1
+          done
