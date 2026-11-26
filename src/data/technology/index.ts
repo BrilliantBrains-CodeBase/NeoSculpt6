@@ -34,6 +34,7 @@ import type {
   TechnologyPage,
   TechnologyReviews,
 } from './types.ts'
+import type { HeldBlock, InfoBlock } from '../blocks.ts'
 import { reviewsForPath } from '../reviews.ts'
 
 // parsed.json, as scripts/parse-technology-pages.mjs writes it (one shape per page kind; checked there).
@@ -56,9 +57,13 @@ interface DocBase {
   seo: { title: string; description: string; h1: string; robots: string; breadcrumb: string[]; note: string | null }
   order: string[]
   notes: TechnologyNote[]
-  hero: { eyebrow: string; h1: string; intro: string; buttons: DocLink[] }
+  hero: { eyebrow: string; h1: string; subheading?: string | null; intro: string; buttons: DocLink[]; trust?: string[] | null }
   doctors: { eyebrow: string | null; h2: string; paragraphs: string[]; cards: DocDoctor[] }
   closing: { h2: string; paragraph: string; buttons: DocLink[] }
+  /** "Info: …" sections (ARTAS, Medical Tourism) and the ones held back until confirmed. */
+  blocks: InfoBlock[]
+  held: HeldBlock[]
+  disclaimer?: { text: string }
 }
 interface DocDetail extends DocBase {
   kind: 'technology-detail' | 'artas-detail'
@@ -66,14 +71,13 @@ interface DocDetail extends DocBase {
   /** Standard pages only. */
   different?: DocText
   assessment?: { h2: string; paragraph: string }
-  /** ARTAS only. */
-  comparison?: { h2: string; introLine: string; cards: DocRow[] }
   benefits: { h2: string; subline: string | null; cards: { title: string; text: string | null }[]; smallPrint: string | null }
   process: { eyebrow: string; h2: string; steps: DocRow[] }
-  candidates: { h2: string; items: string[]; paragraphs: string[] }
+  candidates: { h2: string; lead?: string | null; items: string[]; paragraphs: string[] }
   expectations: DocText
   cost: { h2: string; paragraphs: string[]; buttons: DocLink[] }
-  reviews: { eyebrow: string; h2: string }
+  /** Standard pages only (ARTAS has none). */
+  reviews?: { eyebrow: string; h2: string }
   faqs: DocFaqs
   explore: { heading: string; links: DocLink[]; related: DocLink[]; contact: DocLink[] }
 }
@@ -83,13 +87,6 @@ interface DocHub extends DocBase {
 }
 interface DocInternational extends DocBase {
   kind: 'international-patients'
-  intro: DocText
-  steps: { h2: string; cards: DocRow[] }
-  pathways: { h2: string; tabs: { tab: string; h3: string; paragraph: string; chips: DocLink[]; button: DocLink }[] }
-  journey: { eyebrow: string; h2: string; steps: DocRow[] }
-  travel: DocText
-  estimates: DocText
-  reviews: { eyebrow: string; h2: string }
   faqs: DocFaqs
 }
 type Parsed = DocDetail | DocHub | DocInternational
@@ -104,7 +101,7 @@ export const LIVE = new Set((parsedJson as { path: string }[]).map((p) => p.path
 
 function cta({ label, href }: DocLink): Cta {
   if (/^call\b/i.test(label)) return { label, href: clinic.phoneHref }
-  if (/^whatsapp$/i.test(label)) return { label, href: clinic.whatsappHref }
+  if (/^whatsapp\b/i.test(label)) return { label, href: clinic.whatsappHref }
   if (href === '/contact-us/') return { label, action: 'book' }
   if (!href) throw new Error(`a technology doc button has no destination: ${label}`)
   return { label, href }
@@ -176,11 +173,6 @@ const PHOTOS: Record<string, [string | null, string, string | null]> = {
     'new:slimming-body-contouring/cryolipolysis-treatment-in-bangalore-3', // setting up an applicator
     'new:slimming-body-contouring/cryolipolysis-treatment-in-bangalore-2', // measuring the waist before treatment
   ],
-  '/international-patients/': [
-    'new:cosmetic-surgery/mommy-makeover-surgery-in-bangalore-1', // talking across a consultation desk (travel)
-    'new:slimming-body-contouring/glp-1-weight-loss-program-in-bangalore-1', // notes across the desk (journey)
-    null,
-  ],
 }
 type Photo = { src: string; alt: string | null; width?: number; height?: number; unusable?: string }
 const photoBySrc = new Map([...(photosJson as Photo[]), ...(newPhotosJson as Photo[])].map((p) => [p.src, p]))
@@ -209,7 +201,8 @@ function doctors(p: DocBase['doctors']) {
       portrait: who.portrait,
       specialty: who.role,
       chips: d.chips ?? [],
-      profileLabel: d.button?.label ?? 'Know More',
+      // No label for a doctor without a published profile (a draft record): the card then has no link.
+      profileLabel: who.href ? (d.button?.label ?? 'Know More') : '',
       blockEyebrow: null,
       // International Patients' cards give the qualifications as a line ("MBBS, MD Dermatology."), not chips.
       paragraphs: d.chips ? [d.text] : [d.qualifications, d.text].filter((x): x is string => Boolean(x)),
@@ -233,10 +226,35 @@ function reviews(r: { eyebrow: string; h2: string }, path: string): TechnologyRe
 
 const banner = (h: DocBase['hero'], image: ServiceImage): TechnologyBanner => ({
   eyebrow: h.eyebrow,
+  ...(h.subheading ? { subheading: h.subheading } : {}),
   intro: h.intro,
   ctas: h.buttons.map(cta),
+  ...(h.trust?.length ? { trust: h.trust } : {}),
   image,
 })
+
+// The page's section ids in order, for `npm run verify` (each key's component id; info blocks use their own).
+const SECTION_ID: Record<string, string> = {
+  hero: 'technology-banner',
+  intro: 'service-intro',
+  process: 'how-it-works',
+  benefits: 'technology-benefits',
+  candidates: 'service-candidates',
+  expectations: 'technology-expectations',
+  doctors: 'service-doctor',
+  cost: 'cost',
+  faqs: 'service-faqs',
+  closing: 'service-cta',
+  disclaimer: 'page-disclaimer',
+  explore: 'technology-explore',
+}
+const sectionIds = (order: string[]) => [
+  ...order.map((k) => (k.startsWith('info:') ? k.slice(5) : (SECTION_ID[k] ?? need(undefined, `section id for ${k}`)))),
+  'instagram',
+]
+
+// Held sections and their reasons, for the sign-off list.
+const heldItems = (held: HeldBlock[]) => held.map((h) => `held until confirmed: "${h.h2 ?? h.id}" (${h.reason})`)
 
 const closing = (c: DocBase['closing'], image: ServiceImage | null) => ({
   kicker: null,
@@ -261,8 +279,8 @@ function pendingFor(p: Parsed, extra: string[]): string[] {
 // Source copy that uses a word the content rules keep out ("best", "permanent", …). It is shown word for word, as the
 // doc gives it, and listed for sign-off; `npm run verify` allows exactly these phrases and no others.
 export const SOURCE_EXCEPTIONS: Record<string, string[]> = {
-  '/technology/artas-robotic-hair-transplant/': ['FUT leaves a permanent linear scar'],
-  '/international-patients/': ['International care works best when'],
+  '/technology/artas-robotic-hair-transplant/': ['Best for', 'Is it permanent?'],
+  '/medical-tourism-in-bangalore/': ['Is the result permanent?'],
 }
 const sourceWords = (p: Parsed) =>
   (SOURCE_EXCEPTIONS[p.path] ?? []).map((phrase) => `content rules: source copy "${phrase}" uses a word the rules keep out`)
@@ -289,6 +307,7 @@ function buildDetail(p: DocDetail): TechnologyDetail | ArtasDetail {
     process: { eyebrow: p.process.eyebrow, h2: p.process.h2, steps: p.process.steps, image: pics.second },
     candidates: {
       h2: p.candidates.h2,
+      ...(p.candidates.lead ? { lead: p.candidates.lead } : {}),
       note: p.candidates.paragraphs,
       cards: p.candidates.items.map((title) => ({ title, text: null })),
       image: need(pics.third ?? undefined, `${p.path} candidates photo`),
@@ -296,7 +315,6 @@ function buildDetail(p: DocDetail): TechnologyDetail | ArtasDetail {
     expectations: { h2: p.expectations.h2, paragraphs: p.expectations.paragraphs },
     doctors: docs,
     cost: { h2: p.cost.h2, intro: p.cost.paragraphs, factors: [], ctas: p.cost.buttons.map(cta) },
-    reviews: reviews(p.reviews, p.path),
     faqs: { eyebrow: p.faqs.eyebrow, h2: p.faqs.h2, items: p.faqs.items, cta: p.faqs.button ? cta(p.faqs.button) : null },
     closing: closing(p.closing, reception),
     explore: {
@@ -318,16 +336,25 @@ function buildDetail(p: DocDetail): TechnologyDetail | ArtasDetail {
     ]),
   }
   if (p.kind === 'artas-detail') {
-    const comparison = need(p.comparison, `${p.path} comparison`)
+    if (p.blocks.length !== 1) throw new Error(`${p.path}: expected one info block (the comparison table), found ${p.blocks.length}`)
     return {
       ...shared,
       kind: 'artas-detail',
-      comparison: { ...comparison, highlight: comparison.cards.findIndex((c) => /^ARTAS/.test(c.title)) },
+      comparison: p.blocks[0],
+      disclaimer: need(p.disclaimer, `${p.path} disclaimer`).text,
+      sectionIds: sectionIds(p.order),
+      pending: [
+        ...shared.pending,
+        'model: the page says "ARTAS" until the clinic confirms which model it owns (old copy: ARTAS iX; reference page: ARTAS iXi)',
+        'photos: no photo of the clinic\'s own ARTAS robot yet (the hero is the FUE treatment photo); needed for this page and the home ARTAS section',
+        ...heldItems(p.held),
+      ],
     }
   }
   return {
     ...shared,
     kind: 'technology-detail',
+    reviews: reviews(need(p.reviews, `${p.path} reviews`), p.path),
     different: { ...need(p.different, `${p.path} different`), introLine: null, ctas: [], image: need(pics.first ?? undefined, `${p.path} different photo`), video: null },
     assessment: need(p.assessment, `${p.path} assessment`),
   }
@@ -360,28 +387,21 @@ function buildHub(p: DocHub): TechnologyHub {
 }
 
 function buildInternational(p: DocInternational): InternationalPatients {
-  const pics = bands(p.path)
   return {
     ...common(p),
     kind: 'international-patients',
     hero: banner(p.hero, texture),
-    intro: { h2: p.intro.h2, paragraphs: p.intro.paragraphs, points: [] },
-    steps: { h2: p.steps.h2, cards: p.steps.cards },
-    pathways: {
-      h2: p.pathways.h2,
-      tabs: p.pathways.tabs.map((t) => ({ tab: t.tab, h3: t.h3, paragraph: t.paragraph, chips: navLinks(t.chips), cta: cta(t.button) })),
-    },
-    journey: { eyebrow: p.journey.eyebrow, h2: p.journey.h2, steps: p.journey.steps, image: pics.second },
-    travel: { h2: p.travel.h2, introLine: null, paragraphs: p.travel.paragraphs, ctas: [], image: need(pics.first ?? undefined, `${p.path} travel photo`), video: null },
+    blocks: p.blocks,
+    held: p.held,
     doctors: doctors(p.doctors),
-    estimates: { h2: p.estimates.h2, intro: p.estimates.paragraphs, factors: [], ctas: [] },
-    reviews: reviews(p.reviews, p.path),
     faqs: { eyebrow: p.faqs.eyebrow, h2: p.faqs.h2, items: p.faqs.items, cta: p.faqs.button ? cta(p.faqs.button) : null },
     // The reception would repeat the clinic photo; the band is plain until an approved photo is supplied.
     closing: closing(p.closing, null),
+    disclaimer: need(p.disclaimer, `${p.path} disclaimer`).text,
+    sectionIds: sectionIds(p.order),
     pending: pendingFor(p, [
-      'photos: the banner texture and the journey and travel photos are placeholders',
-      'pathways: Fertility Care shows no treatment links until the Neo Fertility link is confirmed (or the tab removed)',
+      'photos: the banner is a texture; no photo of international patients or the clinic yet',
+      ...heldItems(p.held),
       ...sourceWords(p),
     ]),
   }

@@ -114,6 +114,7 @@ export const footerNav = [
   { label: 'Our Doctors', href: '/#our-doctors' },
   { label: 'Results', href: '/#results' },
   { label: 'Journal', href: '/journal/' },
+  { label: 'ARTAS Robotic Hair Transplant', href: '/technology/artas-robotic-hair-transplant/' },
   { label: 'Contact', href: '/contact-us/' },
 ]
 

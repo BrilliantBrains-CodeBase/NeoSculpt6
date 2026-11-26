@@ -6,7 +6,8 @@ import { PagePlaceholder } from './PagePlaceholder'
 import { TechnologyBanner } from '../components/technology/TechnologyBanner'
 import { TechnologyHighlight } from '../components/technology/TechnologyHighlight'
 import { TechnologyBenefits } from '../components/technology/TechnologyBenefits'
-import { TechnologyComparison } from '../components/technology/TechnologyComparison'
+import { InfoSection } from '../components/InfoSection'
+import { PageDisclaimer } from '../components/PageDisclaimer'
 import { TechnologyExplore } from '../components/technology/TechnologyExplore'
 import { ServiceIntro } from '../components/service/ServiceIntro'
 import { ServiceConsultation } from '../components/service/ServiceConsultation'
@@ -32,13 +33,15 @@ export function TechnologyTemplate({ page }: TemplateProps) {
     return <PagePlaceholder page={page} template="technology" />
   }
 
-  // ARTAS: hero, intro, ARTAS vs traditional, how it works, benefits, candidates, results, then the shared tail.
+  // ARTAS (client brief 2026-11-25): hero, intro, how it works, benefits, the ARTAS vs FUT vs manual FUE table,
+  // candidates, results, doctor, cost, FAQs, closing band, disclaimer, Explore; no reviews.
   // The others: hero, intro, how it is different, assessment band, benefits, how it works, candidates, expectations.
+  if (content.kind === 'artas-detail') return <ArtasPage page={page} content={content} />
   return (
     <>
       <TechnologyBanner page={page} hero={content.hero} />
       <ServiceIntro intro={content.intro} />
-      {content.kind === 'artas-detail' ? <ArtasMiddle content={content} /> : <StandardMiddle content={content} />}
+      <StandardMiddle content={content} />
       <ServiceIntro id="technology-expectations" intro={{ ...content.expectations, points: [] }} />
       <ServiceDoctor doctors={content.doctors} />
       <ServiceCost cost={content.cost} />
@@ -69,13 +72,23 @@ function StandardMiddle({ content }: { content: TechnologyDetail }) {
   )
 }
 
-function ArtasMiddle({ content }: { content: ArtasDetail }) {
+function ArtasPage({ page, content }: { page: TemplateProps['page']; content: ArtasDetail }) {
   return (
     <>
-      <TechnologyComparison comparison={content.comparison} />
+      <TechnologyBanner page={page} hero={content.hero} />
+      <ServiceIntro intro={content.intro} />
       <ServiceProcess id="how-it-works" process={content.process} />
       <TechnologyBenefits benefits={content.benefits} />
+      <InfoSection block={content.comparison} />
       <ServiceCandidates candidates={content.candidates} />
+      <ServiceIntro id="technology-expectations" intro={{ ...content.expectations, points: [] }} />
+      <ServiceDoctor doctors={content.doctors} />
+      <ServiceCost cost={content.cost} />
+      <ServiceFaq faqs={content.faqs} />
+      <ServiceCta closing={content.closing} />
+      <PageDisclaimer text={content.disclaimer} />
+      <TechnologyExplore explore={content.explore} />
+      <InstagramStrip />
     </>
   )
 }

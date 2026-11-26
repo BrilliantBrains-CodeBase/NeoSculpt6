@@ -442,30 +442,30 @@
     "oldSite": null
   },
   {
-    "path": "/international-patients/",
-    "type": "hub",
-    "name": "International Patients",
-    "section": null,
-    "title": "International Patient Care in Bangalore | NeoSculpt6",
-    "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
-    "h1": "International Patient Care in Bangalore",
+    "path": "/laser-skin-aesthetic/microblading-in-bangalore/",
+    "type": "service",
+    "name": "Microblading",
+    "section": "/laser-skin-aesthetic/",
+    "title": "Microblading in Bangalore | Natural Eyebrows | NeoSculpt6",
+    "description": "Doctor-led microblading in Bangalore for fuller, natural-looking brows. Personalised brow mapping, hygienic single-use tools and a touch-up plan. Call +91 99640 60483.",
+    "h1": "Microblading in Bangalore",
     "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/international-patients/",
+    "canonical": "https://neosculpt6.com/laser-skin-aesthetic/microblading-in-bangalore/",
     "og": {
       "type": "website",
-      "title": "International Patient Care in Bangalore | NeoSculpt6",
-      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
-      "url": "https://neosculpt6.com/international-patients/",
-      "image": "/og/cards/international-patients.jpg",
-      "imageAlt": "International Patient Care in Bangalore | NeoSculpt6",
+      "title": "Microblading in Bangalore | Natural Eyebrows | NeoSculpt6",
+      "description": "Doctor-led microblading in Bangalore for fuller, natural-looking brows. Personalised brow mapping, hygienic single-use tools and a touch-up plan. Call +91 99640 60483.",
+      "url": "https://neosculpt6.com/laser-skin-aesthetic/microblading-in-bangalore/",
+      "image": "/og/cards/laser-skin-aesthetic__microblading-in-bangalore.jpg",
+      "imageAlt": "Microblading in Bangalore | Natural Eyebrows | NeoSculpt6",
       "siteName": "NeoSculpt6",
       "photo": null
     },
     "twitter": {
       "card": "summary_large_image",
-      "title": "International Patient Care in Bangalore | NeoSculpt6",
-      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
-      "image": "/og/cards/international-patients.jpg"
+      "title": "Microblading in Bangalore | Natural Eyebrows | NeoSculpt6",
+      "description": "Doctor-led microblading in Bangalore for fuller, natural-looking brows. Personalised brow mapping, hygienic single-use tools and a touch-up plan. Call +91 99640 60483.",
+      "image": "/og/cards/laser-skin-aesthetic__microblading-in-bangalore.jpg"
     },
     "breadcrumbs": [
       {
@@ -473,8 +473,12 @@
         "path": "/"
       },
       {
-        "name": "International Patients",
-        "path": "/international-patients/"
+        "name": "Laser & Skin Aesthetics",
+        "path": "/laser-skin-aesthetic/"
+      },
+      {
+        "name": "Microblading",
+        "path": "/laser-skin-aesthetic/microblading-in-bangalore/"
       }
     ],
     "sources": {
@@ -483,9 +487,59 @@
     },
     "todo": [
       "new page: share card has no photo (no page photo yet)",
-      "description: 178 characters (over 160, may be cut in search results)"
+      "description: 167 characters (over 160, may be cut in search results)"
     ],
-    "category": "International Patients",
+    "category": "Laser & Skin Aesthetics",
+    "video": null,
+    "lastmod": null,
+    "oldSite": null
+  },
+  {
+    "path": "/medical-tourism-in-bangalore/",
+    "type": "hub",
+    "name": "Medical Tourism in Bangalore",
+    "section": null,
+    "title": "Medical Tourism in Bangalore for International Patients | NeoSculpt6",
+    "description": "Travelling to Bangalore for aesthetic or hair restoration care? NeoSculpt6 offers virtual consultations, a doctor-led plan and travel guidance. Call +91 99640 60483.",
+    "h1": "Medical Tourism in Bangalore for International Patients",
+    "robots": "index, follow",
+    "canonical": "https://neosculpt6.com/medical-tourism-in-bangalore/",
+    "og": {
+      "type": "website",
+      "title": "Medical Tourism in Bangalore for International Patients | NeoSculpt6",
+      "description": "Travelling to Bangalore for aesthetic or hair restoration care? NeoSculpt6 offers virtual consultations, a doctor-led plan and travel guidance. Call +91 99640 60483.",
+      "url": "https://neosculpt6.com/medical-tourism-in-bangalore/",
+      "image": "/og/cards/medical-tourism-in-bangalore.jpg",
+      "imageAlt": "Medical Tourism in Bangalore for International Patients | NeoSculpt6",
+      "siteName": "NeoSculpt6",
+      "photo": null
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Medical Tourism in Bangalore for International Patients | NeoSculpt6",
+      "description": "Travelling to Bangalore for aesthetic or hair restoration care? NeoSculpt6 offers virtual consultations, a doctor-led plan and travel guidance. Call +91 99640 60483.",
+      "image": "/og/cards/medical-tourism-in-bangalore.jpg"
+    },
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "path": "/"
+      },
+      {
+        "name": "Medical Tourism in Bangalore",
+        "path": "/medical-tourism-in-bangalore/"
+      }
+    ],
+    "sources": {
+      "title": "doc",
+      "description": "doc"
+    },
+    "todo": [
+      "new page: share card has no photo (no page photo yet)",
+      "title: 68 characters (over 60, may be cut in search results)",
+      "description: 165 characters (over 160, may be cut in search results)"
+    ],
+    "category": "Medical Tourism in Bangalore",
     "video": null,
     "lastmod": null,
     "oldSite": null
@@ -876,59 +930,6 @@
       {
         "name": "Dr Thyagaraj",
         "path": "/dr-thyagaraj/"
-      }
-    ],
-    "sources": {
-      "title": "doctor-json",
-      "description": "doctor-json"
-    },
-    "todo": [
-      "doctor: profile copy awaiting medical review (doctors.json contentReview)",
-      "og:image: share card has no photo (no approved og image in doctors.json)"
-    ],
-    "category": "Doctors",
-    "video": null,
-    "lastmod": null,
-    "oldSite": null
-  },
-  {
-    "path": "/dr-sumedha-tirthani/",
-    "type": "doctor",
-    "name": "Dr Sumedha Tirthani",
-    "section": null,
-    "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
-    "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
-    "h1": "Dr. Sumedha Tirthani",
-    "robots": "index, follow",
-    "canonical": "https://neosculpt6.com/dr-sumedha-tirthani/",
-    "og": {
-      "type": "profile",
-      "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
-      "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
-      "url": "https://neosculpt6.com/dr-sumedha-tirthani/",
-      "image": "/og/cards/dr-sumedha-tirthani.jpg",
-      "imageAlt": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
-      "siteName": "NeoSculpt6",
-      "photo": null
-    },
-    "twitter": {
-      "card": "summary_large_image",
-      "title": "Dr Sumedha Tirthani | Consultant Dermatologist | NeoSculpt6",
-      "description": "Meet Dr Sumedha Tirthani, Consultant Dermatologist (MD Dermatology, Gold Medalist) for acne, pigmentation, hair loss and vitiligo at NeoSculpt6, Bangalore.",
-      "image": "/og/cards/dr-sumedha-tirthani.jpg"
-    },
-    "breadcrumbs": [
-      {
-        "name": "Home",
-        "path": "/"
-      },
-      {
-        "name": "Our Doctors",
-        "path": "/#our-doctors"
-      },
-      {
-        "name": "Dr Sumedha Tirthani",
-        "path": "/dr-sumedha-tirthani/"
       }
     ],
     "sources": {
@@ -10211,14 +10212,14 @@
     "name": "ARTAS Robotic Hair Transplant",
     "section": "/technology/",
     "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
-    "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
+    "description": "Doctor-led ARTAS robotic hair transplant in Bangalore. Image-guided graft harvesting, a personalised hairline plan and honest advice on candidacy. Call +91 99640 60483.",
     "h1": "ARTAS Robotic Hair Transplant in Bangalore",
     "robots": "index, follow",
     "canonical": "https://neosculpt6.com/technology/artas-robotic-hair-transplant/",
     "og": {
       "type": "website",
       "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
-      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
+      "description": "Doctor-led ARTAS robotic hair transplant in Bangalore. Image-guided graft harvesting, a personalised hairline plan and honest advice on candidacy. Call +91 99640 60483.",
       "url": "https://neosculpt6.com/technology/artas-robotic-hair-transplant/",
       "image": "/og/cards/technology__artas-robotic-hair-transplant.jpg",
       "imageAlt": "ARTAS Robotic Hair Transplant",
@@ -10228,7 +10229,7 @@
     "twitter": {
       "card": "summary_large_image",
       "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
-      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
+      "description": "Doctor-led ARTAS robotic hair transplant in Bangalore. Image-guided graft harvesting, a personalised hairline plan and honest advice on candidacy. Call +91 99640 60483.",
       "image": "/og/cards/technology__artas-robotic-hair-transplant.jpg"
     },
     "breadcrumbs": [
@@ -10249,7 +10250,9 @@
       "title": "technology-doc",
       "description": "technology-doc"
     },
-    "todo": [],
+    "todo": [
+      "description: 168 characters (over 160, may be cut in search results)"
+    ],
     "category": "Technology pages",
     "video": null,
     "lastmod": "2026-10-06T10:46:35+00:00",

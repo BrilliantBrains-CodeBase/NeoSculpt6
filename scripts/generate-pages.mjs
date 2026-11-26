@@ -134,7 +134,7 @@ const TERMS = {
   redirectFrom: ['/terms/', '/terms-and-conditions/'],
 }
 
-// Technology pages and the two pages that go with them (/technology/, /international-patients/): SEO fixed by
+// Technology pages and the two pages that go with them (/technology/, /medical-tourism-in-bangalore/): SEO fixed by
 // content/technology/technology-international-patient.md, read from its parse (scripts/parse-technology-pages.mjs, run
 // first by `npm run gen`). The nine technology pages have no SEO CSV rows, so the doc's title tag, description, H1 and
 // breadcrumb name replace the live ones; the two hubs copy the same values into src/data/hubs.ts (`source`).
@@ -522,6 +522,8 @@ async function main() {
   for (const from of TERMS.redirectFrom) redirects.push({ from, to: TERMS.path, status: 301 })
   // Dr Saranya T's profile was removed on 2026-11-04; Dr Thyagaraj took her place on every page.
   redirects.push({ from: '/dr-saranya-t/', to: '/dr-thyagaraj/', status: 301 })
+  // International Patients became Medical Tourism in Bangalore on 2026-11-25 (client brief); one page, not two.
+  redirects.push({ from: '/international-patients/', to: '/medical-tourism-in-bangalore/', status: 301 })
 
   pages.push(
     record({

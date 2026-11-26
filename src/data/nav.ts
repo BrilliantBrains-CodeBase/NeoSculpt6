@@ -106,7 +106,7 @@ export const primaryNav: NavItem[] = [
       { label: 'All Technology', href: '/technology/' },
       { label: 'AI Hair Analysis', href: '/technology/ai-integrated-hair-analysis/' },
       { label: 'AI Donor Assessment', href: '/technology/ai-integrated-donor-assessment/' },
-      { label: 'ARTAS Robotic', href: '/technology/artas-robotic-hair-transplant/' },
+      { label: 'ARTAS Robotic Hair Transplant', href: '/technology/artas-robotic-hair-transplant/' },
       { label: 'Vaser Liposuction', href: '/technology/vaser-liposuction-technology/' },
       { label: 'Viora Reaction RF', href: '/technology/reaction-viora-rf-tightening/' },
       { label: 'CO2 Fractional Laser', href: '/technology/co2-fractional-laser/' },
@@ -127,7 +127,7 @@ export const primaryNav: NavItem[] = [
     href: '/about-us/',
     children: [
       { label: 'About NeoSculpt6', href: '/about-us/' },
-      { label: 'International Patients', href: '/international-patients/' },
+      { label: 'Medical Tourism', href: '/medical-tourism-in-bangalore/' },
       { label: 'Journal & Media', href: '/journal/' },
     ],
   },

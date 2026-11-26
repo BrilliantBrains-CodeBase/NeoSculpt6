@@ -17,11 +17,14 @@ import { delay, h2 } from '../shared'
 type Candidates = Omit<ServiceContent['candidates'], 'cards' | 'note'> & {
   cards: { title: string; text: string | null }[]
   note: string | string[] | null
+  /** A sentence that introduces the checklist (ARTAS: "… Your doctor checks:"). */
+  lead?: string | null
 }
 
 export function ServiceCandidates({ candidates }: { candidates: Candidates }) {
   const imageRef = useReveal<HTMLDivElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
+  const leadRef = useReveal<HTMLParagraphElement>()
   const listRef = useReveal<HTMLUListElement>()
   const noteRef = useReveal<HTMLParagraphElement>()
   const notesRef = useReveal<HTMLDivElement>()
@@ -48,6 +51,11 @@ export function ServiceCandidates({ candidates }: { candidates: Candidates }) {
         <h2 id="service-candidates-heading" ref={titleRef} data-reveal="up" className={`${h2} text-balance`}>
           {candidates.h2}
         </h2>
+        {candidates.lead && (
+          <p ref={leadRef} data-reveal="up" style={delay(150)} className="-mt-5">
+            {candidates.lead}
+          </p>
+        )}
         <ul ref={listRef} data-reveal-stagger="" className="flex flex-col gap-5">
           {candidates.cards.map((card, i) => (
             <li key={card.title} style={{ '--i': i } as CSSProperties} className="flex items-start gap-[15px]">

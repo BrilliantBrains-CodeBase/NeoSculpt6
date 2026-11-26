@@ -270,6 +270,106 @@ export const popular = {
   ],
 }
 
+// Extra: ARTAS robotic hair restoration (content/home-page/prompts/16-artas-section.md), after the popular carousel
+// and before the celebrity section. Two columns: clinic photo one side, copy, buttons and note on the other, with the
+// four icon points under the copy. `icon` names an icon in components/icons.tsx (HomeArtas maps it). `pending` is
+// listed by `npm run verify`.
+export const artasSection = {
+  id: 'artas',
+  eyebrow: 'Robotic Hair Restoration',
+  // Option A of the brief's three; B and C are in the prompt file.
+  h2: [{ text: 'Robotic Precision. ' }, { text: 'Doctor-Led Planning.', gold: true }],
+  body: 'ARTAS is an image-guided robotic system that assists our doctors during hair transplantation. It helps identify and harvest healthy grafts with consistent movements. Your doctor designs the hairline and makes every decision. The result is a plan built around your face and your hair.',
+  points: [
+    { icon: 'camera', label: 'Image-guided', text: 'Grafts are identified using high-definition imaging.' },
+    { icon: 'robotic-arm', label: 'Consistent harvesting', text: 'Repeatable movement, graft by graft.' },
+    { icon: 'scalp', label: 'No strip incision', text: 'No linear strip scar.' },
+    { icon: 'doctor', label: 'Doctor-led', text: 'Every plan is designed and supervised by our doctors.' },
+  ] as { icon: 'camera' | 'robotic-arm' | 'scalp' | 'doctor'; label: string; text: string }[],
+  primary: { label: 'Explore ARTAS Robotic Hair Transplant', href: '/technology/artas-robotic-hair-transplant/' },
+  bookingLabel: 'Book a Consultation', // scrolls to the Find My Treatment form (useBooking)
+  note: 'Suitability depends on your hair and donor area. Your doctor will advise at consultation.',
+  // Stand-in: a NeoSculpt6 graft-implantation photo from the Neo Follicle page (1200×1200), not used elsewhere on the
+  // home page (the FUE photo is already the Popular and Technology cards'). It shows a surgeon, not the robot, so the
+  // alt describes what is in it. When the clinic's own ARTAS photo arrives, use the brief's alt:
+  // 'ARTAS robotic hair transplant system at NeoSculpt6, Bangalore'.
+  image: {
+    src: '/images/services/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore-2.webp',
+    width: 1200,
+    height: 1200,
+    alt: 'A surgeon wearing loupes implanting grafts along a man’s hairline in the operating room',
+  },
+  pending: [
+    'Real clinic photo of the ARTAS robot (own photo, not manufacturer) — stand-in in use; launch blocker',
+    'Alt text for the real photo: "ARTAS robotic hair transplant system at NeoSculpt6, Bangalore"',
+    'Heading option A chosen by default — client sign-off',
+    'ARTAS model name (iX vs iXi) — copy says plain "ARTAS" until confirmed',
+  ],
+}
+
+// Extra: celebrity section (content/home-page/prompts/17-celebrity-section.md), after the ARTAS section. These five
+// were treated at the sister clinic Neo Follicle (Neo Group), so the intro and cards say "Neo Group" / "our doctors",
+// never that they were NeoSculpt6 patients. Card text is the brief's verbatim. Photos are Neo Follicle's
+// (neofollicletransplant.com/treatments/celebrity-hair-transplant/, 650×450). No quotes or results are attributed to
+// anyone. `pending` is listed by `npm run verify`.
+export const celebrities = {
+  id: 'celebrities',
+  eyebrow: 'Trusted by Names You Know',
+  // Option B of the brief's three (A says NeoSculpt6 patients; C needs the 10,000+ figure confirmed).
+  h2: [{ text: 'Faces You Know. ' }, { text: 'Care They Trust.', gold: true }],
+  intro:
+    'From the screen to the stage, people in the public eye choose Neo Group for one reason. They want a doctor-led plan and a natural-looking result, with discretion at every step.',
+  people: [
+    {
+      name: 'Sri Murali',
+      role: 'Kannada Actor',
+      text: 'Sri Murali is among the Kannada film industry names who chose Neo Group for their care. Every plan stays doctor-led and personal.',
+      image: { src: '/images/celebrities/sri-murali.webp', alt: 'Sri Murali, Kannada actor' },
+    },
+    {
+      name: 'Prem',
+      role: 'Kannada Actor',
+      text: 'Prem is one of the Sandalwood names who trusted our doctors with a natural-looking result.',
+      image: { src: '/images/celebrities/prem.webp', alt: 'Prem, Kannada actor' },
+    },
+    {
+      name: 'Rakshith Gowda',
+      role: 'Kannada Actor',
+      text: 'Rakshith Gowda chose a doctor-led plan built around what suits him.',
+      image: { src: '/images/celebrities/rakshith-gowda.webp', alt: 'Rakshith Gowda, Kannada actor' },
+    },
+    {
+      name: 'Sharan',
+      role: 'Kannada Actor',
+      text: 'Sharan is among the film names who came to us for honest advice and a plan made for him.',
+      image: { src: '/images/celebrities/sharan.webp', alt: 'Sharan, Kannada actor' },
+    },
+    {
+      name: 'RJ Mayuraa Raghavendra',
+      role: 'Radio Jockey',
+      text: 'RJ Mayuraa Raghavendra trusted our team with a discreet, personalised plan.',
+      image: { src: '/images/celebrities/rj-mayuraa-raghavendra.webp', alt: 'RJ Mayuraa Raghavendra, radio jockey' },
+    },
+  ].map((p) => ({
+    ...p,
+    image: { ...p.image, width: 650, height: 450 },
+    link: { label: 'Know more about celebrity hair transplant', href: '/hair-transplant-restoration/celebrity-hair-transplant-in-bangalore/' } as {
+      label: string
+      href: string
+    } | null,
+  })),
+  closing: 'Your plan is just as personal. Start with a conversation.',
+  bookingLabel: 'Book a Consultation', // scrolls to the Find My Treatment form (useBooking)
+  footnote:
+    'Results vary from person to person. Names and photos are shown with the patient’s written consent. This section does not replace an in-person consultation.',
+  pending: [
+    'Written consent from each person on file for use on the NeoSculpt6 site (photos taken from neofollicletransplant.com)',
+    'Clinic sign-off under NMC ethics / ASCI / DMR Act before launch',
+    'Footer note states names/photos are shown with written consent — true only once consent is on file',
+    'Heading option B chosen by default',
+  ],
+}
+
 // 6. Philosophy / results slider. In the theme, the stats counters are this section's bottom row; ours stay under
 // the hero (agreed with the client). `h2` is three lines, as the doc sets them.
 // The slider shows one case from the /results/ registry (src/data/results.json), by id, so it passes the same consent

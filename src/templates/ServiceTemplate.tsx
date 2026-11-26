@@ -17,6 +17,9 @@ import { ServiceFaq } from '../components/service/ServiceFaq'
 import { ServiceSidebar } from '../components/service/ServiceSidebar'
 import { ServiceCta } from '../components/service/ServiceCta'
 import { InstagramStrip } from '../components/InstagramStrip'
+import { InfoSection } from '../components/InfoSection'
+import { PageDisclaimer } from '../components/PageDisclaimer'
+import type { ServiceExtraAnchor } from '../data/services/types'
 
 // Treatment pages. Content and section order: content/service/service-page.md (the 13 sections, plus the sidebar),
 // parsed into src/data/services/parsed.json and assembled in src/data/services/index.ts. A service route missing from
@@ -28,18 +31,30 @@ import { InstagramStrip } from '../components/InstagramStrip'
 export function ServiceTemplate({ page }: TemplateProps) {
   const content = servicesByPath.get(page.path)
   if (!content) return <PagePlaceholder page={page} template="service" />
+  // A supplement doc's info blocks (tables, do/avoid, lists), each after the section it names.
+  const extras = (after: ServiceExtraAnchor) =>
+    (content.extras ?? []).filter((x) => x.placeAfter === after).map((x) => <InfoSection key={x.id} block={x} />)
 
   return (
     <>
       <ServiceHero page={page} hero={content.hero} />
       <ServiceIntro intro={content.intro} />
+      {extras('intro')}
       <ServiceConsultation consultation={content.consultation} />
+      {extras('consultation')}
       <ServiceWhyChoose whyChoose={content.whyChoose} />
+      {extras('whyChoose')}
       <ServiceProcess process={content.process} />
+      {extras('process')}
       <ServiceCandidates candidates={content.candidates} />
+      {extras('candidates')}
       <ServiceDoctor doctors={content.doctors} />
-      <ServiceTechnology technology={content.technology} />
+      {extras('doctors')}
+      {/* A supplement page may have no technology section (Microblading). */}
+      {content.technology.cards.length > 0 && <ServiceTechnology technology={content.technology} />}
+      {extras('technology')}
       <ServiceCost cost={content.cost} />
+      {extras('cost')}
 
       {content.strips.length > 0 && (
         // Two strips (10a, 10b) sit side by side; a single one takes a centred column rather than half the row.
@@ -61,8 +76,10 @@ export function ServiceTemplate({ page }: TemplateProps) {
         rating={testimonials.rating}
       />
       <ServiceFaq faqs={content.faqs} />
+      {extras('faqs')}
       <ServiceSidebar sidebar={content.sidebar} />
       <ServiceCta closing={content.closing} />
+      <PageDisclaimer text={content.disclaimer} />
       <InstagramStrip />
     </>
   )

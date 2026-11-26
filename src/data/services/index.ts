@@ -22,6 +22,7 @@ import { reviewsForPath } from '../reviews.ts'
 import { clinic, instagram } from '../site.ts'
 import type { NavLink } from '../nav.ts'
 import type { Cta, ServiceContent, ServiceDoctor, ServiceImage, ServiceVideo } from './types.ts'
+import type { HeldBlock } from '../blocks.ts'
 
 type Parsed = (typeof parsedJson)[number]
 // The client's video sheet (scripts/import-videos.mjs); a page shows its video only once it is approved,
@@ -61,6 +62,7 @@ export const reception: ServiceImage = {
 // section, and every other one (book, assess, ask) opens the booking popup.
 function cta(label: string): Cta {
   if (/^call\b/i.test(label)) return { label, href: clinic.phoneHref }
+  if (/^whatsapp\b/i.test(label)) return { label, href: clinic.whatsappHref }
   if (/estimate|price|cost/i.test(label)) return { label, href: '#cost' }
   return { label, action: 'book' }
 }
@@ -78,6 +80,10 @@ export function doctorFor(docName: string) {
 const EXTRA_LINKS: Record<string, NavLink[]> = {
   '/anti-aging-injectables/chin-fillers-in-bangalore/': [
     { label: 'Chin Augmentation Surgery in Bangalore', href: '/cosmetic-surgery/chin-augmentation-surgery-in-bangalore/' },
+  ],
+  // microblading.md: Microblading is the semi-permanent alternative the eyebrow-transplant page's readers may want.
+  '/hair-transplant-restoration/eyebrow-hair-transplant-in-bangalore/': [
+    { label: 'Microblading in Bangalore', href: '/laser-skin-aesthetic/microblading-in-bangalore/' },
   ],
 }
 
@@ -137,6 +143,9 @@ function pendingFor(p: Parsed, cards: ServiceDoctor[]): string[] {
   if (prices.length) out.push(`prices shown in the cost section: "${prices[0].text.replace(/^.*?·\s*/, '')}" (and the asterisk's note)`)
   else if (p.cost.factors.some((f) => /\d/.test(f.text))) out.push('figures in the cost section (graft/session ranges)')
   if (p.seo.note) out.push(`SEO note from the doc: ${p.seo.note}`)
+  // Supplement docs: their "Note:" lines and the sections they hold back until the clinic confirms them.
+  for (const note of p.notes ?? []) out.push(`doc note: ${note}`)
+  for (const h of (p.held ?? []) as HeldBlock[]) out.push(`held until confirmed: "${h.h2 ?? h.id}" (${h.reason})`)
   return out
 }
 
@@ -161,8 +170,22 @@ function build(p: Parsed): ServiceContent {
   return {
     path: p.path,
     source: p.source,
-    hero: { intro: p.hero.intro, ctas: heroCtas, phoneLabel: p.hero.phone.split(' · ')[0], image: pics.hero },
-    intro: { h2: p.intro.h2, paragraphs: p.intro.paragraphs, points: p.intro.points },
+    hero: {
+      intro: p.hero.intro,
+      ctas: heroCtas,
+      phoneLabel: p.hero.phone.split(' · ')[0],
+      image: pics.hero,
+      ...(p.hero.eyebrow ? { eyebrow: p.hero.eyebrow } : {}),
+      ...(p.hero.subheading ? { subheading: p.hero.subheading } : {}),
+      ...(p.hero.trust?.length ? { trust: p.hero.trust } : {}),
+    },
+    intro: {
+      h2: p.intro.h2,
+      paragraphs: p.intro.paragraphs,
+      points: p.intro.points,
+      ...(p.intro.list?.length ? { list: p.intro.list } : {}),
+      ...(p.intro.after?.length ? { after: p.intro.after } : {}),
+    },
     consultation: {
       h2: p.consultation.h2,
       introLine: p.consultation.introLine,
@@ -192,6 +215,9 @@ function build(p: Parsed): ServiceContent {
       contactText: p.sidebar.contactText,
       cta: cta(p.sidebar.contactButton || 'Book a Consultation'),
     },
+    ...(p.extras?.length ? { extras: p.extras as ServiceContent['extras'] } : {}),
+    ...(p.held?.length ? { held: p.held as HeldBlock[] } : {}),
+    ...(p.disclaimer ? { disclaimer: p.disclaimer } : {}),
     pending: pendingFor(p, doctorCards),
   }
 }

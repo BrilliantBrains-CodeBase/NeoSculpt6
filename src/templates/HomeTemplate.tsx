@@ -4,6 +4,8 @@ import { HomeAbout } from '../components/home/HomeAbout'
 import { HomePopular } from '../components/home/HomePopular'
 import { HomePillars } from '../components/home/HomePillars'
 import { HomeDoctorSpotlight } from '../components/home/HomeDoctorSpotlight'
+import { HomeArtas } from '../components/home/HomeArtas'
+import { HomeCelebrities } from '../components/home/HomeCelebrities'
 import { HomeResults } from '../components/home/HomeResults'
 import { HomeSignature } from '../components/home/HomeSignature'
 import { HomeDoctors } from '../components/home/HomeDoctors'
@@ -26,6 +28,9 @@ export function HomeTemplate() {
       {/* Section A (Dr Sandeep spotlight): before the popular carousel, as prompts/04 places it. */}
       <HomeDoctorSpotlight />
       <HomePopular />
+      {/* ARTAS robotic hair restoration, then the celebrity carousel (prompts/16 and 17), after the popular carousel. */}
+      <HomeArtas />
+      <HomeCelebrities />
       {/* The technology banner (section 13's replacement), full width, directly above Real Results. */}
       <HomeTechnology />
       <HomeResults />

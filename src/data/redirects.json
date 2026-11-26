@@ -34,6 +34,11 @@
       "from": "/dr-saranya-t/",
       "to": "/dr-thyagaraj/",
       "status": 301
+    },
+    {
+      "from": "/international-patients/",
+      "to": "/medical-tourism-in-bangalore/",
+      "status": 301
     }
   ],
   "gone": [

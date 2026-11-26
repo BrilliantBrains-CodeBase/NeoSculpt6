@@ -18,6 +18,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { replaceTechDoctor } from '../src/data/replaced-doctors.ts'
+import { readInfoBlock } from './info-blocks.mjs'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DOC_REL = 'content/technology/technology-international-patient.md'
@@ -130,12 +131,15 @@ const rowsOf = (table) => table.rows.map((c) => ({ title: clean(c.at(-2)), text:
 const KINDS = {
   '/technology/': 'technology-hub',
   '/technology/artas-robotic-hair-transplant/': 'artas-detail',
-  '/international-patients/': 'international-patients',
+  '/medical-tourism-in-bangalore/': 'international-patients',
 }
 const kindOf = (p) => KINDS[p] ?? 'technology-detail'
 
 // Section keys by title, so a page's own layout (ARTAS, International Patients) is read in its own order.
 const SECTION_KEYS = [
+  // "Info: …" sections are generic info blocks (scripts/info-blocks.mjs), read in place, any number per page.
+  [/^Info:/, 'info'],
+  [/^Disclaimer/i, 'disclaimer'],
   [/^Page banner/i, 'hero'],
   [/^Introduction/i, 'intro'],
   [/^Technology cards/i, 'cards'],
@@ -146,7 +150,7 @@ const SECTION_KEYS = [
   [/^How it works/i, 'process'],
   [/candidates|^Who may be assessed/i, 'candidates'],
   [/^Results/i, 'expectations'],
-  [/^Your doctor|^Clinical advice/i, 'doctors'],
+  [/^Your doctor|^Our doctors|^Clinical advice/i, 'doctors'],
   [/^Cost and consultation/i, 'cost'],
   [/^Estimates/i, 'estimates'],
   [/^Success stories/i, 'reviews'],
@@ -181,8 +185,10 @@ const BUILD = {
   hero: (s) => ({
     eyebrow: s.one('Eyebrow'),
     h1: s.one('H1'),
+    subheading: s.one('Sub-heading'),
     intro: s.one('Intro text'),
-    buttons: [s.raw('Button'), s.raw('Button 1'), s.raw('Button 2')].filter(Boolean).map(button),
+    buttons: [s.raw('Button'), s.raw('Button 1'), s.raw('Button 2'), s.raw('Button 3')].filter(Boolean).map(button),
+    trust: s.raw('Trust strip') ? dots(s.raw('Trust strip')) : null,
   }),
   intro: (s) => ({ h2: s.one('H2'), paragraphs: s.paragraphs() }),
   different: (s) => ({ h2: s.one('H2'), paragraphs: s.paragraphs() }),
@@ -201,6 +207,7 @@ const BUILD = {
   process: (s) => ({ eyebrow: s.one('Eyebrow'), h2: s.one('H2'), steps: rowsOf(s.rows()[0] ?? { rows: [] }) }),
   candidates: (s) => ({
     h2: s.one('H2'),
+    lead: s.one('Paragraph before checklist'),
     items: marks(s.raw('Checklist (ticks)') ?? ''),
     paragraphs: [s.one('Paragraph under checklist'), ...s.paragraphs()].filter(Boolean),
   }),
@@ -220,7 +227,12 @@ const BUILD = {
     items: (s.rows()[0]?.rows ?? []).map((c) => ({ q: clean(c[0]), a: clean(c[1]) })),
     button: s.raw('Button') ? button(s.raw('Button')) : null,
   }),
-  closing: (s) => ({ h2: s.one('H2'), paragraph: s.one('Paragraph'), buttons: [s.raw('Button')].filter(Boolean).map(button) }),
+  closing: (s) => ({
+    h2: s.one('H2'),
+    paragraph: s.one('Paragraph'),
+    buttons: [s.raw('Button'), s.raw('Button 1'), s.raw('Button 2'), s.raw('Button 3')].filter(Boolean).map(button),
+  }),
+  disclaimer: (s) => ({ text: s.one('Text') }),
   explore: (s) => ({
     heading: s.one('List heading'),
     links: links(s.raw('Links') ?? ''),
@@ -255,8 +267,9 @@ const BUILD = {
 const EXPECTED = {
   'technology-hub': ['hero', 'cards', 'doctors', 'closing'],
   'technology-detail': ['hero', 'intro', 'different', 'assessment', 'benefits', 'process', 'candidates', 'expectations', 'doctors', 'cost', 'reviews', 'faqs', 'closing', 'explore'],
-  'artas-detail': ['hero', 'intro', 'comparison', 'process', 'benefits', 'candidates', 'expectations', 'doctors', 'cost', 'reviews', 'faqs', 'closing', 'explore'],
-  'international-patients': ['hero', 'intro', 'steps', 'pathways', 'journey', 'travel', 'doctors', 'estimates', 'reviews', 'faqs', 'closing'],
+  // Info blocks ("info:<id>") may sit anywhere between these; the ARTAS comparison table is one.
+  'artas-detail': ['hero', 'intro', 'process', 'benefits', 'candidates', 'expectations', 'doctors', 'cost', 'faqs', 'closing', 'disclaimer', 'explore'],
+  'international-patients': ['hero', 'doctors', 'faqs', 'closing', 'disclaimer'],
 }
 
 // --- main ------------------------------------------------------------------------------------------------------
@@ -300,6 +313,9 @@ for (const [n, start] of starts.entries()) {
     },
     order: [],
     notes: pageNotes.map((text) => ({ section: 'page', kind: 'note', text })),
+    /** Info blocks, in the doc's order ("info:<id>" in `order`), and the ones held back until confirmed. */
+    blocks: [],
+    held: [],
   }
 
   for (const s of sections) {
@@ -307,6 +323,21 @@ for (const [n, start] of starts.entries()) {
     const key = SECTION_KEYS.find(([re]) => re.test(s.title))?.[1]
     if (!key) {
       warn(page, `unknown section "${s.title}" (line ${s.line})`)
+      continue
+    }
+    if (key === 'info') {
+      const { block, held } = readInfoBlock(s.lines, (msg) => warn(page, `${msg} (line ${s.line})`))
+      for (const l of s.lines) {
+        const note = l.trim().match(/^\*\*Note:\*\*\s*(.+)$/)
+        if (note) record.notes.push({ section: block.id, kind: 'note', text: clean(note[1]) })
+      }
+      if (held) {
+        record.held.push({ id: block.id, h2: block.h2, reason: held })
+        continue
+      }
+      if (record.blocks.some((b) => b.id === block.id)) warn(page, `info block id "${block.id}" appears twice`)
+      record.blocks.push(block)
+      record.order.push(`info:${block.id}`)
       continue
     }
     if (record[key]) warn(page, `section "${key}" appears twice`)
@@ -320,7 +351,8 @@ for (const [n, start] of starts.entries()) {
 
   // Checks: the expected sections in order, the hero H1 against the SEO H1, empty values.
   const expected = EXPECTED[kind]
-  if (record.order.join() !== expected.join()) warn(page, `sections ${record.order.join(', ')}; expected ${expected.join(', ')}`)
+  const fixed = record.order.filter((k) => !k.startsWith('info:'))
+  if (fixed.join() !== expected.join()) warn(page, `sections ${fixed.join(', ')}; expected ${expected.join(', ')}`)
   if (record.hero?.h1 && record.hero.h1 !== record.seo.h1) warn(page, `hero H1 "${record.hero.h1}" differs from the SEO H1 "${record.seo.h1}"`)
   for (const [k, v] of Object.entries(record.seo)) if (v === null || v === '' || (Array.isArray(v) && !v.length)) if (k !== 'note') warn(page, `SEO ${k} missing`)
   const walk = (v, at) => {
@@ -328,7 +360,7 @@ for (const [n, start] of starts.entries()) {
     else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${at}[${i}]`))
     else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, `${at}.${k}`)
   }
-  for (const key of record.order) walk(record[key], key)
+  for (const key of fixed) walk(record[key], key)
   out.push(record)
 }
 

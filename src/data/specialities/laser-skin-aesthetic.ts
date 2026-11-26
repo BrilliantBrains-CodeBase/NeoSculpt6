@@ -115,6 +115,14 @@ export const laserSkin: HubSource = {
           child('laser-tattoo-removal'),
         ],
       },
+      {
+        // Added 2026-11-25 with the Microblading page (content/service/microblading.md). Drafted group copy; the photo is
+        // the eyebrow-transplant page's until NeoSculpt6 supplies a microblading photo.
+        title: 'Brows',
+        text: 'Microblading for fuller, natural-looking brows, mapped to your face first.',
+        image: hubPhoto('hair-transplant-restoration', 'eyebrow-hair-transplant-in-bangalore-1'),
+        paths: [child('microblading')],
+      },
     ],
   },
 
@@ -274,5 +282,6 @@ export const laserSkin: HubSource = {
     'no vascular-laser page exists in service-page.md, so the hair group covers hair only; add one if the clinic offers it',
     'technology: CO2 and Q-Switch card photos are old-site placeholders (technology hub)',
     'doctor: portrait is the old-site placeholder (doctors.json)',
+    'treatments: the "Brows" group (Microblading) copy is drafted, and its photo is the eyebrow-transplant page\'s',
   ],
 }

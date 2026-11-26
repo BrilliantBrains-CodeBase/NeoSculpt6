@@ -225,3 +225,50 @@ export function PlayIcon({ className = 'size-3 shrink-0' }: IconProps) {
     </svg>
   )
 }
+
+// Camera: the ARTAS section's "Image-guided" point (HomeArtas).
+export function CameraIcon({ className = 'size-6 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} {...stroke}>
+      <path d="M3.5 8a2 2 0 0 1 2-2h2.2l1.5-2h5.6l1.5 2h2.2a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z" />
+      <circle cx="12" cy="12.5" r="3.5" />
+    </svg>
+  )
+}
+
+// Robotic arm on a base, two jointed segments and a gripper: the ARTAS section's "Consistent harvesting" point.
+export function RoboticArmIcon({ className = 'size-6 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} {...stroke}>
+      <path d="M3.5 21h9" />
+      <path d="M5.5 21v-2.5h5V21" />
+      <path d="M8 18.5 6.5 11" />
+      <circle cx="6.5" cy="10" r="1.5" />
+      <path d="m7.7 9.1 7.6-4.3" />
+      <circle cx="16.5" cy="4.5" r="1.5" />
+      <path d="M17.6 5.6 20 9" />
+      <path d="m18.6 10.4 1.4-1.4 1.4 1.4" />
+    </svg>
+  )
+}
+
+// Head in profile with hair on the crown: the ARTAS section's "No strip incision" point.
+export function ScalpIcon({ className = 'size-6 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} {...stroke}>
+      <path d="M9 21v-3.5a6.5 6.5 0 0 1-3.5-5.9 6.8 6.8 0 0 1 13.4-1.6l1.3 3.2a.6.6 0 0 1-.5.8h-1.2v2.5a1.8 1.8 0 0 1-1.8 1.8h-1.7V21" />
+      <path d="M6.2 8.6c1.4.4 2.8-.3 3.6-1.4.8 1 2.3 1.6 3.7 1.2 1 .9 2.6 1 3.8.4" />
+    </svg>
+  )
+}
+
+// Stethoscope: the ARTAS section's "Doctor-led" point.
+export function DoctorIcon({ className = 'size-6 shrink-0' }: IconProps) {
+  return (
+    <svg {...iconProps} viewBox="0 0 24 24" className={className} {...stroke}>
+      <path d="M6 3.5H4.5v5a4.5 4.5 0 0 0 9 0v-5H12" />
+      <path d="M9 13v2.5a5 5 0 0 0 10 0V13" />
+      <circle cx="19" cy="11" r="2" />
+    </svg>
+  )
+}

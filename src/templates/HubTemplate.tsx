@@ -8,11 +8,10 @@ import { testimonials } from '../data/home'
 import { PagePlaceholder } from './PagePlaceholder'
 import { TechnologyBanner } from '../components/technology/TechnologyBanner'
 import { TechnologyCards } from '../components/technology/TechnologyCards'
-import { TechnologyPathways } from '../components/technology/TechnologyPathways'
+import { InfoSection } from '../components/InfoSection'
+import { PageDisclaimer } from '../components/PageDisclaimer'
 import { ServiceIntro } from '../components/service/ServiceIntro'
-import { ServiceWhyChoose } from '../components/service/ServiceWhyChoose'
 import { ServiceProcess } from '../components/service/ServiceProcess'
-import { ServiceConsultation } from '../components/service/ServiceConsultation'
 import { ServiceDoctor } from '../components/service/ServiceDoctor'
 import { ServiceCost } from '../components/service/ServiceCost'
 import { ServiceFaq } from '../components/service/ServiceFaq'
@@ -26,8 +25,8 @@ import { ResultsIntro } from '../components/results/ResultsIntro'
 import { ResultsGallery } from '../components/results/ResultsGallery'
 import { resultsPage } from '../data/results'
 
-// Speciality hubs, /technology/, /international-patients/ and /results/ (the before/after gallery). New pages;
-// meta in src/data/hubs.ts. /technology/ and /international-patients/ are built from
+// Speciality hubs, /technology/, /medical-tourism-in-bangalore/ and /results/ (the before/after gallery). New pages;
+// meta in src/data/hubs.ts. /technology/ and /medical-tourism-in-bangalore/ are built from
 // content/technology/technology-international-patient.md (src/data/technology/); speciality hubs from
 // src/data/specialities/ (the six speciality hubs); /results/ from src/data/results.ts;
 // any other hub keeps the placeholder.
@@ -55,29 +54,26 @@ function TechnologyHubPage({ page, content }: { page: RoutePage; content: Techno
   )
 }
 
-// International Patients: a planning and travel page, in the doc's order. The three steps use the service pages'
-// numbered open columns (ServiceWhyChoose), the patient journey the "How It Works" accordion, the estimates the
-// cost-factor panel; there is no Explore panel (the doc gives none).
+// Medical Tourism in Bangalore (was International Patients; client brief 2026-11-25): the banner, then the doc's
+// sections in its order — info blocks (InfoSection: lists, the treatments table, numbered journey cards, the cost
+// panel), the doctors, FAQs, the closing band and the disclaimer. Held sections (countries, patient videos) are not
+// drawn; there is no reviews slider or Explore panel (the brief gives none).
 function InternationalPage({ page, content }: { page: RoutePage; content: InternationalPatients }) {
+  const blocks = new Map(content.blocks.map((b) => [b.id, b]))
   return (
     <>
       <TechnologyBanner page={page} hero={content.hero} />
-      <ServiceIntro intro={content.intro} />
-      <ServiceWhyChoose whyChoose={{ h2: content.steps.h2, subline: null, cards: content.steps.cards }} />
-      <TechnologyPathways pathways={content.pathways} />
-      <ServiceProcess id="patient-journey" process={content.journey} />
-      <ServiceConsultation consultation={content.travel} />
-      <ServiceDoctor doctors={content.doctors} />
-      <ServiceCost cost={content.estimates} />
-      <TestimonialsSection
-        id="success-stories"
-        eyebrow={content.reviews.eyebrow}
-        h2={[{ text: content.reviews.h2 }]}
-        reviews={content.reviews.items}
-        rating={testimonials.rating}
-      />
-      <ServiceFaq faqs={content.faqs} />
-      <ServiceCta closing={content.closing} />
+      {content.order.map((key) => {
+        if (key.startsWith('info:')) {
+          const block = blocks.get(key.slice(5))
+          return block ? <InfoSection key={key} block={block} /> : null
+        }
+        if (key === 'doctors') return <ServiceDoctor key={key} doctors={content.doctors} />
+        if (key === 'faqs') return <ServiceFaq key={key} faqs={content.faqs} />
+        if (key === 'closing') return <ServiceCta key={key} closing={content.closing} />
+        if (key === 'disclaimer') return <PageDisclaimer key={key} text={content.disclaimer} />
+        return null
+      })}
       <InstagramStrip />
     </>
   )

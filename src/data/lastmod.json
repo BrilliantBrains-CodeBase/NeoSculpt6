@@ -1,7 +1,7 @@
 {
   "/": {
-    "hash": "0f88d795b887a4aa",
-    "date": "2026-11-04"
+    "hash": "e7c08aa24ade336f",
+    "date": "2026-11-25"
   },
   "/hair-transplant-restoration/": {
     "hash": "e1ddc8c90a479487",
@@ -16,8 +16,8 @@
     "date": "2026-11-04"
   },
   "/laser-skin-aesthetic/": {
-    "hash": "1e72cd4540e73e0e",
-    "date": "2026-11-04"
+    "hash": "08ff1138db9286e6",
+    "date": "2026-11-25"
   },
   "/anti-aging-injectables/": {
     "hash": "da3523ed6e89ae2a",
@@ -35,9 +35,13 @@
     "hash": "8b097062dedca1e1",
     "date": "2026-11-04"
   },
-  "/international-patients/": {
-    "hash": "31c1bf7948e896cc",
-    "date": "2026-11-04"
+  "/laser-skin-aesthetic/microblading-in-bangalore/": {
+    "hash": "6232b1174b602323",
+    "date": "2026-11-25"
+  },
+  "/medical-tourism-in-bangalore/": {
+    "hash": "e97e52dc327b77d2",
+    "date": "2026-11-25"
   },
   "/results/": {
     "hash": "ba60bd29ef5543dc",
@@ -60,16 +64,12 @@
     "date": "2026-10-31"
   },
   "/dr-payal-mahapatra/": {
-    "hash": "3c49367b89f4f10a",
-    "date": "2026-11-04"
+    "hash": "21847d50bc847a06",
+    "date": "2026-11-25"
   },
   "/dr-thyagaraj/": {
-    "hash": "0c7c03d21d43d5f0",
-    "date": "2026-11-04"
-  },
-  "/dr-sumedha-tirthani/": {
-    "hash": "bc26076583c5b429",
-    "date": "2026-11-04"
+    "hash": "156ad33853417461",
+    "date": "2026-11-25"
   },
   "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/": {
     "hash": "4c0d2b00f3a1eea4",
@@ -132,8 +132,8 @@
     "date": "2026-11-04"
   },
   "/hair-transplant-restoration/eyebrow-hair-transplant-in-bangalore/": {
-    "hash": "444c5ab91675b91f",
-    "date": "2026-11-04"
+    "hash": "482d3a7431699af1",
+    "date": "2026-11-25"
   },
   "/hair-transplant-restoration/hair-fillers-treatment-in-bangalore/": {
     "hash": "e2a3725b9a5a8fed",
@@ -712,19 +712,19 @@
     "date": "2026-11-04"
   },
   "/technology/artas-robotic-hair-transplant/": {
-    "hash": "da29192242a5251f",
-    "date": "2026-11-04"
+    "hash": "09e6821ec1850c34",
+    "date": "2026-11-25"
   },
   "/contact-us/": {
-    "hash": "ec2833eeb9f6e4bb",
-    "date": "2026-11-04"
+    "hash": "ec60d553bff4ca6b",
+    "date": "2026-11-25"
   },
   "/about-dr-sandeep-mahapatra/": {
-    "hash": "62c8b71f41bcb0c2",
-    "date": "2026-11-04"
+    "hash": "24a4f70e9890e342",
+    "date": "2026-11-25"
   },
   "/about-us/": {
-    "hash": "e703ff2d90cd0bf4",
-    "date": "2026-11-04"
+    "hash": "150a044f91b7f693",
+    "date": "2026-11-25"
   }
 }

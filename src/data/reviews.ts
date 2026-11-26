@@ -204,7 +204,7 @@ const TECHNOLOGY_TOPICS: Record<string, string[]> = {
 /** Review topics for a page path, e.g. "/laser-skin-aesthetic/chemical-peels-in-bangalore/". */
 export function topicsForPath(path: string): string[] {
   const [section, page] = path.split('/').filter(Boolean)
-  if (section === 'international-patients') return ['international']
+  if (section === 'medical-tourism-in-bangalore') return ['international']
   if (section === 'technology') return page ? (TECHNOLOGY_TOPICS[page] ?? []) : []
   if (!page) return HUB_TOPICS[section] ?? []
   const slug = page.replace(/-in-bangalore$/, '')

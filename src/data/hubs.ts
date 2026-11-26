@@ -97,13 +97,25 @@ export const hubs: HubDraft[] = [
     source: 'content/service/Blepharoplasty-and-Chin-Augmentation.md',
   },
   {
-    path: '/international-patients/',
-    type: 'hub',
-    name: 'International Patients',
-    h1: 'International Patient Care in Bangalore',
-    title: 'International Patient Care in Bangalore | NeoSculpt6',
+    // New page (client brief, 2026-11-25). URL, title, H1 and description: content/service/microblading.md, "SEO (new page)".
+    path: '/laser-skin-aesthetic/microblading-in-bangalore/',
+    type: 'service',
+    name: 'Microblading',
+    h1: 'Microblading in Bangalore',
+    title: 'Microblading in Bangalore | Natural Eyebrows | NeoSculpt6',
     description:
-      'Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.',
+      'Doctor-led microblading in Bangalore for fuller, natural-looking brows. Personalised brow mapping, hygienic single-use tools and a touch-up plan. Call +91 99640 60483.',
+    source: 'content/service/microblading.md',
+  },
+  {
+    // Was /international-patients/ (301 in generate-pages.mjs); client brief 2026-11-25.
+    path: '/medical-tourism-in-bangalore/',
+    type: 'hub',
+    name: 'Medical Tourism in Bangalore',
+    h1: 'Medical Tourism in Bangalore for International Patients',
+    title: 'Medical Tourism in Bangalore for International Patients | NeoSculpt6',
+    description:
+      'Travelling to Bangalore for aesthetic or hair restoration care? NeoSculpt6 offers virtual consultations, a doctor-led plan and travel guidance. Call +91 99640 60483.',
     source: 'content/technology/technology-international-patient.md',
   },
   {

@@ -14,6 +14,8 @@ export function ServiceIntro({ intro, id = 'service-intro' }: { intro: ServiceCo
   const titleRef = useReveal<HTMLHeadingElement>()
   const textRef = useReveal<HTMLDivElement>()
   const pointsRef = useReveal<HTMLUListElement>()
+  const listRef = useReveal<HTMLUListElement>()
+  const afterRef = useReveal<HTMLDivElement>()
 
   return (
     <section
@@ -29,6 +31,23 @@ export function ServiceIntro({ intro, id = 'service-intro' }: { intro: ServiceCo
           <p key={p}>{p}</p>
         ))}
       </div>
+      {intro.list && intro.list.length > 0 && (
+        <ul ref={listRef} data-reveal-stagger="" className="-mt-5 grid w-full max-w-[860px] grid-cols-1 gap-x-10 gap-y-3 text-left md:grid-cols-2">
+          {intro.list.map((item, i) => (
+            <li key={item} style={{ '--i': i } as CSSProperties} className="flex items-start gap-[15px]">
+              <span aria-hidden="true" className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-tertiary" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {intro.after && intro.after.length > 0 && (
+        <div ref={afterRef} data-reveal="up" style={delay(150)} className="-mt-5 flex flex-col gap-5">
+          {intro.after.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+      )}
       {intro.points.length > 0 && (
         <ul
           ref={pointsRef}

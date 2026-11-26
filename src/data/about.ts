@@ -67,7 +67,7 @@ export const story = {
 
 // A. Clinic in numbers, two rows of four. Needs sign-off (all †): every figure, and whether 10,000+ transplants and
 // 6M+ follicles are Dr Sandeep's own cases or the Neo Follicle clinic total. Must match the home page, his profile,
-// Neo Follicle, Practo and Google. `href` links a label to its page (the doc asks for an /international-patients/ link).
+// Neo Follicle, Practo and Google. `href` links a label to its page (the doc asks for an International Patients link: /medical-tourism-in-bangalore/ since 2026-11-25).
 export const numbers = {
   label: 'NeoSculpt6 in numbers',
   items: [
@@ -78,7 +78,7 @@ export const numbers = {
     { value: 100000, suffix: '+', label: 'PRP Sessions' },
     { value: 40000, suffix: '+', label: 'Chemical Peels' },
     { value: 3000, suffix: '+', label: 'Vitiligo Cases Treated' },
-    { value: 500, suffix: '+', label: 'Patients from Outside India', href: '/international-patients/' },
+    { value: 500, suffix: '+', label: 'Patients from Outside India', href: '/medical-tourism-in-bangalore/' },
   ] as { value: number; suffix: string; label: string; href?: string }[],
   note: "Figures reflect Dr Sandeep Mahapatra's cumulative clinical experience.",
 }

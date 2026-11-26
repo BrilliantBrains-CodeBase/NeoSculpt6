@@ -10,14 +10,19 @@
 
 import type { Testimonial } from '../home.ts'
 import type { NavLink } from '../nav.ts'
-import type { Cta, Faq, NumberedCard, ServiceContent, ServiceImage } from '../services/types.ts'
+import type { Cta, Faq, ServiceContent, ServiceImage } from '../services/types.ts'
+import type { HeldBlock, InfoBlock } from '../blocks.ts'
 
 export type TechnologyKind = 'technology-hub' | 'technology-detail' | 'artas-detail' | 'international-patients'
 
 /** 1. Page banner. The H1 is page.h1; the breadcrumb is page.crumbs. */
 export interface TechnologyBanner {
   eyebrow: string
+  /** A line under the H1 (ARTAS, Medical Tourism); null on the pages whose doc has none. */
+  subheading?: string | null
   intro: string
+  /** The doc's trust strip under the buttons ("Doctor-led · Image-guided · …"). */
+  trust?: string[]
   ctas: Cta[]
   image: ServiceImage
 }
@@ -83,7 +88,7 @@ export interface TechnologyDetail extends Common {
   /** 6. How it works. `id="how-it-works"`, the hero's second button's target. */
   process: ServiceContent['process']
   /** 7. Who may be assessed: ticks (titles only) and the doc's paragraph(s). */
-  candidates: Omit<ServiceContent['candidates'], 'cards' | 'note'> & { cards: TitledCard[]; note: string[] }
+  candidates: Omit<ServiceContent['candidates'], 'cards' | 'note'> & { cards: TitledCard[]; note: string[]; lead?: string | null }
   /** 8. Results, recovery and realistic expectations. */
   expectations: { h2: string; paragraphs: string[] }
   /** 9. Your doctor. */
@@ -99,11 +104,16 @@ export interface TechnologyDetail extends Common {
   explore: TechnologyExplore
 }
 
-/** ARTAS: its own section list (no "How it is different" or assessment band; an "ARTAS vs traditional" grid). */
-export interface ArtasDetail extends Omit<TechnologyDetail, 'kind' | 'different' | 'assessment'> {
+/** ARTAS (client brief 2026-11-25): its own section list. No "How it is different" or assessment band, no reviews
+ *  (the brief rules out clinic-wide reviews here); the ARTAS vs FUT vs manual FUE table is an info block. */
+export interface ArtasDetail extends Omit<TechnologyDetail, 'kind' | 'different' | 'assessment' | 'reviews'> {
   kind: 'artas-detail'
-  /** 3. ARTAS vs traditional procedures: three cards, the ARTAS iX one (`highlight`) set apart. */
-  comparison: { h2: string; introLine: string; cards: NumberedCard[]; highlight: number }
+  /** ARTAS vs FUT vs Manual FUE: a table (InfoSection, id="technology-comparison"), after the benefits. */
+  comparison: InfoBlock
+  /** The doc's small print above the Explore panel. */
+  disclaimer: string
+  /** Section ids in page order (`npm run verify`). */
+  sectionIds: string[]
 }
 
 /** /technology/: banner, nine cards (Hair → Body → Skin), doctors, closing band. */
@@ -115,25 +125,20 @@ export interface TechnologyHub extends Common {
   closing: ServiceContent['closing']
 }
 
-/** /international-patients/: planning and travel, not a technology page. */
+/** /medical-tourism-in-bangalore/ (was /international-patients/; client brief 2026-11-25): banner, then the doc's
+ *  sections in order (`order`: "info:<id>" blocks, doctors, FAQs, closing band, disclaimer). */
 export interface InternationalPatients extends Common {
   kind: 'international-patients'
   hero: TechnologyBanner
-  intro: ServiceContent['intro']
-  steps: { h2: string; cards: NumberedCard[] }
-  /** Numbered tabs "01 / 06" … each with H3, paragraph, treatment links and a button. */
-  pathways: { h2: string; tabs: { tab: string; h3: string; paragraph: string; chips: NavLink[]; cta: Cta }[] }
-  /** The patient journey: the "How It Works" accordion and photo (ServiceProcess). */
-  journey: ServiceContent['process']
-  /** Before you travel: the image + text band (ServiceConsultation). */
-  travel: ServiceContent['consultation']
-  /** Clinical advice: the section paragraph (`intro`) above the two doctor cards. */
+  blocks: InfoBlock[]
+  /** Sections held back until the clinic confirms them (countries, patient videos): not rendered, listed in `pending`. */
+  held: HeldBlock[]
   doctors: ServiceContent['doctors']
-  /** Estimates and follow-up: the cost-factor panel (ServiceCost). */
-  estimates: TechnologyCost
-  reviews: TechnologyReviews
   faqs: { eyebrow: string; h2: string; items: Faq[]; cta: Cta | null }
   closing: ServiceContent['closing']
+  disclaimer: string
+  /** Section ids in page order (`npm run verify`). */
+  sectionIds: string[]
 }
 
 export type TechnologyPage = TechnologyHub | TechnologyDetail | ArtasDetail | InternationalPatients

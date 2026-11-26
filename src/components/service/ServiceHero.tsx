@@ -4,7 +4,8 @@ import { clinic } from '../../data/site'
 import { useReveal } from '../useReveal'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { PhoneIcon } from '../icons'
-import { delay } from '../shared'
+import { delay, eyebrow as eyebrowClass, italicLine } from '../shared'
+import { TrustStrip } from '../TrustStrip'
 import { CtaRow } from './CtaButton'
 
 // Service section 1: the Rejuvita service hero card (rejuvita-scrape/pages/services__rhinoplasty, container 687ffed4;
@@ -21,8 +22,11 @@ export function ServiceHero({ page, hero }: { page: RoutePage; hero: ServiceCont
   const imageRef = useReveal<HTMLDivElement>()
   const crumbsRef = useReveal<HTMLElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
+  const eyebrowRef = useReveal<HTMLParagraphElement>()
+  const subRef = useReveal<HTMLParagraphElement>()
   const introRef = useReveal<HTMLParagraphElement>()
   const ctaRef = useReveal<HTMLDivElement>()
+  const trustRef = useReveal<HTMLDivElement>()
   const phoneRef = useReveal<HTMLParagraphElement>()
 
   return (
@@ -43,6 +47,11 @@ export function ServiceHero({ page, hero }: { page: RoutePage; hero: ServiceCont
 
           <div className="flex flex-col items-start justify-center gap-5 bg-alternate px-5 py-[50px] md:p-[60px] xl:flex-1 xl:px-[100px] xl:py-20">
             <Breadcrumbs crumbs={page.crumbs} navRef={crumbsRef} reveal="up" style={delay(150)} />
+            {hero.eyebrow && (
+              <p ref={eyebrowRef} data-reveal="up" style={delay(225)} className={`${eyebrowClass} text-tertiary`}>
+                {hero.eyebrow}
+              </p>
+            )}
             <h1
               id="service-hero-heading"
               ref={titleRef}
@@ -52,12 +61,22 @@ export function ServiceHero({ page, hero }: { page: RoutePage; hero: ServiceCont
             >
               {page.h1}
             </h1>
+            {hero.subheading && (
+              <p ref={subRef} data-reveal="up" style={delay(375)} className={`${italicLine} text-tertiary`}>
+                {hero.subheading}
+              </p>
+            )}
             <p ref={introRef} data-reveal="up" style={delay(450)} className="max-w-[760px]">
               {hero.intro}
             </p>
             <div ref={ctaRef} data-reveal="up" style={delay(600)} className="mt-2.5">
               <CtaRow ctas={hero.ctas} />
             </div>
+            {hero.trust && hero.trust.length > 0 && (
+              <div ref={trustRef} data-reveal="up" style={delay(675)}>
+                <TrustStrip items={hero.trust} label="Quick facts" />
+              </div>
+            )}
             <p ref={phoneRef} data-reveal="up" style={delay(750)} className="flex flex-wrap items-center gap-x-2.5 text-meta text-text">
               <PhoneIcon className="size-4 shrink-0 text-primary" />
               {hero.phoneLabel} ·{' '}

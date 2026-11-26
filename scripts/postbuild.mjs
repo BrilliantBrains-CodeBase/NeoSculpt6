@@ -155,7 +155,7 @@ for (const hub of specialityHubs) {
 }
 const techHub = indexed.get('/technology/')
 const techPages = indexable.filter((r) => r.type === 'technology')
-const otherPaths = ['/about-us/', '/international-patients/', '/journal/', '/contact-us/']
+const otherPaths = ['/about-us/', '/medical-tourism-in-bangalore/', '/journal/', '/contact-us/']
 const policies = indexable.filter((r) => r.type === 'legal')
 
 const listing = [

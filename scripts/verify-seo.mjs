@@ -8,7 +8,7 @@ import { footerNav, legalNav, instagram, robotsContent, OG_SIZE, ogTypeFor, same
 import { imageSize } from './image-size.mjs'
 // The Instagram strip has a site-wide switch (instagram.enabled); while it is off, no section list expects it.
 const withInstagram = (ids) => (instagram.enabled ? ids : ids.filter((id) => id !== 'instagram'))
-import { pillars, results, signature, doctors, doctorSpotlight, testimonials, technology, journal } from '../src/data/home.ts'
+import { pillars, results, signature, doctors, doctorSpotlight, artasSection, celebrities, testimonials, technology, journal } from '../src/data/home.ts'
 import { hubs } from '../src/data/hubs.ts'
 import { resultCases } from '../src/data/results.ts'
 import { editorial, publicRecords, pageRecords, latest, pendingEditorial, isPublic, cardHref } from '../src/data/editorial.ts'
@@ -290,6 +290,13 @@ if (spotlightAt < 0) fail('home spotlight', `section id="${doctorSpotlight.id}" 
 else if (!(spotlightAt < homeHtml.indexOf('id="popular-heading"'))) fail('home spotlight', 'not placed before Our Popular Treatments')
 if (!homeHtml.includes('id="our-doctors"')) fail('home doctors', 'section id="our-doctors" missing from the home page')
 if (!doctorSpotlight.experience.approved && homeHtml.includes(doctorSpotlight.experience.text)) fail('home spotlight', 'experience line shown before approval')
+// Home ARTAS and celebrity sections (prompts/16, 17): the ARTAS heading and every celebrity name are on the built page.
+for (const { text } of artasSection.h2) {
+  if (!homeHtml.includes(text.trim())) fail('home ARTAS', `heading text "${text.trim()}" missing from the built home page`)
+}
+for (const { name } of celebrities.people) {
+  if (!homeHtml.includes(name)) fail('home celebrities', `${name} missing from the built home page`)
+}
 for (const label of testimonialLabels) {
   if (!testimonials.reviews.some((r) => r.treatment === label)) fail('home testimonials', `no card for ${label}`)
   if (!homeHtml.includes(label)) fail('home testimonials', `${label} missing from the built home page`)
@@ -458,7 +465,7 @@ const aboutLinks = [
   about.clinicTech.cta.href,
   ...about.services.cards.map((c) => c.href),
 ]
-for (const href of ['/about-dr-sandeep-mahapatra/', '/dr-thyagaraj/', '/technology/', '/international-patients/']) {
+for (const href of ['/about-dr-sandeep-mahapatra/', '/dr-thyagaraj/', '/technology/', '/medical-tourism-in-bangalore/']) {
   if (!aboutLinks.includes(href)) fail('about', `no link to ${href}`)
 }
 for (const href of aboutLinks) {
@@ -587,6 +594,19 @@ const bodyText = (html) =>
   decode(html.slice(Math.max(0, html.indexOf('<body'))).replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ')
 const ctaHrefs = (ctas) => [...new Set(ctas.filter((c) => c.href).map((c) => c.href))]
 const servicePending = []
+// Visible strings and internal links of an info block (src/data/blocks.ts).
+const infoStrings = (b) => [
+  b.eyebrow ?? '',
+  b.h2 ?? '',
+  ...b.paragraphs,
+  ...b.cards.flatMap((c) => [c.title, c.text]),
+  ...(b.list?.items ?? []).flatMap((i) => [i.lead ?? '', i.text]),
+  ...(b.table ? [...b.table.head, ...b.table.rows.flat().flatMap((c) => (typeof c === 'string' ? [c] : c.map((l) => l.label)))] : []),
+  ...b.columns.flatMap((c) => [c.heading, ...c.items]),
+  ...b.after,
+]
+const infoLinks = (b) => (b.table?.rows.flat() ?? []).flatMap((c) => (typeof c === 'string' ? [] : c.flatMap((l) => (l.href ? [l.href] : []))))
+
 for (const s of services) {
   const p = s.path
   const record = pages.find((r) => r.path === p)
@@ -598,21 +618,26 @@ for (const s of services) {
   const html = decode(raw)
   const text = bodyText(raw)
 
+  // A supplement doc's info blocks follow the section they name; a page may have no technology section (Microblading).
+  const extras = s.extras ?? []
+  const after = (key, id) => [id, ...extras.filter((x) => x.placeAfter === key).map((x) => x.id)]
   const order = [
     'service-hero',
-    'service-intro',
-    'service-consultation',
-    'service-why-choose',
-    'service-process',
-    'service-candidates',
-    'service-doctor',
-    'service-technology',
-    'cost',
+    ...after('intro', 'service-intro'),
+    ...after('consultation', 'service-consultation'),
+    ...after('whyChoose', 'service-why-choose'),
+    ...after('process', 'service-process'),
+    ...after('candidates', 'service-candidates'),
+    ...after('doctors', 'service-doctor'),
+    ...(s.technology.cards.length ? ['service-technology'] : []),
+    ...extras.filter((x) => x.placeAfter === 'technology').map((x) => x.id),
+    ...after('cost', 'cost'),
     ...s.strips.map((_, i) => `service-strip-${i + 1}`),
     'success-stories',
-    'service-faqs',
+    ...after('faqs', 'service-faqs'),
     'service-explore',
     'service-cta',
+    ...(s.disclaimer ? ['page-disclaimer'] : []),
     ...(instagram.enabled ? ['instagram'] : []),
   ]
   const positions = order.map((id) => html.indexOf(`id="${id}"`))
@@ -667,6 +692,13 @@ for (const s of services) {
     s.sidebar.contactHeading,
     s.sidebar.contactText,
     ...ctas.map((c) => c.label),
+    s.hero.eyebrow ?? '',
+    s.hero.subheading ?? '',
+    ...(s.hero.trust ?? []),
+    ...(s.intro.list ?? []),
+    ...(s.intro.after ?? []),
+    s.disclaimer ?? '',
+    ...extras.flatMap((x) => infoStrings(x)),
   ]
   for (const str of strings.filter(Boolean)) if (!text.includes(str)) fail(p, `not on the page: "${str.length > 60 ? str.slice(0, 60) + '…' : str}"`)
   // Each FAQ question shows once in the FAQ list (another section may use the same words, e.g. an intro H2 "What Is …?").
@@ -682,6 +714,7 @@ for (const s of services) {
     s.sidebar.viewAll.href,
     ...s.doctors.cards.flatMap((d) => (d.href ? [d.href] : [])),
     ...ctaHrefs(ctas).filter((h) => h.startsWith('/')),
+    ...extras.flatMap((x) => infoLinks(x)),
   ]
   for (const href of links) {
     if (!fs.existsSync(fileFor(href))) fail(p, `no page for ${href}`)
@@ -707,7 +740,7 @@ for (const s of services) {
 
   const accordions = (raw.match(/<button[^>]*aria-expanded="(true|false)"[^>]*aria-controls="[^"]+"/g) ?? []).length
   if (accordions < s.process.steps.length + s.faqs.items.length) fail(p, `${accordions} accordion buttons with aria-controls`)
-  for (const track of ['service-technology-track', 'success-stories-track']) {
+  for (const track of [...(s.technology.cards.length ? ['service-technology-track'] : []), 'success-stories-track']) {
     if (!raw.includes(`aria-controls="${track}"`)) fail(p, `carousel controls missing for ${track}`)
   }
   for (const r of s.reviews.items) if ((r.quote || r.author) && !r.consent) fail(p, 'review text set without consent')
@@ -757,13 +790,12 @@ for (const doc of techJson) {
 // Section ids per page kind, in the doc's order (TechnologyTemplate, HubTemplate).
 const TECH_ORDER = {
   'technology-detail': ['technology-banner', 'service-intro', 'service-consultation', 'technology-assessment', 'technology-benefits', 'how-it-works', 'service-candidates', 'technology-expectations', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'technology-explore', 'instagram'],
-  'artas-detail': ['technology-banner', 'service-intro', 'technology-comparison', 'how-it-works', 'technology-benefits', 'service-candidates', 'technology-expectations', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'technology-explore', 'instagram'],
+  // ARTAS and Medical Tourism carry their own list (`sectionIds`, from the doc's order, info blocks included).
   'technology-hub': ['technology-banner', 'technology-cards', 'service-doctor', 'service-cta', 'instagram'],
-  'international-patients': ['technology-banner', 'service-intro', 'service-why-choose', 'technology-pathways', 'patient-journey', 'service-consultation', 'service-doctor', 'cost', 'success-stories', 'service-faqs', 'service-cta', 'instagram'],
 }
 // Every visible string in a record: all text values except what is not shown (paths, ids, image data, notes,
 // pending items, review placeholders).
-const HIDDEN_KEYS = new Set(['path', 'source', 'order', 'notes', 'pending', 'kind', 'image', 'portrait', 'href', 'action', 'initials', 'reviews', 'highlight', 'columns'])
+const HIDDEN_KEYS = new Set(['path', 'source', 'order', 'notes', 'pending', 'kind', 'image', 'portrait', 'href', 'action', 'initials', 'reviews', 'highlight', 'columns', 'sectionIds', 'held', 'id', 'style', 'tone', 'panel'])
 const visibleStrings = (v, out = []) => {
   if (typeof v === 'string') out.push(v)
   else if (Array.isArray(v)) v.forEach((x) => visibleStrings(x, out))
@@ -789,7 +821,7 @@ for (const t of technologyPages) {
   const html = decode(raw)
   const text = bodyText(raw)
 
-  const order = withInstagram(TECH_ORDER[t.kind])
+  const order = withInstagram(t.sectionIds ?? TECH_ORDER[t.kind])
   const positions = order.map((id) => html.indexOf(`id="${id}"`))
   order.forEach((id, i) => positions[i] < 0 && fail(p, `section id="${id}" missing`))
   if (positions.every((x) => x >= 0) && positions.some((x, i) => i > 0 && x < positions[i - 1])) fail(p, 'sections are not in the doc order')
@@ -868,7 +900,7 @@ for (const t of technologyPages) {
     for (const e of faq) if (!faqText.includes(e.name) || !faqText.includes(e.acceptedAnswer.text)) fail(p, `FAQPage entry not visible in the FAQ list: "${e.name}"`)
   }
   const physiciansLd = graph.filter((n) => n['@type'] === 'Physician')
-  if (JSON.stringify(physiciansLd.map((n) => n.url)) !== JSON.stringify(t.doctors.cards.map((d) => SITE_URL + d.href))) fail(p, 'Physician schema does not match the doctor cards')
+  if (JSON.stringify(physiciansLd.map((n) => n.url)) !== JSON.stringify(t.doctors.cards.filter((d) => d.href).map((d) => SITE_URL + d.href))) fail(p, 'Physician schema does not match the doctor cards (those with a profile page)')
   if (physiciansLd.some((n) => n.hasCredential || n.memberOf)) fail(p, 'Physician schema lists credentials the page does not show as verified')
   if (/AggregateRating|"Review"/.test(ld)) fail(p, 'rating or review schema before the reviews are verified')
 
@@ -1119,6 +1151,10 @@ console.log(`home pillar links: ${pillarLinks.length} checked`)
 console.log(`home doctor profiles: ${doctors.cards.length} checked`)
 console.log('home doctor spotlight: pending sign-off:')
 for (const item of [...doctorSpotlight.pending, ...(doctorSpotlight.experience.approved ? [] : [`Experience line "${doctorSpotlight.experience.text}" (hidden)`])]) console.log(`  - ${item}`)
+console.log('home ARTAS section: pending sign-off:')
+for (const item of artasSection.pending) console.log(`  - ${item}`)
+console.log('home celebrities: pending sign-off:')
+for (const item of celebrities.pending) console.log(`  - ${item}`)
 console.log(`home technology links: ${technologyLinks.length} checked`)
 console.log(`reviews: ${REVIEW_POOL.length} in the pool; ${reviewPages.matched} pages show a review about their own treatment, ${reviewPages.general.length} show general reviews only`)
 console.log(`home testimonials: ${testimonials.reviews.length} cards checked; pending sign-off:`)

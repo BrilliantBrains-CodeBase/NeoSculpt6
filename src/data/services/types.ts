@@ -8,6 +8,7 @@
 
 import type { Testimonial } from '../home.ts'
 import type { NavLink } from '../nav.ts'
+import type { HeldBlock, InfoBlock } from '../blocks.ts'
 
 /** A button. `book` opens the booking popup; `href` is a page, an on-page anchor ("#cost") or a tel: link. */
 export type Cta = { label: string; action: 'book' } | { label: string; href: string }
@@ -57,9 +58,19 @@ export interface ServiceContent {
   /** Where the copy came from, e.g. "content/service/service-page.md:2983". */
   source: string
   /** 1. Page banner. The H1 is page.h1; the breadcrumb is page.crumbs. */
-  hero: { intro: string; ctas: Cta[]; phoneLabel: string; image: ServiceImage }
-  /** 2. Introduction. `points`: an optional row of small cards under the text (a doc's "Extra" block). */
-  intro: { h2: string; paragraphs: string[]; points: NumberedCard[] }
+  hero: {
+    intro: string
+    ctas: Cta[]
+    phoneLabel: string
+    image: ServiceImage
+    /** Supplement docs only (Microblading): an eyebrow over the H1, a line under it, and a quick-facts strip. */
+    eyebrow?: string | null
+    subheading?: string | null
+    trust?: string[]
+  }
+  /** 2. Introduction. `points`: an optional row of small cards under the text (a doc's "Extra" block); `list` and
+   *  `after`: a bulleted list under the paragraphs and the text that follows it (Microblading's "It can:"). */
+  intro: { h2: string; paragraphs: string[]; points: NumberedCard[]; list?: string[]; after?: string[] }
   /** 3. Consultation highlight. */
   consultation: {
     h2: string
@@ -102,9 +113,18 @@ export interface ServiceContent {
   closing: { kicker: string | null; h2: string; paragraph: string; chips: string[]; ctas: Cta[]; image: ServiceImage | null }
   /** Sidebar "Explore our services". */
   sidebar: { heading: string; links: NavLink[]; viewAll: NavLink; contactHeading: string; contactText: string; cta: Cta }
+  /** Info blocks a supplement doc adds ("Info: …" sections: tables, do/avoid, lists), each drawn after the section
+   *  named in `placeAfter` (a ServiceContent key: intro, consultation, whyChoose, process, candidates, doctors, cost, faqs). */
+  extras?: (InfoBlock & { placeAfter: ServiceExtraAnchor })[]
+  /** Sections held back until the clinic confirms them (not drawn; listed in `pending`). */
+  held?: HeldBlock[]
+  /** The doc's small print under the closing band. */
+  disclaimer?: string | null
   /** Page-specific items that need sign-off before launch (prices, figures, notes); `npm run verify` lists them. */
   pending: string[]
 }
+
+export type ServiceExtraAnchor = 'intro' | 'consultation' | 'whyChoose' | 'process' | 'candidates' | 'doctors' | 'technology' | 'cost' | 'faqs'
 
 /** A service page's YouTube video: a record in videos.json (scripts/import-videos.mjs, checked by
  *  scripts/validate-videos.mjs). A page shows it only when it is approved, consent-confirmed and published. */

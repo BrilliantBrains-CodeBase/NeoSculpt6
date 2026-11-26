@@ -38,16 +38,20 @@
         "text": "Not on the live hub page. Uses the closing wording already on every technology page."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Technology",
+      "subheading": null,
       "intro": "Technology-backed care at NeoSculpt6 supports diagnosis, planning, safety and treatment precision while remaining guided by clinical judgment.",
       "buttons": [
         {
           "label": "Book An Appointment",
           "href": "/contact-us/"
         }
-      ]
+      ],
+      "trust": null
     },
     "cards": [
       {
@@ -229,9 +233,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "AI-Integrated Hair Analysis in Bangalore",
+      "subheading": null,
       "intro": "AI-Integrated Hair Analysis supports a more detailed review of hair density, scalp characteristics and hair-loss patterns during a consultation. It is used alongside clinical examination and the patient’s history; it does not replace a doctor’s diagnosis.",
       "buttons": [
         {
@@ -242,7 +249,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is AI-Integrated Hair Analysis?",
@@ -311,6 +319,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Hair thinning",
         "Pattern hair loss",
@@ -510,9 +519,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "AI-Integrated Donor Assessment in Bangalore",
+      "subheading": null,
       "intro": "AI-Integrated Donor Assessment supports a closer review of the donor area for people considering hair restoration. It forms one part of clinical planning and must be interpreted alongside scalp examination, hair characteristics, medical history and long-term goals.",
       "buttons": [
         {
@@ -523,7 +535,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is AI-Integrated Donor Assessment?",
@@ -592,6 +605,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Exploring FUE hair transplant",
         "Exploring DHI hair transplant",
@@ -757,7 +771,7 @@
     "source": "content/technology/technology-international-patient.md:508",
     "seo": {
       "title": "ARTAS Robotic Hair Transplant in Bangalore | NeoSculpt6",
-      "description": "Explore ARTAS iX robotic hair transplant at NeoSculpt6 in Bangalore with donor assessment, hairline planning and personalised consultation.",
+      "description": "Doctor-led ARTAS robotic hair transplant in Bangalore. Image-guided graft harvesting, a personalised hairline plan and honest advice on candidacy. Call +91 99640 60483.",
       "h1": "ARTAS Robotic Hair Transplant in Bangalore",
       "robots": "index, follow",
       "breadcrumb": [
@@ -770,146 +784,224 @@
     "order": [
       "hero",
       "intro",
-      "comparison",
       "process",
       "benefits",
+      "info:technology-comparison",
       "candidates",
       "expectations",
       "doctors",
       "cost",
-      "reviews",
       "faqs",
       "closing",
+      "disclaimer",
       "explore"
     ],
     "notes": [
       {
         "section": "page",
         "kind": "note",
-        "text": "This page has its own layout on the live site (no \"How Is It Different\" / cost / FAQ blocks like the other eight). All live sections are kept in order; a cost block and FAQs are added so it matches the other technology pages."
+        "text": "Copy replaced on 2026-11-25 from the client brief \"4. ARTAS Robotic Hair Transplant Page\" (content/technology/briefs/ARTAS-page.md). Slug kept to protect SEO. The model is written as \"ARTAS\" until the clinic confirms which model it owns (the old copy said ARTAS iX, the reference page ARTAS iXi). The brief's [CONFIRM] points are listed for sign-off; claims it says to avoid (no scars, painless, permanent results, FDA, manufacturer figures, network-wide reviews) are not used, so the page has no reviews section."
+      },
+      {
+        "section": "intro",
+        "kind": "note",
+        "text": "Confirm which steps the clinic's ARTAS model performs (harvesting only, or recipient-site creation too)."
+      },
+      {
+        "section": "process",
+        "kind": "note",
+        "text": "Confirm whether implantation is manual or robot-assisted on the clinic's model."
       },
       {
         "section": "doctors",
-        "kind": "added",
-        "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
+        "kind": "note",
+        "text": "The brief's card also lists Gold Medalist, certified DHI specialist, 20+ years in practice and 10,000+ hair transplants. Those claims are pending under Dr Sandeep's strict approval and stay off the page until approved in doctors.json. \"Board-Certified Team\" removed from the heading until a named board certification is supplied."
       },
       {
         "section": "cost",
-        "kind": "added",
-        "text": "Not on the live ARTAS page. Uses the same cost wording as the other eight technology pages."
+        "kind": "note",
+        "text": "Confirm the cost wording; add a price range only if the clinic approves."
       },
       {
         "section": "faqs",
-        "kind": "added",
-        "text": "The live ARTAS page has no FAQs. These five are written only from this page's own wording (no new claims). Approve before publishing."
+        "kind": "note",
+        "text": "FAQ 8 (procedure length) to be confirmed by the clinic."
       }
     ],
+    "blocks": [
+      {
+        "id": "technology-comparison",
+        "eyebrow": null,
+        "h2": "ARTAS vs FUT vs Manual FUE",
+        "paragraphs": [],
+        "cards": [],
+        "list": null,
+        "table": {
+          "head": [
+            "",
+            "FUT (strip)",
+            "Manual FUE",
+            "ARTAS robotic FUE"
+          ],
+          "rows": [
+            [
+              "How grafts are taken",
+              "A strip of scalp is removed and dissected",
+              "Handheld punch, one graft at a time",
+              "Robotic arm with image guidance, one graft at a time"
+            ],
+            [
+              "Scarring",
+              "Linear scar at the donor area",
+              "Small dot marks",
+              "Small dot marks"
+            ],
+            [
+              "Consistency",
+              "Depends on the team",
+              "Depends on the operator's hand and stamina",
+              "Repeatable robotic movement"
+            ],
+            [
+              "Recovery",
+              "Tightness or numbness may occur",
+              "Usually quicker than FUT",
+              "Usually quicker than FUT"
+            ],
+            [
+              "Best for",
+              "Selected cases needing many grafts",
+              "Wide range of hair types and areas",
+              "Suitable hair and donor characteristics"
+            ]
+          ]
+        },
+        "columns": [],
+        "after": [
+          "The right technique is chosen at consultation. If another method suits you better, we tell you."
+        ],
+        "panel": false
+      }
+    ],
+    "held": [],
     "hero": {
-      "eyebrow": "Our Technology",
+      "eyebrow": "Robotic Hair Restoration",
       "h1": "ARTAS Robotic Hair Transplant in Bangalore",
-      "intro": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation. At NeoSculpt6, ARTAS technology is considered only after a detailed hair-loss, scalp and donor-area assessment.",
+      "subheading": "Robotic Precision. Doctor-Led Planning.",
+      "intro": "ARTAS uses image-guided robotics to assist our doctors during hair transplantation. The robot supports the steps that need precision and repetition. Your doctor still designs the hairline and makes every decision.",
       "buttons": [
         {
-          "label": "Book an ARTAS Hair Transplant Consultation",
+          "label": "Book an ARTAS Consultation",
           "href": "/contact-us/"
         },
         {
-          "label": "How the Procedure Works",
-          "href": "#how-it-works"
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp Us",
+          "href": null
         }
+      ],
+      "trust": [
+        "Doctor-led",
+        "Image-guided",
+        "No strip incision",
+        "Personalised hairline plan"
       ]
     },
     "intro": {
-      "h2": "What Is ARTAS iX Robotic Hair Restoration?",
+      "h2": "What Is ARTAS Robotic Hair Restoration?",
       "paragraphs": [
-        "ARTAS iX uses robotic technology and a high-definition stereoscopic vision system to identify suitable hair follicular units from the scalp. The system can support experts during follicular-unit harvesting, recipient-site creation and implantation as part of a clinically planned hair-transplant procedure.",
-        "Treatment planning remains specialist led. The choice of technique depends on the pattern of hair loss, donor availability, scalp condition, hair characteristics and the result the patient hopes to achieve."
-      ]
-    },
-    "comparison": {
-      "h2": "How Is ARTAS Different From Traditional Hair Transplant Procedures?",
-      "introLine": "Traditional hair restoration procedures include Follicular Unit Transplantation (FUT) and manual Follicular Unit Excision (FUE). The appropriate method depends on the individual assessment and treatment plan.",
-      "cards": [
-        {
-          "title": "Follicular Unit Transplantation (FUT)",
-          "text": "FUT involves removing a strip of scalp from the back of the head and separating the hair follicles from it for implantation into balding areas. Because it involves strip removal, FUT leaves a permanent linear scar, and some patients may experience scalp numbness, tingling, tightness or discomfort during recovery."
-        },
-        {
-          "title": "Manual Follicular Unit Excision (FUE)",
-          "text": "Manual FUE uses handheld instruments to extract individual hair grafts. The procedure relies on the expert’s or technician’s hand-eye coordination and involves repetitive graft extraction during surgery."
-        },
-        {
-          "title": "ARTAS iX Robotic Hair Restoration",
-          "text": "ARTAS iX uses robotic technology to assist experts with precise and repetitive movements during follicular-unit harvesting. It is designed to identify suitable grafts, assist with extraction, create recipient sites and implant harvested follicles as part of the planned procedure."
-        }
+        "ARTAS is a robotic system used in follicular unit extraction (FUE) hair transplants. It uses a high-definition, multi-camera vision system to identify healthy follicular units in the donor area. A robotic arm then helps the doctor harvest them and create the recipient sites.",
+        "The robot is a tool. It does not decide who is treated or how the hairline looks. That is your doctor's role.",
+        "Whether ARTAS suits you depends on your hair-loss pattern, donor density, scalp condition and hair characteristics. We assess these first."
       ]
     },
     "process": {
       "eyebrow": "Our Process",
-      "h2": "How Does the ARTAS iX Procedure Work?",
+      "h2": "How the ARTAS Procedure Works",
       "steps": [
         {
-          "title": "High-Definition Stereoscopic Vision",
-          "text": "The ARTAS iX high-definition stereoscopic vision system identifies grafts suitable for harvesting and provides detailed visualisation during the procedure."
+          "title": "Assessment and planning",
+          "text": "Your doctor reviews your hair loss, donor area and goals, then designs the hairline."
         },
         {
-          "title": "Precise Follicular-Unit Harvesting",
-          "text": "The ARTAS iX harvesting system helps the expert dissect and harvest grafts from the donor area. Robotic technology supports consistent repetitive movements throughout this stage of the procedure."
+          "title": "Image-guided mapping",
+          "text": "The vision system scans the donor area and identifies follicular units suited to harvest."
         },
         {
-          "title": "Recipient-Site Creation",
-          "text": "After harvesting, the ARTAS iX system can create recipient sites according to the individual treatment plan, hairline design and graft-placement strategy."
+          "title": "Precise harvesting",
+          "text": "The robotic arm assists with extracting individual grafts, one at a time, with consistent movements."
         },
         {
-          "title": "Site Making and Implantation",
-          "text": "ARTAS iX can support recipient-site making and implantation of harvested grafts. The treatment team plans every stage around the patient’s existing hair, donor area and restoration goal."
+          "title": "Recipient-site creation",
+          "text": "Sites are created to follow your planned hairline, direction and density."
+        },
+        {
+          "title": "Implantation",
+          "text": "Grafts are placed by our team according to the plan."
+        },
+        {
+          "title": "Aftercare",
+          "text": "You leave with written instructions and a follow-up schedule."
         }
       ]
     },
     "benefits": {
-      "h2": "What Are the Benefits of ARTAS iX?",
+      "h2": "Benefits of ARTAS",
       "subline": null,
       "cards": [
         {
-          "title": "No Linear Scar",
-          "text": "ARTAS-assisted follicular-unit extraction does not use a strip-removal approach, so it does not create a linear donor scar."
+          "title": "Image-guided precision",
+          "text": "Each graft is chosen using imaging, not by eye alone."
         },
         {
-          "title": "No Plugs, Stitches or Staples",
-          "text": "The procedure is designed around individual follicular units rather than the plug-graft approach used in older transplant methods. It does not involve strip closure with stitches or staples."
+          "title": "Consistent harvesting",
+          "text": "The robotic arm repeats the same movement without fatigue."
         },
         {
-          "title": "Precise Graft Harvesting and Implantation",
-          "text": "Robotic technology supports detailed imaging, graft identification and repeatable procedural movements during the planned stages of treatment."
+          "title": "No strip incision",
+          "text": "Grafts are taken one by one, so there is no linear strip scar as with FUT. Tiny marks at the donor area are expected."
         },
         {
-          "title": "Natural-Looking Hair-Restoration Planning",
-          "text": "Hairline design, graft placement and density goals are planned around the individual’s facial proportions, existing hair, donor availability and long-term expectations."
+          "title": "No stitches or staples",
+          "text": "No stitches or staples are needed for graft extraction."
+        },
+        {
+          "title": "Personalised planning",
+          "text": "Hairline, density and placement follow your face and your long-term hair-loss pattern."
+        },
+        {
+          "title": "Doctor-led at every step",
+          "text": "The robot assists. The doctor decides."
         }
       ],
-      "smallPrint": "Individual results, recovery experience and visible growth vary between patients."
+      "smallPrint": "Results, recovery and visible growth vary from person to person."
     },
     "candidates": {
-      "h2": "Who Is ARTAS iX For?",
+      "h2": "Who Is ARTAS For?",
+      "lead": "ARTAS may suit men and women with androgenetic (pattern) hair loss who have enough healthy donor hair. Your doctor checks:",
       "items": [
-        "Men and women with androgenetic alopecia",
-        "Hair and donor characteristics suitable for the technology-assisted procedure",
-        "Hair-loss pattern, donor area and scalp condition assessed first"
+        "Pattern and stage of hair loss",
+        "Donor density and quality",
+        "Scalp condition",
+        "Hair colour, texture and curl",
+        "Your goals and expectations"
       ],
       "paragraphs": [
-        "ARTAS iX may be considered for men and women with androgenetic alopecia where hair and donor characteristics are suitable for the technology-assisted procedure. Hair-loss pattern, donor area, scalp condition and hair characteristics are assessed before treatment is recommended.",
-        "The expert determines whether ARTAS-assisted treatment is appropriate after evaluating the patient’s hair loss and donor area."
+        "Some hair types and areas are better treated with manual FUE or DHI. We recommend what fits, not what is newest."
       ]
     },
     "expectations": {
-      "h2": "What Results Can You Expect From ARTAS iX?",
+      "h2": "What Results Can You Expect?",
       "paragraphs": [
-        "Hair restoration develops gradually after treatment. Visible change is reviewed over time, with hair-transplant progress commonly assessed at different stages of the growth cycle. Actual growth, density, recovery and final appearance vary between patients."
+        "Transplanted hairs usually shed in the first few weeks. New growth then starts and builds gradually over several months. Your doctor reviews progress at set stages of the growth cycle. Final density and appearance vary between patients."
       ]
     },
     "doctors": {
-      "eyebrow": "Our Doctors",
-      "h2": "Board-Certified Team",
+      "eyebrow": null,
+      "h2": "Our Doctors",
       "paragraphs": [],
       "cards": [
         {
@@ -919,19 +1011,19 @@
             "MD Dermatology"
           ],
           "qualifications": null,
-          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "specialty": "Founder and Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
           "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
           "button": {
-            "label": "Meet Dr. Sandeep Mahapatra",
+            "label": "Full profile",
             "href": "/about-dr-sandeep-mahapatra/"
           }
         }
       ]
     },
     "cost": {
-      "h2": "ARTAS Robotic Hair Transplant Cost and Consultation in Bangalore",
+      "h2": "Cost of ARTAS Hair Transplant in Bangalore",
       "paragraphs": [
-        "The treatment estimate depends on the concern, treatment area, assessment findings, technology plan, number of sessions or procedure requirements, aftercare and follow-up needs. A preliminary estimate may be discussed after the relevant information is reviewed; final costs follow the required clinical assessment."
+        "The cost depends on the number of grafts, the area treated, your plan, the number of sessions and follow-up. A preliminary estimate may be shared after your records are reviewed. The final cost follows your in-person assessment."
       ],
       "buttons": [
         {
@@ -940,47 +1032,77 @@
         }
       ]
     },
-    "reviews": {
-      "eyebrow": "Patient Stories",
-      "h2": "What Our Patients Say",
-      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
-    },
     "faqs": {
       "eyebrow": "Quick Answers",
       "h2": "Frequently Asked Questions About ARTAS Robotic Hair Transplant",
       "items": [
         {
-          "q": "What is ARTAS iX robotic hair restoration?",
-          "a": "ARTAS iX is a robotic hair-restoration system designed to assist experts during selected stages of hair transplantation, including follicular-unit harvesting, recipient-site creation and implantation."
+          "q": "What is ARTAS?",
+          "a": "A robotic system that assists doctors in FUE hair transplants. It uses imaging to identify grafts and a robotic arm to help harvest them."
         },
         {
-          "q": "Is ARTAS different from FUT and manual FUE?",
-          "a": "Yes. FUT removes a strip of scalp and leaves a linear scar, and manual FUE uses handheld instruments. ARTAS iX uses robotic technology to assist experts with precise and repetitive movements during harvesting."
+          "q": "Does the robot perform the surgery?",
+          "a": "No. Your doctor plans the hairline, supervises every step and makes every decision. The robot assists with precise, repetitive tasks."
         },
         {
           "q": "Does ARTAS leave a linear scar?",
-          "a": "ARTAS-assisted follicular-unit extraction does not use a strip-removal approach, so it does not create a linear donor scar."
+          "a": "No. Grafts are extracted one by one, with no strip removed. Small dot marks remain at the donor area and are usually covered by hair."
         },
         {
-          "q": "Is ARTAS iX suitable for everyone?",
-          "a": "No. The expert determines whether ARTAS-assisted treatment is appropriate after evaluating the patient’s hair loss, donor area, scalp condition and hair characteristics."
+          "q": "How is ARTAS different from manual FUE?",
+          "a": "Both take grafts individually. In manual FUE, the operator's hand does the extraction. In ARTAS, a robotic arm helps with consistent movements."
         },
         {
-          "q": "When will I see results after an ARTAS hair transplant?",
-          "a": "Hair restoration develops gradually after treatment, and progress is reviewed at different stages of the growth cycle. Actual growth, density and final appearance vary between patients."
+          "q": "Is ARTAS suitable for everyone?",
+          "a": "No. Suitability depends on donor density, hair type, scalp condition and your pattern of loss. The doctor decides at consultation."
+        },
+        {
+          "q": "Does ARTAS work for women?",
+          "a": "It can for suitable candidates with pattern hair loss and enough donor hair. Your doctor will advise."
+        },
+        {
+          "q": "Is ARTAS painful?",
+          "a": "The area is numbed with local anaesthesia. Most patients feel pressure rather than sharp pain. Comfort varies."
+        },
+        {
+          "q": "How long does the procedure take?",
+          "a": "It depends on the number of grafts. Most sessions take one day. Your doctor confirms timing in your plan."
+        },
+        {
+          "q": "When will I see results?",
+          "a": "Growth is gradual. Many patients see early growth after three to four months and fuller results by 12 months or more. Results vary."
+        },
+        {
+          "q": "How soon can I return to work?",
+          "a": "Many patients return within a few days. Your doctor will advise based on your plan."
+        },
+        {
+          "q": "Is it permanent?",
+          "a": "Transplanted follicles from the donor area are generally long-lasting. Existing hair can still thin, so a maintenance plan may help."
         }
       ],
       "button": null
     },
     "closing": {
-      "h2": "ARTAS iX at NeoSculpt6",
-      "paragraph": "NeoSculpt6 combines specialist-led hair restoration with advanced hair analysis, donor assessment and ARTAS iX robotic hair-restoration technology where suitable. A consultation helps assess hair loss, donor area and suitability before a personalised restoration plan is recommended.",
+      "h2": "Find Out If ARTAS Is Right for You",
+      "paragraph": "Book a consultation. Your doctor will assess your hair and donor area and give an honest plan.",
       "buttons": [
         {
-          "label": "Book an ARTAS Hair Transplant Consultation",
+          "label": "Book an ARTAS Consultation",
           "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp Us",
+          "href": null
         }
       ]
+    },
+    "disclaimer": {
+      "text": "Results vary from person to person. This page is for patient education and does not replace an in-person consultation. Medically reviewed by Dr. Sandeep Mahapatra."
     },
     "explore": {
       "heading": "Our Technology",
@@ -1052,7 +1174,7 @@
     "path": "/technology/vaser-liposuction-technology/",
     "name": "Vaser Liposuction Technology",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:694",
+    "source": "content/technology/technology-international-patient.md:710",
     "seo": {
       "title": "Vaser Liposuction Technology in Bangalore | NeoSculpt6",
       "description": "Explore Vaser Liposuction Technology at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -1088,9 +1210,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Vaser Liposuction Technology in Bangalore",
+      "subheading": null,
       "intro": "Vaser is an ultrasound-assisted technology used in selected liposuction procedures. It may support fat-removal and contour-planning discussions when surgical body contouring is clinically appropriate.",
       "buttons": [
         {
@@ -1101,7 +1226,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is Vaser Liposuction Technology?",
@@ -1170,6 +1296,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Adults with localised fat concerns",
         "Assessed as suitable for surgical body contouring",
@@ -1328,7 +1455,7 @@
     "path": "/technology/reaction-viora-rf-tightening/",
     "name": "Reaction Viora RF Tightening",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:861",
+    "source": "content/technology/technology-international-patient.md:877",
     "seo": {
       "title": "Reaction Viora RF Tightening in Bangalore | NeoSculpt6",
       "description": "Explore Reaction Viora RF Tightening at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -1364,9 +1491,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Reaction Viora RF Tightening in Bangalore",
+      "subheading": null,
       "intro": "Reaction Viora RF tightening is a radiofrequency-based technology considered in selected skin-firming and body-contouring plans. The appropriate approach depends on the treatment area, skin quality, medical suitability and the outcome being discussed.",
       "buttons": [
         {
@@ -1377,7 +1507,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is Reaction Viora RF Tightening?",
@@ -1446,6 +1577,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Selected skin-firmness concerns",
         "Contour-refinement concerns",
@@ -1602,7 +1734,7 @@
     "path": "/technology/co2-fractional-laser/",
     "name": "CO2 Fractional Laser",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:1028",
+    "source": "content/technology/technology-international-patient.md:1044",
     "seo": {
       "title": "CO2 Fractional Laser in Bangalore | NeoSculpt6",
       "description": "Explore CO2 Fractional Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -1638,9 +1770,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "CO2 Fractional Laser in Bangalore",
+      "subheading": null,
       "intro": "CO2 fractional laser is a skin-resurfacing technology used in selected treatment plans for acne scars, uneven texture, fine lines and skin-remodelling concerns. Treatment settings and recovery are planned after detailed skin assessment.",
       "buttons": [
         {
@@ -1651,7 +1786,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is CO2 Fractional Laser?",
@@ -1720,6 +1856,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Selected acne scars",
         "Uneven texture",
@@ -1877,7 +2014,7 @@
     "path": "/technology/q-switch-laser/",
     "name": "Q-Switch Laser",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:1195",
+    "source": "content/technology/technology-international-patient.md:1211",
     "seo": {
       "title": "Q-Switch Laser in Bangalore | NeoSculpt6",
       "description": "Explore Q-Switch Laser at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -1913,9 +2050,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Q-Switch Laser in Bangalore",
+      "subheading": null,
       "intro": "Q-Switch laser treatment uses short, targeted pulses of laser energy in selected plans for pigmentation-related concerns. The treatment approach is based on skin assessment, the nature and pattern of pigmentation, treatment history and individual suitability.",
       "buttons": [
         {
@@ -1926,7 +2066,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is Q-Switch Laser?",
@@ -1995,6 +2136,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Uneven pigmentation",
         "Tanning or dullness concerns",
@@ -2147,7 +2289,7 @@
     "path": "/technology/excimer-laser-targeted-phototherapy/",
     "name": "Excimer Laser & Targeted Phototherapy",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:1362",
+    "source": "content/technology/technology-international-patient.md:1378",
     "seo": {
       "title": "Excimer Laser and Targeted Phototherapy in Bangalore | NeoSculpt6",
       "description": "Explore Excimer Laser and Targeted Phototherapy at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -2188,9 +2330,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Excimer Laser and Targeted Phototherapy in Bangalore",
+      "subheading": null,
       "intro": "Excimer laser and targeted phototherapy are focused light-based treatment approaches considered for selected cases of vitiligo and inflammatory skin concerns. Suitability, treatment frequency and expected response are assessed individually.",
       "buttons": [
         {
@@ -2201,7 +2346,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is Excimer Laser and Targeted Phototherapy?",
@@ -2270,6 +2416,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Selected vitiligo concerns",
         "Certain inflammatory skin conditions"
@@ -2416,7 +2563,7 @@
     "path": "/technology/body-contouring-cryolipolysis-platforms/",
     "name": "Body Contouring & Cryolipolysis Platforms",
     "kind": "technology-detail",
-    "source": "content/technology/technology-international-patient.md:1531",
+    "source": "content/technology/technology-international-patient.md:1547",
     "seo": {
       "title": "Body Contouring and Cryolipolysis Platforms in Bangalore | NeoSculpt6",
       "description": "Explore Body Contouring and Cryolipolysis Platforms at NeoSculpt6 in Bangalore with consultation-led assessment, personalised treatment planning, realistic expectations and aftercare guidance.",
@@ -2457,9 +2604,12 @@
         "text": "Not on the live technology page. Doctor text is copied word for word from the live International Patients page, so nothing new needs sign-off."
       }
     ],
+    "blocks": [],
+    "held": [],
     "hero": {
       "eyebrow": "Our Technology",
       "h1": "Body Contouring and Cryolipolysis Platforms in Bangalore",
+      "subheading": null,
       "intro": "Body contouring and cryolipolysis platforms may be considered in selected non-surgical plans for localised body-shape concerns. The right approach depends on the area of concern, anatomy, skin quality, lifestyle factors and whether a non-surgical option is appropriate.",
       "buttons": [
         {
@@ -2470,7 +2620,8 @@
           "label": "Learn How It Works",
           "href": "#how-it-works"
         }
-      ]
+      ],
+      "trust": null
     },
     "intro": {
       "h2": "What Is Body Contouring and Cryolipolysis Platforms?",
@@ -2539,6 +2690,7 @@
     },
     "candidates": {
       "h2": "Who May Be Assessed?",
+      "lead": null,
       "items": [
         "Adults with selected localised contour concerns",
         "Wish to explore a non-surgical option"
@@ -2711,349 +2863,692 @@
     }
   },
   {
-    "path": "/international-patients/",
-    "name": "International Patients",
+    "path": "/medical-tourism-in-bangalore/",
+    "name": "Medical Tourism in Bangalore",
     "kind": "international-patients",
-    "source": "content/technology/technology-international-patient.md:1709",
+    "source": "content/technology/technology-international-patient.md:1725",
     "seo": {
-      "title": "International Patient Care in Bangalore | NeoSculpt6",
-      "description": "Plan your NeoSculpt6 treatment journey to Bangalore with virtual consultation, personalised care planning, in-person assessment guidance and treatment-specific follow-up support.",
-      "h1": "International Patient Care in Bangalore",
+      "title": "Medical Tourism in Bangalore for International Patients | NeoSculpt6",
+      "description": "Travelling to Bangalore for aesthetic or hair restoration care? NeoSculpt6 offers virtual consultations, a doctor-led plan and travel guidance. Call +91 99640 60483.",
+      "h1": "Medical Tourism in Bangalore for International Patients",
       "robots": "index, follow",
       "breadcrumb": [
         "Home",
-        "International Patients"
+        "Medical Tourism in Bangalore"
       ],
       "note": null
     },
     "order": [
       "hero",
-      "intro",
-      "steps",
-      "pathways",
-      "journey",
-      "travel",
+      "info:medical-tourism-why",
+      "info:medical-tourism-treatments",
+      "info:medical-tourism-journey",
+      "info:medical-tourism-travel",
+      "info:medical-tourism-procedure-day",
+      "info:medical-tourism-aftercare",
+      "info:cost",
+      "info:medical-tourism-why-choose",
+      "info:medical-tourism-facilities",
       "doctors",
-      "estimates",
-      "reviews",
       "faqs",
-      "closing"
+      "closing",
+      "disclaimer"
     ],
     "notes": [
       {
-        "section": "pathways",
+        "section": "page",
         "kind": "note",
-        "text": "Fertility Care is the only pathway with no treatment links, and NeoSculpt6 has no fertility service pages. Confirm whether this tab should link to the Neo Fertility website or be removed."
+        "text": "Replaces International Patients (/international-patients/, which now 301-redirects here) on 2026-11-25, from the client brief \"2. Medical Tourism Page\" (content/technology/briefs/medical-tourism-page.md). Claims the brief marks [CONFIRM] that describe a service the clinic may not offer (countries served, nearby stay options, airport pickup, invitation letter, recovery area, other languages) are held back until confirmed; patient journey videos are held until consented videos exist. The brief has no reviews section, so the page has none."
+      },
+      {
+        "section": "hero",
+        "kind": "note",
+        "text": "\"500+ patients from outside India\" is the About page figure, still pending sign-off there."
+      },
+      {
+        "section": "medical-tourism-treatments",
+        "kind": "note",
+        "text": "Fertility care is shown without a link until the Neo Fertility link is confirmed. \"Vaser liposuction\" links to the technology page (there is no Vaser service page); \"breast surgery\" links to the Cosmetic Surgery hub."
+      },
+      {
+        "section": "medical-tourism-travel",
+        "kind": "note",
+        "text": "Held until the clinic confirms: sharing nearby stay options, airport pickup and a medical invitation letter."
+      },
+      {
+        "section": "cost",
+        "kind": "note",
+        "text": "Confirm the cost wording with the clinic (\"Your doctor confirms the final estimate in writing after the assessment.\")."
+      },
+      {
+        "section": "medical-tourism-facilities",
+        "kind": "note",
+        "text": "\"Recovery area\" is held until the clinic confirms it."
+      },
+      {
+        "section": "faqs",
+        "kind": "note",
+        "text": "FAQ 3 (medical invitation letter), FAQ 4 (airport pickup and hotel guidance) and FAQ 11 (languages beyond English, Hindi and Kannada) to be confirmed; the unconfirmed parts are left out."
+      },
+      {
+        "section": "disclaimer",
+        "kind": "note",
+        "text": "Confirm the reviewer for surgical treatments (for example Dr. Thyagaraj)."
+      }
+    ],
+    "blocks": [
+      {
+        "id": "medical-tourism-why",
+        "eyebrow": null,
+        "h2": "Why Patients Travel to Bangalore for Care",
+        "paragraphs": [
+          "Good results depend on more than the procedure. They depend on who plans it, who performs it and who follows up.",
+          "At NeoSculpt6, you get:"
+        ],
+        "cards": [],
+        "list": {
+          "style": "ticks",
+          "items": [
+            {
+              "lead": "Doctor-led diagnosis.",
+              "text": "Every plan begins with a medical assessment, not a package."
+            },
+            {
+              "lead": "Natural-looking planning.",
+              "text": "We design around your face, your features and your goals."
+            },
+            {
+              "lead": "Experienced surgeons and specialists.",
+              "text": "Our doctors lead each case from consultation to review."
+            },
+            {
+              "lead": "Treatments under one roof.",
+              "text": "Cosmetic surgery, laser and skin, injectables, body contouring and hair restoration."
+            },
+            {
+              "lead": "Structured follow-up.",
+              "text": "Reviews continue after you fly home."
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [
+          "Your plan is personalised, never copied from a brochure."
+        ],
+        "panel": false
+      },
+      {
+        "id": "medical-tourism-treatments",
+        "eyebrow": null,
+        "h2": "Treatments Available for International Patients",
+        "paragraphs": [],
+        "cards": [],
+        "list": null,
+        "table": {
+          "head": [
+            "Category",
+            "Treatments"
+          ],
+          "rows": [
+            [
+              "Hair Restoration",
+              [
+                {
+                  "label": "Neo Follicle Hair Transplant",
+                  "href": "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/"
+                },
+                {
+                  "label": "FUE",
+                  "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
+                },
+                {
+                  "label": "DHI",
+                  "href": "/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/"
+                },
+                {
+                  "label": "ARTAS robotic hair transplant",
+                  "href": "/technology/artas-robotic-hair-transplant/"
+                },
+                {
+                  "label": "failed transplant repair",
+                  "href": "/hair-transplant-restoration/failed-hair-transplant-repair-in-bangalore/"
+                },
+                {
+                  "label": "beard and moustache transplant",
+                  "href": "/hair-transplant-restoration/beard-moustache-transplant-in-bangalore/"
+                },
+                {
+                  "label": "PRP",
+                  "href": "/hair-transplant-restoration/prp-hair-treatment-in-bangalore/"
+                }
+              ]
+            ],
+            [
+              "Laser & Skin Aesthetics",
+              [
+                {
+                  "label": "CO2 fractional laser",
+                  "href": "/laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore/"
+                },
+                {
+                  "label": "acne scar laser",
+                  "href": "/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/"
+                },
+                {
+                  "label": "melasma treatment",
+                  "href": "/laser-skin-aesthetic/melasma-treatment-in-bangalore/"
+                },
+                {
+                  "label": "full body laser hair removal",
+                  "href": "/laser-skin-aesthetic/full-body-laser-hair-removal-in-bangalore/"
+                },
+                {
+                  "label": "Q-Switch laser",
+                  "href": "/laser-skin-aesthetic/q-switch-laser-treatment-in-bangalore/"
+                },
+                {
+                  "label": "microblading",
+                  "href": "/laser-skin-aesthetic/microblading-in-bangalore/"
+                }
+              ]
+            ],
+            [
+              "Anti-Ageing & Injectables",
+              [
+                {
+                  "label": "Botox",
+                  "href": "/anti-aging-injectables/botox-treatment-in-bangalore/"
+                },
+                {
+                  "label": "dermal fillers",
+                  "href": "/anti-aging-injectables/dermal-filler-treatment-in-bangalore/"
+                },
+                {
+                  "label": "Profhilo",
+                  "href": "/anti-aging-injectables/profhilo-in-bangalore/"
+                },
+                {
+                  "label": "HIFU",
+                  "href": "/anti-aging-injectables/hifu-treatment-in-bangalore/"
+                },
+                {
+                  "label": "RF skin tightening",
+                  "href": "/anti-aging-injectables/rf-skin-tightening-treatment-in-bangalore/"
+                }
+              ]
+            ],
+            [
+              "Cosmetic Surgery",
+              [
+                {
+                  "label": "Rhinoplasty",
+                  "href": "/cosmetic-surgery/rhinoplasty-in-bangalore/"
+                },
+                {
+                  "label": "facelift",
+                  "href": "/cosmetic-surgery/facelift-surgery-in-bangalore/"
+                },
+                {
+                  "label": "blepharoplasty",
+                  "href": "/cosmetic-surgery/blepharoplasty-eyelid-surgery-in-bangalore/"
+                },
+                {
+                  "label": "tummy tuck",
+                  "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/"
+                },
+                {
+                  "label": "gynaecomastia",
+                  "href": "/cosmetic-surgery/gynecomastia-surgery-in-bangalore/"
+                },
+                {
+                  "label": "breast surgery",
+                  "href": "/cosmetic-surgery/"
+                }
+              ]
+            ],
+            [
+              "Slimming & Body Contouring",
+              [
+                {
+                  "label": "Body contouring",
+                  "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
+                },
+                {
+                  "label": "Vaser liposuction",
+                  "href": "/technology/vaser-liposuction-technology/"
+                },
+                {
+                  "label": "cryolipolysis",
+                  "href": "/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/"
+                },
+                {
+                  "label": "GLP-1 weight loss programme",
+                  "href": "/slimming-body-contouring/glp-1-weight-loss-program-in-bangalore/"
+                },
+                {
+                  "label": "post-pregnancy belly correction",
+                  "href": "/slimming-body-contouring/post-pregnancy-belly-correction-in-bangalore/"
+                }
+              ]
+            ],
+            [
+              "Intimate Wellness",
+              [
+                {
+                  "label": "Labiaplasty",
+                  "href": "/cosmetic-gynecology/labiaplasty-surgery-in-bangalore/"
+                },
+                {
+                  "label": "laser vaginal tightening",
+                  "href": "/cosmetic-gynecology/laser-vaginal-tightening-in-bangalore/"
+                },
+                {
+                  "label": "vaginal rejuvenation",
+                  "href": "/cosmetic-gynecology/vaginal-rejuvenation-treatment-in-bangalore/"
+                },
+                {
+                  "label": "intimate pigmentation",
+                  "href": "/cosmetic-gynecology/intimate-pigmentation-treatment-in-bangalore/"
+                }
+              ]
+            ],
+            [
+              "Fertility Care",
+              "Through our sister clinic, Neo Fertility"
+            ]
+          ]
+        },
+        "columns": [],
+        "after": [
+          "The right treatment is chosen at consultation, after your doctor reviews your photos and history."
+        ],
+        "panel": false
+      },
+      {
+        "id": "medical-tourism-journey",
+        "eyebrow": null,
+        "h2": "Your Journey Before You Travel",
+        "paragraphs": [],
+        "cards": [
+          {
+            "title": "Share your enquiry",
+            "text": "Tell us your concern and your preferred timeline."
+          },
+          {
+            "title": "Records review",
+            "text": "Send reports, prescriptions, photos or videos, depending on your concern."
+          },
+          {
+            "title": "Virtual consultation",
+            "text": "Meet your doctor on video and ask every question."
+          },
+          {
+            "title": "Visit planning",
+            "text": "We plan your visit around your treatment, the number of visits and the recovery review."
+          }
+        ],
+        "list": null,
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": false
+      },
+      {
+        "id": "medical-tourism-travel",
+        "eyebrow": null,
+        "h2": "Travel, Stay and Support",
+        "paragraphs": [],
+        "cards": [],
+        "list": {
+          "style": "bullets",
+          "items": [
+            {
+              "lead": "What we do:",
+              "text": "records review, virtual consultation and visit planning, so you know what to expect before you book."
+            },
+            {
+              "lead": "Length of stay:",
+              "text": "discussed with you before travel dates are finalised."
+            },
+            {
+              "lead": "What you arrange:",
+              "text": "your visa, travel and accommodation."
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": true
+      },
+      {
+        "id": "medical-tourism-procedure-day",
+        "eyebrow": null,
+        "h2": "Procedure Day",
+        "paragraphs": [],
+        "cards": [],
+        "list": {
+          "style": "numbers",
+          "items": [
+            {
+              "lead": "In-person assessment.",
+              "text": "Your doctor examines you and confirms the plan."
+            },
+            {
+              "lead": "Treatment.",
+              "text": "Performed by our doctors in a private, sterile setting."
+            },
+            {
+              "lead": "Recovery.",
+              "text": "Rest, written aftercare instructions and your medicines."
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": false
+      },
+      {
+        "id": "medical-tourism-aftercare",
+        "eyebrow": null,
+        "h2": "Aftercare for International Patients",
+        "paragraphs": [],
+        "cards": [],
+        "list": {
+          "style": "ticks",
+          "items": [
+            {
+              "lead": null,
+              "text": "Written aftercare plan before you leave the clinic"
+            },
+            {
+              "lead": null,
+              "text": "Scheduled photo reviews by your doctor"
+            },
+            {
+              "lead": null,
+              "text": "Video consultations"
+            },
+            {
+              "lead": null,
+              "text": "Email or other agreed digital channels"
+            },
+            {
+              "lead": null,
+              "text": "Your care team explains what suits your plan"
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": false
+      },
+      {
+        "id": "cost",
+        "eyebrow": null,
+        "h2": "The Cost Advantage of Travelling to Bangalore",
+        "paragraphs": [
+          "Treatment in India typically costs a fraction of the price in the USA, UK, Europe or Australia. The technique and the standard of care are what matter, and you pay for neither less.",
+          "A preliminary estimate may be shared after we review your records. The final cost follows your in-person assessment and depends on:"
+        ],
+        "cards": [],
+        "list": {
+          "style": "bullets",
+          "items": [
+            {
+              "lead": null,
+              "text": "The treatment and the area"
+            },
+            {
+              "lead": null,
+              "text": "The number of sessions or visits"
+            },
+            {
+              "lead": null,
+              "text": "Aftercare and follow-up"
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [
+          "Your doctor confirms the final estimate in writing after the assessment."
+        ],
+        "panel": true
+      },
+      {
+        "id": "medical-tourism-why-choose",
+        "eyebrow": null,
+        "h2": "Why International Patients Choose NeoSculpt6",
+        "paragraphs": [],
+        "cards": [],
+        "list": {
+          "style": "ticks",
+          "items": [
+            {
+              "lead": null,
+              "text": "Doctor-led care"
+            },
+            {
+              "lead": null,
+              "text": "Honest plans, no overselling"
+            },
+            {
+              "lead": null,
+              "text": "Natural-looking results"
+            },
+            {
+              "lead": null,
+              "text": "Virtual consultation first"
+            },
+            {
+              "lead": null,
+              "text": "Records review before you travel"
+            },
+            {
+              "lead": null,
+              "text": "Follow-up after you return home"
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": false
+      },
+      {
+        "id": "medical-tourism-facilities",
+        "eyebrow": null,
+        "h2": "Our Facilities",
+        "paragraphs": [],
+        "cards": [],
+        "list": {
+          "style": "ticks",
+          "items": [
+            {
+              "lead": null,
+              "text": "Comfortable reception and waiting lounge"
+            },
+            {
+              "lead": null,
+              "text": "Private consultation rooms"
+            },
+            {
+              "lead": null,
+              "text": "Modern procedure rooms"
+            }
+          ]
+        },
+        "table": null,
+        "columns": [],
+        "after": [],
+        "panel": false
+      }
+    ],
+    "held": [
+      {
+        "id": "medical-tourism-countries",
+        "h2": "Countries We Serve",
+        "reason": "Keep only the countries the clinic confirms (the live site's reviews mention Mauritius and the USA)."
+      },
+      {
+        "id": "medical-tourism-patient-journeys",
+        "h2": "Patient Journeys",
+        "reason": "Use only consented patient videos; none are approved yet."
       }
     ],
     "hero": {
       "eyebrow": "International Patients",
-      "h1": "International Patient Care in Bangalore",
-      "intro": "Plan your hair, skin, aesthetic, body-contouring or fertility consultation journey with clear clinical guidance before you travel to Bangalore. The process begins with your concern and the information your doctor needs—not with a preset package.",
+      "h1": "Medical Tourism in Bangalore for International Patients",
+      "subheading": "Plan Your Treatment Before You Travel",
+      "intro": "From your first message to your flight home, our team stays with you. Start with a virtual consultation. Arrive with a clear, doctor-led plan.",
       "buttons": [
         {
-          "label": "Start a Virtual Consultation",
+          "label": "Book a Virtual Consultation",
           "href": "/contact-us/"
         },
         {
-          "label": "Send Your Medical Records",
-          "href": "/contact-us/"
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp Us",
+          "href": null
         }
-      ]
-    },
-    "intro": {
-      "h2": "Not Medical Tourism Packages. A Care Plan.",
-      "paragraphs": [
-        "International care works best when the clinical pathway is understood before travel. NeoSculpt6 helps patients begin with a structured conversation, share the information relevant to their concern and understand what may need an in-person assessment. Recommendations are made around diagnosis, suitability, preparation and realistic treatment goals."
-      ]
-    },
-    "steps": {
-      "h2": "Three Steps. No Uncertainty.",
-      "cards": [
-        {
-          "title": "Share the Context",
-          "text": "Tell us what you would like help with, your country of residence, preferred travel window and any previous treatment history. This helps the team route your enquiry appropriately."
-        },
-        {
-          "title": "Share Relevant Records",
-          "text": "Depending on the concern, we may request reports, prescriptions, investigations, photographs or short videos. Hair enquiries may need scalp and donor-area photographs; other treatments have different information requirements."
-        },
-        {
-          "title": "Speak With the Right Team",
-          "text": "A preliminary review or virtual consultation helps you understand the relevant clinical pathway, preparation, likely clinic visits and the next decision to make before travelling."
-        }
-      ]
-    },
-    "pathways": {
-      "h2": "One Place. Six Clinical Pathways.",
-      "tabs": [
-        {
-          "tab": "01 / 06",
-          "h3": "Hair Restoration",
-          "paragraph": "For hair thinning, pattern hair loss and transplant enquiries, the pathway may include virtual review, donor assessment, scalp examination, graft planning where appropriate, treatment guidance and follow-up planning.",
-          "chips": [
-            {
-              "label": "Neo Follicle Hair Transplant",
-              "href": "/hair-transplant-restoration/neo-follicle-hair-transplant-in-bangalore/"
-            },
-            {
-              "label": "FUE Hair Transplant",
-              "href": "/hair-transplant-restoration/fue-hair-transplant-in-bangalore/"
-            },
-            {
-              "label": "DHI Hair Transplant",
-              "href": "/hair-transplant-restoration/dhi-hair-transplant-in-bangalore/"
-            },
-            {
-              "label": "PRP Hair Treatment",
-              "href": "/hair-transplant-restoration/prp-hair-treatment-in-bangalore/"
-            }
-          ],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        },
-        {
-          "tab": "02 / 06",
-          "h3": "Laser and Skin Aesthetic Care",
-          "paragraph": "For acne scars, pigmentation, texture concerns, vitiligo, laser procedures and skin refinement, recommendations depend on diagnosis, skin type, treatment history and recovery requirements.",
-          "chips": [
-            {
-              "label": "CO2 Fractional Laser Treatment",
-              "href": "/laser-skin-aesthetic/co2-fractional-laser-treatment-in-bangalore/"
-            },
-            {
-              "label": "Q-Switch Laser Treatment",
-              "href": "/laser-skin-aesthetic/q-switch-laser-treatment-in-bangalore/"
-            },
-            {
-              "label": "Acne Scar Laser Treatment",
-              "href": "/laser-skin-aesthetic/acne-scar-laser-treatment-in-bangalore/"
-            },
-            {
-              "label": "Full Body Laser Hair Removal",
-              "href": "/laser-skin-aesthetic/full-body-laser-hair-removal-in-bangalore/"
-            }
-          ],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        },
-        {
-          "tab": "03 / 06",
-          "h3": "Anti-Aging and Injectables",
-          "paragraph": "For anti-ageing and injectable-treatment enquiries, the consultation focuses on skin and facial assessment, treatment goals, appropriate options, safety considerations and realistic outcomes.",
-          "chips": [
-            {
-              "label": "Botox Treatment",
-              "href": "/anti-aging-injectables/botox-treatment-in-bangalore/"
-            },
-            {
-              "label": "Dermal Filler Treatment",
-              "href": "/anti-aging-injectables/dermal-filler-treatment-in-bangalore/"
-            },
-            {
-              "label": "Profhilo",
-              "href": "/anti-aging-injectables/profhilo-in-bangalore/"
-            },
-            {
-              "label": "HIFU Treatment",
-              "href": "/anti-aging-injectables/hifu-treatment-in-bangalore/"
-            }
-          ],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        },
-        {
-          "tab": "04 / 06",
-          "h3": "Cosmetic Surgery",
-          "paragraph": "For surgical aesthetic enquiries, the in-person consultation focuses on anatomy, medical suitability, procedure options, recovery planning and what can realistically be achieved.",
-          "chips": [
-            {
-              "label": "Rhinoplasty",
-              "href": "/cosmetic-surgery/rhinoplasty-in-bangalore/"
-            },
-            {
-              "label": "Facelift Surgery",
-              "href": "/cosmetic-surgery/facelift-surgery-in-bangalore/"
-            },
-            {
-              "label": "Blepharoplasty (Eyelid Surgery)",
-              "href": "/cosmetic-surgery/blepharoplasty-eyelid-surgery-in-bangalore/"
-            },
-            {
-              "label": "Tummy Tuck Surgery (Abdominoplasty)",
-              "href": "/cosmetic-surgery/tummy-tuck-surgery-abdominoplasty-in-bangalore/"
-            }
-          ],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        },
-        {
-          "tab": "05 / 06",
-          "h3": "Slimming and Body Contouring",
-          "paragraph": "For localised body-shape, fat-reduction, skin-tightening or body-contouring concerns, the team assesses the treatment area, skin quality, anatomy, lifestyle factors and whether a surgical or non-surgical approach may be appropriate.",
-          "chips": [
-            {
-              "label": "Body Contouring",
-              "href": "/slimming-body-contouring/body-contouring-in-bangalore/"
-            },
-            {
-              "label": "Cryolipolysis Treatment",
-              "href": "/slimming-body-contouring/cryolipolysis-treatment-in-bangalore/"
-            },
-            {
-              "label": "Lipolaser Treatment",
-              "href": "/slimming-body-contouring/lipolaser-treatment-in-bangalore/"
-            },
-            {
-              "label": "Medical Weight Loss Treatment",
-              "href": "/slimming-body-contouring/medical-weight-loss-treatment-in-bangalore/"
-            }
-          ],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        },
-        {
-          "tab": "06 / 06",
-          "h3": "Fertility Care",
-          "paragraph": "For fertility-related concerns, the team can explain the consultation pathway and the records or investigations that may be relevant before a treatment plan is considered.",
-          "chips": [],
-          "button": {
-            "label": "Start a Virtual Consultation",
-            "href": "/contact-us/"
-          }
-        }
-      ]
-    },
-    "journey": {
-      "eyebrow": "Your Journey",
-      "h2": "The Plan Continues After You Arrive.",
-      "steps": [
-        {
-          "title": "Initial Enquiry",
-          "text": "Share your concern and preferred timeline."
-        },
-        {
-          "title": "Records Review",
-          "text": "Provide the information requested for a preliminary review."
-        },
-        {
-          "title": "Virtual Consultation",
-          "text": "Discuss the likely pathway, suitability questions and preparation."
-        },
-        {
-          "title": "Visit Planning",
-          "text": "Plan appointments around the recommended consultation, treatment and early recovery period."
-        },
-        {
-          "title": "In-Person Clinical Assessment",
-          "text": "The specialist confirms the clinical factors that cannot be assessed fully online."
-        },
-        {
-          "title": "Treatment and Recovery",
-          "text": "If treatment is appropriate, you receive a personalised plan, aftercare instructions and recovery guidance."
-        },
-        {
-          "title": "Follow-Up",
-          "text": "Where appropriate, the team explains the recommended remote review process after you return home."
-        }
-      ]
-    },
-    "travel": {
-      "h2": "What to Arrange Before You Travel.",
-      "paragraphs": [
-        "Keep relevant reports, prescriptions and treatment history organised. Tell the team about medical conditions, allergies, medications and previous procedures so that the consultation can be planned safely.",
-        "The right length of stay depends on your treatment, number of required visits, procedure plan and early recovery review. Avoid tightly scheduled travel around consultations or procedures. Visa, travel and accommodation arrangements remain the responsibility of the patient and the relevant authorities."
+      ],
+      "trust": [
+        "500+ patients from outside India",
+        "Virtual consultation first",
+        "Records review before you travel",
+        "Remote follow-up after you return home"
       ]
     },
     "doctors": {
       "eyebrow": null,
-      "h2": "Clinical Advice Before Aesthetic Decisions.",
-      "paragraphs": [
-        "On arrival, the appropriate specialist completes the in-person assessment, reviews the treatment goals and confirms whether the proposed plan remains suitable. You should understand the expected outcome, limitations, aftercare, alternatives and follow-up before deciding how to proceed."
-      ],
+      "h2": "Our Doctors",
+      "paragraphs": [],
       "cards": [
         {
           "name": "Dr. Sandeep Mahapatra",
           "chips": null,
           "qualifications": "MBBS, MD Dermatology.",
-          "specialty": "Senior Consultant Dermatologist, Cosmetic Expert and Hair Transplant Surgeon.",
+          "specialty": "Founder and Senior Consultant Dermatologist.",
           "text": "Relevant for hair restoration, dermatology, skin and laser care, and non-surgical aesthetic consultations.",
           "button": {
-            "label": "Meet Dr. Sandeep Mahapatra",
+            "label": "Profile",
             "href": "/about-dr-sandeep-mahapatra/"
           }
         },
         {
-          "name": "Dr Thyagaraj",
+          "name": "Dr. Thyagaraj",
           "chips": null,
-          "qualifications": "MBBS, MS General Surgery, MCh Plastic Surgery, Masters in Reconstructive Breast Surgery.",
-          "specialty": "Consultant Plastic Surgeon.",
-          "text": "Relevant for cosmetic surgery, body contouring and reconstructive-care consultations.",
+          "qualifications": "MBBS, MS General Surgery, MCh Plastic Surgery.",
+          "specialty": "Plastic surgeon.",
+          "text": "Leads cosmetic surgery.",
           "button": {
-            "label": "Meet Dr Thyagaraj",
+            "label": "Profile",
             "href": "/dr-thyagaraj/"
+          }
+        },
+        {
+          "name": "Dr. Sumedha Tirthani",
+          "chips": null,
+          "qualifications": "MBBS, MD Dermatology.",
+          "specialty": "Dermatologist.",
+          "text": "Dermatology, skin and laser consultations.",
+          "button": null
+        },
+        {
+          "name": "Dr. Payal Mahapatra",
+          "chips": null,
+          "qualifications": "MBBS, DGO, DNB.",
+          "specialty": "Fertility specialist and gynaecologist.",
+          "text": "Fertility care through our sister clinic, Neo Fertility.",
+          "button": {
+            "label": "Profile",
+            "href": "/dr-payal-mahapatra/"
           }
         }
       ]
-    },
-    "estimates": {
-      "h2": "Treatment Estimates and Follow-Up, Explained Clearly.",
-      "paragraphs": [
-        "A preliminary estimate may be discussed after the relevant information has been reviewed. Final recommendations and costs depend on the clinical assessment, treatment complexity, number of sessions or visits, procedure time, technology used, recovery needs and follow-up requirements.",
-        "Some follow-up discussions can be managed remotely, depending on the treatment. Your care team will explain what is suitable for your plan and when an in-person review may be needed."
-      ]
-    },
-    "reviews": {
-      "eyebrow": "Patient Stories",
-      "h2": "What International Patients Say",
-      "note": "Use 3–6 real Google reviews from patients who agreed to be featured. No reviews written here."
     },
     "faqs": {
       "eyebrow": "Quick Answers",
       "h2": "Frequently Asked Questions",
       "items": [
         {
-          "q": "Can I begin with an online consultation?",
-          "a": "Yes. You can share your concern and relevant records before travelling. Some treatments still need an in-person assessment before the clinical recommendation is confirmed."
+          "q": "Can I have a consultation before I travel?",
+          "a": "Yes. Online consultations can begin before you travel. Some treatments need an in-person assessment first, and your doctor tells you which."
         },
         {
-          "q": "Which records should I share?",
-          "a": "The information depends on the concern. We may request medical reports, prescriptions, treatment history, photographs, videos or investigations. The team will explain what is relevant for your enquiry."
+          "q": "How many days do I need to stay in Bangalore?",
+          "a": "It depends on your treatment, the number of visits and the recovery review. We discuss this with you before travel dates are finalised."
         },
         {
-          "q": "How long should I stay in Bangalore?",
-          "a": "The appropriate duration depends on the treatment, number of appointments, procedure plan and recovery review required. This can be discussed before your travel dates are finalised."
+          "q": "Can you help with my visa and travel?",
+          "a": "Visa, travel and accommodation are arranged by the patient. We share the visit plan and clinic details to help you prepare."
         },
         {
-          "q": "Can I receive a cost estimate before travelling?",
-          "a": "A preliminary estimate may be discussed once the relevant information is reviewed. Final cost depends on the in-person assessment and the personalised treatment plan."
+          "q": "Will someone help me during my stay?",
+          "a": "Your care team stays in touch before, during and after treatment."
         },
         {
-          "q": "Can I receive follow-up guidance after I return home?",
-          "a": "Where appropriate, follow-up may include scheduled photo reviews, video consultations, email communication or other agreed digital channels. The team will explain the recommended review process."
+          "q": "Can I send photos before I come?",
+          "a": "Yes. Photos help your doctor give an initial opinion. A final plan is made after a full consultation."
+        },
+        {
+          "q": "How soon can I fly home after treatment?",
+          "a": "Your doctor advises based on the treatment and how you are healing. Most patients get a clear date in their plan."
+        },
+        {
+          "q": "What does the cost include?",
+          "a": "A preliminary estimate may be shared after records review. The final cost follows the in-person assessment and covers your treatment plan, visits and aftercare. Your written estimate lists what is included."
+        },
+        {
+          "q": "Can I continue follow-ups from my own country?",
+          "a": "Yes. We review your progress by video, phone, WhatsApp or email."
+        },
+        {
+          "q": "Can I combine more than one treatment in one trip?",
+          "a": "Often, yes. Your doctor decides what is safe to combine and in what order."
+        },
+        {
+          "q": "Is the result permanent?",
+          "a": "That depends on the treatment. Some results are long-lasting. Others need maintenance. Your doctor explains this before you decide."
+        },
+        {
+          "q": "Which languages do you support?",
+          "a": "English, Hindi and Kannada."
+        },
+        {
+          "q": "Is it safe to travel for treatment?",
+          "a": "We follow strict clinical and hygiene protocols, and every treatment is led by a qualified doctor. We also plan your timing so you travel only when it is safe for you."
         }
       ],
       "button": null
     },
     "closing": {
-      "h2": "Tell Us How We Can Help.",
-      "paragraph": "Start with your concern, not a treatment name. Share the information you have, and the NeoSculpt6 team will guide you to the appropriate next step.",
+      "h2": "Begin Your Treatment Journey Before You Even Travel",
+      "paragraph": "Send us your photos and questions. We will reply with an honest plan.",
       "buttons": [
         {
-          "label": "Speak With the International Patient Team",
+          "label": "Book a Virtual Consultation",
           "href": "/contact-us/"
+        },
+        {
+          "label": "Call +91 99640 60483",
+          "href": null
+        },
+        {
+          "label": "WhatsApp Us",
+          "href": null
         }
       ]
+    },
+    "disclaimer": {
+      "text": "Medically reviewed by Dr. Sandeep Mahapatra, MBBS, MD (Dermatology). This page does not replace an in-person consultation."
     }
   }
 ]

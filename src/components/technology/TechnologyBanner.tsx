@@ -2,7 +2,8 @@ import type { RoutePage } from '../../data/types'
 import type { TechnologyBanner as Banner } from '../../data/technology/types'
 import { useReveal } from '../useReveal'
 import { Breadcrumbs } from '../Breadcrumbs'
-import { delay, eyebrow } from '../shared'
+import { delay, eyebrow, italicLine } from '../shared'
+import { TrustStrip } from '../TrustStrip'
 import { CtaRow } from '../service/CtaButton'
 
 // Technology section 1: the black template's page banner (technology-international-patient.md §1), drawn full bleed:
@@ -19,8 +20,10 @@ export function TechnologyBanner({ page, hero }: { page: RoutePage; hero: Banner
   const crumbsRef = useReveal<HTMLElement>()
   const eyebrowRef = useReveal<HTMLParagraphElement>()
   const titleRef = useReveal<HTMLHeadingElement>()
+  const subRef = useReveal<HTMLParagraphElement>()
   const introRef = useReveal<HTMLParagraphElement>()
   const ctaRef = useReveal<HTMLDivElement>()
+  const trustRef = useReveal<HTMLDivElement>()
 
   return (
     <section id="technology-banner" aria-labelledby="technology-banner-heading" className="bg-background pt-(--header-offset)">
@@ -53,12 +56,22 @@ export function TechnologyBanner({ page, hero }: { page: RoutePage; hero: Banner
           >
             {page.h1}
           </h1>
+          {hero.subheading && (
+            <p ref={subRef} data-reveal="up" style={delay(525)} className={`${italicLine} text-tertiary`}>
+              {hero.subheading}
+            </p>
+          )}
           <p ref={introRef} data-reveal="up" style={delay(600)} className="max-w-[680px] text-secondary">
             {hero.intro}
           </p>
           <div ref={ctaRef} data-reveal="up" style={delay(750)} className="mt-2.5">
             <CtaRow ctas={hero.ctas} />
           </div>
+          {hero.trust && hero.trust.length > 0 && (
+            <div ref={trustRef} data-reveal="up" style={delay(900)} className="mt-2.5 border-t border-secondary/20 pt-5">
+              <TrustStrip items={hero.trust} />
+            </div>
+          )}
         </div>
       </div>
     </section>

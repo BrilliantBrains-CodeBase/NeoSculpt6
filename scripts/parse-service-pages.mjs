@@ -23,6 +23,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { replaceDoctor } from '../src/data/replaced-doctors.ts'
 
+import { readInfoBlock } from './info-blocks.mjs'
+
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DOC = path.resolve(ROOT, '../content/service/service-page.md')
 const SCRAPED = path.resolve(ROOT, '../scraped')
@@ -85,6 +87,8 @@ const LABELS = [
   'Card: name', 'Card: speciality line', 'Card: qualification chips', 'Card: button', 'Doctor block eyebrow',
   'Doctor block paragraphs', 'Cards', 'Button under accordion', 'Button', 'List heading', 'Links (same speciality)',
   'Contact card',
+  // Supplement docs only (Microblading): hero eyebrow / sub-heading / quick-facts strip, the intro's bulleted list.
+  'Sub-heading', 'Trust strip', 'List', 'Paragraphs after list',
 ]
 const key = (s) => s.replace(/\*\*/g, '').replace(/[^a-z0-9]/gi, '').toLowerCase()
 const LABEL_BY_KEY = new Map(LABELS.map((l) => [key(l), l]))
@@ -481,9 +485,10 @@ for (const e of entries) {
 }
 
 // One page's sections (label → value fields and numbered rows, from either reader) → the record parsed.json holds.
-function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, page, pagePath, dict }) {
+function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, page, pagePath, dict, supplement = null }) {
   const empty = { one: () => '', many: () => [], has: () => false, rows: [], points: [], design: '' }
-  const need = (id) => sec[id] ?? (warn(page, `missing section ${id}`), empty)
+  // A supplement page may leave out the technology section (Microblading's brief has none).
+  const need = (id) => sec[id] ?? (supplement && id === '8' ? empty : (warn(page, `missing section ${id}`), empty))
   if (!doctorSecs.length) warn(page, 'missing section 7')
 
   const s1 = need('1'), s2 = need('2'), s3 = need('3'), s4 = need('4'), s5 = need('5'), s6 = need('6'), s7 = doctorSecs[0] ?? empty
@@ -524,9 +529,19 @@ function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, pag
       intro: s1.one('Intro paragraph'),
       buttons: splitList(s1.one('Buttons'), ' | '),
       phone: s1.one('Phone strip'),
+      eyebrow: s1.one('Eyebrow') || null,
+      subheading: s1.one('Sub-heading') || null,
+      trust: splitList(s1.one('Trust strip'), ' · '),
     },
-    // `points`: the optional row of small cards under the intro text (a doc's "Extra" design block).
-    intro: { h2: s2.one('H2'), paragraphs: s2.many('Paragraphs'), points: s2.points ?? [] },
+    // `points`: the optional row of small cards under the intro text (a doc's "Extra" design block); `list` / `after`:
+    // a supplement's bulleted list under the paragraphs and the text after it.
+    intro: {
+      h2: s2.one('H2'),
+      paragraphs: s2.many('Paragraphs'),
+      points: s2.points ?? [],
+      list: splitList(s2.one('List'), '◆'),
+      after: s2.many('Paragraphs after list'),
+    },
     consultation: {
       h2: s3.one('H2'),
       introLine: s3.one('Intro line') || null,
@@ -574,6 +589,11 @@ function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, pag
       contactText: contact.slice(1).filter((x) => !x.startsWith('Button:')).join(' · '),
       contactButton: contact.find((x) => x.startsWith('Button:'))?.replace(/^Button:\s*/, '') ?? '',
     },
+    // Supplement docs: "Info: …" blocks with the section they follow, held blocks, the disclaimer and doc notes.
+    extras: supplement?.extras ?? [],
+    held: supplement?.held ?? [],
+    disclaimer: supplement?.disclaimer || null,
+    notes: supplement?.notes ?? [],
   }
 
   // Required copy: an empty string here means the parser lost something.
@@ -585,8 +605,8 @@ function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, pag
     'process h2': record.process.h2, 'process steps': record.process.steps.length,
     'candidates h2': record.candidates.h2, 'candidate cards': record.candidates.cards.length,
     'doctor name': record.doctors.cards.every((d) => d.name), 'doctor paragraphs': record.doctors.cards.every((d) => d.paragraphs.length),
-    'technology h2': record.technology.h2, 'technology cards': record.technology.cards.length,
-    'cost h2': record.cost.h2, 'cost factors': record.cost.factors.length,
+    ...(supplement && !sec['8'] ? {} : { 'technology h2': record.technology.h2, 'technology cards': record.technology.cards.length }),
+    'cost h2': record.cost.h2, ...(supplement ? {} : { 'cost factors': record.cost.factors.length }),
     'faq h2': record.faqs.h2, 'faqs': record.faqs.items.length,
     'closing h2': record.closing.h2, 'closing paragraph': record.closing.paragraph, 'closing buttons': record.closing.buttons.length,
     'sidebar links': record.sidebar.links.length, 'contact text': record.sidebar.contactText,
@@ -602,9 +622,11 @@ function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, pag
     if (longer && !CHECKED.has(r.title)) warn(page, `title "${r.title}" looks cut (live: "${longer}")`)
   }
   if (dict.faqs.length) for (const f of record.faqs.items) if (!dict.faqs.includes(f.q) && !CHECKED.has(f.q)) warn(page, `FAQ question not live: "${f.q}"`)
-  for (const r of [...record.whyChoose.cards, ...record.process.steps, ...record.candidates.cards, ...record.technology.cards, ...record.cost.factors]) {
+  // A supplement's checklist may be titles only (Microblading); every other row needs both.
+  for (const r of [...record.whyChoose.cards, ...record.process.steps, ...(supplement ? [] : record.candidates.cards), ...record.technology.cards, ...record.cost.factors]) {
     if (!r.title || !r.text) warn(page, `row without title or text: "${r.title || r.text}"`)
   }
+  for (const r of record.candidates.cards) if (!r.title) warn(page, 'candidate row without a title')
   for (const [field, from, to] of FIXES[record.path] ?? []) {
     const parts = field.split('.')
     const last = parts.pop()
@@ -620,7 +642,12 @@ function buildRecord({ name, speciality, source, sec, doctorSecs, seo: seo0, pag
 // Later docs in clean markdown: "## **Page**", "### **Section**" (the dot escaped, "1\. Page banner"), two-column
 // label tables whose first row is the table header (so its label is not bold) and numbered tables. Escapes ("\|",
 // "\+", "\-", "https\://") are undone; " | " inside a value separates buttons, as in service-page.md.
-const SUPPLEMENTS = ['Blepharoplasty-and-Chin-Augmentation.md']
+const SUPPLEMENTS = [
+  { file: 'Blepharoplasty-and-Chin-Augmentation.md', speciality: 'Cosmetic Surgery' },
+  { file: 'microblading.md', speciality: 'Laser & Skin Aesthetics' },
+]
+// Where a supplement's "Info: …" block may sit ("Place after"): the section keys ServiceTemplate draws extras after.
+const EXTRA_ANCHORS = ['intro', 'consultation', 'whyChoose', 'process', 'candidates', 'doctors', 'technology', 'cost', 'faqs']
 const unescapeMd = (s) => s.replace(/\\([\\`*_{}[\]()#+\-.!|:<>])/g, '$1')
 const cleanCells = (line) =>
   line
@@ -666,7 +693,7 @@ function readCleanSection(lines) {
   }
 }
 
-for (const file of SUPPLEMENTS) {
+for (const { file, speciality } of SUPPLEMENTS) {
   const docPath = path.resolve(ROOT, '../content/service', file)
   const docLines = fs.readFileSync(docPath, 'utf8').split('\n')
   const starts = docLines.flatMap((l, i) => (/^## \*\*.+\*\*/.test(l) ? [i] : []))
@@ -681,7 +708,23 @@ for (const file of SUPPLEMENTS) {
     }
     const sec = {}
     const doctorSecs = []
+    const supplement = { extras: [], held: [], disclaimer: null, notes: [] }
     for (const s of sections) {
+      for (const l of s.lines) {
+        const note = l.trim().match(/^\*\*Note:\*\*\s*(.+)$/)
+        if (note) supplement.notes.push(unescapeMd(note[1].replace(/\*\*/g, '')).trim())
+      }
+      if (/^Info:/.test(s.title)) {
+        const { block, held, after } = readInfoBlock(s.lines, (msg) => warn(name, msg))
+        if (held) supplement.held.push({ id: block.id, h2: block.h2, reason: held })
+        else if (!EXTRA_ANCHORS.includes(after)) warn(name, `info block ${block.id}: "Place after" must be one of ${EXTRA_ANCHORS.join(', ')}`)
+        else supplement.extras.push({ ...block, placeAfter: after })
+        continue
+      }
+      if (/^Disclaimer/.test(s.title)) {
+        supplement.disclaimer = readCleanSection(s.lines).one('Text')
+        continue
+      }
       const id = s.title.match(/^(\d+[ab]?)\./)?.[1] ?? (s.title.startsWith('SEO') ? 'seo' : 'sidebar')
       sec[id] = { ...readCleanSection(s.lines), title: s.title }
       if (id === '7') doctorSecs.push(sec[id])
@@ -690,7 +733,7 @@ for (const file of SUPPLEMENTS) {
     const pagePath = url ? new URL(url).pathname : null
     const page = pagePath ?? name
     const dict = pagePath ? live(pagePath) : { headings: [], faqs: [], video: null }
-    const record = buildRecord({ name, speciality: 'Cosmetic Surgery', source: `content/service/${file}:${start + 1}`, sec, doctorSecs, seo: sec.seo, page, pagePath, dict })
+    const record = buildRecord({ name, speciality, source: `content/service/${file}:${start + 1}`, sec, doctorSecs, seo: sec.seo, page, pagePath, dict, supplement })
     const at = out.findIndex((r) => r.path === record.path)
     if (at >= 0) out[at] = record
     else out.push(record)
