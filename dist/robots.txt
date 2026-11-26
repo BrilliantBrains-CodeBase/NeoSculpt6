@@ -1,7 +1,0 @@
-# NeoSculpt6 · https://neosculpt6.com/
-# A plain-text guide to the clinic and its pages for AI assistants: https://neosculpt6.com/llms.txt
-
-User-agent: *
-Allow: /
-
-Sitemap: https://neosculpt6.com/sitemap.xml

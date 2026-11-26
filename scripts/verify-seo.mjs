@@ -38,7 +38,9 @@ const DIST = path.join(ROOT, 'dist')
 const SITE_URL = 'https://neosculpt6.com'
 
 const pages = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/pages.json'), 'utf8'))
-const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, '../scraped/manifest.json'), 'utf8'))
+// The old-site capture lives outside the repo (../scraped). Where it is absent, e.g. in CI, the old-URL check is skipped.
+const MANIFEST = path.join(ROOT, '../scraped/manifest.json')
+const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : (console.warn('verify: ../scraped/manifest.json not found, skipping the old-URL check'), [])
 const htaccess = fs.readFileSync(path.join(DIST, '.htaccess'), 'utf8')
 // The .htaccess rewrite rules, as [regex, target, flags], to check what the server answers for a path.
 const rewriteRules = [...htaccess.matchAll(/^\s*RewriteRule\s+(\S+)\s+(\S+)\s+\[([^\]]+)\]/gm)].map(([, re, to, flags]) => ({ re: new RegExp(re), to, flags }))

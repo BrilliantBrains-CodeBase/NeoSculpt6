@@ -39,7 +39,7 @@ export const local = {
     mapEmbedSrc: null as string | null,
   },
   // Site verification meta tokens (the content="" value only).
-  verification: { google: null as string | null, bing: null as string | null },
+  verification: { google: 'mVcdPA86D-u6DWEqHxiPb8kCS6emZ338J4ArxjN8I8M' as string | null, bing: null as string | null },
 }
 
 const ADDRESS_QUERY = 'NeoSculpt6, Sadaramangala, Whitefield Main Road, Bangalore 560066'
